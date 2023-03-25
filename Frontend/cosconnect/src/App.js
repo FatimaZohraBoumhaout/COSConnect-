@@ -8,7 +8,7 @@ function App() {
     <>
     <Header />
     <UserProfileView/>
-    <Footer />
+    <Footer /> 
    </>
   );
 }
