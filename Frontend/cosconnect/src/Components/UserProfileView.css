@@ -1,0 +1,87 @@
+.UserLayout {
+  width: 100%;
+  height: 100%;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: auto auto;
+  grid-template-areas: 'detail setting'
+                       'detail request';
+  background-color: #8C8B88;
+}
+
+.details {
+  grid-area: detail;
+  height: auto;
+  margin-left: 20%;
+}
+
+.settings {
+  grid-area: setting;
+  height: auto;
+  margin-right: 4%;
+}
+
+.requests {
+  grid-area: request;
+  height: auto;
+  margin-right: 4%;
+}
+
+.UserLayout > * {
+  padding: 20px;
+}
+
+@media only screen and (max-width: 768px) {
+  .UserLayout {
+    grid-template-columns: 1fr;
+    grid-template-rows: auto auto auto;
+    grid-template-areas: 'detail'
+                         'setting'
+                         'request';
+  }
+  
+  .details {
+    margin-left: 0;
+  }
+  
+  .settings,
+  .requests {
+    margin-right: 0;
+  }
+}
+  
+@media only screen and (min-width: 769px) and (max-width: 1024px) {
+  .UserLayout {
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: auto auto;
+    grid-template-areas: 'detail setting'
+                         'request request';
+  }
+  
+  .details {
+    margin-left: 5%;
+  }
+  
+  .settings,
+  .requests {
+    margin-right: 5%;
+  }
+}
+
+@media only screen and (min-width: 1025px) {
+  .UserLayout {
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: auto;
+    grid-template-areas: 'detail setting'
+                         'detail request';
+  }
+  
+  .details {
+    margin-left: 10%;
+  }
+  
+  .settings,
+  .requests {
+    margin-right: 10%;
+  }
+}

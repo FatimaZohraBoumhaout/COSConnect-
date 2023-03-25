@@ -1,10 +1,15 @@
 import './App.css';
+import UserProfileView from './Components/UserProfileView';
+import Header from './Components/Header';
+import Footer from './Components/Footer';
 
 function App() {
   return (
-    <div className="App">
-      Hello COSCONNECT
-    </div>
+    <>
+    <Header />
+    <UserProfileView/>
+    <Footer />
+   </>
   );
 }
 
