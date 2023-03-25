@@ -16,7 +16,7 @@ function UserProfileView() {
         <div className="requests">
         < RequestView />
         </div>
-      </div>
+      </div> 
   );
 }
 

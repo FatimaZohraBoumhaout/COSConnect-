@@ -3,7 +3,7 @@ import './UserSurvey.css';
 
 function UserSurvey() {
   return (
-    <div>
+    <div className="bd">
       <div className="container">
       <h1 className="form-title">Welcome to COSConnect!</h1>
 
