@@ -18,11 +18,11 @@ function UserSurvey() {
                     placeholder="Enter Full Name"/>
           </div>
           <div className="input-box">
-            <label for="username">Username</label>
+            <label for="username">Display Name</label>
             <input type="text"
                     id="username"
                     name="username"
-                    placeholder="Enter Username"/>
+                    placeholder="Enter Display Name"/>
           </div>
           <div className="input-box">
             <label for="Pronouns">Pronouns</label>
