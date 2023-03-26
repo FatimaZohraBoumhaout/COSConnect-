@@ -18,10 +18,10 @@ function UserSurvey() {
                     placeholder="Enter Full Name"/>
           </div>
           <div className="input-box">
-            <label for="username">Display Name</label>
+            <label for="displayName">Display Name</label>
             <input type="text"
-                    id="username"
-                    name="username"
+                    id="displayName"
+                    name="displayName"
                     placeholder="Enter Display Name"/>
           </div>
           <div className="input-box">
@@ -64,3 +64,8 @@ function UserSurvey() {
 }
 
 export default UserSurvey;
+
+
+
+
+
