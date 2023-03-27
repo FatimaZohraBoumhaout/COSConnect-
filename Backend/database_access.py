@@ -34,11 +34,10 @@ def add_user(input, database_url):
 
 def get_user(input, database_url):
     try:
-        with psycopg2.connect(database_url, isolation_level=None,
-        uri=True) as connection:
+        with psycopg2.connect(dbname = database_url, user="testuser", password="pass") as connection:
             with contextlib.closing(connection.cursor()) as cursor:
-                query = "SELECT pronouns, classes, bio, full_name,"
-                query += "display_name FROM testdb"
+                query = "SELECT pronouns, classes, bio, full_name, "
+                query += "display_name FROM testdb "
                 query += "WHERE user_id = " + input + ";"
                 #might need prepared list
 

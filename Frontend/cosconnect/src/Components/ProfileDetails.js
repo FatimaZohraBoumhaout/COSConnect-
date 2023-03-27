@@ -1,6 +1,15 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 
 function ProfileDetails() {
+  const [user, setUser] = useState(null);
+
+  useEffect(() => {
+    // Fetch the user's data from the Flask server
+    fetch("/firstpage?id=1")
+      .then((response) => response.json())
+      .then((data) => setUser(data));
+  }, []);
+
   const styles = `
   .profile-container {
     display: flex;
@@ -9,7 +18,7 @@ function ProfileDetails() {
     height: 100vh;
     background-color: #F2F0EB;
     border-radius: 30px;
-    margin: 20px; 
+    margin: 20px;
   }
   
   .grid-item {
@@ -47,11 +56,12 @@ function ProfileDetails() {
     padding: 20px;
     display: flex;
     flex-direction: column;
-    flex-grow: 1;
+    flex-grow: 1; /* add this */
+    justify-content: space-between; /* add this */
   }
   
   .gray-box {
-    width: 100%; 
+    width: 100%;
     height: 200px;
     background-color: #d3d3d3;
     margin-bottom: 20px;
@@ -62,7 +72,7 @@ function ProfileDetails() {
       width: 90%;
       max-width: none;
     }
-    
+  
     .profile-avatar {
       height: 80px;
       width: 80px;
@@ -86,6 +96,10 @@ function ProfileDetails() {
   
   `;
 
+  if (!user) {
+    return <>loading...</>
+  }
+
   return (
     <div className="profile-container">
       <style>{styles}</style>
@@ -93,13 +107,28 @@ function ProfileDetails() {
         <div className="profile-header">
           <img alt="avatar" className="profile-avatar" />
           <div className="profile-info">
-            <h1 className="profile-name">Name</h1>
+            <h1 className="profile-name">{user.display_name}</h1>
           </div>
           <button className="edit-button">Edit</button>
         </div>
         <div className="profile-content">
           <div className="gray-box"></div>
-          <div className="gray-box"></div>
+          <div>
+            <label htmlFor="pronouns">Pronouns:</label>
+            <span id="pronouns">{user.pronouns}</span>
+          </div>
+          <div>
+            <label htmlFor="classes">Classes:</label>
+            <span id="classes">{user.classes}</span>
+          </div>
+          <div>
+            <label htmlFor="bio">Bio:</label>
+            <span id="bio">{user.bio}</span>
+          </div>
+          <div>
+            <label htmlFor="availability">Availability:</label>
+            <span id="availability">{user.availability}</span>
+          </div>
         </div>
       </div>
     </div>

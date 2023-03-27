@@ -12,7 +12,7 @@ function App() {
     <Header />
     <BrowserRouter>
     <Routes>
-        <Route path="/first-time-user" element={<UserSurvey />} />
+        <Route path="/firstpage" element={<UserSurvey />} />
         <Route index element={<UserProfileView />} />
     </Routes>
     </BrowserRouter>
