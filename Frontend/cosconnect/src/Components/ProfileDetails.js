@@ -5,9 +5,14 @@ function ProfileDetails() {
 
   useEffect(() => {
     // Fetch the user's data from the Flask server
-    fetch("/firstpage?id=1")
+    fetch("/firstpage?id=9")
       .then((response) => response.json())
-      .then((data) => setUser(data));
+      .then((data) => {
+        setUser(data);
+        console.log("user state set to:", data);
+      })
+      .catch(error => console.log(error));
+      
   }, []);
 
   const styles = `
@@ -107,7 +112,7 @@ function ProfileDetails() {
         <div className="profile-header">
           <img alt="avatar" className="profile-avatar" />
           <div className="profile-info">
-            <h1 className="profile-name">{user.display_name}</h1>
+            <h1 className="profile-name">{  user[0][4]}</h1>
           </div>
           <button className="edit-button">Edit</button>
         </div>
@@ -115,19 +120,19 @@ function ProfileDetails() {
           <div className="gray-box"></div>
           <div>
             <label htmlFor="pronouns">Pronouns:</label>
-            <span id="pronouns">{user.pronouns}</span>
+            <span id="pronouns">{  user[0][0]}</span>
           </div>
           <div>
             <label htmlFor="classes">Classes:</label>
-            <span id="classes">{user.classes}</span>
+            <span id="classes">{  user[0][1]}</span>
           </div>
           <div>
             <label htmlFor="bio">Bio:</label>
-            <span id="bio">{user.bio}</span>
+            <span id="bio">{  user[0][2]}</span>
           </div>
           <div>
             <label htmlFor="availability">Availability:</label>
-            <span id="availability">{user.availability}</span>
+            <span id="availability">{}</span>
           </div>
         </div>
       </div>

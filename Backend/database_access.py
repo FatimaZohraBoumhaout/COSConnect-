@@ -17,6 +17,7 @@ def add_user(input, database_url):
                 query += bio + "\'" + ", " + "\'" + availability + "\'" + ", " + "\'" + full_name + "\'"
                 query += ", " + "\'" + display_name+ "\'" 
                 query += ") RETURNING user_id;"
+                print(pronouns, bio, availability, full_name, display_name, classes)
                 
                 #might need prepared list
 
@@ -25,7 +26,7 @@ def add_user(input, database_url):
                 except Exception as ex:
                     print(ex)
                 
-                user_id = cursor.fetchall()
+                user_id = cursor.fetchone()[0]
 
                 # return the generated id
                 return user_id
@@ -39,7 +40,7 @@ def get_user(input, database_url):
             with contextlib.closing(connection.cursor()) as cursor:
                 query = "SELECT pronouns, classes, bio, full_name, "
                 query += "display_name FROM user_profile "
-                query += "WHERE user_id = " + input + ";"
+                query += "WHERE user_id = " + str(input) + ";"
                 #might need prepared list
 
                 try:

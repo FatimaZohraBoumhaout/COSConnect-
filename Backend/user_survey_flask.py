@@ -4,9 +4,11 @@
 #-----------------------------------------------------------------------
 import flask
 import database_access
+from flask import jsonify
 #-----------------------------------------------------------------------
 app = flask.Flask(__name__) # might need to change
 #-----------------------------------------------------------------------
+@app.route('/', methods=['GET'])
 @app.route('/firstpage', methods=['GET', 'POST'])
 def firstpage():
     print(flask.request.method, 'me')
@@ -30,7 +32,8 @@ def firstpage():
         user_id = flask.request.args.get('id')
         if user_id:
             output = database_access.get_user(user_id, 'testdb_ery6')
-            return output
+            print(output)
+            return jsonify(output)
         else:
             print('before we hit here')
             return "We hit here"
