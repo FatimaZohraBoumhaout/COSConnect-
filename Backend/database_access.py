@@ -13,9 +13,9 @@ def add_user(input, database_url):
             with contextlib.closing(connection.cursor()) as cursor:
                 query = "INSERT INTO user_profile (pronouns, "
                 query += "classes, bio, availability, full_name, display_name) "
-                query += "VALUES (" + pronouns + ", " + classes + ", "
-                query += bio + ", " + availability + ", " + full_name
-                query += ", " + display_name
+                query += "VALUES (" + "\'" + pronouns + "\'" + ", " + "\'" + classes + "\'" + ", "+ "\'" 
+                query += bio + "\'" + ", " + "\'" + availability + "\'" + ", " + "\'" + full_name + "\'"
+                query += ", " + "\'" + display_name+ "\'" 
                 query += ") RETURNING user_id;"
                 
                 #might need prepared list
