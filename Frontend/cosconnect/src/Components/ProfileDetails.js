@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from "react";
 
-function ProfileDetails() {
+function ProfileDetails(props) {
+  const { userId } = props;
   const [user, setUser] = useState(null);
 
   useEffect(() => {
     // Fetch the user's data from the Flask server
-    fetch("/firstpage?id=9")
+    fetch(`/firstpage?id=${userId}`)
       .then((response) => response.json())
       .then((data) => {
         setUser(data);
@@ -13,7 +14,7 @@ function ProfileDetails() {
       })
       .catch(error => console.log(error));
       
-  }, []);
+  }, [userId]);
 
   const styles = `
   .profile-container {

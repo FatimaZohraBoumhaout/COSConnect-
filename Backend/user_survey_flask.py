@@ -21,15 +21,14 @@ def firstpage():
         availability = data.get('availability')
         full_name = data.get('fullName')
         display_name = data.get('displayName')
-        id = database_access.add_user(
+        user_id = database_access.add_user(
             (pronouns, classes, bio, availability, full_name, display_name),'testdb_ery6')
         
-        output = database_access.get_user(id, 'testdb_ery6')
         print('we returned')
-
-        return output
+        return jsonify({'user_id': user_id})
     else:
         user_id = flask.request.args.get('id')
+        print('userid: ',user_id)
         if user_id:
             output = database_access.get_user(user_id, 'testdb_ery6')
             print(output)

@@ -1,7 +1,9 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import './UserSurvey.css';
 
 function UserSurvey() {
+  const navigate = useNavigate();
   const [fullName, setFullName] = useState('');
   const [displayName, setDisplayName] = useState('');
   const [pronouns, setPronouns] = useState('');
@@ -19,7 +21,12 @@ function UserSurvey() {
       },
       body: JSON.stringify(data)
     })
-      .then(response => console.log(response.data))
+      .then(response => response.json())
+      .then(data => {
+        const userId = data.user_id;
+        console.log(userId);
+        navigate(`/profileview/${userId}`);
+      })
       .catch(error => console.error(error));
   }
  

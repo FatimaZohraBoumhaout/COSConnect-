@@ -12,8 +12,8 @@ function App() {
     <Header />
     <BrowserRouter>
     <Routes>
-        <Route path="/firstpage" element={<UserSurvey />} />
-        <Route index element={<UserProfileView />} />
+        <Route path="/" element={<UserSurvey />} />
+        <Route path="/profileview/:userId" element={<UserProfileView />} />
     </Routes>
     </BrowserRouter>
     <Footer /> 
