@@ -40,6 +40,8 @@ def firstpage():
 
 @app.route('/homepage', methods=['GET'])
 def homepage():
+    data = flask.request.get_json()
+    classes = data.get('classes')
     
 
 
