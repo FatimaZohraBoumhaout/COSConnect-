@@ -26,7 +26,7 @@ def check_user_id_in_db(user_id, database_url):
 
         # Check if the result is not None (user exists in the db)
         if id is not None:
-            return id[0]
+            return id #id[0]
         else:
             return None
           
