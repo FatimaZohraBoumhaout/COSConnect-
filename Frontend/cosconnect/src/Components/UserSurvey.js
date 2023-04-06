@@ -1,3 +1,7 @@
+  /*------------------------------------------------------------------
+  FOR FIRST TIME USERS (Form)
+  -------------------------------------------------------------------*/
+
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import './UserSurvey.css';
@@ -34,7 +38,7 @@ function UserSurvey() {
     <div className="bd">
       <div className="container">
       <h1 className="form-title" style={{color: "#338888"}}>Welcome to COSConnect!</h1>
-
+ 
         <form method="post" action="/Home" onSubmit={handleSubmit}>   
           <div className="user-info">
 
@@ -108,6 +112,7 @@ function UserSurvey() {
             <input type="submit" value="Submit" />
           </div>
         </form>
+
       </div>
     </div>
   );
