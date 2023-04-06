@@ -16,100 +16,6 @@ function HomePageView(props) {
       
   }, [userId]);
 
-  const styles = `
-
-  .bd {
-
-
-  }
-
-
-
-  .profile-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    background-color: #F2F0EB;
-    border-radius: 30px;
-    margin: 20px;
-  }
-  
-  .grid-item {
-    width: 85%;
-    max-width: 800px;
-    height: 100%;
-    margin: 0 auto;
-    display: flex;
-    flex-direction: column;
-  }
-  
-  .profile-header {
-    display: flex;
-    align-items: center;
-  }
-  
-  .profile-avatar {
-    height: 100px;
-    width: 100px;
-    border-radius: 50%;
-    margin-right: 20px;
-  }
-  
-  .profile-name {
-    font-size: 24px;
-    margin: 0;
-  }
-  
-  .edit-button {
-    margin-left: auto;
-  }
-  
-  .profile-content {
-    margin-top: 20px;
-    padding: 20px;
-    display: flex;
-    flex-direction: column;
-    flex-grow: 1; /* add this */
-    justify-content: space-between; /* add this */
-  }
-  
-  .gray-box {
-    width: 100%;
-    height: 200px;
-    background-color: #d3d3d3;
-    margin-bottom: 20px;
-  }
-  
-  @media (max-width: 768px) {
-    .grid-item {
-      width: 90%;
-      max-width: none;
-    }
-  
-    .profile-avatar {
-      height: 80px;
-      width: 80px;
-      margin-right: 10px;
-    }
-  
-    .profile-name {
-      font-size: 18px;
-    }
-  
-    .profile-content {
-      margin-top: 10px;
-      padding: 10px;
-    }
-  
-    .gray-box {
-      height: 100px;
-      margin-bottom: 10px;
-    }
-  }
-  
-  `;
-
   if (!user) {
     return <>loading...</>
   }
@@ -123,22 +29,26 @@ function HomePageView(props) {
 
         <div className="classes">
             <div className="square">
-                <div className="class1">
+                <div className="content">
+                    <h3 className="class-text">Class 1</h3>
                 </div>
             </div>
 
             <div className="square">
-                <div className="class2">
+                <div className="content">
+                    <h3 className="class-text">Class 2</h3>
                 </div>
             </div>
 
             <div className="square">
-                <div className="class3">
+                <div className="content">
+                    <h3 className="class-text">Class 3</h3>
                 </div>
             </div>
 
             <div className="square">
-                <div className="class4">
+                <div className="content">
+                    <h3 className="class-text">Class 4</h3>
                 </div>
             </div>
         </div>

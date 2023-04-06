@@ -36,6 +36,16 @@ def firstpage():
         else:
             print('before we hit here')
             return "We hit here"
+        
+
+@app.route('/homepage', methods=['GET'])
+def homepage():
+    
+
+
+
+
+
 
 if __name__ == '__main__':
     app.run(debug=True)
