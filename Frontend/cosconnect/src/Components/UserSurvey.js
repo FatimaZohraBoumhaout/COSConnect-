@@ -33,9 +33,9 @@ function UserSurvey() {
   return (
     <div className="bd">
       <div className="container">
-        <h1 className="form-title">Welcome to COSConnect!</h1>
+      <h1 className="form-title" style={{color: "#338888"}}>Welcome to COSConnect!</h1>
 
-        <form method="post" action="/firstpage" onSubmit={handleSubmit}>
+        <form method="post" action="/Home" onSubmit={handleSubmit}>   
           <div className="user-info">
 
             <div className="input-box">
@@ -80,12 +80,14 @@ function UserSurvey() {
 
             <div className="input-box">
               <label htmlFor="availability">Availability</label>
-              <input type="text"
+              <textarea type="text"
                 id="availability"
                 name="availability"
-                placeholder="i.e. Monday from 3:00 PM to 5:00 PM & ..."
+                placeholder="i.e. Monday from 3:00 PM to 5:00 PM"
                 value={availability}
-                onChange={event => setAvailability(event.target.value)} />
+                onChange={event => setAvailability(event.target.value)} 
+                style={{ height:"97%", width: "95%", padding: "15px"}}>
+              </textarea>
             </div>
 
             <div className="input-box">
@@ -96,7 +98,7 @@ function UserSurvey() {
                 placeholder="Tell us about yourself"
                 value={bio}
                 onChange={event => setBio(event.target.value)}
-                style={{ height:"100px"}}>
+                style={{ height:"97%", width: "95%", padding: "15px"}}>
               </textarea>
             </div>
 
