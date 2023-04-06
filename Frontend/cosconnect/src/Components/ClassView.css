@@ -1,0 +1,61 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Inter";
+
+  }
+
+.bd{
+    display: flex;
+    height: 100vh;
+    background-size: cover;
+}
+.body{
+    background-color:#BADFE7;
+    background-size:cover;
+}
+.grid-container{
+    display: grid;
+    grid-template-columns: 30vw 70vw;
+    grid-template-rows: auto;
+    grid-template-areas: 
+        'classes search '
+        'classes sent '
+        'received students '
+        'received students ';
+    
+}
+.classes{
+    grid-area: classes;   
+    border-right: 5px solid #403F3D;
+    height: 50vh;
+}
+.received{
+    grid-area:received;
+    border-right: 5px solid #403F3D;
+    border-top: 5px solid #403F3D;
+    height:50vh;
+}
+.students{
+    grid-area:students;
+}
+.sent{
+    grid-area:sent;
+}
+.search{
+    grid-area:search;
+}
+h3{
+    color:#338888;
+    font-family:'Inter';
+    font-size: 28;
+    font-weight:100;
+    margin:20px;
+}
+h2{
+    text-align:center;
+}
+.left-header{
+    text-align:center;
+}

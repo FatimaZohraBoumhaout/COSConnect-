@@ -5,6 +5,7 @@ import UserProfileView from './Components/UserProfileView';
 import Header from './Components/Header';
 import Footer from './Components/Footer';
 import UserSurvey from './Components/UserSurvey';
+import ClassView from './Components/ClassView';
 
 function App() {
   return (
@@ -14,6 +15,8 @@ function App() {
     <Routes>
         <Route path="/" element={<UserSurvey />} />
         <Route path="/profileview/:userId" element={<UserProfileView />} />
+        <Route path="/classview/:userId" element={<ClassView/>}></Route>
+
     </Routes>
     </BrowserRouter>
     <Footer /> 
