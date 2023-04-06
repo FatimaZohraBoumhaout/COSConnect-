@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 
-function ProfileDetails(props) {
+function HomePageView(props) {
   const { userId } = props;
   const [user, setUser] = useState(null);
 
@@ -17,6 +17,14 @@ function ProfileDetails(props) {
   }, [userId]);
 
   const styles = `
+
+  .bd {
+
+
+  }
+
+
+
   .profile-container {
     display: flex;
     justify-content: center;
@@ -107,36 +115,33 @@ function ProfileDetails(props) {
   }
 
   return (
-    <div className="profile-container">
-      <style>{styles}</style>
-      <div className="grid-item item-1">
-        <div className="profile-header">
-          <img alt="avatar" className="profile-avatar" />
-          <div className="profile-info">
-            <h1 className="profile-name">{  user[0][4]}</h1>
-          </div>
-          <button className="edit-button">Edit</button>
+    <div className="bd">
+        <div className="home-header">
+            <img alt="avatar" className="profile-avatar" />
+            <h1 className="home-title">Classes</h1>
         </div>
-        <div className="profile-content">
-          <div className="gray-box"></div>
-          <div>
-            <label htmlFor="pronouns">Pronouns:</label>
-            <span id="pronouns">{  user[0][0]}</span>
-          </div>
-          <div>
-            <label htmlFor="classes">Classes:</label>
-            <span id="classes">{  user[0][1]}</span>
-          </div>
-          <div>
-            <label htmlFor="bio">Bio:</label>
-            <span id="bio">{  user[0][2]}</span>
-          </div>
-          <div>
-            <label htmlFor="availability">Availability:</label>
-            <span id="availability">{}</span>
-          </div>
+
+        <div className="classes">
+            <div className="square">
+                <div className="class1">
+                </div>
+            </div>
+
+            <div className="square">
+                <div className="class2">
+                </div>
+            </div>
+
+            <div className="square">
+                <div className="class3">
+                </div>
+            </div>
+
+            <div className="square">
+                <div className="class4">
+                </div>
+            </div>
         </div>
-      </div>
     </div>
   );
 }
