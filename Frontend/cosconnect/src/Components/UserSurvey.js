@@ -1,5 +1,5 @@
   /*------------------------------------------------------------------
-  FOR FIRST TIME USERS (Form)
+  FOR FIRST TIME USERS (Form) -----> ADD REQUIRED TO INPUT
   -------------------------------------------------------------------*/
 
 import React, { useState } from "react";
