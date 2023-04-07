@@ -49,7 +49,8 @@ function UserSurvey() {
                 name="fullName"
                 placeholder="Enter Full Name"
                 value={fullName}
-                onChange={event => setFullName(event.target.value)} />
+                onChange={event => setFullName(event.target.value)} 
+                required/>
             </div>
 
             <div className="input-box">
@@ -59,7 +60,8 @@ function UserSurvey() {
                 name="displayName"
                 placeholder="Enter Display Name"
                 value={displayName}
-                onChange={event => setDisplayName(event.target.value)} />
+                onChange={event => setDisplayName(event.target.value)} 
+                />
             </div>
 
             <div className="input-box">
@@ -69,7 +71,8 @@ function UserSurvey() {
                 name="pronouns"
                 placeholder="Enter Pronouns"
                 value={pronouns}
-                onChange={event => setPronouns(event.target.value)} />
+                onChange={event => setPronouns(event.target.value)} 
+                required/>
             </div>
 
             <div className="input-box">
@@ -79,7 +82,8 @@ function UserSurvey() {
                 name="classes"
                 placeholder="e.g. COS 126"
                 value={classes}
-                onChange={event => setClasses(event.target.value)} />
+                onChange={event => setClasses(event.target.value)} 
+                required/>
             </div>
 
             <div className="input-box">
@@ -90,7 +94,8 @@ function UserSurvey() {
                 placeholder="i.e. Monday from 3:00 PM to 5:00 PM"
                 value={availability}
                 onChange={event => setAvailability(event.target.value)} 
-                style={{ height:"97%", width: "95%", padding: "15px"}}>
+                style={{ height:"97%", width: "95%", padding: "15px"}}
+                required>
               </textarea>
             </div>
 
@@ -102,7 +107,8 @@ function UserSurvey() {
                 placeholder="Tell us about yourself"
                 value={bio}
                 onChange={event => setBio(event.target.value)}
-                style={{ height:"97%", width: "95%", padding: "15px"}}>
+                style={{ height:"97%", width: "95%", padding: "15px"}}
+                required>
               </textarea>
             </div>
 
