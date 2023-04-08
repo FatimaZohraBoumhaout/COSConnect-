@@ -2,15 +2,25 @@
     padding: 0;
     margin: 0;
     box-sizing: border-box;
-    font-family: sans-serif;
+    font-family: "Times New Roman", Times, serif;
 }
+.form-title{
+    font-family: Apple Chancery	
+    ;	
+}
+html, bd  {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+  }
 
 .bd{
     display: flex;
     height: 100vh;
     justify-content: center;
     align-items: center;    
-    background-image: url("../../public/princetonlogo.JPG");
+    background-image: url("../../public/test3.jpeg");
     background-size: cover;
     
 }
@@ -83,13 +93,15 @@
     padding: 10px;
     border:none;
     border-radius: 3px;
-    color: #FFFFFF;
-    background:	#696969;
+    background:  #338888;
+    color:#FFFFFF;
+    
 }
 
 .submit-btn input:hover{
-    background:  #303030;
-    color:#FFFFFF;
+    
+    color: black;
+    background:	#BADFE7;
 }
 
 @media(max-width: 600px){
