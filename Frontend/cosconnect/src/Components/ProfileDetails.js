@@ -1,14 +1,16 @@
 import React, { useState, useEffect } from "react";
 import Avatar from 'react-avatar';
 import { Link } from 'react-router-dom';
+import { useCookies } from 'react-cookie';
 
-function ProfileDetails(props) {
-  const { userId } = props;
+function ProfileDetails() {
+  // const { userId } = props;
   const [user, setUser] = useState(null);
+  const [cookies] = useCookies(['user_id']);
 
   useEffect(() => {
     // Fetch the user's data from the Flask server
-    fetch(`/firstpage?id=${userId}`)
+    fetch(`/firstpage?id=${cookies.user_id}`)
       .then((response) => response.json())
       .then((data) => {
         setUser(data);
@@ -16,7 +18,7 @@ function ProfileDetails(props) {
       })
       .catch(error => console.log(error));
       
-  }, [userId]);
+  }, [cookies.user_id]);
 
   const styles = `
     .profile-container {

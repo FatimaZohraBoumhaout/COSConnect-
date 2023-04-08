@@ -15,7 +15,7 @@ function App() {
     <BrowserRouter>
     <Routes>
         <Route path="/" element={<UserSurvey />} />
-        <Route path="/profileview/:userId" element={<UserProfileView />} />
+        <Route path="/profileview" element={<UserProfileView />} />
         <Route path="/edit" element={<SettingsView/>} />
         <Route path="/Home" element={<Home />} />
     </Routes>

@@ -4,16 +4,23 @@
 
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { useCookies } from "react-cookie";
 import './UserSurvey.css';
 
 function UserSurvey() {
   const navigate = useNavigate();
+  const [cookies, setCookie, removeCookie] = useCookies(['user_id']);
+  // const [userId, setUserId] = useState(cookies.user_id || '');
   const [fullName, setFullName] = useState('');
   const [displayName, setDisplayName] = useState('');
   const [pronouns, setPronouns] = useState('');
   const [classes, setClasses] = useState('');
   const [availability, setAvailability] = useState('');
   const [bio, setBio] = useState('');
+
+  // const handleUserIdChange = (event) => {
+  //   setUserId(event.target.value);
+  // };
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -28,8 +35,9 @@ function UserSurvey() {
       .then(response => response.json())
       .then(data => {
         const userId = data.user_id;
+        setCookie('user_id', userId);
         console.log(userId);
-        navigate(`/profileview/${userId}`);
+        navigate(`/profileview`);
       })
       .catch(error => console.error(error));
   }
