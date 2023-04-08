@@ -6,6 +6,7 @@ import Header from './Components/Header';
 import Footer from './Components/Footer';
 import UserSurvey from './Components/UserSurvey';
 import SettingsView from "./Components/SettingsView";
+import Home from "./Components/Home";
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
         <Route path="/" element={<UserSurvey />} />
         <Route path="/profileview/:userId" element={<UserProfileView />} />
         <Route path="/edit" element={<SettingsView/>} />
+        <Route path="/Home" element={<Home />} />
     </Routes>
     </BrowserRouter>
     <Footer /> 
