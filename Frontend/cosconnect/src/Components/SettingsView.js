@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import "./SettingsView.css"; // import CSS file for custom styling
 
 const settingsStyle = {
   gridRow: "1",
@@ -6,7 +7,7 @@ const settingsStyle = {
   display: "flex",
   alignItems: "center",
   justifyContent: "center",
-  backgroundColor: "#F2F0EB",
+  backgroundColor: "#BADFE7",
   borderRadius: "30px",
   marginTop: "20px"
 };
@@ -28,12 +29,11 @@ const toggleContainerStyle = {
 function SettingsView() {
   const [status, setStatus] = useState("Not Available");
   const [notifications, setNotifications] = useState(false);
+  
 
   const handleStatusToggle = () => {
     setStatus((prevStatus) => (prevStatus === "Available" ? "Not Available" : "Available"));
   };
-  
-
   const handleNotificationsToggle = () => {
     setNotifications((prevNotifications) => !prevNotifications);
   };
@@ -44,7 +44,7 @@ function SettingsView() {
         <div style={headerContainerStyle}>
           <h2 style={{ margin:0}}>Settings</h2>
           <div style={toggleContainerStyle}>
-            <label htmlFor="status-toggle">Status:</label>
+            <label htmlFor="status-toggle">Status: </label>
             <div style={{ marginLeft: "10px" }}>
               <label className="switch">
                 <input
@@ -58,6 +58,20 @@ function SettingsView() {
             </div>
             <span style={{ marginLeft: "10px" }}>{status}</span>
           </div>
+          <div style={toggleContainerStyle}>
+            <label htmlFor="talking-toggle">Talking to..: </label>
+            <div style={{ marginLeft: "10px" }}>
+              <label className="switch">
+                <input
+                  type="checkbox"
+                  id="talking-toggle"
+                  
+                  
+                />
+                <span className="slider round"></span>
+              </label>
+            </div>
+            </div>
           <div style={toggleContainerStyle}>
             <label htmlFor="notifications-toggle">Notifications:</label>
             <div style={{ marginLeft: "10px" }}>

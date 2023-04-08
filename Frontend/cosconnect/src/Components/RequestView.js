@@ -1,9 +1,9 @@
 import React from "react";
 const requestBody = {
-  backgroundColor: "#F2F0EB",
+  backgroundColor: "#BADFE7",
   borderRadius: "30px",
   marginTop: "20px",
-  height: "auto",
+  height: "85%",
   paddingBottom: "20px",
 };
 
@@ -13,6 +13,7 @@ const headerStyle = {
   justifyContent: "center",
 };
 
+
 const rectangleContainerStyle = {
   display: "flex",
   flexDirection: "column",
@@ -21,9 +22,11 @@ const rectangleContainerStyle = {
 };
 
 const rectangleStyle = {
+  marginTop: "10px",
   width: "80%",
-  height: "80px",
-  backgroundColor: "gray",
+  height: "100%",
+  backgroundColor: "#D9D9D9",
+  borderRadius: "15px",
 };
 
 const mediaQueryStyle = {
@@ -34,6 +37,11 @@ const mediaQueryStyle = {
   gap: "20px",
 };
 
+const pStyle = {
+  color: "#000000",
+  margin: "10px",
+};
+
 function RequestView() {
   return (
     <div className="grid-item item-3" style={requestBody}>
@@ -41,9 +49,12 @@ function RequestView() {
         <h2>My Requests</h2>
       </div>
       <div className="rectangle-container" style={rectangleContainerStyle}>
-        <div className="rectangle" style={rectangleStyle}></div>
-        <div className="rectangle" style={rectangleStyle}></div>
-        <div className="rectangle" style={rectangleStyle}></div>
+        <div className="rectangle" style={rectangleStyle}>
+          <p style={pStyle}>Received Requests</p>
+        </div>
+        <div className="rectangle" style={rectangleStyle}>
+        <p style={pStyle}>Sent Requests</p>
+        </div>
       </div>
       <style>
         {`@media (min-width: 768px) {

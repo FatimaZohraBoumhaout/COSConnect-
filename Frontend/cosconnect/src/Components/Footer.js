@@ -2,10 +2,11 @@ import React from 'react';
 
 const footerStyles = {
   padding: '1rem',
-  textAlign: 'center',
-  backgroundColor: '#262625',
-  color: '#F2F0EB',
-  boxShadow: '0px 2px 4px rgba(0, 0, 0, 0.2)'
+  textAlign: 'left',
+  backgroundColor: '#65B3B8', 
+  color: '#F6F6F2',
+  boxShadow: '0px 2px 4px rgba(0, 0, 0, 0.2)',
+  fontSize: '10px',
 };
 
 function Footer() {

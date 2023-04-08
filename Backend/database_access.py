@@ -39,7 +39,7 @@ def get_user(input, database_url):
         with psycopg2.connect(dbname = database_url, host = "dpg-cggj3fceoogqfc2no840-a.ohio-postgres.render.com", user="testuser", password="gVYdK2LMupfkuAxyR6kp3a6XpuIB9VVV") as connection:
             with contextlib.closing(connection.cursor()) as cursor:
                 query = "SELECT pronouns, classes, bio, full_name, "
-                query += "display_name FROM user_profile "
+                query += "display_name, availability FROM user_profile "
                 query += "WHERE user_id = " + str(input) + ";"
                 #might need prepared list
 
