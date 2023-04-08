@@ -1,59 +1,46 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import Avatar from "react-avatar";
+import './Home.css';
 
-function HomePageView(props) {
-  const { userId } = props;
-  const [user, setUser] = useState(null);
 
-  useEffect(() => {
-    // Fetch the user's data from the Flask server
-    fetch(`/firstpage?id=${userId}`)
-      .then((response) => response.json())
-      .then((data) => {
-        setUser(data);
-        console.log("user state set to:", data);
-      })
-      .catch(error => console.log(error));
-      
-  }, [userId]);
+function Home(){
+    return(
+        <div className="home">
+            <div className="avatar">
+                <Avatar  className="p-avatar" name="Zohra" size="60" round={true} />
+            </div>
+            <div className="title">
+                <h3> Classes </h3>
+            </div>
+            <div className="buttons">
+                <button>
+                    Add
+                </button>
+                <button>
+                    Drop
+                </button>
+            </div>
+            <div className="boxes">
+                <div>
+                    <h2 className="num">Class 1</h2>
+                </div>
+                <div>
+                    <h2 className="num">Class 2</h2>
+                </div>
+                <div>
+                    <h2 className="num">Class 3</h2>
+                </div>
+                <div>
+                    <h2 className="num">Class 4</h2>
+                </div>
+            </div>
 
-  if (!user) {
-    return <>loading...</>
-  }
-
-  return (
-    <div className="bd">
-        <div className="home-header">
-            <img alt="avatar" className="profile-avatar" />
-            <h1 className="home-title">Classes</h1>
         </div>
+    
+    );
 
-        <div className="classes">
-            <div className="square">
-                <div className="content">
-                    <h3 className="class-text">Class 1</h3>
-                </div>
-            </div>
-
-            <div className="square">
-                <div className="content">
-                    <h3 className="class-text">Class 2</h3>
-                </div>
-            </div>
-
-            <div className="square">
-                <div className="content">
-                    <h3 className="class-text">Class 3</h3>
-                </div>
-            </div>
-
-            <div className="square">
-                <div className="content">
-                    <h3 className="class-text">Class 4</h3>
-                </div>
-            </div>
-        </div>
-    </div>
-  );
 }
 
-export default ProfileDetails;
+
+export default Home
