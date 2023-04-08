@@ -1,12 +1,21 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
+//classview_flask structures this template
+
 import "./ClassView.css"
 import "@fontsource/inter";
 
 //get all sent and received students by id from DB
+
+//-------------------
+//notice that i have NOT used cookies in the frontend to see which 
+//class i am current in on (ex. hardcode COS126)
+
+
 function ClassView(){
     return(
+
         <div className="body">
             <div className="grid-container">
                 <div className="classes">
@@ -27,7 +36,7 @@ function ClassView(){
                 </div>
                 <div className="sent">
                     <h3>Invitations Sent</h3>
-                    <div className="rectangle-right">hi</div>
+                    <div className="rectangle-right"></div>
                     <div className="rectangle-right"></div>
                     <div className="rectangle-right"></div>
                     
@@ -38,7 +47,7 @@ function ClassView(){
                     <div className="rectangle-left"></div>
                     <div className="rectangle-left"></div>
                     <div className="rectangle-left"></div>
-                    </div>
+                </div>
                 <div className="students">
                     <h3>Students</h3>
                     <div className="rectangle-right"></div>
