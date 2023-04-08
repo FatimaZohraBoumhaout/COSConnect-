@@ -28,7 +28,7 @@ function Home(){
         <Avatar className="p-avatar" name="Zohra" size="60" round={true} />
       </div>
       <div className="title">
-        <h3> Classes </h3>
+        <> Classes </>
       </div>
       <div className="buttons">
         <button>

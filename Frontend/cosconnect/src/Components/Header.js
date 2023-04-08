@@ -156,17 +156,17 @@ function Header() {
 
         { /* Render the links as a dropdown on small screens */ }
         <div className={`header__links ${isDropdownOpen ? 'open' : ''}`}>
-          <a href="/cosconnect/home">Home</a>
-          <a href="/cosconnect/profile">Profile</a>
-          <a href="/cosconnect/classes">Classes</a>
+          <a href="home">Home</a>
+          <a href="profileview">Profile</a>
+          <a href="classview">Classes</a>
         </div>
 
         { /* Render the links as individual items on large screens */ }
-        <a className="hidd" href="/cosconnect/home">Home</a>
+        <a className="hidd" href="home">Home</a>
         <div className="header__button-divider hidd"></div>
-        <a className="hidd" href="/cosconnect/profile">Profile</a>
+        <a className="hidd" href="profileview">Profile</a>
         <div className="header__button-divider hidd"></div>
-        <a className="hidd" href="/cosconnect/classes">Classes</a>
+        <a className="hidd" href="classview">Classes</a>
       </div>
     </nav>
   );

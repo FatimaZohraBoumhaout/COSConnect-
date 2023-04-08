@@ -17,10 +17,10 @@ function App() {
     <BrowserRouter>
     <Routes>
         <Route path="/" element={<UserSurvey />} />
-        <Route path="/profileview" element={<UserProfileView />} />
-        <Route path="/edit" element={<SettingsView/>} />
-        <Route path="/Home" element={<Home />} />
-        <Route path="/classview/:userId" element={<ClassView/>}></Route>
+        <Route path="home" element={<Home />} />
+        <Route path="profileview" element={<UserProfileView />} />
+        <Route path="edit" element={<SettingsView/>} />
+        <Route path="classview" element={<ClassView/>}></Route>
     </Routes>
     </BrowserRouter>
     <Footer /> 
