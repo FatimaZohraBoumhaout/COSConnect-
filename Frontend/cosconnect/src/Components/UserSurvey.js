@@ -37,7 +37,7 @@ function UserSurvey() {
         const userId = data.user_id;
         setCookie('user_id', userId);
         console.log(userId);
-        navigate(`/profileview`);
+        navigate(`/home`);
       })
       .catch(error => console.error(error));
   }
