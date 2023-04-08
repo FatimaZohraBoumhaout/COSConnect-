@@ -5,28 +5,24 @@ import UserProfileView from './Components/UserProfileView';
 import Header from './Components/Header';
 import Footer from './Components/Footer';
 import UserSurvey from './Components/UserSurvey';
-
-function Layout({ page }) {
-  const location = useLocation();
-  const showHeaderFooter = location.pathname.startsWith('/profileview');
-
-  return (
-    <>
-      {showHeaderFooter && <Header />}
-      {page}
-      {showHeaderFooter && <Footer />}
-    </>
-  );
-}
+import SettingsView from "./Components/SettingsView";
 
 function App() {
   return (
+  <>
+    <Header />
     <BrowserRouter>
-      <Routes>
+    <Routes>
         <Route path="/" element={<UserSurvey />} />
         <Route path="/profileview/:userId" element={<UserProfileView />} />
-      </Routes>
+        <Route path="/edit" element={<SettingsView/>} />
+    </Routes>
     </BrowserRouter>
+    <Footer /> 
+   </>
   );
 }
 export default App;
+
+
+
