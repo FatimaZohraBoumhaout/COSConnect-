@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { useCookies } from "react-cookie";
 import Avatar from "react-avatar";
 import './Home.css';
 
 function Home(){
   const [classes, setClasses] = useState([]);
-  const navigate = useNavigate();
+  const [cookies] = useCookies(['user_id']); 
 
   useEffect(() => {
     // fetch classes from the backend API
@@ -15,12 +15,24 @@ function Home(){
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-        user_id: 'user123' // replace with the user ID you want to fetch classes for
+        user_Id: cookies.user_id// replace with the user ID you want to fetch classes for
       }),
     })
       .then(response => response.json())
       .then(data => setClasses(data));
   }, []);
+
+  // useEffect(() => {
+  // fetch(`/get_class?user_id=${cookies.user_id}`)
+  //     .then((response) => response.json())
+  //     .then((data) => {
+  //       setUser(data);
+  //       console.log("user state set to:", data);
+  //     })
+  //     .catch(error => console.log(error));
+      
+  // }, [cookies.user_id]);
+
 
   return(
     <div className="home">

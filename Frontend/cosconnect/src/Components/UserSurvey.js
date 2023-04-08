@@ -23,6 +23,7 @@ function UserSurvey() {
   // };
 
   const handleSubmit = (event) => {
+    let class_ = ""; 
     event.preventDefault();
     const data = { fullName, displayName, pronouns, classes, availability, bio };
     fetch('/firstpage', {
@@ -35,12 +36,31 @@ function UserSurvey() {
       .then(response => response.json())
       .then(data => {
         const userId = data.user_id;
+        class_ = classes
         setCookie('user_id', userId);
         console.log(userId);
+        // Make a new API request to add the classes 
+        fetch('/add_class', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({
+            "user_id": userId,
+            "class_name": class_
+          })
+        })
+          .then(response => response.json())
+          .then(data => {
+            console.log(data);
+          })
+          .catch(error => console.error(error));
+  
         navigate(`/home`);
       })
       .catch(error => console.error(error));
   }
+  
  
   return (
     <div className="bd">
