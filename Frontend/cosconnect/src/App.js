@@ -7,6 +7,8 @@ import Footer from './Components/Footer';
 import UserSurvey from './Components/UserSurvey';
 import SettingsView from "./Components/SettingsView";
 import Home from "./Components/Home";
+import ClassView from './Components/ClassView';
+
 
 function App() {
   return (
@@ -18,6 +20,7 @@ function App() {
         <Route path="/profileview/:userId" element={<UserProfileView />} />
         <Route path="/edit" element={<SettingsView/>} />
         <Route path="/Home" element={<Home />} />
+        <Route path="/classview/:userId" element={<ClassView/>}></Route>
     </Routes>
     </BrowserRouter>
     <Footer /> 
