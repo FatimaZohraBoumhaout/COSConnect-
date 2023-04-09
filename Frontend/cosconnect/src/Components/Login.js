@@ -1,78 +1,162 @@
-import React, { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
-import Avatar from "react-avatar";
-import './Login.css';
+import React, { useState } from "react";
+import { useCookies } from "react-cookie";
+import "./Login.css";
 
-function login(){
+function Login() {
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+  const [email, setEmail] = useState('');
+  const [cookies, setCookie] = useCookies(["user_id"]);
+  const [isSignUpMode, setIsSignUpMode] = useState(false);
 
 
 
+  function toggleMode() {
+    setIsSignUpMode((prevMode) => !prevMode);
+  }
 
-return(
-    <div className="bdy">
-        <div class="contain">
-        <div class="forms-container">
-            <div class="signin-signup">
-            <form action="/loggedIn" method="POST" class="sign-in-form">
-                <h2 class="title">Sign in</h2>
-                <div class="input-field">
-                <i class="fas fa-user"></i>
-                <input type="text" name="username" placeholder="Username" />
-                </div>
-                <div class="input-field">
-                <i class="fas fa-lock"></i>
-                <input type="password" name="password" placeholder="Password" />
-                </div>
-                <input type="submit" value="Login" class="btn solid" />
+  const handleLogIn = (event) => {
+    event.preventDefault();
+    // Send a POST request to server to log in user
+    fetch("/login", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        username: username,
+        password: password,
+      }),
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        // Set the user id cookie
+        setCookie("user_id", data.user_id);
+      })
+      .catch((error) => console.log(error));
+  };
+
+  const handleSignUp = (event) => {
+    event.preventDefault();
+    // Send a POST request to server to sign up user
+    fetch("/reg", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        username: username,
+        email: email,
+        password: password,
+      }),
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        // Set the user id cookie
+        setCookie("user_id", data.user_id);
+      })
+      .catch((error) => console.log(error));
+  };
+
+  return (
+    <div className={`container ${isSignUpMode ? "sign-up-mode" : ""}`}>
+      <div className="forms-container">
+        <div className="signin-signup">
+          {/* LOG IN */}
+          {!isSignUpMode && (
+            <form onSubmit={handleLogIn} className="sign-in-form">
+              <h2 className="title">Sign in</h2>
+              <div className="input-field">
+                <i className="fas fa-user"></i>
+                <input
+                  type="text"
+                  name="username"
+                  placeholder="Username"
+                  value={username}
+                  onChange={(event) => setUsername(event.target.value)}
+                />
+              </div>
+              <div className="input-field">
+                <i className="fas fa-lock"></i>
+                <input
+                  type="password"
+                  name="password"
+                  placeholder="Password"
+                  value={password}
+                  onChange={(event) => setPassword(event.target.value)}
+                />
+              </div>
+              <input type="submit" value="Login" className="btn solid" />
             </form>
+          )}
 
-            <form action="/reg" method="POST" class="sign-up-form">
-                <h2 class="title">Sign up</h2>
-                <div class="input-field">
-                <i class="fas fa-user"></i>
-                <input type="username" name="username" placeholder="Username" /> 
+          {/* HIDDEN SIGN UP - JS Content */}
+          {isSignUpMode && (
+            <form onSubmit={handleSignUp} className="sign-up-form">
+              <h2 className="title">Sign up</h2>
+              <div className="input-field">
+                <i className="fas fa-user"></i>
+                <input
+                  type="text"
+                  name="username"
+                  placeholder="Username"
+                  value={username}
+                  onChange={(event) => setUsername(event.target.value)}
+                />
+              </div>
+              <div className="input-field">
+                <i className="fas fa-envelope"></i>
+                <input
+                  type="text"
+                  name="email"
+                  placeholder="Email"
+                  value={email}
+                  onChange={(event) => setEmail(event.target.value)}
+                  />
                 </div>
-                <div class="input-field">
-                <i class="fas fa-envelope"></i>
-                <input type="text" name="email" placeholder="Email" /> 
+                <div className="input-field">
+                  <i className="fas fa-lock"></i>
+                  <input
+                    type="password"
+                    name="password"
+                    placeholder="Password"
+                    value={password}
+                    onChange={(event) => setPassword(event.target.value)}
+                  />
                 </div>
-                <div class="input-field">
-                <i class="fas fa-lock"></i>
-                <input type="password" name="password" placeholder="Password" /> 
-                </div>
-                
-                <input type="submit" class="btn" value="Sign up" />
-            </form>
-            </div>
+                <input type="submit" value="Sign up" className="btn" />
+              </form>
+            )}
+      
+            {/* TOGGLE SIGN UP/LOG IN */}
+            <p className="toggle-link" onClick={toggleMode}>
+              {isSignUpMode ? "Already have an account? Sign in" : "Don't have an account? Sign up"}
+            </p>
+          </div>
         </div>
-
-        <div class="panels-container">
-            <div class="panel left-panel">
-            <div class="content">
-                <h3>New here ?</h3>
-                <p>
-                Sign up to join the familly!
-                </p>
-                <button class="btn transparent" id="sign-up-btn">
+      
+        <div className="panels-container">
+          <div className="panel left-panel">
+            <div className="content">
+              <h3>New here?</h3>
+              <button className="btn transparent" onClick={toggleMode}>
                 Sign up
-                </button>
+              </button>
             </div>
-            </div>
-            <div class="panel right-panel">
-            <div class="content">
-                <h3>One of us ?</h3>
-                <p>
-                Sign in then!
-                </p>
-                <button class="btn transparent" id="sign-in-btn">
+            <img src="img/log.svg" className="image" alt="" />
+          </div>
+          <div className="panel right-panel">
+            <div className="content">
+              <h3>One of us?</h3>
+              <button className="btn transparent" onClick={toggleMode}>
                 Sign in
-                </button>
+              </button>
             </div>
-            </div>
+            <img src="img/register.svg" className="image" alt="" />
+          </div>
         </div>
-        </div>
-    </div>
-);
-}
-
-export default login;
+      </div>
+      );
+    }
+    
+    export default Login;

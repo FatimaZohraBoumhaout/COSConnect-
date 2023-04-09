@@ -6,11 +6,12 @@
   box-sizing: border-box;
 }
 
-.bdy,input {
+body,
+input {
   font-family: "Poppins", sans-serif;
 }
 
-.contain {
+.container {
   position: relative;
   width: 100%;
   background-color: #fff;
