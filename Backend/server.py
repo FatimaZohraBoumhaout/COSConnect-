@@ -71,8 +71,18 @@ def add_request():
     data = flask.request.get_json()
     sender_id = data.get('sender_id')
     receiver_id = data.get('receiver_id')
+    message = data.get('message')
 
-    database_access.add_request((sender_id, receiver_id), 'testdb_ery6')
+    database_access.add_request((sender_id, receiver_id, message), 'testdb_ery6')
+
+@app.route('/get_request', methods=['GET'])
+def get_request():
+    data = flask.request.get_json()
+    sender_id = data.get('sender_id')
+    receiver_id = data.get('receiver_id')
+    message = data.get('message')
+
+    database_access.get_request((sender_id, receiver_id, message), 'testdb_ery6')
 
 # a different api
 
@@ -119,6 +129,17 @@ def get_class():
     print("we did it")
     print(output)
     return jsonify(output)
+
+@app.route('/send_message', methods=['POST'])
+def send_message():
+    data = flask.request.get_json()
+    id_sender = data.get('user_id')
+    id_receiver = data.get('id_receiver')
+    message = data.get('message')
+    database_access.send_message(id_sender, id_receiver, message, 'testdb_ery6')
+    print("sent message: ", message, "to user:", id_receiver, "from:", id_sender)
+    return jsonify({'status': 'success', 'message': 'Class added successfully'})
+
 
 # @app.route('/', methods=['GET'])
 # @app.route('/classview', methods=['GET'])
