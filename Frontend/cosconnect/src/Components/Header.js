@@ -1,11 +1,17 @@
 import React, { useState } from 'react';
+import { useCookies } from 'react-cookie';
 
 function Header() {
 
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const [cookies, setCookie, removeCookie] = useCookies(['user_id']);
 
   function handleDropdownClick() {
     setIsDropdownOpen(!isDropdownOpen);
+  }
+
+  function handleLogOut() {
+    removeCookie('user_id');
   }
 
   const styles = `
@@ -162,11 +168,14 @@ function Header() {
         </div>
 
         { /* Render the links as individual items on large screens */ }
+        <a className="hidd" href="login" onClick={handleLogOut}>Log Out</a>
+        <div className="header__button-divider hidd"></div>
         <a className="hidd" href="home">Home</a>
         <div className="header__button-divider hidd"></div>
         <a className="hidd" href="profileview">Profile</a>
         <div className="header__button-divider hidd"></div>
         <a className="hidd" href="classview">Classes</a>
+
       </div>
     </nav>
   );

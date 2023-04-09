@@ -18,7 +18,7 @@ function App() {
     <BrowserRouter>
     <Routes>
         <Route path="survey" element={<UserSurvey />} />
-        <Route path="/" element={<Home />} />
+        <Route path="/" element={<Login />} />
         <Route path="home" element={<Home />} />
         <Route path="profileview" element={<UserProfileView />} />
         <Route path="edit" element={<SettingsView/>} />

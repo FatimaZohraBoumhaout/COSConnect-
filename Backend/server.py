@@ -8,7 +8,7 @@ from flask import jsonify
 # -----------------------------------------------------------------------
 app = flask.Flask(__name__)  # might need to change
 # -----------------------------------------------------------------------
-print("running")
+
 @app.route('/signup', methods=['POST'])
 def sign_up():
     print('inside sign_up')
