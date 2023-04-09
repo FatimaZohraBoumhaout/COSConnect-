@@ -1,15 +1,15 @@
 import React, { useState } from "react";
 import { useCookies } from "react-cookie";
+import { useNavigate } from "react-router-dom";
 import "./Login.css";
 
 function Login() {
+  const navigate = useNavigate();
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [email, setEmail] = useState('');
   const [cookies, setCookie] = useCookies(["user_id"]);
   const [isSignUpMode, setIsSignUpMode] = useState(false);
-
-
 
   function toggleMode() {
     setIsSignUpMode((prevMode) => !prevMode);
@@ -24,39 +24,57 @@ function Login() {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        username: username,
-        password: password,
+        'username': username,
+        'password': password,
       }),
     })
-      .then((response) => response.json())
+      .then((response) => {
+        return response.json();
+      })
       .then((data) => {
-        // Set the user id cookie
-        setCookie("user_id", data.user_id);
+        if (data && 'error' in data) {
+          // Display error message to the user
+          alert(data.error);
+        } else {
+          // Set the user id cookie
+          setCookie("user_id", data.user_id);
+        }
+        navigate(`/home`);
       })
       .catch((error) => console.log(error));
   };
-
+  
+  
   const handleSignUp = (event) => {
     event.preventDefault();
     // Send a POST request to server to sign up user
-    fetch("/reg", {
+    fetch("/signup", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        username: username,
-        email: email,
-        password: password,
+        'username': username,
+        'email': email,
+        'password': password,
       }),
     })
-      .then((response) => response.json())
+      .then((response) => {
+        return response.json();
+      })
       .then((data) => {
-        // Set the user id cookie
-        setCookie("user_id", data.user_id);
+        if (data && 'error' in data) {
+          // Display error message to the user
+          alert(data.error);
+        } else {
+          // Set the user id cookie
+          setCookie("user_id", data.user_id);
+          navigate(`/survey`);
+        }
       })
       .catch((error) => console.log(error));
   };
+  
 
   return (
     <div className={`container ${isSignUpMode ? "sign-up-mode" : ""}`}>
@@ -143,7 +161,7 @@ function Login() {
                 Sign up
               </button>
             </div>
-            <img src="img/log.svg" className="image" alt="" />
+            {/* <img src="img/log.svg" className="image" alt="" /> */}
           </div>
           <div className="panel right-panel">
             <div className="content">
@@ -152,7 +170,7 @@ function Login() {
                 Sign in
               </button>
             </div>
-            <img src="img/register.svg" className="image" alt="" />
+            {/* <img src="img/register.svg" className="image" alt="" /> */}
           </div>
         </div>
       </div>

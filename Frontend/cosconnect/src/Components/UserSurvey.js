@@ -9,7 +9,7 @@ import './UserSurvey.css';
 
 function UserSurvey() {
   const navigate = useNavigate();
-  const [cookies, setCookie, removeCookie] = useCookies(['user_id']);
+  //const [cookies, setCookie, removeCookie] = useCookies(['user_id']);
   // const [userId, setUserId] = useState(cookies.user_id || '');
   const [fullName, setFullName] = useState('');
   const [displayName, setDisplayName] = useState('');
@@ -17,6 +17,7 @@ function UserSurvey() {
   const [classes, setClasses] = useState('');
   const [availability, setAvailability] = useState('');
   const [bio, setBio] = useState('');
+  const [cookies] = useCookies(['user_id']);
 
   // const handleUserIdChange = (event) => {
   //   setUserId(event.target.value);
@@ -25,8 +26,9 @@ function UserSurvey() {
   const handleSubmit = (event) => {
     let class_ = ""; 
     event.preventDefault();
-    const data = { fullName, displayName, pronouns, classes, availability, bio };
-    fetch('/firstpage', {
+    const userId = cookies.user_id;
+    const data = { userId, fullName, displayName, pronouns, classes, availability, bio };
+    fetch('/userprofile', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
@@ -35,9 +37,7 @@ function UserSurvey() {
     })
       .then(response => response.json())
       .then(data => {
-        const userId = data.user_id;
         class_ = classes
-        setCookie('user_id', userId);
         console.log(userId);
         // Make a new API request to add the classes 
         fetch('/add_class', {
@@ -55,7 +55,6 @@ function UserSurvey() {
             console.log(data);
           })
           .catch(error => console.error(error));
-  
         navigate(`/home`);
       })
       .catch(error => console.error(error));

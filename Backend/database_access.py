@@ -6,6 +6,22 @@
 import contextlib
 import psycopg2
 
+def authenticate_user(username, password, database_url):
+    try:
+        with psycopg2.connect(dbname=database_url, host="dpg-cggj3fceoogqfc2no840-a.ohio-postgres.render.com", user="testuser", password="gVYdK2LMupfkuAxyR6kp3a6XpuIB9VVV") as connection:
+            with contextlib.closing(connection.cursor()) as cursor:
+                query = "SELECT user_id FROM signup WHERE username = " + str(username) + " AND password = " + str(password)+ ";"
+                try:
+                    cursor.execute(query, (username, password))
+                    output = cursor.fetchone()
+                    return output
+                except Exception as ex:
+                    print(ex)
+    except Exception as ex:
+        print(ex)
+    return None
+
+
 def sign_up(input, database_url):
     username, email, password = input
     try:
@@ -14,7 +30,7 @@ def sign_up(input, database_url):
                 query = "INSERT INTO signup (username, "
                 query += "email, password) "
                 query += "VALUES (" + "\'" + username + "\'" + ", " + "\'" + email + "\'" + ", "+ "\'" 
-                query += + password+ "\'" 
+                query += password+ "\'" 
                 query += ") RETURNING user_id;"
                 print(username, email, password)
                 #might need prepared list

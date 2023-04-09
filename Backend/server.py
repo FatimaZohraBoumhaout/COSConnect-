@@ -8,6 +8,7 @@ from flask import jsonify
 # -----------------------------------------------------------------------
 app = flask.Flask(__name__)  # might need to change
 # -----------------------------------------------------------------------
+print("running")
 @app.route('/signup', methods=['POST'])
 def sign_up():
     print('inside sign_up')
@@ -21,12 +22,23 @@ def sign_up():
     print('we returned from signup')
     return jsonify({'user_id': user_id})
 
-@app.route('/firstpage', methods=['POST'])
-def firstpage():
+@app.route('/login', methods=['POST'])
+def log_in():
+    data = flask.request.get_json()
+    username = data.get('username', '')
+    password = data.get('password', '')
+    user_id = database_access.authenticate_user(username, password, 'testdb_ery6')
+    if user_id is not None:
+        return jsonify({'user_id': user_id})
+    else:
+        return jsonify({'error': 'Invalid credentials'}), 401
+
+@app.route('/userprofile', methods=['POST'])
+def user_profile():
     print(flask.request.method, 'me')
     print('inside')
     data = flask.request.get_json()
-    user_id = data.get('user_id')
+    user_id = data.get('userId')
     pronouns = data.get('pronouns')
     classes = data.get('classes')
     bio = data.get('bio')

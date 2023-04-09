@@ -17,7 +17,8 @@ function App() {
     <Header />
     <BrowserRouter>
     <Routes>
-        <Route path="/" element={<UserSurvey />} />
+        <Route path="survey" element={<UserSurvey />} />
+        <Route path="/" element={<Home />} />
         <Route path="home" element={<Home />} />
         <Route path="profileview" element={<UserProfileView />} />
         <Route path="edit" element={<SettingsView/>} />

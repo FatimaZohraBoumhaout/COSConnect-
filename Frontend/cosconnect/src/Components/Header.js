@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import LogOut from './LogOut';
 
 function Header() {
 
@@ -168,7 +167,6 @@ function Header() {
         <a className="hidd" href="profileview">Profile</a>
         <div className="header__button-divider hidd"></div>
         <a className="hidd" href="classview">Classes</a>
-        <LogOut/>
       </div>
     </nav>
   );
