@@ -24,12 +24,13 @@ function PartnerProfileDetails(props) {
   const styles = `
     .profile-container {
       display: flex;
+      width: 100%;
       justify-content: center;
       align-items: center;
-      height: 75vh;
       background-color: #BADFE7;  
       border-radius: 30px;
       margin: 20px;
+      margin-left: 50%;
     }
 
     .grid-item {
@@ -128,6 +129,7 @@ function PartnerProfileDetails(props) {
         height: 100px;
         margin-bottom: 10px;
       }
+
     }
 
   `;
@@ -145,7 +147,8 @@ function PartnerProfileDetails(props) {
           <div className="profile-info">
             <h1 className="profile-name">{  partner[0][4]}</h1>
           </div>
-          <Link to={`/edit`} className="edit-button">Edit</Link>
+          <Link to={`/classview`} className="edit-button">Close</Link>
+          <Link to={`/classview`} className="edit-button">Send Request</Link>
           
         </div>
         <div className="profile-content">

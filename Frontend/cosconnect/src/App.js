@@ -10,6 +10,7 @@ import Home from "./Components/Home";
 import ClassView from './Components/ClassView';
 import Login from './Components/Login';
 import PartnerProfileView from './Components/PartnerProfileView'
+import EditView from './Components/EditView'
 
 
 function App() {
@@ -22,7 +23,7 @@ function App() {
         <Route path="/" element={<Login />} />
         <Route path="home" element={<Home />} />
         <Route path="profileview" element={<UserProfileView />} />
-        <Route path="edit" element={<SettingsView/>} />
+        <Route path="edit" element={<EditView/>} />
         <Route path="classview" element={<ClassView/>}></Route>
         <Route path="login" element={<Login />} />
         <Route path="partnerview" element={<PartnerProfileView />} />

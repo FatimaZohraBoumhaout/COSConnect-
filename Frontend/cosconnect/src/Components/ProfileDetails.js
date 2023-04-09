@@ -28,7 +28,6 @@ function ProfileDetails() {
       display: flex;
       justify-content: center;
       align-items: center;
-      height: 75vh;
       background-color: #BADFE7;  
       border-radius: 30px;
       margin: 20px;
