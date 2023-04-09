@@ -140,6 +140,19 @@ def send_message():
     print("sent message: ", message, "to user:", id_receiver, "from:", id_sender)
     return jsonify({'status': 'success', 'message': 'Class added successfully'})
 
+@app.route('/edit_profile', methods=['POST'])
+def edit_profile():
+    data = flask.request.get_json()
+    user_id = data.get('userId')
+    pronouns = data.get('pronouns')
+    classes = data.get('classes')
+    bio = data.get('bio')
+    availability = data.get('availability')
+    database_access.edit_user(
+        (user_id, pronouns, classes, bio, availability), 'testdb_ery6')
+
+    return
+
 
 # @app.route('/', methods=['GET'])
 # @app.route('/classview', methods=['GET'])

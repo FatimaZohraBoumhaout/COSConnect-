@@ -181,6 +181,26 @@ def get_request(request, database_url):
     except Exception as ex:
         print(ex)
 
+def edit_user(input, database_url):
+    user_id, pronouns, classes, bio, availability = input
+    try:
+        with psycopg2.connect(dbname = database_url, host = "dpg-cggj3fceoogqfc2no840-a.ohio-postgres.render.com", user="testuser", password="gVYdK2LMupfkuAxyR6kp3a6XpuIB9VVV") as connection:
+            with contextlib.closing(connection.cursor()) as cursor:
+                query = "UPDATE user_profile SET pronouns="+"\'"+pronouns+"\', "
+                query += "classes="+"\'"+classes+"\', "
+                query += "bio="+"\'"+bio+"\', "
+                query += "availability="+"\'"+availability+"\', "
+                query += "classes="+"\'"+classes+"\' "
+                query += "WHERE user_id = " +"\'"+user_id+"\' "
+                query += ");"
+
+                try:
+                    cursor.execute(query)
+                except Exception as ex:
+                    print(ex)
+    except Exception as ex:
+        print(ex)
+
 # def get_class(input, database_url):
 #     try:
 #         with psycopg2.connect(dbname = database_url, host = "dpg-cggj3fceoogqfc2no840-a.ohio-postgres.render.com", user="testuser", password="gVYdK2LMupfkuAxyR6kp3a6XpuIB9VVV") as connection:
