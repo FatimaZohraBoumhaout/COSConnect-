@@ -55,19 +55,6 @@ def get_user(input, database_url):
     except Exception as ex:
         print(ex)
 
-def get_classes(student_id, database_url):
-    try:
-        with psycopg2.connect(dbname=database_url, host="dpg-cggj3fceoogqfc2no840-a.ohio-postgres.render.com", user="testuser", password="gVYdK2LMupfkuAxyR6kp3a6XpuIB9VVV") as connection:
-            with contextlib.closing(connection.cursor()) as cursor:
-                query = "SELECT class_name FROM classes WHERE student_id = %s"
-                cursor.execute(query, (student_id))
-                results = cursor.fetchall()
-                classes = [row[0] for row in results]
-                return classes
-    except Exception as ex:
-        print(ex)
-        return []
-
 def add_class(input_data, database_url):
     user_id, class_name = input_data
     print("id: " , user_id)
@@ -75,7 +62,7 @@ def add_class(input_data, database_url):
     try:
         with psycopg2.connect(dbname=database_url, host="dpg-cggj3fceoogqfc2no840-a.ohio-postgres.render.com", user="testuser", password="gVYdK2LMupfkuAxyR6kp3a6XpuIB9VVV") as connection:
             with contextlib.closing(connection.cursor()) as cursor:
-                query = "INSERT INTO classes (students_id, class_name) VALUES (" + "\' {" +str(user_id) + " }\'" + ", \'" + class_name + "\'" + ");"
+                query = "INSERT INTO classes (students_id, class_name) VALUES (" + "\'" +str(user_id) + "\'" + ", \'" + class_name + "\'" + ");"
                 try:
                     cursor.execute(query)
                 except Exception as ex:
@@ -83,6 +70,24 @@ def add_class(input_data, database_url):
                 return     
     except Exception as ex:
         print(ex)
+
+def get_classes(student_id, database_url):
+    try:
+        with psycopg2.connect(dbname = database_url, host = "dpg-cggj3fceoogqfc2no840-a.ohio-postgres.render.com", user="testuser", password="gVYdK2LMupfkuAxyR6kp3a6XpuIB9VVV") as connection:
+            with contextlib.closing(connection.cursor()) as cursor:
+                query = "SELECT class_name FROM classes "
+                query += "WHERE students_id = " + str(student_id) + ";"
+                try:
+                    cursor.execute(query)
+                except Exception as ex:
+                    print(ex)
+                    
+                output = cursor.fetchall()
+
+            return output
+    except Exception as ex:
+        print(ex)
+
 
 def add_request(request, database_url):
     sender_id, receiver_id = request 
@@ -129,19 +134,19 @@ def get_received(input, database_url):
     except Exception as ex:
         print(ex)
 
-def get_class(input, database_url):
-    try:
-        with psycopg2.connect(dbname = database_url, host = "dpg-cggj3fceoogqfc2no840-a.ohio-postgres.render.com", user="testuser", password="gVYdK2LMupfkuAxyR6kp3a6XpuIB9VVV") as connection:
-            with contextlib.closing(connection.cursor()) as cursor:
-                query = "SELECT class_name, department, course_number, students_id FROM classes "
-                query += "WHERE class_id = "+str(input)
-            try:
-                cursor.execute(query)
-            except Exception as ex:
-                print(ex)
+# def get_class(input, database_url):
+#     try:
+#         with psycopg2.connect(dbname = database_url, host = "dpg-cggj3fceoogqfc2no840-a.ohio-postgres.render.com", user="testuser", password="gVYdK2LMupfkuAxyR6kp3a6XpuIB9VVV") as connection:
+#             with contextlib.closing(connection.cursor()) as cursor:
+#                 query = "SELECT class_name FROM classes "
+#                 query += "WHERE students_id = " + str(input) + ";"
+#             try:
+#                 cursor.execute(query)
+#             except Exception as ex:
+#                 print(ex)
                 
-            output = cursor.fetchall()
+#             output = cursor.fetchall()
 
-            return output
-    except Exception as ex:
-        print(ex)
+#             return output
+#     except Exception as ex:
+#         print(ex)

@@ -9,15 +9,18 @@ function ProfileDetails() {
   const [cookies] = useCookies(['user_id']);
 
   useEffect(() => {
-    // Fetch the user's data from the Flask server
-    fetch(`/firstpage?id=${cookies.user_id}`)
-      .then((response) => response.json())
-      .then((data) => {
-        setUser(data);
-        console.log("user state set to:", data);
-      })
-      .catch(error => console.log(error));
-      
+    if (cookies.user_id !== null) {
+      // Fetch the user's data from the Flask server
+      fetch(`/get_info?id=${cookies.user_id}`)
+        .then((response) => response.json())
+        .then((data) => {
+          setUser(data);
+          console.log("user state set to:", data);
+        })
+        .catch(error => console.log(error));
+    } else {
+      console.log("user_id is null");
+    }
   }, [cookies.user_id]);
 
   const styles = `

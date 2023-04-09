@@ -67,7 +67,7 @@ function UserSurvey() {
       <div className="container">
       <h1 className="form-title" style={{color: "#338888"}}>Welcome to COSConnect!</h1>
  
-        <form method="post" action="/Home" onSubmit={handleSubmit}>   
+        <form method="post" onSubmit={handleSubmit}>   
           <div className="user-info">
 
             <div className="input-box">
