@@ -8,6 +8,7 @@ import UserSurvey from './Components/UserSurvey';
 import SettingsView from "./Components/SettingsView";
 import Home from "./Components/Home";
 import ClassView from './Components/ClassView';
+import Login from './Components/Login';
 
 
 function App() {
@@ -21,6 +22,7 @@ function App() {
         <Route path="profileview" element={<UserProfileView />} />
         <Route path="edit" element={<SettingsView/>} />
         <Route path="classview" element={<ClassView/>}></Route>
+        <Route path="login" element={<Login />} />
     </Routes>
     </BrowserRouter>
     <Footer /> 
