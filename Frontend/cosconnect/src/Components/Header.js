@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import LogOut from './LogOut';
 
 function Header() {
 
@@ -151,7 +152,7 @@ function Header() {
       <div className="header__button">
         { /* Render the dropdown button on small screens */ }
         <div className="header__dropdown-button" onClick={handleDropdownClick}>
-          <span className="header__dropdown-icon">{isDropdownOpen ? '×' : '☰'}</span>
+          <span className="header__dropdown-icon">{isDropdownOpen ? 'x' : '☰'}</span>
         </div>
 
         { /* Render the links as a dropdown on small screens */ }
@@ -167,6 +168,7 @@ function Header() {
         <a className="hidd" href="profileview">Profile</a>
         <div className="header__button-divider hidd"></div>
         <a className="hidd" href="classview">Classes</a>
+        <LogOut/>
       </div>
     </nav>
   );

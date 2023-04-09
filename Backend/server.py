@@ -8,21 +8,33 @@ from flask import jsonify
 # -----------------------------------------------------------------------
 app = flask.Flask(__name__)  # might need to change
 # -----------------------------------------------------------------------
+@app.route('/signup', methods=['POST'])
+def sign_up():
+    print('inside sign_up')
+    data = flask.request.get_json()
+    username = data.get('username')
+    email = data.get('email')
+    password = data.get('password')
+    user_id = database_access.sign_up(
+        (username, email, password), 'testdb_ery6')
 
+    print('we returned from signup')
+    return jsonify({'user_id': user_id})
 
 @app.route('/firstpage', methods=['POST'])
 def firstpage():
     print(flask.request.method, 'me')
     print('inside')
     data = flask.request.get_json()
+    user_id = data.get('user_id')
     pronouns = data.get('pronouns')
     classes = data.get('classes')
     bio = data.get('bio')
     availability = data.get('availability')
     full_name = data.get('fullName')
     display_name = data.get('displayName')
-    user_id = database_access.add_user(
-        (pronouns, classes, bio, availability, full_name, display_name), 'testdb_ery6')
+    database_access.add_user(
+        (user_id, pronouns, classes, bio, availability, full_name, display_name), 'testdb_ery6')
 
     print('we returned')
     return jsonify({'user_id': user_id})

@@ -8,7 +8,8 @@ import UserSurvey from './Components/UserSurvey';
 import SettingsView from "./Components/SettingsView";
 import Home from "./Components/Home";
 import ClassView from './Components/ClassView';
-
+import SignUp from "./Components/SignUp";
+import LogIn from "./Components/LogIn";
 
 function App() {
   return (
@@ -21,6 +22,8 @@ function App() {
         <Route path="profileview" element={<UserProfileView />} />
         <Route path="edit" element={<SettingsView/>} />
         <Route path="classview" element={<ClassView/>}></Route>
+        <Route path="signup" element={<SignUp/>}></Route>
+        <Route path="login" element={<LogIn/>}></Route>
     </Routes>
     </BrowserRouter>
     <Footer /> 

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useCookies } from "react-cookie";
 import Avatar from "react-avatar";
+import { Link } from "react-router-dom";
 import './Home.css';
 
 function Home(){
@@ -45,6 +46,7 @@ function Home(){
           Drop
         </button>
       </div>
+      <Link to={`/classview`}>
       <div className="boxes">
         {classes && classes.map((className, index) => (
           <div key={index}>
@@ -52,6 +54,7 @@ function Home(){
           </div>
         ))}
       </div>
+      </Link>
     </div>
   );
 }

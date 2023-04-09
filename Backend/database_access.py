@@ -6,21 +6,18 @@
 import contextlib
 import psycopg2
 
-def add_user(input, database_url):
-    pronouns, classes, bio, availability, full_name, display_name = input
+def sign_up(input, database_url):
+    username, email, password = input
     try:
         with psycopg2.connect(dbname = database_url, host = "dpg-cggj3fceoogqfc2no840-a.ohio-postgres.render.com", user="testuser", password="gVYdK2LMupfkuAxyR6kp3a6XpuIB9VVV") as connection:
             with contextlib.closing(connection.cursor()) as cursor:
-                query = "INSERT INTO user_profile (pronouns, "
-                query += "classes, bio, availability, full_name, display_name) "
-                query += "VALUES (" + "\'" + pronouns + "\'" + ", " + "\'" + classes + "\'" + ", "+ "\'" 
-                query += bio + "\'" + ", " + "\'" + availability + "\'" + ", " + "\'" + full_name + "\'"
-                query += ", " + "\'" + display_name+ "\'" 
+                query = "INSERT INTO signup (username, "
+                query += "email, password) "
+                query += "VALUES (" + "\'" + username + "\'" + ", " + "\'" + email + "\'" + ", "+ "\'" 
+                query += + password+ "\'" 
                 query += ") RETURNING user_id;"
-                print(pronouns, bio, availability, full_name, display_name, classes)
-                
+                print(username, email, password)
                 #might need prepared list
-
                 try:
                     cursor.execute(query)
                 except Exception as ex:
@@ -28,11 +25,33 @@ def add_user(input, database_url):
                 
                 user_id = cursor.fetchone()[0]
 
-                # return the generated id
                 return user_id
-
     except Exception as ex:
         print(ex)
+
+
+def add_user(input, database_url):
+    user_id, pronouns, classes, bio, availability, full_name, display_name = input
+    try:
+        with psycopg2.connect(dbname = database_url, host = "dpg-cggj3fceoogqfc2no840-a.ohio-postgres.render.com", user="testuser", password="gVYdK2LMupfkuAxyR6kp3a6XpuIB9VVV") as connection:
+            with contextlib.closing(connection.cursor()) as cursor:
+                query = "INSERT INTO user_profile (user_id, pronouns, "
+                query += "classes, bio, availability, full_name, display_name) "
+                query += "VALUES (" + "\'" + pronouns + "\'" + ", " + "\'" + classes + "\'" + ", "+ "\'" 
+                query += bio + "\'" + ", " + "\'" + availability + "\'" + ", " + "\'" + full_name + "\'"
+                query += ", " + "\'" + display_name+ "\'" 
+                query += ");"
+                print(user_id, pronouns, bio, availability, full_name, display_name, classes)
+                
+                #might need prepared list
+
+                try:
+                    cursor.execute(query)
+                except Exception as ex:
+                    print(ex)
+    except Exception as ex:
+        print(ex)
+
 
 def get_user(input, database_url):
     try:
