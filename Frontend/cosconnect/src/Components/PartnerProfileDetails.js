@@ -1,10 +1,11 @@
-import React, { useState} from "react";
+import React, { useState, useEffect} from "react";
 import Avatar from 'react-avatar';
 import { Link } from 'react-router-dom';
 
 function PartnerProfileDetails(props) {
   const [partner, setPartner] = useState(null);
 
+  useEffect(() => {
   if (props.partneridProp !== 0) {
     // Fetch the partner's data from the Flask server
     console.log("I got here")
@@ -18,6 +19,7 @@ function PartnerProfileDetails(props) {
   } else {
     console.log("partner_id is null");
   }
+    }, []);
 
   const styles = `
     .profile-container {
