@@ -9,23 +9,39 @@ function ClassView(){
     const [classes, setClasses] = useState([]);
     const [sentRequest, setSentRequest] = useState([]);
     const [receivedRequest, setReceivedRequest] = useState([]);
+    const [students, setStudents] = useState([]);
 
     const user_id = cookies.user_id;
     const location = useLocation;
+    let this_class = null;
     
     useEffect(() => {
         console.log("get class: ",cookies.user_id);
         fetch(`/get_class?user_id=${cookies.user_id}`)
-          .then(response => response.json())
-          .then(data => {setClasses(data) 
-            fetch(`/getSentRequest?user_id=${cookies.user_id}`)
-                .then(response=> response.json())
-                .then(data => {setSentRequest(data)
-                    fetch(`/getReceivedRequest?user_id=${cookies.user_id}`)
-                        .then(response=> response.json())
-                        .then(data => {setReceivedRequest(data)})
-            })})
-      }, [cookies.user_id]);
+            .then(response => response.json())
+            .then(data => {
+                setClasses(data);
+                this_class = data;
+                fetch(`/getSentRequest?user_id=${cookies.user_id}`)
+                    .then(response=> response.json())
+                    .then(data => {
+                        setSentRequest(data);
+                        fetch(`/getReceivedRequest?user_id=${cookies.user_id}`)
+                            .then(response=> response.json())
+                            .then(data => {
+                                setReceivedRequest(data);
+                                if (classes.length > 0){
+                                fetch(`/get_students?class=${this_class[0]}`)
+                                    .then(response=> response.json())
+                                    .then(data => {
+                                        setStudents(data);
+                                    });
+                                }
+                            });
+                    });
+            });
+    }, [cookies.user_id]);
+    
     
     return(
         <div className="body">
@@ -61,7 +77,7 @@ function ClassView(){
                 </div>
                 <div className="students">
                     <h3>Students</h3>
-                    <div className="rectangle-right"></div>
+                    <div className="rectangle-right">{students[0]}</div>
                     <div className="rectangle-right"></div>
                     <div className="rectangle-right"></div>
                     <div className="rectangle-right"></div>
