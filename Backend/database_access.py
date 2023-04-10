@@ -209,13 +209,13 @@ def get_students(input, database_url):
     try:
         with psycopg2.connect(dbname=database_url, host="dpg-cggj3fceoogqfc2no840-a.ohio-postgres.render.com", user="testuser", password="gVYdK2LMupfkuAxyR6kp3a6XpuIB9VVV") as connection:
             with contextlib.closing(connection.cursor()) as cursor:
-                query = "SELECT students_id WHERE class_name="+"\'"+input+"\';"
-            try:
-                cursor.execute(query)
-                output = cursor.fetchall()
-                return output 
-            except Exception as ex:
-                print(ex)
+                query = "SELECT students_id FROM classes WHERE class_name="+"\'"+input+"\';"
+                try:
+                    cursor.execute(query)
+                    output = cursor.fetchall()
+                    return output 
+                except Exception as ex:
+                    print(ex)
     except Exception as ex:
         print(ex)
                     

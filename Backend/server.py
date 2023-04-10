@@ -94,6 +94,7 @@ def get_sent_request():
     
     user_id = flask.request.args.get('user_id')
     output = database_access.get_sent(user_id, 'testdb_ery6')
+    print(output)
     
     return jsonify(output)
 
@@ -105,6 +106,7 @@ def get_received_request():
     print('received requests')
     user_id = flask.request.args.get('user_id')
     output = database_access.get_received(user_id, 'testdb_ery6')
+    print(output)
 
     return jsonify(output)
 
@@ -159,8 +161,11 @@ def edit_profile():
 
 @app.route('/get_students', methods=['GET'])
 def get_students():
+    print("we are getting students")
     classes = flask.request.args.get('class')
+    print("class to get: ", classes)
     students = database_access.get_students(classes, 'testdb_ery6')
+    print("students: ", students)
     return jsonify(students)
 
 

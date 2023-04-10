@@ -6,14 +6,13 @@ import "@fontsource/inter";
 
 function ClassView(){
     const [cookies, setCookie] = useCookies(['user_id']);
-    const [classes, setClasses] = useState([]);
+    const [classes, setClasses] = useState(['cl']);
     const [sentRequest, setSentRequest] = useState([]);
     const [receivedRequest, setReceivedRequest] = useState([]);
     const [students, setStudents] = useState([]);
 
     const user_id = cookies.user_id;
     const location = useLocation;
-    let this_class = null;
     
     useEffect(() => {
         console.log("get class: ",cookies.user_id);
@@ -21,7 +20,7 @@ function ClassView(){
             .then(response => response.json())
             .then(data => {
                 setClasses(data);
-                this_class = data;
+                const this_class = data; 
                 fetch(`/getSentRequest?user_id=${cookies.user_id}`)
                     .then(response=> response.json())
                     .then(data => {
@@ -30,13 +29,11 @@ function ClassView(){
                             .then(response=> response.json())
                             .then(data => {
                                 setReceivedRequest(data);
-                                if (classes.length > 0){
-                                fetch(`/get_students?class=${this_class[0]}`)
+                                fetch(`/get_students?class=${this_class}`)
                                     .then(response=> response.json())
                                     .then(data => {
                                         setStudents(data);
                                     });
-                                }
                             });
                     });
             });
@@ -78,9 +75,9 @@ function ClassView(){
                 <div className="students">
                     <h3>Students</h3>
                     <div className="rectangle-right">{students[0]}</div>
-                    <div className="rectangle-right"></div>
-                    <div className="rectangle-right"></div>
-                    <div className="rectangle-right"></div>
+                    <div className="rectangle-right">{students[1]}</div>
+                    <div className="rectangle-right">{students[2]}</div>
+                    <div className="rectangle-right">{students[3]}</div>
                 </div>
             </div>
         </div>
