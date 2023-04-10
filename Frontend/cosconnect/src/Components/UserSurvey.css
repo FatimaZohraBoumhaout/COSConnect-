@@ -25,7 +25,7 @@ html, .bd  {
     margin-bottom: auto;
 }
 
-.container{
+.container1{
     width: 100%;
     max-width: 650px;
     background: #FFFFFF;
@@ -105,7 +105,7 @@ html, .bd  {
 }
 
 @media(max-width: 600px){
-    .container{
+    .container1{
         min-width: 280px;
     }
 
