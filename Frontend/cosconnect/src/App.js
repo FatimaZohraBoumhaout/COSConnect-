@@ -11,6 +11,7 @@ import ClassView from './Components/ClassView';
 import Login from './Components/Login';
 import PartnerProfileView from './Components/PartnerProfileView'
 import EditView from './Components/EditView'
+import SendRequestView from "./Components/SendRequestView";
 
 
 function App() {
@@ -27,6 +28,7 @@ function App() {
         <Route path="classview" element={<ClassView/>}></Route>
         <Route path="login" element={<Login />} />
         <Route path="partnerview" element={<PartnerProfileView />} />
+        <Route path="sendrequest" element={<SendRequestView />} />
     </Routes>
     </BrowserRouter>
     <Footer /> 

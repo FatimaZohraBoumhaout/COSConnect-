@@ -125,11 +125,12 @@ def get_classes(student_id, database_url):
 # send message to another user
 def add_request(request, database_url):
     sender_id, receiver_id, message = request 
+    print(sender_id, receiver_id, message)
     try:
         with psycopg2.connect(dbname=database_url, host = "dpg-cggj3fceoogqfc2no840-a.ohio-postgres.render.com", user="testuser", password="gVYdK2LMupfkuAxyR6kp3a6XpuIB9VVV") as connection:
             with contextlib.closing(connection.cursor()) as cursor:
                 query = "INSERT INTO communications (id_sender, id_receiver, message) "
-                query += "VALUES (" + "\'" + sender_id+ "\'" + ", " + "\'" + receiver_id + "\'" + ", " + "\'" + message + "\'" + ");"
+                query += "VALUES (" + "\'" + str(sender_id)+ "\'" + ", " + "\'" + str(receiver_id) + "\'" + ", " + "\'" + message + "\'" + ");"
                 try:
                     cursor.execute(query)
                 except Exception as ex:

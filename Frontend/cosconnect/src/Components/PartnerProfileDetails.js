@@ -148,7 +148,7 @@ function PartnerProfileDetails(props) {
             <h1 className="profile-name">{  partner[0][4]}</h1>
           </div>
           <Link to={`/classview`} className="edit-button">Close</Link>
-          <Link to={`/classview`} className="edit-button">Send Request</Link>
+          <Link to={`/sendrequest?receiver=${props.partneridProp}`} className="edit-button">Send Request</Link>
           
         </div>
         <div className="profile-content">

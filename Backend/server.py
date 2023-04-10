@@ -133,10 +133,10 @@ def get_class():
 @app.route('/send_message', methods=['POST'])
 def send_message():
     data = flask.request.get_json()
-    id_sender = data.get('user_id')
-    id_receiver = data.get('id_receiver')
+    id_sender = data.get('userId')[0]
+    id_receiver = data.get('receiver')
     message = data.get('message')
-    database_access.send_message(id_sender, id_receiver, message, 'testdb_ery6')
+    database_access.add_request((id_sender, id_receiver, message), 'testdb_ery6')
     print("sent message: ", message, "to user:", id_receiver, "from:", id_sender)
     return jsonify({'status': 'success', 'message': 'Class added successfully'})
 

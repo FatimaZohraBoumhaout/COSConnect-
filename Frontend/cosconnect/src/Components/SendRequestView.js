@@ -4,15 +4,15 @@ import { Link } from 'react-router-dom';
 import { useCookies } from 'react-cookie';
 import { useNavigate } from "react-router-dom";
 
-function EditView() {
+function SendRequestView() {
+    // Might need to find a better function for this
+    const match = window.location.search.match(/(\?|&)receiver=(\d+)/);
+    const receiver = match && match[2];
   // const { userId } = props;
   const navigate = useNavigate();
   const [user, setUser] = useState(null);
   const [cookies] = useCookies(['user_id']);
-  const [pronouns, setPronouns] = useState('');
-  const [classes, setClasses] = useState('');
-  const [availability, setAvailability] = useState('');
-  const [bio, setBio] = useState('');
+  const [message, setMessage] = useState('');
 
   useEffect(() => {
     if (cookies.user_id !== null) {
@@ -21,10 +21,6 @@ function EditView() {
         .then((response) => response.json())
         .then((data) => {
           setUser(data);
-          setPronouns(data[0][0]);
-          setClasses(data[0][1]);
-          setAvailability(data[0][2]);
-          setBio(data[0][5]);
           console.log("user state set to:", data);
         })
         .catch(error => console.log(error));
@@ -37,9 +33,8 @@ function EditView() {
     let class_ = ""; 
     event.preventDefault();
     const userId = cookies.user_id;
-    console.log(pronouns, classes, availability, bio)
-    const data = {userId, pronouns, classes, availability, bio};
-    fetch(`/edit_profile`, {
+    const data = {userId, receiver, message};
+    fetch(`/send_message`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
@@ -48,7 +43,7 @@ function EditView() {
     })
     .then(response => {
         if (response.ok) {
-          navigate(`/profileview`);
+          navigate(`/classview`);
         } else {
           throw new Error('Request failed');
         }
@@ -182,28 +177,22 @@ function EditView() {
           <div className="profile-info">
             <h1 className="profile-name">{  user[0][4]}</h1>
           </div>
-          <Link to={`/profileview`} className="edit-button">Close</Link>
+          <Link to={`/classview`} className="edit-button">Close</Link>
           
         </div>
         <div className="profile-content">
           {/* <div className="gray-box"></div> */}
           <div>
-            <label htmlFor="pronouns">Pronouns: </label>
-            <input id="pronouns" name="pronouns" type="text" placeholder={user[0][0]} onChange={event => setPronouns(event.target.value)}  required/>
+            <label>Sender: {cookies.user_id}</label>
           </div>
           <div>
-            <label htmlFor="classes">Classes: </label>
-            <input id="classes" name="classes" type="text" placeholder={user[0][1]} onChange={event => setClasses(event.target.value)} required/>
+            <label>Receiver: {receiver}</label>
           </div>
           <div>
-            <label htmlFor="bio">Bio: </label>
-            <input id="bio" name="bio" type="text" placeholder={user[0][2]} onChange={event => setAvailability(event.target.value)} required/>
+            <label>Message: </label>
+            <input id="message" name="message" type="text" placeholder="Write Message you want to send here" onChange={event => setMessage(event.target.value)} required/>
           </div>
-          <div>
-            <label htmlFor="availability">Availability: </label>
-            <input id="availability" name="availability" type="text" placeholder={user[0][5]} onChange={event => setBio(event.target.value)} required/>
-          </div>
-          <input type="submit" name="submit" value="Save" />
+          <input type="submit" name="submit" value="Send" />
         </div>
       </div>
     </div>
@@ -211,4 +200,4 @@ function EditView() {
   );
 }
 
-export default EditView;
+export default SendRequestView;
