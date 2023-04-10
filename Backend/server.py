@@ -79,10 +79,11 @@ def add_request():
 
 @app.route('/getSentRequest', methods=['GET'])
 def get_sent_request():
+    print('sent_request')
     data = flask.request.get_json()
     user_id = data.get('user_id')
     output = database_access.get_sent(user_id, 'testdb_ery6')
-
+    
     return jsonify(output)
 
 # a different api
@@ -90,6 +91,7 @@ def get_sent_request():
 
 @app.route('/getReceievedRequest', methods=['GET'])
 def get_received_request():
+    print('received requests')
     data = flask.request.get_json()
     user_id = data.get('user_id')
     output = database_access.get_received(user_id, 'testdb_ery6')
@@ -120,25 +122,19 @@ def get_class():
     print(output)
     return jsonify(output)
 
-# @app.route('/', methods=['GET'])
-# @app.route('/classview', methods=['GET'])
-# def classview():
-#     #user_id = session.get('user_id')
-#     #not sure what the data type is for sent and received so i just treated them like
-#     #arrays in this and in the frontend too
-#     sent = database_access.get_sent(user_id, 'testdb_ery6')
-#     received = database_access.get_received(user_id, 'testdb_ery6')
-#     pronouns, classes, bio, name, nickname = database_access.get_user(user_id, 'testdb_ery6')
-#     current_class = flask.request.cookies.get('class_cookie')
-#     class_detail = database_access.get_class(current_class, 'testdb_ery6')
+@app.route('/classview', methods=['GET'])
+def classview():
+    user_id = flask.request.args.get('user_id')
+    sent = database_access.get_sent(user_id, 'testdb_ery6')
+    received = database_access.get_received(user_id, 'testdb_ery6')
+    pronouns, classes, bio, name, nickname = database_access.get_user(user_id, 'testdb_ery6')
+    class_detail = database_access.get_class(current_class, 'testdb_ery6')
 
-#     #i'm returning the sent requests, received requests, list of classes that the student is enrolled,
-#     #and the details of the current class (that will be passed through cookies)
+    #i'm returning the sent requests, received requests, list of classes that the student is enrolled,
+    #and the details of the current class (that will be passed through cookies)
 
-#     #is this how you render a js file???
-#     return flask.make_response(flask.render_template('ClassView.js',
-#                                                      sentreq=sent, receivedreq=received, classes=classes,
-#                                                      class_detail=class_detail))
+    #is this how you render a js file???
+    
 
 
 if __name__ == '__main__':
