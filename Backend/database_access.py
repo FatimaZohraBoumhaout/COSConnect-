@@ -182,17 +182,20 @@ def get_request(request, database_url):
         print(ex)
 
 def edit_user(input, database_url):
-    user_id, pronouns, classes, bio, availability = input
+    user_id = input[0]
+    pronouns = input[1]
+    classes = input[2]
+    bio = input[3]
+    availability = input[4]
     try:
         with psycopg2.connect(dbname = database_url, host = "dpg-cggj3fceoogqfc2no840-a.ohio-postgres.render.com", user="testuser", password="gVYdK2LMupfkuAxyR6kp3a6XpuIB9VVV") as connection:
             with contextlib.closing(connection.cursor()) as cursor:
                 query = "UPDATE user_profile SET pronouns="+"\'"+pronouns+"\', "
                 query += "classes="+"\'"+classes+"\', "
                 query += "bio="+"\'"+bio+"\', "
-                query += "availability="+"\'"+availability+"\', "
-                query += "classes="+"\'"+classes+"\' "
-                query += "WHERE user_id = " +"\'"+user_id+"\' "
-                query += ");"
+                query += "availability="+"\'"+availability+"\' "
+                query += "WHERE user_id=" +str(user_id)
+                query += ";"
 
                 try:
                     cursor.execute(query)

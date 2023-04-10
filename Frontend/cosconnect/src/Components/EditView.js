@@ -37,17 +37,21 @@ function EditView() {
     let class_ = ""; 
     event.preventDefault();
     const userId = cookies.user_id;
-    const data = { userId, pronouns, classes, availability, bio};
-    fetch('/edit_profile', {
+    console.log(pronouns, classes, availability, bio)
+    const data = {userId, pronouns, classes, availability, bio};
+    fetch(`/edit_profile`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
       },
       body: JSON.stringify(data)
     })
-      .then(response => response.json())
-      .then(data => {
-        navigate(`/profileview`);
+    .then(response => {
+        if (response.ok) {
+          navigate(`/profileview`);
+        } else {
+          throw new Error('Request failed');
+        }
       })
       .catch(error => console.error(error));
   }

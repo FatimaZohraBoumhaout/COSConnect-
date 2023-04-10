@@ -142,16 +142,17 @@ def send_message():
 
 @app.route('/edit_profile', methods=['POST'])
 def edit_profile():
+    print("here in edit")
     data = flask.request.get_json()
-    user_id = data.get('userId')
+    user_id = data.get('userId')[0]
     pronouns = data.get('pronouns')
     classes = data.get('classes')
     bio = data.get('bio')
     availability = data.get('availability')
+    print(user_id, pronouns, classes, bio, availability)
     database_access.edit_user(
         (user_id, pronouns, classes, bio, availability), 'testdb_ery6')
-
-    return
+    return jsonify({'message': 'Profile updated successfully'})
 
 
 # @app.route('/', methods=['GET'])
