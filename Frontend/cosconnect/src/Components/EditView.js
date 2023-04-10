@@ -2,11 +2,17 @@ import React, { useState, useEffect } from "react";
 import Avatar from 'react-avatar';
 import { Link } from 'react-router-dom';
 import { useCookies } from 'react-cookie';
+import { useNavigate } from "react-router-dom";
 
-function ProfileDetails() {
+function EditView() {
   // const { userId } = props;
+  const navigate = useNavigate();
   const [user, setUser] = useState(null);
   const [cookies] = useCookies(['user_id']);
+  const [pronouns, setPronouns] = useState('');
+  const [classes, setClasses] = useState('');
+  const [availability, setAvailability] = useState('');
+  const [bio, setBio] = useState('');
 
   useEffect(() => {
     if (cookies.user_id !== null) {
@@ -15,6 +21,10 @@ function ProfileDetails() {
         .then((response) => response.json())
         .then((data) => {
           setUser(data);
+          setPronouns(data[0][0]);
+          setClasses(data[0][1]);
+          setAvailability(data[0][2]);
+          setBio(data[0][5]);
           console.log("user state set to:", data);
         })
         .catch(error => console.log(error));
@@ -22,6 +32,29 @@ function ProfileDetails() {
       console.log("user_id is null");
     }
   }, [cookies.user_id]);
+
+  const handleSubmit = (event) => {
+    let class_ = ""; 
+    event.preventDefault();
+    const userId = cookies.user_id;
+    console.log(pronouns, classes, availability, bio)
+    const data = {userId, pronouns, classes, availability, bio};
+    fetch(`/edit_profile`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(data)
+    })
+    .then(response => {
+        if (response.ok) {
+          navigate(`/profileview`);
+        } else {
+          throw new Error('Request failed');
+        }
+      })
+      .catch(error => console.error(error));
+  }
 
   const styles = `
     .profile-container {
@@ -31,6 +64,8 @@ function ProfileDetails() {
       background-color: #BADFE7;  
       border-radius: 30px;
       margin: 20px;
+      width: 50%;
+      margin-left: 0%;
     }
 
     .grid-item {
@@ -138,6 +173,7 @@ function ProfileDetails() {
   }
 
   return (
+    <form method="post" onSubmit={handleSubmit}>   
     <div className="profile-container">
       <style>{styles}</style>
       <div className="grid-item item-1">
@@ -146,31 +182,33 @@ function ProfileDetails() {
           <div className="profile-info">
             <h1 className="profile-name">{  user[0][4]}</h1>
           </div>
-          <Link to={`/edit`} className="edit-button">Edit</Link>
+          <Link to={`/profileview`} className="edit-button">Close</Link>
           
         </div>
         <div className="profile-content">
           {/* <div className="gray-box"></div> */}
           <div>
             <label htmlFor="pronouns">Pronouns: </label>
-            <span id="pronouns">{  user[0][0]}</span>
+            <input id="pronouns" name="pronouns" type="text" placeholder={user[0][0]} onChange={event => setPronouns(event.target.value)}  required/>
           </div>
           <div>
             <label htmlFor="classes">Classes: </label>
-            <span id="classes">{  user[0][1]}</span>
+            <input id="classes" name="classes" type="text" placeholder={user[0][1]} onChange={event => setClasses(event.target.value)} required/>
           </div>
           <div>
             <label htmlFor="bio">Bio: </label>
-            <span id="bio">{ user[0][2]}</span>
+            <input id="bio" name="bio" type="text" placeholder={user[0][2]} onChange={event => setAvailability(event.target.value)} required/>
           </div>
           <div>
             <label htmlFor="availability">Availability: </label>
-            <span id="availability">{user[0][5]}</span>
+            <input id="availability" name="availability" type="text" placeholder={user[0][5]} onChange={event => setBio(event.target.value)} required/>
           </div>
+          <input type="submit" name="submit" value="Save" />
         </div>
       </div>
     </div>
+    </form>
   );
 }
 
-export default ProfileDetails;
+export default EditView;

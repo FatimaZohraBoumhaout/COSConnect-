@@ -71,8 +71,18 @@ def add_request():
     data = flask.request.get_json()
     sender_id = data.get('sender_id')
     receiver_id = data.get('receiver_id')
+    message = data.get('message')
 
-    database_access.add_request((sender_id, receiver_id), 'testdb_ery6')
+    database_access.add_request((sender_id, receiver_id, message), 'testdb_ery6')
+
+@app.route('/get_request', methods=['GET'])
+def get_request():
+    data = flask.request.get_json()
+    sender_id = data.get('sender_id')
+    receiver_id = data.get('receiver_id')
+    message = data.get('message')
+
+    database_access.get_request((sender_id, receiver_id, message), 'testdb_ery6')
 
 # a different api
 
@@ -122,13 +132,42 @@ def get_class():
     print(output)
     return jsonify(output)
 
-@app.route('/classview', methods=['GET'])
-def classview():
-    user_id = flask.request.args.get('user_id')
-    sent = database_access.get_sent(user_id, 'testdb_ery6')
-    received = database_access.get_received(user_id, 'testdb_ery6')
-    pronouns, classes, bio, name, nickname = database_access.get_user(user_id, 'testdb_ery6')
-    class_detail = database_access.get_class(current_class, 'testdb_ery6')
+@app.route('/send_message', methods=['POST'])
+def send_message():
+    data = flask.request.get_json()
+    id_sender = data.get('userId')[0]
+    id_receiver = data.get('receiver')
+    message = data.get('message')
+    database_access.add_request((id_sender, id_receiver, message), 'testdb_ery6')
+    print("sent message: ", message, "to user:", id_receiver, "from:", id_sender)
+    return jsonify({'status': 'success', 'message': 'Class added successfully'})
+
+@app.route('/edit_profile', methods=['POST'])
+def edit_profile():
+    print("here in edit")
+    data = flask.request.get_json()
+    user_id = data.get('userId')[0]
+    pronouns = data.get('pronouns')
+    classes = data.get('classes')
+    bio = data.get('bio')
+    availability = data.get('availability')
+    print(user_id, pronouns, classes, bio, availability)
+    database_access.edit_user(
+        (user_id, pronouns, classes, bio, availability), 'testdb_ery6')
+    return jsonify({'message': 'Profile updated successfully'})
+
+
+# @app.route('/', methods=['GET'])
+# @app.route('/classview', methods=['GET'])
+# def classview():
+#     #user_id = session.get('user_id')
+#     #not sure what the data type is for sent and received so i just treated them like
+#     #arrays in this and in the frontend too
+#     sent = database_access.get_sent(user_id, 'testdb_ery6')
+#     received = database_access.get_received(user_id, 'testdb_ery6')
+#     pronouns, classes, bio, name, nickname = database_access.get_user(user_id, 'testdb_ery6')
+#     current_class = flask.request.cookies.get('class_cookie')
+#     class_detail = database_access.get_class(current_class, 'testdb_ery6')
 
     #i'm returning the sent requests, received requests, list of classes that the student is enrolled,
     #and the details of the current class (that will be passed through cookies)

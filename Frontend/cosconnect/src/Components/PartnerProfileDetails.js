@@ -1,36 +1,36 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect} from "react";
 import Avatar from 'react-avatar';
 import { Link } from 'react-router-dom';
-import { useCookies } from 'react-cookie';
 
-function ProfileDetails() {
-  // const { userId } = props;
-  const [user, setUser] = useState(null);
-  const [cookies] = useCookies(['user_id']);
+function PartnerProfileDetails(props) {
+  const [partner, setPartner] = useState(null);
 
   useEffect(() => {
-    if (cookies.user_id !== null) {
-      // Fetch the user's data from the Flask server
-      fetch(`/get_info?id=${cookies.user_id}`)
-        .then((response) => response.json())
-        .then((data) => {
-          setUser(data);
-          console.log("user state set to:", data);
-        })
-        .catch(error => console.log(error));
-    } else {
-      console.log("user_id is null");
-    }
-  }, [cookies.user_id]);
+  if (props.partneridProp !== 0) {
+    // Fetch the partner's data from the Flask server
+    console.log("I got here")
+    fetch(`/get_info?id=${props.partneridProp}`)
+      .then((response) => response.json())
+      .then((data) => {
+        setPartner(data);
+        console.log("partner state set to:", data);
+      })
+      .catch(error => console.log(error));
+  } else {
+    console.log("partner_id is null");
+  }
+    }, []);
 
   const styles = `
     .profile-container {
       display: flex;
+      width: 100%;
       justify-content: center;
       align-items: center;
       background-color: #BADFE7;  
       border-radius: 30px;
       margin: 20px;
+      margin-left: 50%;
     }
 
     .grid-item {
@@ -129,43 +129,45 @@ function ProfileDetails() {
         height: 100px;
         margin-bottom: 10px;
       }
+
     }
 
   `;
 
-  if (!user) {
-    return <>loading...</>
-  }
+    if (partner === null){
+        return (<p>error: nothing returned from database (ignore this message if it pops up for one second)</p>)
+    } 
 
   return (
     <div className="profile-container">
       <style>{styles}</style>
       <div className="grid-item item-1">
         <div className="profile-header">
-          <Avatar  className="profile-avatar" name={user[0][4]} size="50" round={true} />
+          <Avatar  className="profile-avatar" name={partner[0][4]} size="50" round={true} />
           <div className="profile-info">
-            <h1 className="profile-name">{  user[0][4]}</h1>
+            <h1 className="profile-name">{  partner[0][4]}</h1>
           </div>
-          <Link to={`/edit`} className="edit-button">Edit</Link>
+          <Link to={`/classview`} className="edit-button">Close</Link>
+          <Link to={`/sendrequest?receiver=${props.partneridProp}`} className="edit-button">Send Request</Link>
           
         </div>
         <div className="profile-content">
           {/* <div className="gray-box"></div> */}
           <div>
             <label htmlFor="pronouns">Pronouns: </label>
-            <span id="pronouns">{  user[0][0]}</span>
+            <span id="pronouns">{  partner[0][0]}</span>
           </div>
           <div>
             <label htmlFor="classes">Classes: </label>
-            <span id="classes">{  user[0][1]}</span>
+            <span id="classes">{  partner[0][1]}</span>
           </div>
           <div>
             <label htmlFor="bio">Bio: </label>
-            <span id="bio">{ user[0][2]}</span>
+            <span id="bio">{ partner[0][2]}</span>
           </div>
           <div>
             <label htmlFor="availability">Availability: </label>
-            <span id="availability">{user[0][5]}</span>
+            <span id="availability">{partner[0][5]}</span>
           </div>
         </div>
       </div>
@@ -173,4 +175,4 @@ function ProfileDetails() {
   );
 }
 
-export default ProfileDetails;
+export default PartnerProfileDetails;

@@ -2,11 +2,17 @@ import React, { useState, useEffect } from "react";
 import Avatar from 'react-avatar';
 import { Link } from 'react-router-dom';
 import { useCookies } from 'react-cookie';
+import { useNavigate } from "react-router-dom";
 
-function ProfileDetails() {
+function SendRequestView() {
+    // Might need to find a better function for this
+    const match = window.location.search.match(/(\?|&)receiver=(\d+)/);
+    const receiver = match && match[2];
   // const { userId } = props;
+  const navigate = useNavigate();
   const [user, setUser] = useState(null);
   const [cookies] = useCookies(['user_id']);
+  const [message, setMessage] = useState('');
 
   useEffect(() => {
     if (cookies.user_id !== null) {
@@ -23,6 +29,28 @@ function ProfileDetails() {
     }
   }, [cookies.user_id]);
 
+  const handleSubmit = (event) => {
+    let class_ = ""; 
+    event.preventDefault();
+    const userId = cookies.user_id;
+    const data = {userId, receiver, message};
+    fetch(`/send_message`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(data)
+    })
+    .then(response => {
+        if (response.ok) {
+          navigate(`/classview`);
+        } else {
+          throw new Error('Request failed');
+        }
+      })
+      .catch(error => console.error(error));
+  }
+
   const styles = `
     .profile-container {
       display: flex;
@@ -31,6 +59,8 @@ function ProfileDetails() {
       background-color: #BADFE7;  
       border-radius: 30px;
       margin: 20px;
+      width: 50%;
+      margin-left: 0%;
     }
 
     .grid-item {
@@ -138,6 +168,7 @@ function ProfileDetails() {
   }
 
   return (
+    <form method="post" onSubmit={handleSubmit}>   
     <div className="profile-container">
       <style>{styles}</style>
       <div className="grid-item item-1">
@@ -146,31 +177,27 @@ function ProfileDetails() {
           <div className="profile-info">
             <h1 className="profile-name">{  user[0][4]}</h1>
           </div>
-          <Link to={`/edit`} className="edit-button">Edit</Link>
+          <Link to={`/classview`} className="edit-button">Close</Link>
           
         </div>
         <div className="profile-content">
           {/* <div className="gray-box"></div> */}
           <div>
-            <label htmlFor="pronouns">Pronouns: </label>
-            <span id="pronouns">{  user[0][0]}</span>
+            <label>Sender: {cookies.user_id}</label>
           </div>
           <div>
-            <label htmlFor="classes">Classes: </label>
-            <span id="classes">{  user[0][1]}</span>
+            <label>Receiver: {receiver}</label>
           </div>
           <div>
-            <label htmlFor="bio">Bio: </label>
-            <span id="bio">{ user[0][2]}</span>
+            <label>Message: </label>
+            <input id="message" name="message" type="text" placeholder="Write Message you want to send here" onChange={event => setMessage(event.target.value)} required/>
           </div>
-          <div>
-            <label htmlFor="availability">Availability: </label>
-            <span id="availability">{user[0][5]}</span>
-          </div>
+          <input type="submit" name="submit" value="Send" />
         </div>
       </div>
     </div>
+    </form>
   );
 }
 
-export default ProfileDetails;
+export default SendRequestView;

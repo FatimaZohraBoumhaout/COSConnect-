@@ -63,7 +63,7 @@ function UserSurvey() {
  
   return (
     <div className="bd">
-      <div className="container">
+      <div className="container1">
       <h1 className="form-title" style={{color: "#338888"}}>Welcome to COSConnect!</h1>
  
         <form method="post" onSubmit={handleSubmit}>   
