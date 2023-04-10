@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useCookies } from "react-cookie";
 import { useNavigate, useLocation } from "react-router-dom";
+import { Link } from 'react-router-dom';
 import "./ClassView.css"
 import "@fontsource/inter";
 
@@ -74,10 +75,10 @@ function ClassView(){
                 </div>
                 <div className="students">
                     <h3>Students</h3>
-                    <div className="rectangle-right">{students[0]}</div>
-                    <div className="rectangle-right">{students[1]}</div>
-                    <div className="rectangle-right">{students[2]}</div>
-                    <div className="rectangle-right">{students[3]}</div>
+                    <Link to={`/partnerview?partnerid=${students[0]}`}><div className="rectangle-right">{students[0]}</div></Link>
+                    <Link to={`/partnerview?partnerid=${students[1]}`}><div className="rectangle-right">{students[1]}</div></Link>
+                    <Link to={`/partnerview?partnerid=${students[2]}`}><div className="rectangle-right">{students[2]}</div></Link>
+                    <Link to={`/partnerview?partnerid=${students[3]}`}><div className="rectangle-right">{students[3]}</div></Link>
                 </div>
             </div>
         </div>
