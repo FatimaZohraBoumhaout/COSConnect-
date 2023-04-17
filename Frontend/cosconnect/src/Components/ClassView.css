@@ -12,7 +12,7 @@
     background-size: cover;
 }
 .body{
-    background-color:#BADFE7;
+    background-color:#F6F6F2;
     background-size:cover;
 }
 .grid-container{
@@ -20,7 +20,7 @@
     grid-template-columns: 30vw 70vw;
     grid-template-rows: auto;
     grid-template-areas: 
-        'classes search '
+        'classes sent '
         'classes sent '
         'received students '
         'received students ';
@@ -29,7 +29,7 @@
 .classes{
     grid-area: classes;   
     border-right: 5px solid #403F3D;
-    height: 50vh;
+    min-height: 50vh;
 }
 .received{
     grid-area:received;
@@ -46,6 +46,7 @@
 .search{
     grid-area:search;
     align-content:'center';
+    max-height: 100px;
 }
 h3{
     color:#338888;
@@ -80,16 +81,21 @@ h2{
     background-color: #F6F6F2;
     justify-content: 'center';
     margin: 16px;
-    
+    border-color: #BDD2B6;
+    border-style: solid;
+    border-width: 2px;
+
 }
 .rectangle-left{
     display: 'flex';
     width: 90%;
     height: 50px;
     background-color: #F6F6F2;
-    justify-content: 'center';
     margin: 16px;
     text-align: 'center';
+    border-color: #BDD2B6;
+    border-style: solid;
+    border-width: 2px;
 }
 
 .search-button{
@@ -110,4 +116,10 @@ input{
     outline: 0;
     height:44px;
     width:100%;
+}
+
+p{
+    font-size: small;
+    color: #65B3B8;
+    text-align: center;
 }

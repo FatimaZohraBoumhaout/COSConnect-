@@ -46,15 +46,15 @@ function Home(){
           Drop
         </button>
       </div>
-      <Link to={`/classview`}>
       <div className="boxes">
         {classes && classes.map((className, index) => (
+          <Link to={`/classview?class=${className}`}>
           <div key={index}>
             <h2 className="num">{className}</h2>
           </div>
+          </Link>
         ))}
       </div>
-      </Link>
     </div>
   );
 }
