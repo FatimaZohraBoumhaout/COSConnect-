@@ -10,14 +10,14 @@ function ClassView(props){
     const [classes, setClasses] = useState([]);
     const [sentRequest, setSentRequest] = useState([]);
     const [receivedRequest, setReceivedRequest] = useState([]);
-    const [students, setStudents] = useState([]);
-
+    const [studentsId, setStudentsId] = useState([]);
+    const [input, setInput] = useState('');
     const user_id = cookies.user_id;
     const location = useLocation;
     
-    const this_class = window.location.search.match(/class=([^&]*)/)[1];
+    const this_class = window.location.search.match(/class=([^&]*)/)[1].replace('%20',' ');
 
-
+    
     useEffect(() => {
         console.log("get class: ",cookies.user_id);
         console.log("this class: ",this_class);
@@ -86,15 +86,50 @@ function ClassView(props){
             fetch(`/get_students?class=${this_class}`)
             .then(response=> response.json())
             .then(data => {
-                setStudents(data);
+                setStudentsId(data);
             })
             .catch(error => console.log(error));
           } else {
             console.log("user_id is null");
           }
       }, [cookies.user_id]);
-    
 
+      var studentInfo = [];
+      Promise.all(
+        studentsId.map(id => {
+            fetch(`/get_info?id=${id}`)
+            .then((response) => response.json())
+            .then(data => {studentInfo.push(data)})
+            .catch(error => console.log(error));
+        }));
+    //   ).then((body) =>{
+    //     body.forEach(response =>{
+    //         if(response){
+    //             response.json().then(data=>{
+    //                 studentInfo.push(data)
+    //             })
+    //         }else{
+    //             console.log(`Response error: ${response.status}`);
+    //         }
+    //     })
+    // var studentInfo = []
+    // Promise.all(
+    //     studentsId.map(id => {
+    //         fetch(`/get_info?id=${id}`)
+    //         .then(response => response.json())
+    //         .then(json=>{
+    //             studentInfo.push(json)
+    //         })
+    //     })
+    // )
+      console.log(studentInfo);
+    function handleChange(event){
+        //setData()
+    }
+    function handleSubmit(event){
+        //event.preventDefault();
+        //console.log(data);
+    }
     return(
         <div className="body">
             <div className="grid-container">
@@ -110,7 +145,7 @@ function ClassView(props){
                 <div className="search">
                     <center>
                     <form id="form" className="form">
-                        <input placeholder="Search..."></input>
+                        <input placeholder="Search..." value={input}></input>
                         <button className="search-button">
                         <svg viewBox="0 0 1024 1024"><path class="path1" d="M848.471 928l-263.059-263.059c-48.941 36.706-110.118 55.059-177.412 55.059-171.294 0-312-140.706-312-312s140.706-312 312-312c171.294 0 312 140.706 312 312 0 67.294-24.471 128.471-55.059 177.412l263.059 263.059-79.529 79.529zM189.623 408.078c0 121.364 97.091 218.455 218.455 218.455s218.455-97.091 218.455-218.455c0-121.364-103.159-218.455-218.455-218.455-121.364 0-218.455 97.091-218.455 218.455z"></path></svg>
                         </button>
@@ -139,7 +174,7 @@ function ClassView(props){
                 </div>
                 <div className="students">
                     <h3>Students</h3>
-                    {students && students.map((st, index) =>(
+                    {studentsId && studentsId.map((st, index) =>(
                     <Link to={`/partnerview?partnerid=${st}`}><div className="rectangle-right">{st}</div></Link>
                     ))}
                     
