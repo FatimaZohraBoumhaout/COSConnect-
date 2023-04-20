@@ -4,14 +4,14 @@ import { useCookies } from 'react-cookie';
 function Header() {
 
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
-  const [cookies, setCookie, removeCookie] = useCookies(['user_id']);
+  const [cookies, setCookie, removeCookie] = useCookies(['net_id']);
 
   function handleDropdownClick() {
     setIsDropdownOpen(!isDropdownOpen);
   }
 
   function handleLogOut() {
-    removeCookie('user_id');
+    removeCookie('net_id');
   }
 
   const styles = `
@@ -168,7 +168,7 @@ function Header() {
         </div>
 
         { /* Render the links as individual items on large screens */ }
-        <a className="hidd" href="login" onClick={handleLogOut}>Log Out</a>
+        <a className="hidd" href="/" onClick={handleLogOut}>Log Out</a>
         <div className="header__button-divider hidd"></div>
         <a className="hidd" href="home">Home</a>
         <div className="header__button-divider hidd"></div>
