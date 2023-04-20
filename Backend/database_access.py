@@ -98,12 +98,14 @@ def get_classes(student_id, database_url):
                 query = "SELECT class_name FROM classes WHERE students_id = %s;"
                 try:
                     cursor.execute(query, (student_id,))
+                    result = cursor.fetchall()
+                    classes = [row[0] for row in result]
                 except Exception as ex:
                     print(ex)
 
-                output = cursor.fetchall()
+                # output = cursor.fetchall()
 
-            return output
+            return classes
     except Exception as ex:
         print(ex)
 
