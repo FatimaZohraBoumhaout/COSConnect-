@@ -97,13 +97,7 @@ def get_classes(net_id, database_url):
             with contextlib.closing(connection.cursor()) as cursor:
                 query = "SELECT class_name FROM classes WHERE net_id = %s;"
                 try:
-<<<<<<< HEAD
-                    cursor.execute(query, (student_id,))
-                    result = cursor.fetchall()
-                    classes = [row[0] for row in result]
-=======
                     cursor.execute(query, (net_id,))
->>>>>>> 7f070d381718608187e366645ab33594fc26b775
                 except Exception as ex:
                     print(ex)
 
