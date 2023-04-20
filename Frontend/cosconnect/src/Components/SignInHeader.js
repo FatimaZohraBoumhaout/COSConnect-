@@ -4,14 +4,14 @@ import { useCookies } from 'react-cookie';
 function Header() {
 
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
-  const [cookies, setCookie, removeCookie] = useCookies(['net_id']);
+  const [cookies, setCookie, removeCookie] = useCookies(['user_id']);
 
   function handleDropdownClick() {
     setIsDropdownOpen(!isDropdownOpen);
   }
 
   function handleLogOut() {
-    removeCookie('net_id');
+    removeCookie('user_id');
   }
 
   const styles = `
@@ -155,30 +155,6 @@ function Header() {
         <h1>COSConnect</h1>
       </div>
       <div className="header__button">
-        { /* Render the dropdown button on small screens */ }
-        <div className="header__dropdown-button" onClick={handleDropdownClick}>
-          <span className="header__dropdown-icon">{isDropdownOpen ? 'x' : '☰'}</span>
-        </div>
-
-        { /* Render the links as a dropdown on small screens */ }
-        <div className={`header__links ${isDropdownOpen ? 'open' : ''}`}>
-          <a href="home">Home</a>
-          <a href="profileview">Profile</a>
-          <a href="chatsview">Chats</a>
-          <a href="classview">Classes</a>
-        </div>
-
-        { /* Render the links as individual items on large screens */ }
-        <a className="hidd" href="/" onClick={handleLogOut}>Log Out</a>
-        <div className="header__button-divider hidd"></div>
-        <a className="hidd" href="home">Home</a>
-        <div className="header__button-divider hidd"></div>
-        <a className="hidd" href="profileview">Profile</a>
-        <div className="header__button-divider hidd"></div>
-        <a className="hidd" href="chatsview">Chats</a>
-        <div className="header__button-divider hidd"></div>
-        <a className="hidd" href="classview">Classes</a>
-
       </div>
     </nav>
   );
