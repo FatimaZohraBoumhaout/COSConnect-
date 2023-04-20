@@ -38,15 +38,11 @@ def sign_up():
 @app.route('/login', methods=['POST'])
 def log_in():
     """Endpoint to authenticate a user"""
+    print("looog")
     try:
-        data = flask.request.get_json()
-        username = data.get('username', '')
-        password = data.get('password', '')
-        if not username or not password:
-            raise ValueError('Missing required fields')
-        user_id = database_access.authenticate_user(username, password, 'testdb_ery6')
-        if user_id is not None:
-            return jsonify({'user_id': user_id})
+        id_token = flask.request.get_json()
+        if id_token is not None:
+            return jsonify({'id': id_token})
         else:
             return jsonify({'error': 'Invalid credentials'}), 401
     except ValueError as vex:
@@ -55,6 +51,7 @@ def log_in():
     except Exception as ex:
         print('Error in log_in:', ex)
         return jsonify({'error': 'Failed to log in user'}), 500
+
 
 
 @app.route('/userprofile', methods=['POST'])

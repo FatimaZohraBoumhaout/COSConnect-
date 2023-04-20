@@ -1,0 +1,29 @@
+.main-container {
+  background-color: white;
+  font-family: Arial, sans-serif;
+}
+
+.welcome {
+  text-align: center;
+  color: black;
+  margin-top: 50px;
+  font-family: "Times New Roman", Times, serif;
+  margin-bottom: 4%;
+}
+
+img {
+  display: block;
+  margin: 0 auto;
+  width: 80%;
+  max-width: 40%;
+  margin-bottom: 5%;
+}
+
+.butt-container {
+  display: flex;
+  justify-content: center; /* centers horizontally */
+  align-items: center; /* centers vertically */
+  margin-bottom: 50px;
+}
+
+

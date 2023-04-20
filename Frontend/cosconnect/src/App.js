@@ -8,14 +8,14 @@ import UserSurvey from './Components/UserSurvey';
 import SettingsView from "./Components/SettingsView";
 import Home from "./Components/Home";
 import ClassView from './Components/ClassView';
-import Login from './Components/Login';
+import Login from './Components/SignIn';
 import PartnerProfileView from './Components/PartnerProfileView'
 import EditView from './Components/EditView'
 import SendRequestView from "./Components/SendRequestView";
 
 
 function App() {
-  return (
+  return ( 
   <>
     <Header />
     <BrowserRouter>
