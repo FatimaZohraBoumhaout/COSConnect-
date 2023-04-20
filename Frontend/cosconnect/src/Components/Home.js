@@ -6,19 +6,19 @@ import './Home.css';
 
 function Home(){
   const [classes, setClasses] = useState([]);
-  const [cookies] = useCookies(['user_id']); 
+  const [cookies] = useCookies(['net_id']); 
   const [user, setUser] = useState(null);
 
   useEffect(() => {
-    console.log("get class: ",cookies.user_id);
-    fetch(`/get_class?user_id=${cookies.user_id}`)
+    console.log("get class: ",cookies.net_id);
+    fetch(`/get_class?net_id=${cookies.net_id}`)
       .then(response => response.json())
       .then(data => setClasses(data));
-  }, [cookies.user_id]);
+  }, [cookies.net_id]);
 
   useEffect(() => {
-    if (cookies.user_id !== null) {
-      fetch(`/get_info?id=${cookies.user_id}`)
+    if (cookies.net_id !== null) {
+      fetch(`/get_info?id=${cookies.net_id}`)
         .then((response) => response.json())
         .then((data) => {
           setUser(data);
@@ -26,9 +26,9 @@ function Home(){
         })
         .catch(error => console.log(error));
     } else {
-      console.log("user_id is null");
+      console.log("net_id is null");
     }
-  }, [cookies.user_id]);
+  }, [cookies.net_id]);
 
   return(
     <div className="home">

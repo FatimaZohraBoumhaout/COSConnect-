@@ -17,7 +17,7 @@ function UserSurvey() {
   const [classes, setClasses] = useState('');
   const [availability, setAvailability] = useState('');
   const [bio, setBio] = useState('');
-  const [cookies] = useCookies(['user_id']);
+  const [cookies] = useCookies(['net_id']);
 
   // const handleUserIdChange = (event) => {
   //   setUserId(event.target.value);
@@ -26,8 +26,9 @@ function UserSurvey() {
   const handleSubmit = (event) => {
     let class_ = ""; 
     event.preventDefault();
-    const userId = cookies.user_id;
-    const data = { userId, fullName, displayName, pronouns, classes, availability, bio };
+    const netId = cookies.net_id;
+    console.log(netId);
+    const data = { netId, fullName, displayName, pronouns, classes, availability, bio };
     fetch('/userprofile', {
       method: 'POST',
       headers: {
@@ -38,7 +39,7 @@ function UserSurvey() {
       .then(response => response.json())
       .then(data => {
         class_ = classes
-        console.log(userId);
+        console.log(netId);
         // Make a new API request to add the classes 
         fetch('/add_class', {
           method: 'POST',
@@ -46,7 +47,7 @@ function UserSurvey() {
             'Content-Type': 'application/json'
           },
           body: JSON.stringify({
-            "user_id": userId,
+            "net_id": netId,
             "class_name": class_
           })
         })
