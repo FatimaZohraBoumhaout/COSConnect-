@@ -17,7 +17,7 @@ import SignInHeader from './Components/SignInHeader';
 
 function App() {
   const showHeader = window.location.pathname !== "/" && window.location.pathname !== "/survey";
-  const showSignInHeader = window.location.pathname == "/"
+  const showSignInHeader = window.location.pathname == "/" && window.location.pathname !== "/"
 
   return (
     <>
