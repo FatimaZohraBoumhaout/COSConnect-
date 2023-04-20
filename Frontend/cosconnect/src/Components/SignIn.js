@@ -28,8 +28,12 @@ const handleLogin = (response) => {
   })
   .then((res) => {
     if (res.ok) {
+      res.json().then((jsonRes) => {
+      console.log("jsonres" + jsonRes.net_id);
+      const netId = jsonRes.net_id;
       setCookie("net_id", netId);
       navigate(`/home`);
+      });
     } else if (res.status === 404) {
       res.json().then((jsonRes) => {
         console.log("jsonres" + jsonRes.net_id);
