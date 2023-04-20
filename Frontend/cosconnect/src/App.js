@@ -1,8 +1,7 @@
 import React from "react";
-import { BrowserRouter, Routes, Route, useLocation} from "react-router-dom";
+import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
 import './App.css';
 import UserProfileView from './Components/UserProfileView';
-import Header from './Components/Header';
 import Footer from './Components/Footer';
 import UserSurvey from './Components/UserSurvey';
 import SettingsView from "./Components/SettingsView";
@@ -35,6 +34,3 @@ function App() {
   );
 }
 export default App;
-
-
-

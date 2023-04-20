@@ -164,6 +164,7 @@ function Header() {
         <div className={`header__links ${isDropdownOpen ? 'open' : ''}`}>
           <a href="home">Home</a>
           <a href="profileview">Profile</a>
+          <a href="chatsview">Chats</a>
           <a href="classview">Classes</a>
         </div>
 
@@ -173,6 +174,8 @@ function Header() {
         <a className="hidd" href="home">Home</a>
         <div className="header__button-divider hidd"></div>
         <a className="hidd" href="profileview">Profile</a>
+        <div className="header__button-divider hidd"></div>
+        <a className="hidd" href="chatsview">Chats</a>
         <div className="header__button-divider hidd"></div>
         <a className="hidd" href="classview">Classes</a>
 

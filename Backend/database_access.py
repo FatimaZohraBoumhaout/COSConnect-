@@ -101,9 +101,9 @@ def get_classes(net_id, database_url):
                 except Exception as ex:
                     print(ex)
 
-                output = cursor.fetchall()
+                # output = cursor.fetchall()
 
-            return output
+            return classes
     except Exception as ex:
         print(ex)
 
