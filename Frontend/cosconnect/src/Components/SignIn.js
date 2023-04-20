@@ -4,31 +4,48 @@ import { GoogleLogin } from '@react-oauth/google';
 import jwt_decode from 'jwt-decode';
 import './SignIn.css';
 import image from './FronPage.png';
+import { useCookies } from "react-cookie";
+import { useNavigate } from "react-router-dom";
 
 function SignIn() {
-  const handleLogin = async (response) => {
-    try {
-      const token = response.credential;
-      const data = { token };
-      const res = await fetch('/login', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(data)
-      });
 
-      if (res.ok) {
-        const token = await res.text();
-        const decoded = jwt_decode(token);
-        console.log(decoded);
-      } else {
-        console.error('Login failed.');
-      }
-    } catch (error) {
-      console.error(error);
+  const navigate = useNavigate();
+  const [cookies, setCookie] = useCookies(["net_id"]);
+
+  /*@Zohra @Pascal */
+const handleLogin = (response) => {
+  const token = response.credential;
+  const decoded_token = jwt_decode(token);
+  console.log(decoded_token);
+  const data = { decoded_token };
+  
+  fetch('/login', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(data)
+  })
+  .then((res) => {
+    if (res.ok) {
+      setCookie("net_id", netId);
+      navigate(`/home`);
+    } else if (res.status === 404) {
+      res.json().then((jsonRes) => {
+        console.log("jsonres" + jsonRes.net_id);
+        const netId = jsonRes.net_id;
+        setCookie("net_id", netId);
+        navigate(`/survey`);
+      });
+    } else {
+      console.error('Login failed.');
     }
-  };
+  })
+  .catch((error) => {
+    console.error(error);
+  });
+};
+
 
   return (
     <div className='main-container'>

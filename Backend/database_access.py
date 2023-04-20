@@ -6,13 +6,13 @@
 import contextlib
 import psycopg2
 
-def authenticate_user(username, password, database_url):
+def authenticate_user(netId, database_url):
     try:
         with psycopg2.connect(dbname=database_url, host="dpg-cggj3fceoogqfc2no840-a.ohio-postgres.render.com", user="testuser", password="gVYdK2LMupfkuAxyR6kp3a6XpuIB9VVV") as connection:
             with contextlib.closing(connection.cursor()) as cursor:
-                query = "SELECT user_id FROM signup WHERE username = %s AND password = %s;"
+                query = "SELECT display_name FROM user_profile WHERE net_id = %s;"
                 try:
-                    cursor.execute(query, (str(username), str(password)))
+                    cursor.execute(query, (str(netId)))
                     output = cursor.fetchone()
                     return output
                 except Exception as ex:
@@ -43,13 +43,13 @@ def sign_up(input, database_url):
 
 
 def add_user(input, database_url):
-    user_id, pronouns, classes, bio, availability, full_name, display_name = input
+    net_id, pronouns, classes, bio, availability, full_name, display_name = input
     try:
         with psycopg2.connect(dbname = database_url, host = "dpg-cggj3fceoogqfc2no840-a.ohio-postgres.render.com", user="testuser", password="gVYdK2LMupfkuAxyR6kp3a6XpuIB9VVV") as connection:
             with contextlib.closing(connection.cursor()) as cursor:
-                query = "INSERT INTO user_profile (user_id, pronouns, classes, bio, availability, full_name, display_name) VALUES (%s, %s, %s, %s, %s, %s, %s);"
+                query = "INSERT INTO user_profile (net_id, pronouns, classes, bio, availability, full_name, display_name) VALUES (%s, %s, %s, %s, %s, %s, %s);"
                 try:
-                    cursor.execute(query, (user_id, pronouns, classes, bio, availability, full_name, display_name))
+                    cursor.execute(query, (net_id, pronouns, classes, bio, availability, full_name, display_name))
                 except Exception as ex:
                     print(ex)
     except Exception as ex:
@@ -60,7 +60,7 @@ def get_user(input, database_url):
     try:
         with psycopg2.connect(dbname = database_url, host = "dpg-cggj3fceoogqfc2no840-a.ohio-postgres.render.com", user="testuser", password="gVYdK2LMupfkuAxyR6kp3a6XpuIB9VVV") as connection:
             with contextlib.closing(connection.cursor()) as cursor:
-                query = "SELECT pronouns, classes, bio, full_name, display_name, availability FROM user_profile WHERE user_id = %s;"
+                query = "SELECT pronouns, classes, bio, full_name, display_name, availability FROM user_profile WHERE net_id = %s;"
                 try:
                     cursor.execute(query, (input,))
                 except Exception as ex:
@@ -75,15 +75,15 @@ def get_user(input, database_url):
 
 
 def add_class(input_data, database_url):
-    user_id, class_name = input_data
-    print("id: ", user_id)
+    net_id, class_name = input_data
+    print("id: ", net_id)
     print("name: ", class_name)
     try:
         with psycopg2.connect(dbname=database_url, host="dpg-cggj3fceoogqfc2no840-a.ohio-postgres.render.com", user="testuser", password="gVYdK2LMupfkuAxyR6kp3a6XpuIB9VVV") as connection:
             with contextlib.closing(connection.cursor()) as cursor:
-                query = "INSERT INTO classes (students_id, class_name) VALUES (%s, %s);"
+                query = "INSERT INTO classes (class_name, net_id) VALUES (%s, %s);"
                 try:
-                    cursor.execute(query, (user_id, class_name))
+                    cursor.execute(query, (class_name, net_id))
                 except Exception as ex:
                     print(ex)
                 return
@@ -91,13 +91,13 @@ def add_class(input_data, database_url):
         print(ex)
 
 
-def get_classes(student_id, database_url):
+def get_classes(net_id, database_url):
     try:
         with psycopg2.connect(dbname=database_url, host="dpg-cggj3fceoogqfc2no840-a.ohio-postgres.render.com", user="testuser", password="gVYdK2LMupfkuAxyR6kp3a6XpuIB9VVV") as connection:
             with contextlib.closing(connection.cursor()) as cursor:
-                query = "SELECT class_name FROM classes WHERE students_id = %s;"
+                query = "SELECT class_name FROM classes WHERE net_id = %s;"
                 try:
-                    cursor.execute(query, (student_id,))
+                    cursor.execute(query, (net_id,))
                 except Exception as ex:
                     print(ex)
 

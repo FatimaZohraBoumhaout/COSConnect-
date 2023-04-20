@@ -5,6 +5,7 @@
 import flask
 import database_access
 from flask import jsonify
+
 # -----------------------------------------------------------------------
 app = flask.Flask(__name__)  # might need to change
 # -----------------------------------------------------------------------
@@ -41,10 +42,16 @@ def log_in():
     print("looog")
     try:
         id_token = flask.request.get_json()
-        if id_token is not None:
-            return jsonify({'id': id_token})
+        decoded_token = id_token['decoded_token']
+        email = decoded_token['email']
+        print("email:", email)
+        net_id = email.split("@")[0]
+        print(net_id)
+        displayname = database_access.authenticate_user(net_id, 'testdb_ery6')
+        if displayname is None:
+            return jsonify({'message': 'User not found', 'net_id': net_id}), 404
         else:
-            return jsonify({'error': 'Invalid credentials'}), 401
+            return jsonify({'net_id': net_id, 'displayname': displayname}), 200
     except ValueError as vex:
         print('Error in log_in:', vex)
         return jsonify({'error': 'Missing required fields'}), 400
@@ -59,8 +66,8 @@ def user_profile():
     """Endpoint to update user profile"""
     try:
         data = flask.request.get_json()
-        user_id = data.get('userId')
-        if not user_id:
+        net_id = data.get('netId')
+        if not net_id:
             raise ValueError('Missing required fields')
         pronouns = data.get('pronouns')
         classes = data.get('classes')
@@ -69,8 +76,8 @@ def user_profile():
         full_name = data.get('fullName')
         display_name = data.get('displayName')
         database_access.add_user(
-            (user_id, pronouns, classes, bio, availability, full_name, display_name), 'testdb_ery6')
-        return jsonify({'user_id': user_id})
+            (net_id, pronouns, classes, bio, availability, full_name, display_name), 'testdb_ery6')
+        return jsonify({'user_id': net_id})
     except ValueError as vex:
         print('Error in user_profile:', vex)
         return jsonify({'error': 'Missing required fields'}), 400
@@ -83,10 +90,10 @@ def user_profile():
 def get_info():
     """Get user info for the given user ID."""
     try:
-        user_id = flask.request.args.get('id')
-        if not user_id:
+        net_id = flask.request.args.get('id')
+        if not net_id:
             raise ValueError('Missing user ID')
-        output = database_access.get_user(user_id, 'testdb_ery6')
+        output = database_access.get_user(net_id, 'testdb_ery6')
         return jsonify(output)
     except Exception as ex:
         print('Error in get_info:', ex)
@@ -166,11 +173,11 @@ def add_class():
     """Add a new class for the given user ID and class name."""
     try:
         data = flask.request.get_json()
-        user_id = data.get('user_id')
+        net_id = data.get('net_id')
         class_name = data.get('class_name')
-        if not user_id or not class_name:
+        if not net_id or not class_name:
             raise ValueError('Missing user ID or class name')
-        database_access.add_class((user_id, class_name), 'testdb_ery6')
+        database_access.add_class((net_id, class_name), 'testdb_ery6')
         print("added class: ", class_name)
         return jsonify({'status': 'success', 'message': 'Class added successfully'})
     except ValueError as vex:
@@ -185,10 +192,10 @@ def add_class():
 def get_class():
     """Get all classes for the given user ID."""
     try:
-        user_id = flask.request.args.get('user_id')
-        if not user_id:
-            raise ValueError('Missing user ID')
-        output = database_access.get_classes(user_id, 'testdb_ery6')
+        net_id = flask.request.args.get('net_id')
+        if not net_id:
+            raise ValueError('Missing netID')
+        output = database_access.get_classes(net_id, 'testdb_ery6')
         print("we did it")
         print(output)
         return jsonify(output)
