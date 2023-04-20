@@ -12,7 +12,6 @@ import PartnerProfileView from './Components/PartnerProfileView'
 import EditView from './Components/EditView'
 import SendRequestView from "./Components/SendRequestView";
 import Login from "./Components/SignIn";
-import FrontPage from "./Components/FrontPage";
 
 function App() {
   return ( 
@@ -21,7 +20,7 @@ function App() {
     <BrowserRouter>
     <Routes>
         <Route path="survey" element={<UserSurvey />} />
-        <Route path="/" element={<FrontPage />} />
+        <Route path="/" element={<Login />} />
         <Route path="home" element={<Home />} />
         <Route path="profileview" element={<UserProfileView />} />
         <Route path="edit" element={<EditView/>} />
