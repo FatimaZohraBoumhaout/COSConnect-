@@ -92,20 +92,24 @@ def add_class(input_data, database_url):
 
 
 def get_classes(student_id, database_url):
-    try:
-        with psycopg2.connect(dbname=database_url, host="dpg-cggj3fceoogqfc2no840-a.ohio-postgres.render.com", user="testuser", password="gVYdK2LMupfkuAxyR6kp3a6XpuIB9VVV") as connection:
-            with contextlib.closing(connection.cursor()) as cursor:
-                query = "SELECT class_name FROM classes WHERE students_id = %s;"
-                try:
-                    cursor.execute(query, (student_id,))
-                except Exception as ex:
-                    print(ex)
+   try:
+       with psycopg2.connect(dbname=database_url, host="dpg-cggj3fceoogqfc2no840-a.ohio-postgres.render.com", user="testuser", password="gVYdK2LMupfkuAxyR6kp3a6XpuIB9VVV") as connection:
+           with contextlib.closing(connection.cursor()) as cursor:
+               query = "SELECT class_name FROM classes WHERE students_id = %s;"
+               try:
+                   cursor.execute(query, (student_id,))
+                   result = cursor.fetchall()
+                   classes = [row[0] for row in result]
+               except Exception as ex:
+                   print(ex)
 
-                output = cursor.fetchall()
+               # output = cursor.fetchall()
 
-            return output
-    except Exception as ex:
-        print(ex)
+           return classes
+       
+   except Exception as ex:
+       print(ex)
+
 
 
 def add_request(request, database_url):
