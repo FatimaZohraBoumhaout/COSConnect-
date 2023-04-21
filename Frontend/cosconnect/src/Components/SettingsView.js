@@ -59,7 +59,7 @@ function SettingsView() {
             <span style={{ marginLeft: "10px" }}>{status}</span>
           </div>
           <div style={toggleContainerStyle}>
-            <label htmlFor="talking-toggle">Talking to..: </label>
+            <label htmlFor="talking-toggle">Talking to Someone: </label>
             <div style={{ marginLeft: "10px" }}>
               <label className="switch">
                 <input

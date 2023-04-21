@@ -27,10 +27,12 @@ const handleLogin = (response) => {
     body: JSON.stringify(data)
   })
   .then((res) => {
-    if (res.ok) {
+    console.log(res);
+    if (res.status === 200) {
       res.json().then((jsonRes) => {
       console.log("jsonres" + jsonRes.net_id);
       const netId = jsonRes.net_id;
+      console.log("should go to home");
       setCookie("net_id", netId);
       navigate(`/home`);
       });
@@ -38,8 +40,9 @@ const handleLogin = (response) => {
       res.json().then((jsonRes) => {
         console.log("jsonres" + jsonRes.net_id);
         const netId = jsonRes.net_id;
+        console.log("should go to survey");
         setCookie("net_id", netId);
-        navigate(`/survey`);
+        navigate('/survey');
       });
     } else {
       console.error('Login failed.');

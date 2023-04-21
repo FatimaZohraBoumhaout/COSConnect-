@@ -30,6 +30,14 @@ function Home(){
     }
   }, [cookies.net_id]);
 
+  const handleAddClass = () => {
+    console.log("Add button clicked");
+  }
+
+  const handleDropClass = () => {
+    console.log("Drop button clicked");
+  }
+
   return(
     <div className="home">
       <div className="avatar">
@@ -39,10 +47,10 @@ function Home(){
         <> Classes </>
       </div>
       <div className="buttons">
-        <button>
+        <button onClick={handleAddClass}>
           Add
         </button>
-        <button>
+        <button onClick={handleDropClass}>
           Drop
         </button>
       </div>

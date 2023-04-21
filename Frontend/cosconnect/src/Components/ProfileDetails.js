@@ -6,12 +6,12 @@ import { useCookies } from 'react-cookie';
 function ProfileDetails() {
   // const { userId } = props;
   const [user, setUser] = useState(null);
-  const [cookies] = useCookies(['user_id']);
+  const [cookies] = useCookies(['net_id']);
 
   useEffect(() => {
     if (cookies.user_id !== null) {
       // Fetch the user's data from the Flask server
-      fetch(`/get_info?id=${cookies.user_id}`)
+      fetch(`/get_info?id=${cookies.net_id}`)
         .then((response) => response.json())
         .then((data) => {
           setUser(data);

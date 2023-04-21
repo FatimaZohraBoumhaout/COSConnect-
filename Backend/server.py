@@ -48,6 +48,7 @@ def log_in():
         net_id = email.split("@")[0]
         print(net_id)
         displayname = database_access.authenticate_user(net_id, 'testdb_ery6')
+        print(displayname)
         if displayname is None:
             return jsonify({'message': 'User not found', 'net_id': net_id}), 404
         else:
@@ -77,7 +78,7 @@ def user_profile():
         display_name = data.get('displayName')
         database_access.add_user(
             (net_id, pronouns, classes, bio, availability, full_name, display_name), 'testdb_ery6')
-        return jsonify({'user_id': net_id})
+        return jsonify({'net_id': net_id})
     except ValueError as vex:
         print('Error in user_profile:', vex)
         return jsonify({'error': 'Missing required fields'}), 400
