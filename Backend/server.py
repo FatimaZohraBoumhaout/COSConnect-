@@ -171,22 +171,23 @@ def get_received_request():
 
 @app.route('/add_class', methods=['POST'])
 def add_class():
-    """Add a new class for the given user ID and class name."""
+    """Add new classes for the given user ID."""
     try:
         data = flask.request.get_json()
         net_id = data.get('net_id')
-        class_name = data.get('class_name')
-        if not net_id or not class_name:
-            raise ValueError('Missing user ID or class name')
-        database_access.add_class((net_id, class_name), 'testdb_ery6')
-        print("added class: ", class_name)
-        return jsonify({'status': 'success', 'message': 'Class added successfully'})
+        classes = data.get('classes')
+        if not net_id or not classes:
+            raise ValueError('Missing user ID or classes')
+        for class_name in classes:
+            database_access.add_class((net_id, class_name), 'testdb_ery6')
+            print("added class: ", class_name)
+        return jsonify({'status': 'success', 'message': 'Classes added successfully'})
     except ValueError as vex:
         print('Error in add_class:', vex)
-        return jsonify({'error': 'Missing user ID or class name'}), 400
+        return jsonify({'error': 'Missing user ID or classes'}), 400
     except Exception as ex:
         print('Error in add_class:', ex)
-        return jsonify({'error': 'Failed to add class'}), 500
+        return jsonify({'error': 'Failed to add classes'}), 500
 
 
 @app.route('/get_class', methods=['GET'])

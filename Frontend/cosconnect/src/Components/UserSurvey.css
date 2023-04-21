@@ -104,6 +104,10 @@ html, .bd  {
     background:	#BADFE7;
 }
 
+.multi-select {
+    width: 100%;
+}
+
 @media(max-width: 600px){
     .container1{
         min-width: 280px;

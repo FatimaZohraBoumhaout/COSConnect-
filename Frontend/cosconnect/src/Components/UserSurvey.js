@@ -1,165 +1,153 @@
-  /*------------------------------------------------------------------
+/*------------------------------------------------------------------
   FOR FIRST TIME USERS (Form) -----> ADD REQUIRED TO INPUT
   -------------------------------------------------------------------*/
 
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useCookies } from "react-cookie";
-import './UserSurvey.css';
-import Multiselect from 'multiselect-react-dropdown';
+import "./UserSurvey.css";
+import Multiselect from "multiselect-react-dropdown";
 
 function UserSurvey() {
   const navigate = useNavigate();
-  //const [cookies, setCookie, removeCookie] = useCookies(['user_id']);
-  // const [userId, setUserId] = useState(cookies.user_id || '');
-  const [fullName, setFullName] = useState('');
-  const [displayName, setDisplayName] = useState('');
-  const [pronouns, setPronouns] = useState('');
-  const [classes, setClasses] = useState([]);
-  const [availability, setAvailability] = useState('');
-  const [bio, setBio] = useState('');
-  const [cookies] = useCookies(['net_id']);
-  const [options, setOptions] = useState([]);
-
-  // const handleUserIdChange = (event) => {
-  //   setUserId(event.target.value);
-  // };
+  const [fullName, setFullName] = useState("");
+  const [displayName, setDisplayName] = useState("");
+  const [pronouns, setPronouns] = useState("");
+  const [availability, setAvailability] = useState("");
+  const [bio, setBio] = useState("");
+  const [cookies] = useCookies(["net_id"]);
+  const [course, setCourse] = useState([]);
 
   const handleSubmit = (event) => {
-    let class_ = ""; 
     event.preventDefault();
     const netId = cookies.net_id;
     console.log(netId);
-    const data = { netId, fullName, displayName, pronouns, classes, availability, bio };
-    fetch('/userprofile', {
-      method: 'POST',
+    const data = {
+      netId,
+      fullName,
+      displayName,
+      pronouns,
+      course,
+      availability,
+      bio,
+    };
+    fetch("/userprofile", {
+      method: "POST",
       headers: {
-        'Content-Type': 'application/json'
+        "Content-Type": "application/json",
       },
-      body: JSON.stringify(data)
+      body: JSON.stringify(data),
     })
-      .then(response => response.json())
-      .then(data => {
-        class_ = classes
+      .then((response) => response.json())
+      .then((data) => {
         console.log(netId);
-        // Make a new API request to add the classes 
-        fetch('/add_class', {
-          method: 'POST',
+        // Make a new API request to add the classes
+        fetch("/add_class", {
+          method: "POST",
           headers: {
-            'Content-Type': 'application/json'
+            "Content-Type": "application/json",
           },
           body: JSON.stringify({
-            "net_id": netId,
-            "class_name": class_
-          })
+            net_id: netId,
+            classes: course,
+          }),
         })
-          .then(response => response.json())
-          .then(data => {
+          .then((response) => response.json())
+          .then((data) => {
             console.log(data);
           })
-          .catch(error => console.error(error));
+          .catch((error) => console.error(error));
         navigate(`/home`);
       })
-      .catch(error => console.error(error));
-  }
-
-/*   const handleClasses = event => {
-    const selectedValues = Array.from(event.target.selectedOptions, option => option.value)
-    setClasses(selectedValues)
-  }
-
-  useEffect(() => {
-    if (cookies.user_id !== null) {
-      // Fetch the user's data from the Flask server
-      fetch(`/get_info?id=${cookies.user_id}`)
-        .then((response) => response.json())
-        .then((data) => {
-          setUser(data);
-          console.log("user state set to:", data);
-        })
-        .catch(error => console.log(error));
-    } else {
-      console.log("user_id is null");
-    }
-  }, [cookies.user_id]); */
+      .catch((error) => console.error(error));
+  };
 
   useEffect(() => {
     fetch(`/get_courses`)
-        .then((response) => response.json())
-        .then(({term}) => {
-          const subjects = term[0].subjects;
-          const courses = subjects[0].courses;
-          const coursenums = courses.map(course => course.catalog_number);
-          const coursenumsstring = coursenums.map((num) => String(num));
-          setOptions(coursenumsstring);
-          console.log("options set to:", coursenumsstring);
-        })
-        .catch(error => console.log(error));
-    }, []);
-  
- 
+      .then((response) => response.json())
+      .then(({ term }) => {
+        console.log("terms:", term);
+        const subjects = term[0].subjects;
+        console.log("subjects:", subjects);
+        const courses = subjects[0].courses;
+        console.log("courses", courses);
+        const coursenums = courses.map((course) => course.catalog_number);
+        console.log("coursenums", coursenums);
+        const coursenumsstring = coursenums.map((num) => String(num));
+        setCourse(coursenumsstring);
+      })
+      .catch((error) => console.log(error));
+  }, []);
+
   return (
     <div className="bd">
       <div className="container1">
-      <h1 className="form-title" style={{color: "#338888"}}>Welcome to COSConnect!</h1>
- 
-        <form method="post" onSubmit={handleSubmit}>   
-          <div className="user-info">
+        <h1 className="form-title" style={{ color: "#338888" }}>
+          Welcome to COSConnect!
+        </h1>
 
+        <form method="post" onSubmit={handleSubmit}>
+          <div className="user-info">
             <div className="input-box">
               <label htmlFor="fullName">Full Name</label>
-              <input type="text"
+              <input
+                type="text"
                 id="fullName"
                 name="fullName"
                 placeholder="Enter Full Name"
                 value={fullName}
-                onChange={event => setFullName(event.target.value)} 
-                required/>
+                onChange={(event) => setFullName(event.target.value)}
+                required
+              />
             </div>
 
             <div className="input-box">
               <label htmlFor="displayName">Display Name</label>
-              <input type="text"
+              <input
+                type="text"
                 id="displayName"
                 name="displayName"
                 placeholder="Enter Display Name"
                 value={displayName}
-                onChange={event => setDisplayName(event.target.value)} 
-                />
+                onChange={(event) => setDisplayName(event.target.value)}
+              />
             </div>
 
             <div className="input-box">
               <label htmlFor="pronouns">Pronouns</label>
-              <input type="text"
+              <input
+                type="text"
                 id="pronouns"
                 name="pronouns"
                 placeholder="Enter Pronouns"
                 value={pronouns}
-                onChange={event => setPronouns(event.target.value)} 
-                required/>
+                onChange={(event) => setPronouns(event.target.value)}
+                required
+              />
             </div>
 
-            
-            <Multiselect
-              displayValue="key"
-              onKeyPressFn={function noRefCheck(){}}
-              onRemove={function noRefCheck(){}}
-              onSearch={function noRefCheck(){}}
-              onSelect={function noRefCheck(){}}
-              options={options}
-            />
-         
+            <div className="input-box">
+              <label htmlFor="classes">Classes</label>
+              <div className="multi-select">
+                <Multiselect 
+                isObject={false}
+                options={course}
+                />
+              </div>
+            </div>
+
             <div className="input-box">
               <label htmlFor="availability">Availability</label>
-              <textarea type="text"
+              <textarea
+                type="text"
                 id="availability"
                 name="availability"
                 placeholder="i.e. Monday from 3:00 PM to 5:00 PM"
                 value={availability}
-                onChange={event => setAvailability(event.target.value)} 
-                style={{ height:"97%", width: "95%", padding: "15px"}}
-                required>
-              </textarea>
+                onChange={(event) => setAvailability(event.target.value)}
+                style={{ height: "97%", width: "95%", padding: "15px" }}
+                required
+              ></textarea>
             </div>
 
             <div className="input-box">
@@ -169,21 +157,18 @@ function UserSurvey() {
                 name="Bio"
                 placeholder="Tell us about yourself"
                 value={bio}
-                onChange={event => setBio(event.target.value)}
-                style={{ height:"97%", width: "95%", padding: "15px"}}
-                required>
-              </textarea>
+                onChange={(event) => setBio(event.target.value)}
+                style={{ height: "97%", width: "95%", padding: "15px" }}
+                required
+              ></textarea>
             </div>
-
           </div>
 
           <div className="submit-btn">
             <input type="submit" value="Submit" />
           </div>
         </form>
-
       </div>
-      <script src="multiselect-dropdown.js" ></script>
     </div>
   );
 }
