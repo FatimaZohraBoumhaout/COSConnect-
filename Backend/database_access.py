@@ -5,6 +5,7 @@
 
 import contextlib
 import psycopg2
+from req_lib import ReqLib
 
 def authenticate_user(netId, database_url):
     try:
@@ -187,4 +188,21 @@ def get_students(input, database_url):
                 return output 
     except Exception as ex:
         print(ex)
+
+def get_courses():
+    req_lib = ReqLib()
+    spring_2020_term_code = "1204"
+    subj = "COS"
+
+    # Returns all courses in COS
+    term_info = req_lib.getJSON(
+        req_lib.configs.COURSE_COURSES,
+        # To return a json version of the return value
+        fmt="json",
+        term=spring_2020_term_code, 
+        subject=subj,
+    )
+
+    return term_info
+
                     
