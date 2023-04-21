@@ -263,6 +263,15 @@ def get_students():
         print('Error in get_students:', ex)
         return jsonify({'error': 'Failed to retrieve students'}), 500
 
+@app.route('/get_courses', methods=['GET'])
+def get_courses():
+    """Get a list of courses in COS."""
+    try:
+        classes = database_access.get_courses()
+        return jsonify(classes)
+    except Exception as ex:
+        print('Error in calling API:', ex)
+        return jsonify({'error': 'Failed to retrieve students'}), 500
 
 if __name__ == '__main__':
     app.run(debug=True)
