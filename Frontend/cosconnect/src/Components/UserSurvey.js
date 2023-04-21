@@ -2,10 +2,11 @@
   FOR FIRST TIME USERS (Form) -----> ADD REQUIRED TO INPUT
   -------------------------------------------------------------------*/
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useCookies } from "react-cookie";
 import './UserSurvey.css';
+import Multiselect from 'multiselect-react-dropdown';
 
 function UserSurvey() {
   const navigate = useNavigate();
@@ -14,10 +15,11 @@ function UserSurvey() {
   const [fullName, setFullName] = useState('');
   const [displayName, setDisplayName] = useState('');
   const [pronouns, setPronouns] = useState('');
-  const [classes, setClasses] = useState('');
+  const [classes, setClasses] = useState([]);
   const [availability, setAvailability] = useState('');
   const [bio, setBio] = useState('');
   const [cookies] = useCookies(['net_id']);
+  const [options, setOptions] = useState([]);
 
   // const handleUserIdChange = (event) => {
   //   setUserId(event.target.value);
@@ -60,6 +62,40 @@ function UserSurvey() {
       })
       .catch(error => console.error(error));
   }
+
+/*   const handleClasses = event => {
+    const selectedValues = Array.from(event.target.selectedOptions, option => option.value)
+    setClasses(selectedValues)
+  }
+
+  useEffect(() => {
+    if (cookies.user_id !== null) {
+      // Fetch the user's data from the Flask server
+      fetch(`/get_info?id=${cookies.user_id}`)
+        .then((response) => response.json())
+        .then((data) => {
+          setUser(data);
+          console.log("user state set to:", data);
+        })
+        .catch(error => console.log(error));
+    } else {
+      console.log("user_id is null");
+    }
+  }, [cookies.user_id]); */
+
+  useEffect(() => {
+    fetch(`/get_courses`)
+        .then((response) => response.json())
+        .then(({term}) => {
+          const subjects = term[0].subjects;
+          const courses = subjects[0].courses;
+          const coursenums = courses.map(course => course.catalog_number);
+          const coursenumsstring = coursenums.map((num) => String(num));
+          setOptions(coursenumsstring);
+          console.log("options set to:", coursenumsstring);
+        })
+        .catch(error => console.log(error));
+    }, []);
   
  
   return (
@@ -103,17 +139,16 @@ function UserSurvey() {
                 required/>
             </div>
 
-            <div className="input-box">
-              <label htmlFor="classes">COS Classes</label>
-              <input type="text"
-                id="classes"
-                name="classes"
-                placeholder="e.g. COS 126"
-                value={classes}
-                onChange={event => setClasses(event.target.value)} 
-                required/>
-            </div>
-
+            
+            <Multiselect
+              displayValue="key"
+              onKeyPressFn={function noRefCheck(){}}
+              onRemove={function noRefCheck(){}}
+              onSearch={function noRefCheck(){}}
+              onSelect={function noRefCheck(){}}
+              options={options}
+            />
+         
             <div className="input-box">
               <label htmlFor="availability">Availability</label>
               <textarea type="text"
@@ -148,6 +183,7 @@ function UserSurvey() {
         </form>
 
       </div>
+      <script src="multiselect-dropdown.js" ></script>
     </div>
   );
 }
