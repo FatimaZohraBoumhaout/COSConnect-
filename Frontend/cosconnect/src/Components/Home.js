@@ -37,6 +37,19 @@ function Home(){
   const handleDropClass = () => {
     console.log("Drop button clicked");
   }
+  
+  const extractedElements = classes[0][0].map((element, index) => {
+    console.log(element);
+    return (
+      <div key = {index}>
+        <Link to={`/classview?class=${element}`}>
+          
+          <h2 key={index} className="num">{element}</h2>
+        
+        </Link>
+      </div>
+    );
+  });
 
   return(
     <div className="home">
@@ -55,13 +68,7 @@ function Home(){
         </button>
       </div>
       <div className="boxes">
-        {classes && classes.map((className, index) => (
-          <Link to={`/classview?class=${className}`}>
-          <div key={index}>
-            <h2 className="num">{className}</h2>
-          </div>
-          </Link>
-        ))}
+        {classes && extractedElements}
       </div>
     </div>
   );
