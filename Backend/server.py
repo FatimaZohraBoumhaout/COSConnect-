@@ -19,28 +19,6 @@ def index():
     """Endpoint to check if the server is running"""
     return("Welcome, COSConnect Server is running.")
 
-
-# @app.route('/signup', methods=['POST'])
-# def sign_up():
-#     """Endpoint to register a new user"""
-#     try:
-#         data = flask.request.get_json()
-#         username = data.get('username')
-#         email = data.get('email')
-#         password = data.get('password')
-#         if not username or not email or not password:
-#             raise ValueError('Missing required fields')
-#         user_id = database_access.sign_up(
-#             (username, email, password), 'testdb_ery6')
-#         return jsonify({'user_id': user_id})
-#     except ValueError as vex:
-#         print('Error in sign_up:', vex)
-#         return jsonify({'error': 'Missing required fields'}), 400
-#     except Exception as ex:
-#         print('Error in sign_up:', ex)
-#         return jsonify({'error': 'Failed to sign up user'}), 500
-
-
 @app.route('/login', methods=['POST'])
 def log_in():
     """Endpoint to authenticate a user"""
