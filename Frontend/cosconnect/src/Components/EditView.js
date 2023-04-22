@@ -96,13 +96,14 @@ function EditView() {
 
     .edit-button {
       margin-left: auto;
-      background-color: #4CAF50;
+      background-color: #26272D;
       color: white;
       border: none;
       border-radius: 5px;
       padding: 10px 20px;
       font-size: 16px;
       cursor: pointer;
+      margin-top: 50px;
     }
 
     .edit-button:hover {
