@@ -144,6 +144,9 @@ function EditView() {
       background-color: #26272D;
       color: #fff;      
     }
+    .button-save:hover {
+      background-color: #3e8e41;
+    }
 
     @media (max-width: 768px) {
       .grid-item {
