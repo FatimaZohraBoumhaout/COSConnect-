@@ -42,7 +42,6 @@ function Home(){
   let extractedElements = null;
   if(classes.length > 0){
   extractedElements = classes[0][0].map((element, index) => {
-
     console.log(element);
     return (
       <div key = {index}>
