@@ -27,7 +27,8 @@ function ClassView(props){
         fetch(`/get_class?net_id=${cookies.net_id}`)
             .then(response => response.json())
             .then(data => {
-                setClasses(data);})
+                setClasses(data);
+                console.log(classes)})
         //         const this_class = data; 
         //         fetch(`/getSentRequest?net_id=${cookies.net_id}`)
         //             .then(response=> response.json())
@@ -141,6 +142,10 @@ function ClassView(props){
         })
         if(buttonRef.current) buttonRef.current.disabled = true;
     }
+    // if(classes){
+    //     console.log("each: ", classes.map((cl) => (console.log(cl))))
+
+    // }
     return(
         <div className="body">
             <div className="grid-container">
@@ -189,7 +194,7 @@ function ClassView(props){
                     <h3>Students</h3>
                     {studentsId && studentsId.map((st, index) =>(
                         <div className="rectangle-right">
-                    <Link to={`/partnerview`} onClick={setCookie('partner_id', st)}>{st}</Link>
+                    <Link to={`/partnerview`} >{st}</Link>
                     <button ref={buttonRef} onClick={sendRequest(st)}>
                         <center>Send</center>
                     </button>
