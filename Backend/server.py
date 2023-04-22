@@ -221,9 +221,10 @@ def get_students():
     """Get a list of students who are enrolled in the given class."""
     try:
         classes = flask.request.args.get('class')
+        net_id = flask.request.args.get('id')
         if not classes:
             raise ValueError('Missing class name')
-        students = database_access.get_students(classes, 'testdb_ery6')
+        students = database_access.get_students((classes, net_id), 'testdb_ery6')
         return jsonify(students)
     except ValueError as vex:
         print('Error in get_students:', vex)
@@ -324,6 +325,19 @@ def get_talking():
         talking = database_access.get_talking((net_id), 'testdb_ery6')
         print("GOT TALKING", talking[0][0])
         return jsonify(talking[0][0])
+    except Exception as ex:
+        print('Error in post_status:', ex)
+        return jsonify({'error': 'Failed to get talking'}), 500
+
+@app.route('/get_students_info', methods=['GET'])
+def get_students_info():
+    try:
+        classes = flask.request.args.get('class')
+        net_id = flask.request.args.get('id')
+        students = database_access.get_students((classes, net_id), 'testdb_ery6')
+        students_info = database_access.get_students_info(students, 'testdb_ery6')
+        print("GOT TALKING", students_info)
+        return jsonify(students_info)
     except Exception as ex:
         print('Error in post_status:', ex)
         return jsonify({'error': 'Failed to get talking'}), 500
