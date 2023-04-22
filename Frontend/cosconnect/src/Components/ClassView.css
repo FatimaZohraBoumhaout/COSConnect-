@@ -123,3 +123,11 @@ p{
     color: #65B3B8;
     text-align: center;
 }
+button{
+    float:align;
+    color: #26272D;
+    width: 70px;
+    height: 53%;
+    border-radius: 5px;
+    
+}

@@ -144,7 +144,9 @@ def get_sent_request():
     try:
         user_id = flask.request.args.get('user_id')
         course = flask.request.args.get('course')
-        if not user_id or course:
+        print(user_id)
+        print("course", course)
+        if not (user_id or course):
             raise ValueError('Missing user ID or Course')
         output = database_access.get_sent((user_id, course), 'testdb_ery6')
         return jsonify(output)
@@ -162,7 +164,7 @@ def get_received_request():
     try:
         user_id = flask.request.args.get('user_id')
         course = flask.request.args.get('course')
-        if not user_id or course:
+        if not user_id or not course:
             raise ValueError('Missing user ID or course')
         output = database_access.get_received((user_id, course), 'testdb_ery6')
         return jsonify(output)
