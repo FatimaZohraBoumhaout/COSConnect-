@@ -50,9 +50,9 @@ def add_user(input, database_url):
     try:
         with psycopg2.connect(dbname = database_url, host = "dpg-cggj3fceoogqfc2no840-a.ohio-postgres.render.com", user="testuser", password="gVYdK2LMupfkuAxyR6kp3a6XpuIB9VVV") as connection:
             with contextlib.closing(connection.cursor()) as cursor:
-                query = "INSERT INTO user_profile (net_id, pronouns, classes, bio, availability, full_name, display_name) VALUES (%s, %s, " + "ARRAY [" + classes_string + "], %s, %s, %s, %s);"
+                query = "INSERT INTO user_profile (net_id, pronouns, classes, bio, availability, full_name, display_name) VALUES (%s, %s, ARRAY[%s], %s, %s, %s, %s);"
                 try:
-                    cursor.execute(query, (net_id, pronouns, classes, bio, availability, full_name, display_name))
+                    cursor.execute(query, (net_id, pronouns, classes_string, bio, availability, full_name, display_name))
                 except Exception as ex:
                     print(ex)
     except Exception as ex:

@@ -67,6 +67,8 @@ def user_profile():
     """Endpoint to update user profile"""
     try:
         data = flask.request.get_json()
+        print("GOT HERE")
+        print(data)
         net_id = data.get('netId')
         if not net_id:
             raise ValueError('Missing required fields')
@@ -78,6 +80,7 @@ def user_profile():
         display_name = data.get('displayName')
         database_access.add_user(
             (net_id, pronouns, classes, bio, availability, full_name, display_name), 'testdb_ery6')
+        #print(statement)
         return jsonify({'net_id': net_id})
     except ValueError as vex:
         print('Error in user_profile:', vex)
