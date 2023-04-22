@@ -8,7 +8,7 @@ function EditView() {
   // const { userId } = props;
   const navigate = useNavigate();
   const [user, setUser] = useState(null);
-  const [cookies] = useCookies(['user_id']);
+  const [cookies] = useCookies(['net_id']);
   const [pronouns, setPronouns] = useState('');
   const [classes, setClasses] = useState('');
   const [availability, setAvailability] = useState('');
@@ -17,7 +17,7 @@ function EditView() {
   useEffect(() => {
     if (cookies.user_id !== null) {
       // Fetch the user's data from the Flask server
-      fetch(`/get_info?id=${cookies.user_id}`)
+      fetch(`/get_info?id=${cookies.net_id}`)
         .then((response) => response.json())
         .then((data) => {
           setUser(data);
@@ -65,7 +65,7 @@ function EditView() {
       border-radius: 30px;
       margin: 20px;
       width: 50%;
-      margin-left: 0%;
+      margin-left: 25%;
     }
 
     .grid-item {

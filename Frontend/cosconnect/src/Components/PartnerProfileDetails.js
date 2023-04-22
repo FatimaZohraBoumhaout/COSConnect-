@@ -1,5 +1,6 @@
 import React, { useState, useEffect} from "react";
 import Avatar from 'react-avatar';
+import { Cookies } from "react-cookie";
 import { Link } from 'react-router-dom';
 
 function PartnerProfileDetails(props) {
@@ -148,8 +149,7 @@ function PartnerProfileDetails(props) {
             <h1 className="profile-name">{  partner[0][4]}</h1>
           </div>
           <Link to={`/classview`} className="edit-button">Close</Link>
-          <Link to={`/sendrequest?receiver=${props.partneridProp}`} className="edit-button">Send Request</Link>
-          
+          <Link to={`/sendrequest?receiver=${props.partneridProp}`} className="edit-button" onClick={handleSendEmail}>Send Request</Link>
         </div>
         <div className="profile-content">
           {/* <div className="gray-box"></div> */}
@@ -174,5 +174,30 @@ function PartnerProfileDetails(props) {
     </div>
   );
 }
+/**********************************************************************************/
+
+function handleSendEmail() {
+  const sender_email = Cookies.get('net_id') + '@princeton.edu';
+  const receiver_email = props.partneridProp + '@princeton.edu';
+  const subject = 'COS class partnership request';
+  const body = 'Hello,\n\nThis is a pre-drafted email.\n\nBest regards,';
+  
+  fetch('/send-email', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({
+      sender_email: sender_email,
+      receiver_email: receiver_email,
+      subject: subject,
+      body: body
+    })
+  })
+  .then(response => console.log(response))
+  .catch(error => console.log(error));
+}
+
+/**********************************************************************************/
 
 export default PartnerProfileDetails;
