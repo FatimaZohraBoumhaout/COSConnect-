@@ -124,10 +124,10 @@ p{
     text-align: center;
 }
 button{
-    float:align;
+    float:right;
     color: #26272D;
-    width: 70px;
+    width: 60px;
     height: 53%;
     border-radius: 5px;
-    
+    color:  #F6F6F2
 }
