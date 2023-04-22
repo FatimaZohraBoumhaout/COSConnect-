@@ -67,17 +67,6 @@ function Header() {
     margin: 0 1rem;
   }
   
-  .header__button a:nth-last-child(2)::after { 
-    content: '';
-    position: absolute;
-    top: 50%;
-    right: -10px; 
-    transform: translateY(-50%) rotate(90deg);
-    border-top: 10px solid transparent;
-    border-bottom: 10px solid transparent;
-    border-left: 10px solid #F6F6F2;
-  }
-  
   /* Responsive styles */
   
   @media screen and (max-width: 768px) {
