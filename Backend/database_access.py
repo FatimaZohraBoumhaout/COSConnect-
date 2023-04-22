@@ -236,7 +236,7 @@ def post_talking(input, database_url):
         print(ex)
 
 def get_status(input, database_url):
-    user_id = input[0]
+    user_id = input
     try:
         with psycopg2.connect(dbname=database_url, host="dpg-cggj3fceoogqfc2no840-a.ohio-postgres.render.com", user="testuser", password="gVYdK2LMupfkuAxyR6kp3a6XpuIB9VVV") as connection:
             with contextlib.closing(connection.cursor()) as cursor:
@@ -248,7 +248,7 @@ def get_status(input, database_url):
         print(ex)
 
 def get_talking(input, database_url):
-    user_id = input[0]
+    user_id = input
     try:
         with psycopg2.connect(dbname=database_url, host="dpg-cggj3fceoogqfc2no840-a.ohio-postgres.render.com", user="testuser", password="gVYdK2LMupfkuAxyR6kp3a6XpuIB9VVV") as connection:
             with contextlib.closing(connection.cursor()) as cursor:
