@@ -5,6 +5,11 @@
 import flask
 import database_access
 from flask import jsonify
+import smtplib
+from email.mime.text import MIMEText
+from email.mime.multipart import MIMEMultipart
+from flask_mail import Mail, Message
+
 
 # -----------------------------------------------------------------------
 app = flask.Flask(__name__)  # might need to change
@@ -207,28 +212,6 @@ def get_class():
         print('Error in get_class:', ex)
         return jsonify({'error': 'Failed to retrieve classes'}), 500
 
-
-@app.route('/send_message', methods=['POST'])
-def send_message():
-    """Send a message from the given sender ID to the given receiver ID."""
-    try:
-        data = flask.request.get_json()
-        id_sender = data.get('userId')[0]
-        id_receiver = data.get('receiver')
-        message = data.get('message')
-        if not id_sender or not id_receiver or not message:
-            raise ValueError('Missing sender ID, receiver ID, or message')
-        database_access.add_request((id_sender, id_receiver, message), 'testdb_ery6')
-        print("sent message: ", message, "to user:", id_receiver, "from:", id_sender)
-        return jsonify({'status': 'success', 'message': 'Message sent successfully'})
-    except ValueError as vex:
-        print('Error in send_message:', vex)
-        return jsonify({'error': 'Missing sender ID, receiver ID, or message'}), 400
-    except Exception as ex:
-        print('Error in send_message:', ex)
-        return jsonify({'error': 'Failed to send message'}), 500
-
-
 @app.route('/edit_profile', methods=['POST'])
 def edit_profile():
     """Update the user's profile information."""
@@ -272,6 +255,39 @@ def get_courses():
     except Exception as ex:
         print('Error in calling API:', ex)
         return jsonify({'error': 'Failed to retrieve students'}), 500
+    
+#-------------------------------------------------------------------------------------------------------
+app.config['MAIL_SERVER']='smtp.gmail.com'
+app.config['MAIL_PORT'] = 465
+app.config['MAIL_USERNAME'] = 'cosconnectprinceton@gmail.com'
+app.config['MAIL_PASSWORD'] = 'COSConnect2025'
+app.config['MAIL_USE_TLS'] = False
+app.config['MAIL_USE_SSL'] = True
 
+mail = Mail(app)
+
+@app.route('/send-email', methods=['POST'])
+def send_email():
+    try:
+        data = flask.request.json()
+        sender_email = data.get('sender_email')
+        receiver_email = data.get('receiver_email')
+        subject = data.get('subject')
+        body = data.get('body')
+
+        msg = Message(subject, sender=sender_email, recipients=[receiver_email])
+        msg.body = body
+
+        mail.send(msg)
+
+        return 'Email sent!'
+    
+    except ValueError as vex:
+        print('Error in send_email:', vex)
+        return jsonify({'error': 'Missing sender ID, receiver ID, or text message'}), 400
+    except Exception as ex:
+        print('Error in send_email:', ex)
+        return jsonify({'error': 'Failed to send the email'}), 500
+  
 if __name__ == '__main__':
     app.run(debug=True)
