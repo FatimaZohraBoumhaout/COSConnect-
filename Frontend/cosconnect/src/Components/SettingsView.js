@@ -1,5 +1,6 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./SettingsView.css"; // import CSS file for custom styling
+import { useCookies } from 'react-cookie';
 
 const settingsStyle = {
   gridRow: "1",
@@ -27,15 +28,71 @@ const toggleContainerStyle = {
 };
 
 function SettingsView() {
-  const [status, setStatus] = useState("Not Available");
-  const [notifications, setNotifications] = useState(false);
+  const [status, setStatus] = useState([]);
+  const [talking, setTalking] = useState([]);
+  const [cookies] = useCookies(["net_id"]);
+
+  useEffect(() => {
+    fetch(`/get_status?id=${cookies.net_id}`)
+    .then(response => response.json())
+    .then((data) => {
+      setStatus(data);
+      console.log("status set to:", data);
+    })
+    .catch(error => console.error(error));
+
+    fetch(`/get_talking?id=${cookies.net_id}`)
+    .then(response => response.json())
+    .then((data) => {
+      setTalking(data);
+      console.log("talking set to:", data);
+    })
+    .catch(error => console.error(error));
+  }, []);
   
 
   const handleStatusToggle = () => {
+    const netId = cookies.net_id;
     setStatus((prevStatus) => (prevStatus === "Available" ? "Not Available" : "Available"));
+    console.log(netId, status)
+    const data = {netId, status};
+    fetch(`/post_status`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(data)
+    })
+    .then(response => {
+        if (response.ok) {
+          console.log("Status changed")
+        } else {
+          console.log("Status change failed")
+        }
+      })
+      .catch(error => console.error(error));
   };
-  const handleNotificationsToggle = () => {
-    setNotifications((prevNotifications) => !prevNotifications);
+
+  const handleTalkingToggle = () => {
+    const netId = cookies.net_id;
+    setTalking((prevTalking) => (prevTalking === true ? false : true));
+    console.log(netId, talking)
+    const data = {netId, talking};
+    fetch(`/post_talking`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(data)
+    })
+    .then(response => {
+        if (response.ok) {
+          console.log("talking changed")
+        } else {
+          console.log("talking change failed")
+        }
+      })
+      .catch(error => console.error(error));
   };
 
   return (
@@ -65,8 +122,8 @@ function SettingsView() {
                 <input
                   type="checkbox"
                   id="talking-toggle"
-                  
-                  
+                  onChange={handleTalkingToggle}
+                  checked={talking === true}
                 />
                 <span className="slider round"></span>
               </label>
@@ -79,13 +136,11 @@ function SettingsView() {
                 <input
                   type="checkbox"
                   id="notifications-toggle"
-                  onChange={handleNotificationsToggle}
-                  checked={notifications}
                 />
                 <span className="slider round"></span>
               </label>
             </div>
-            {notifications && <span className="notification-badge">1</span>}
+            {/* {notifications && <span className="notification-badge">1</span>} */}
           </div>
         </div>
       </div>

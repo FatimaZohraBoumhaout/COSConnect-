@@ -285,6 +285,7 @@ def post_status():
         data = flask.request.get_json()
         net_id = data.get('netId')
         status = data.get('status')
+        print("trying to change status to", status)
         database_access.post_status((net_id, status), 'testdb_ery6')
         return jsonify({'status': 'success', 'message': 'Status updated successfully'})
     except Exception as ex:
@@ -296,7 +297,8 @@ def post_talking():
     try:
         data = flask.request.get_json()
         net_id = data.get('netId')
-        talking = data.get('talking')
+        talking = not data.get('talking')
+        print("trying to change talking to", talking)
         database_access.post_talking((net_id, talking), 'testdb_ery6')
         return jsonify({'status': 'success', 'message': 'Talking updated successfully'})
     except Exception as ex:

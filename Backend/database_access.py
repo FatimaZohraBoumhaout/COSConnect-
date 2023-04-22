@@ -213,9 +213,9 @@ def get_courses():
 def post_status(input, database_url):
     user_id, status = input
     if status == "Available":
-        status = "True"
-    else:
         status = "False"
+    else:
+        status = "True"
 
     try:
         with psycopg2.connect(dbname=database_url, host="dpg-cggj3fceoogqfc2no840-a.ohio-postgres.render.com", user="testuser", password="gVYdK2LMupfkuAxyR6kp3a6XpuIB9VVV") as connection:
@@ -230,7 +230,7 @@ def post_talking(input, database_url):
     try:
         with psycopg2.connect(dbname=database_url, host="dpg-cggj3fceoogqfc2no840-a.ohio-postgres.render.com", user="testuser", password="gVYdK2LMupfkuAxyR6kp3a6XpuIB9VVV") as connection:
             with contextlib.closing(connection.cursor()) as cursor:
-                query = "UPDATE user_profile SET talking = " + talking + " WHERE net_id = %s;"
+                query = "UPDATE user_profile SET talking = " + str(talking) + " WHERE net_id = %s;"
                 cursor.execute(query, (user_id,))
     except Exception as ex:
         print(ex)
