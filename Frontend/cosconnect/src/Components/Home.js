@@ -38,6 +38,7 @@ function Home(){
     console.log("Drop button clicked");
   }
   
+  if (classes.length > 0) {
   const extractedElements = classes[0][0].map((element, index) => {
     console.log(element);
     return (
@@ -50,6 +51,7 @@ function Home(){
       </div>
     );
   });
+}
 
   return(
     <div className="home">
