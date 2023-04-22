@@ -297,7 +297,6 @@ app.config['MAIL_PASSWORD'] = 'COSConnect2025'
 app.config['MAIL_USE_TLS'] = False
 app.config['MAIL_USE_SSL'] = True
 
-<<<<<<< HEAD
 mail = Mail(app)
 
 @app.route('/send-email', methods=['POST'])
@@ -323,7 +322,6 @@ def send_email():
         print('Error in send_email:', ex)
         return jsonify({'error': 'Failed to send the email'}), 500
   
-=======
 @app.route('/post_status', methods=['POST'])
 def post_status():
     try:
@@ -377,6 +375,5 @@ def get_talking():
         print('Error in post_status:', ex)
         return jsonify({'error': 'Failed to get talking'}), 500
 
->>>>>>> 1374c76f3a6d9ce55474cb6870c10b4ef4abc917
 if __name__ == '__main__':
     app.run(debug=True)
