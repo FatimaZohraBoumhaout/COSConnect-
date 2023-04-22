@@ -212,10 +212,15 @@ def get_courses():
 
 def post_status(input, database_url):
     user_id, status = input
+    if status == "Available":
+        status = "True"
+    else:
+        status = "False"
+
     try:
         with psycopg2.connect(dbname=database_url, host="dpg-cggj3fceoogqfc2no840-a.ohio-postgres.render.com", user="testuser", password="gVYdK2LMupfkuAxyR6kp3a6XpuIB9VVV") as connection:
             with contextlib.closing(connection.cursor()) as cursor:
-                query = "UPDATE user_profile SET status = " + status + " WHERE user_id = %s;"
+                query = "UPDATE user_profile SET status = " + status + " WHERE net_id = %s;"
                 cursor.execute(query, (user_id,))
     except Exception as ex:
         print(ex)
@@ -225,8 +230,32 @@ def post_talking(input, database_url):
     try:
         with psycopg2.connect(dbname=database_url, host="dpg-cggj3fceoogqfc2no840-a.ohio-postgres.render.com", user="testuser", password="gVYdK2LMupfkuAxyR6kp3a6XpuIB9VVV") as connection:
             with contextlib.closing(connection.cursor()) as cursor:
-                query = "UPDATE user_profile SET talking = " + talking + " WHERE user_id = %s;"
+                query = "UPDATE user_profile SET talking = " + talking + " WHERE net_id = %s;"
                 cursor.execute(query, (user_id,))
+    except Exception as ex:
+        print(ex)
+
+def get_status(input, database_url):
+    user_id = input[0]
+    try:
+        with psycopg2.connect(dbname=database_url, host="dpg-cggj3fceoogqfc2no840-a.ohio-postgres.render.com", user="testuser", password="gVYdK2LMupfkuAxyR6kp3a6XpuIB9VVV") as connection:
+            with contextlib.closing(connection.cursor()) as cursor:
+                query = "SELECT status from user_profile WHERE net_id = %s;"
+                cursor.execute(query, (user_id,))
+                output = cursor.fetchall()
+                return output 
+    except Exception as ex:
+        print(ex)
+
+def get_talking(input, database_url):
+    user_id = input[0]
+    try:
+        with psycopg2.connect(dbname=database_url, host="dpg-cggj3fceoogqfc2no840-a.ohio-postgres.render.com", user="testuser", password="gVYdK2LMupfkuAxyR6kp3a6XpuIB9VVV") as connection:
+            with contextlib.closing(connection.cursor()) as cursor:
+                query = "SELECT talking from user_profile WHERE net_id = %s;"
+                cursor.execute(query, (user_id,))
+                output = cursor.fetchall()
+                return output 
     except Exception as ex:
         print(ex)
 

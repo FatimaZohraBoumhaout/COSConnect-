@@ -303,5 +303,31 @@ def post_talking():
         print('Error in post_status:', ex)
         return jsonify({'error': 'Failed to post talking'}), 500
 
+@app.route('/get_status', methods=['GET'])
+def get_status():
+    try:
+        data = flask.request.get_json()
+        net_id = data.get('netId')
+        status = database_access.get_status((net_id), 'testdb_ery6')
+        if status == "True":
+            status = "Available"
+        else:
+            status = "Not Available"
+        return jsonify(status)
+    except Exception as ex:
+        print('Error in post_status:', ex)
+        return jsonify({'error': 'Failed to get status'}), 500
+
+@app.route('/get_talking', methods=['GET'])
+def get_talking():
+    try:
+        data = flask.request.get_json()
+        net_id = data.get('netId')
+        talking = database_access.get_talking((net_id), 'testdb_ery6')
+        return jsonify(talking)
+    except Exception as ex:
+        print('Error in post_status:', ex)
+        return jsonify({'error': 'Failed to get talking'}), 500
+
 if __name__ == '__main__':
     app.run(debug=True)
