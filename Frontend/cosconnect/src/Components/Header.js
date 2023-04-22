@@ -20,7 +20,7 @@ function Header() {
     justify-content: space-between;
     align-items: center;
     padding: 1rem;
-    background-color: #65B3B8;
+    background-color: #BDD2B6;
     box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2);
   }
   
@@ -165,7 +165,6 @@ function Header() {
           <a href="home">Home</a>
           <a href="profileview">Profile</a>
           <a href="chatsview">Chats</a>
-          <a href="classview">Classes</a>
           <a href="/" onClick={handleLogOut}>Log Out</a>
         </div>
 
@@ -175,8 +174,6 @@ function Header() {
         <a className="hidd" href="profileview">Profile</a>
         <div className="header__button-divider hidd"></div>
         <a className="hidd" href="chatsview">Chats</a>
-        <div className="header__button-divider hidd"></div>
-        <a className="hidd" href="classview">Classes</a>
         <div className="header__button-divider hidd"></div>
         <a className="hidd" href="/" onClick={handleLogOut}>Log Out</a>
 
