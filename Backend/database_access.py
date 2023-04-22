@@ -210,4 +210,24 @@ def get_courses():
 
     return term_info
 
+def post_status(input, database_url):
+    user_id, status = input
+    try:
+        with psycopg2.connect(dbname=database_url, host="dpg-cggj3fceoogqfc2no840-a.ohio-postgres.render.com", user="testuser", password="gVYdK2LMupfkuAxyR6kp3a6XpuIB9VVV") as connection:
+            with contextlib.closing(connection.cursor()) as cursor:
+                query = "UPDATE user_profile SET status = " + status + " WHERE user_id = %s;"
+                cursor.execute(query, (user_id,))
+    except Exception as ex:
+        print(ex)
+
+def post_talking(input, database_url):
+    user_id, talking = input
+    try:
+        with psycopg2.connect(dbname=database_url, host="dpg-cggj3fceoogqfc2no840-a.ohio-postgres.render.com", user="testuser", password="gVYdK2LMupfkuAxyR6kp3a6XpuIB9VVV") as connection:
+            with contextlib.closing(connection.cursor()) as cursor:
+                query = "UPDATE user_profile SET talking = " + talking + " WHERE user_id = %s;"
+                cursor.execute(query, (user_id,))
+    except Exception as ex:
+        print(ex)
+
                     

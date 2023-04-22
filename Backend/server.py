@@ -279,5 +279,29 @@ def get_courses():
         print('Error in calling API:', ex)
         return jsonify({'error': 'Failed to retrieve students'}), 500
 
+@app.route('/post_status', methods=['POST'])
+def post_status():
+    try:
+        data = flask.request.get_json()
+        net_id = data.get('netId')
+        status = data.get('status')
+        database_access.post_status((net_id, status), 'testdb_ery6')
+        return jsonify({'status': 'success', 'message': 'Status updated successfully'})
+    except Exception as ex:
+        print('Error in post_status:', ex)
+        return jsonify({'error': 'Failed to post status'}), 500
+
+@app.route('/post_talking', methods=['POST'])
+def post_talking():
+    try:
+        data = flask.request.get_json()
+        net_id = data.get('netId')
+        talking = data.get('talking')
+        database_access.post_talking((net_id, talking), 'testdb_ery6')
+        return jsonify({'status': 'success', 'message': 'Talking updated successfully'})
+    except Exception as ex:
+        print('Error in post_status:', ex)
+        return jsonify({'error': 'Failed to post talking'}), 500
+
 if __name__ == '__main__':
     app.run(debug=True)
