@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { useCookies } from "react-cookie";
 import { useLocation } from "react-router-dom";
 import { Link } from 'react-router-dom';
@@ -12,8 +12,10 @@ function ClassView(props){
     const [receivedRequest, setReceivedRequest] = useState([]);
     const [studentsId, setStudentsId] = useState([]);
     const [input, setInput] = useState('');
+    const [disabled, setDisabled] = useState({receiver_id: 'false'})
     const net_id = cookies.net_id;
     const location = useLocation;
+    const buttonRef= useRef(null);
     
     const this_class = window.location.search.match(/class=([^&]*)/)[1].replace('%20',' ');
 
@@ -125,6 +127,7 @@ function ClassView(props){
     // )
     function handleChange(event){
         //setData()
+        
     }
     function handleSubmit(event){
         //event.preventDefault();
@@ -136,6 +139,7 @@ function ClassView(props){
         fetch(`add_request?sender_id=${cookies.net_id}&receiver_id=${st}&course=${this_class}`, {
             method: 'POST',
         })
+        if(buttonRef.current) buttonRef.current.disabled = true;
     }
     return(
         <div className="body">
@@ -184,7 +188,9 @@ function ClassView(props){
                     {studentsId && studentsId.map((st, index) =>(
                         <div className="rectangle-right">
                     <Link to={`/partnerview?partnerid=${st}`}>{st}</Link>
-                    <button onClick={sendRequest(st)}></button>
+                    <button ref={buttonRef} onClick={sendRequest(st)}>
+                        <center>Send</center>
+                    </button>
                     </div>
                     ))}
                     

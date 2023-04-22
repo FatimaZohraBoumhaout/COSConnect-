@@ -37,9 +37,12 @@ function Home(){
   const handleDropClass = () => {
     console.log("Drop button clicked");
   }
-  
-  if (classes.length > 0) {
-  const extractedElements = classes[0][0].map((element, index) => {
+
+
+  let extractedElements = null;
+  if(classes.length > 0){
+  extractedElements = classes[0][0].map((element, index) => {
+
     console.log(element);
     return (
       <div key = {index}>
