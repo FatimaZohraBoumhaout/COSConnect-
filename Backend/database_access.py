@@ -184,11 +184,12 @@ def edit_user(input, database_url):
         print(ex)
 
 def get_students(input, database_url):
+    classes, net_id = input
     try:
         with psycopg2.connect(dbname=database_url, host="dpg-cggj3fceoogqfc2no840-a.ohio-postgres.render.com", user="testuser", password="gVYdK2LMupfkuAxyR6kp3a6XpuIB9VVV") as connection:
             with contextlib.closing(connection.cursor()) as cursor:
-                query = "SELECT net_id FROM classes WHERE class = %s"
-                cursor.execute(query, (input,))
+                query = "SELECT net_id FROM classes WHERE class = %s AND net_id != %s"
+                cursor.execute(query, (classes, net_id))
                 output = cursor.fetchall()
                 return output 
     except Exception as ex:
@@ -254,6 +255,20 @@ def get_talking(input, database_url):
             with contextlib.closing(connection.cursor()) as cursor:
                 query = "SELECT talking from user_profile WHERE net_id = %s;"
                 cursor.execute(query, (user_id,))
+                output = cursor.fetchall()
+                return output 
+    except Exception as ex:
+        print(ex)
+
+def get_students_info(input, database_url):
+    students = input
+    students_string = [x[0] for x in students]
+    students_string = ','.join([f"'{x}'" for x in students_string])
+    try:
+        with psycopg2.connect(dbname=database_url, host="dpg-cggj3fceoogqfc2no840-a.ohio-postgres.render.com", user="testuser", password="gVYdK2LMupfkuAxyR6kp3a6XpuIB9VVV") as connection:
+            with contextlib.closing(connection.cursor()) as cursor:
+                query = "SELECT net_id, display_name, availability from user_profile WHERE net_id IN (SELECT unnest(ARRAY["+students_string+"]));"
+                cursor.execute(query, (students,))
                 output = cursor.fetchall()
                 return output 
     except Exception as ex:

@@ -16,9 +16,9 @@ function ClassView(props){
     const net_id = cookies.net_id;
     const location = useLocation;
     const buttonRef= useRef(null);
+    const [studentInfo, setStudentInfo] = useState([]);
     
     const this_class = window.location.search.match(/class=([^&]*)/)[1].replace('%20',' ');
-
 
     useEffect(() => {
         console.log("get class: ",cookies.net_id);
@@ -27,30 +27,9 @@ function ClassView(props){
         fetch(`/get_class?net_id=${cookies.net_id}`)
             .then(response => response.json())
             .then(data => {
-                setClasses(data);})
-        //         const this_class = data; 
-        //         fetch(`/getSentRequest?net_id=${cookies.net_id}`)
-        //             .then(response=> response.json())
-        //             .then(data => {
-        //                 setSentRequest(data);
-        //                 fetch(`/getReceivedRequest?net_id=${cookies.net_id}`)
-        //                     .then(response=> response.json())
-        //                     .then(data => {
-        //                         setReceivedRequest(data);
-        //                         fetch(`/get_students?class=${this_class}`)
-        //                             .then(response=> response.json())
-        //                             .then(data => {
-        //                                 setStudents(data);
-        //                             });
-        //                     });
-        //             });
-        //     })
-        // Promise.all([
-        // fetch(`/get_class?net_id=${cookies.net_id}`),
-        // fetch(`/getSentRequest?net_id=${cookies.net_id}`),
-        // fetch(`/getReceivedRequest?net_id=${cookies.net_id}`),
-        // fetch(`/get_students?class=${this_class}`)])
-        // .then(([setClasses, setSentRequest, setReceivedRequest, setStudents]))
+                setClasses(data);
+                console.log("classes set to ", data);
+            })
             .catch((error) => {
                 console.log(error);
             });
@@ -65,6 +44,7 @@ function ClassView(props){
             .then(response=> response.json())
             .then(data => {
                 setSentRequest(data);
+                console.log("sent requests set to ", data);
             })
             .catch(error => console.log(error));
           } else {
@@ -86,7 +66,7 @@ function ClassView(props){
     
       useEffect(() => {
         if (cookies.net_id !== null) {
-            fetch(`/get_students?class=${this_class}`)
+            fetch(`/get_students?id=${cookies.net_id}&class=${this_class}`)
             .then(response=> response.json())
             .then(data => {
                 setStudentsId(data);
@@ -97,14 +77,18 @@ function ClassView(props){
           }
       }, [cookies.net_id]);
 
-      var studentInfo = [];
-      Promise.all(
-        studentsId.map(id => {
-            fetch(`/get_info?id=${id}`)
-            .then((response) => response.json())
-            .then(data => {studentInfo.push(data)})
+      useEffect(() => {
+        if (cookies.net_id !== null) {
+            fetch(`/get_students_info?id=${cookies.net_id}&class=${this_class}`)
+            .then(response=> response.json())
+            .then(data => {
+                setStudentsId(data);
+            })
             .catch(error => console.log(error));
-        }));
+          } else {
+            console.log("net_id is null");
+          }
+      }, [cookies.net_id]);
     //   ).then((body) =>{
     //     body.forEach(response =>{
     //         if(response){
@@ -134,13 +118,13 @@ function ClassView(props){
         //console.log(data);
     }
 
-    const sendRequest = (st) => {
-        console.log(cookies.net_id)
-        fetch(`add_request?sender_id=${cookies.net_id}&receiver_id=${st}&course=${this_class}`, {
-            method: 'POST',
-        })
-        if(buttonRef.current) buttonRef.current.disabled = true;
-    }
+    // const sendRequest = (st) => {
+    //     console.log(cookies.net_id)
+    //     fetch(`add_request?sender_id=${cookies.net_id}&receiver_id=${st}&course=${this_class}`, {
+    //         method: 'POST',
+    //     })
+    //     if(buttonRef.current) buttonRef.current.disabled = true;
+    // }
     return(
         <div className="body">
             <div className="grid-container">
@@ -189,10 +173,10 @@ function ClassView(props){
                     <h3>Students</h3>
                     {studentsId && studentsId.map((st, index) =>(
                         <div className="rectangle-right">
-                    <Link to={`/partnerview`} onClick={setCookie('partner_id', st)}>{st}</Link>
-                    <button ref={buttonRef} onClick={sendRequest(st)}>
-                        <center>Send</center>
-                    </button>
+                    {/* <Link to={`/partnerview`} onClick={setCookie('partner_id', st)}>{st}</Link> */}
+                    {/* <button ref={buttonRef} onClick={sendRequest(st)}> */}
+                        {/* <center>Send</center>
+                    </button> */}
                     </div>
                     ))}
                     
