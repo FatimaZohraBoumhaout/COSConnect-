@@ -17,6 +17,7 @@ function UserSurvey() {
   const [bio, setBio] = useState("");
   const [cookies] = useCookies(["net_id"]);
   const [course, setCourse] = useState([]);
+  const [classes, setClasses] = useState([]);
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -27,7 +28,7 @@ function UserSurvey() {
       fullName,
       displayName,
       pronouns,
-      course,
+      classes,
       availability,
       bio,
     };
@@ -49,7 +50,7 @@ function UserSurvey() {
           },
           body: JSON.stringify({
             net_id: netId,
-            classes: course,
+            classes: classes,
           }),
         })
           .then((response) => response.json())
@@ -78,6 +79,10 @@ function UserSurvey() {
       })
       .catch((error) => console.log(error));
   }, []);
+
+   function handleTagSelect(selectedList) {
+    setClasses(selectedList);
+    }
 
   return (
     <div className="bd">
@@ -132,6 +137,9 @@ function UserSurvey() {
                 <Multiselect 
                 isObject={false}
                 options={course}
+                selectedValues={classes}
+                onSelect={handleTagSelect}
+                onRemove={handleTagSelect}
                 />
               </div>
             </div>

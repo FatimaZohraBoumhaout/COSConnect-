@@ -15,25 +15,25 @@ def index():
     return("Welcome, COSConnect Server is running.")
 
 
-@app.route('/signup', methods=['POST'])
-def sign_up():
-    """Endpoint to register a new user"""
-    try:
-        data = flask.request.get_json()
-        username = data.get('username')
-        email = data.get('email')
-        password = data.get('password')
-        if not username or not email or not password:
-            raise ValueError('Missing required fields')
-        user_id = database_access.sign_up(
-            (username, email, password), 'testdb_ery6')
-        return jsonify({'user_id': user_id})
-    except ValueError as vex:
-        print('Error in sign_up:', vex)
-        return jsonify({'error': 'Missing required fields'}), 400
-    except Exception as ex:
-        print('Error in sign_up:', ex)
-        return jsonify({'error': 'Failed to sign up user'}), 500
+# @app.route('/signup', methods=['POST'])
+# def sign_up():
+#     """Endpoint to register a new user"""
+#     try:
+#         data = flask.request.get_json()
+#         username = data.get('username')
+#         email = data.get('email')
+#         password = data.get('password')
+#         if not username or not email or not password:
+#             raise ValueError('Missing required fields')
+#         user_id = database_access.sign_up(
+#             (username, email, password), 'testdb_ery6')
+#         return jsonify({'user_id': user_id})
+#     except ValueError as vex:
+#         print('Error in sign_up:', vex)
+#         return jsonify({'error': 'Missing required fields'}), 400
+#     except Exception as ex:
+#         print('Error in sign_up:', ex)
+#         return jsonify({'error': 'Failed to sign up user'}), 500
 
 
 @app.route('/login', methods=['POST'])
@@ -108,10 +108,10 @@ def add_request():
         data = flask.request.get_json()
         sender_id = data.get('sender_id')
         receiver_id = data.get('receiver_id')
-        message = data.get('message')
-        if not sender_id or not receiver_id or not message:
+        course = data.get('course')
+        if not sender_id or not receiver_id or not course:
             raise ValueError('Missing required fields')
-        database_access.add_request((sender_id, receiver_id, message), 'testdb_ery6')
+        database_access.add_request((sender_id, receiver_id, course), 'testdb_ery6')
         return jsonify({'status': 'success'})
     except ValueError as vex:
         print('Error in add_request:', vex)
@@ -121,18 +121,18 @@ def add_request():
         return jsonify({'error': 'Failed to add request'}), 500
 
 
-@app.route('/get_request', methods=['GET'])
-def get_request():
-    """Get request data for the given sender ID, receiver ID, and message."""
-    try:
-        sender_id = flask.request.args.get('sender_id')
-        receiver_id = flask.request.args.get('receiver_id')
-        message = flask.request.args.get('message')
-        requests = database_access.get_request((sender_id, receiver_id, message), 'testdb_ery6')
-        return jsonify(requests)
-    except Exception as ex:
-        print('Error in get_request:', ex)
-        return jsonify({'error': 'Failed to retrieve requests'}), 500
+# @app.route('/get_request', methods=['GET'])
+# def get_request():
+#     """Get request data for the given sender ID, receiver ID, and message."""
+#     try:
+#         sender_id = flask.request.args.get('sender_id')
+#         receiver_id = flask.request.args.get('receiver_id')
+#         course = flask.request.args.get('course')
+#         requests = database_access.get_request((sender_id, receiver_id, course), 'testdb_ery6')
+#         return jsonify(requests)
+#     except Exception as ex:
+#         print('Error in get_request:', ex)
+#         return jsonify({'error': 'Failed to retrieve requests'}), 500
 
 
 @app.route('/getSentRequest', methods=['GET'])
@@ -140,9 +140,10 @@ def get_sent_request():
     """Get all sent requests for the given user ID."""
     try:
         user_id = flask.request.args.get('user_id')
-        if not user_id:
-            raise ValueError('Missing user ID')
-        output = database_access.get_sent(user_id, 'testdb_ery6')
+        course = flask.request.args.get('course')
+        if not user_id or course:
+            raise ValueError('Missing user ID or Course')
+        output = database_access.get_sent((user_id, course), 'testdb_ery6')
         return jsonify(output)
     except ValueError as vex:
         print('Error in get_sent_request:', vex)
@@ -157,9 +158,10 @@ def get_received_request():
     """Get all received requests for the given user ID."""
     try:
         user_id = flask.request.args.get('user_id')
-        if not user_id:
-            raise ValueError('Missing user ID')
-        output = database_access.get_received(user_id, 'testdb_ery6')
+        course = flask.request.args.get('course')
+        if not user_id or course:
+            raise ValueError('Missing user ID or course')
+        output = database_access.get_received((user_id, course), 'testdb_ery6')
         return jsonify(output)
     except ValueError as vex:
         print('Error in get_received_request:', vex)
@@ -209,25 +211,25 @@ def get_class():
         return jsonify({'error': 'Failed to retrieve classes'}), 500
 
 
-@app.route('/send_message', methods=['POST'])
-def send_message():
-    """Send a message from the given sender ID to the given receiver ID."""
-    try:
-        data = flask.request.get_json()
-        id_sender = data.get('userId')[0]
-        id_receiver = data.get('receiver')
-        message = data.get('message')
-        if not id_sender or not id_receiver or not message:
-            raise ValueError('Missing sender ID, receiver ID, or message')
-        database_access.add_request((id_sender, id_receiver, message), 'testdb_ery6')
-        print("sent message: ", message, "to user:", id_receiver, "from:", id_sender)
-        return jsonify({'status': 'success', 'message': 'Message sent successfully'})
-    except ValueError as vex:
-        print('Error in send_message:', vex)
-        return jsonify({'error': 'Missing sender ID, receiver ID, or message'}), 400
-    except Exception as ex:
-        print('Error in send_message:', ex)
-        return jsonify({'error': 'Failed to send message'}), 500
+# @app.route('/send_message', methods=['POST'])
+# def send_message():
+#     """Send a message from the given sender ID to the given receiver ID."""
+#     try:
+#         data = flask.request.get_json()
+#         id_sender = data.get('userId')[0]
+#         id_receiver = data.get('receiver')
+#         message = data.get('message')
+#         if not id_sender or not id_receiver or not message:
+#             raise ValueError('Missing sender ID, receiver ID, or message')
+#         database_access.add_request((id_sender, id_receiver, message), 'testdb_ery6')
+#         print("sent message: ", message, "to user:", id_receiver, "from:", id_sender)
+#         return jsonify({'status': 'success', 'message': 'Message sent successfully'})
+#     except ValueError as vex:
+#         print('Error in send_message:', vex)
+#         return jsonify({'error': 'Missing sender ID, receiver ID, or message'}), 400
+#     except Exception as ex:
+#         print('Error in send_message:', ex)
+#         return jsonify({'error': 'Failed to send message'}), 500
 
 
 @app.route('/edit_profile', methods=['POST'])
