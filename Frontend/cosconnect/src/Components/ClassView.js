@@ -184,9 +184,7 @@ function ClassView(props){
                     {studentsId && studentsId.map((st, index) =>(
                         <div className="rectangle-right">
                     <Link to={`/partnerview?partnerid=${st}`}>{st}</Link>
-                    <button onClick={sendRequest(st)}>
-                        <center>Send</center>
-                    </button>
+                    <button onClick={sendRequest(st)}></button>
                     </div>
                     ))}
                     
