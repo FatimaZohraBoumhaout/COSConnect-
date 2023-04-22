@@ -61,7 +61,7 @@ function EditView() {
       display: flex;
       justify-content: center;
       align-items: center;
-      background-color: #BADFE7;  
+      background-color: #edede4;  
       border-radius: 30px;
       margin: 20px;
       width: 50%;
@@ -96,13 +96,14 @@ function EditView() {
 
     .edit-button {
       margin-left: auto;
-      background-color: #4CAF50;
+      background-color: #26272D;
       color: white;
       border: none;
       border-radius: 5px;
       padding: 10px 20px;
       font-size: 16px;
       cursor: pointer;
+      margin-top: 50px;
     }
 
     .edit-button:hover {
@@ -119,7 +120,7 @@ function EditView() {
     }
 
     .profile-content > div {
-      margin-bottom: 100px;
+      margin-bottom: 8.5%;
     }
 
     .profile-content label {
@@ -137,6 +138,14 @@ function EditView() {
       height: 200px;
       background-color: #d3d3d3;
       margin-bottom: 20px;
+    }
+
+    .button-save{
+      background-color: #26272D;
+      color: #fff;      
+    }
+    .button-save:hover {
+      background-color: #3e8e41;
     }
 
     @media (max-width: 768px) {
@@ -203,7 +212,8 @@ function EditView() {
             <label htmlFor="availability">Availability: </label>
             <input id="availability" name="availability" type="text" placeholder={user[0][5]} onChange={event => setBio(event.target.value)} required/>
           </div>
-          <input type="submit" name="submit" value="Save" />
+
+          <input className = "button-save" type="submit" name="submit" value="Save" />
         </div>
       </div>
     </div>
