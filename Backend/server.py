@@ -220,31 +220,6 @@ def get_class():
         print('Error in get_class:', ex)
         return jsonify({'error': 'Failed to retrieve classes'}), 500
 
-<<<<<<< HEAD
-=======
-
-# @app.route('/send_message', methods=['POST'])
-# def send_message():
-#     """Send a message from the given sender ID to the given receiver ID."""
-#     try:
-#         data = flask.request.get_json()
-#         id_sender = data.get('userId')[0]
-#         id_receiver = data.get('receiver')
-#         message = data.get('message')
-#         if not id_sender or not id_receiver or not message:
-#             raise ValueError('Missing sender ID, receiver ID, or message')
-#         database_access.add_request((id_sender, id_receiver, message), 'testdb_ery6')
-#         print("sent message: ", message, "to user:", id_receiver, "from:", id_sender)
-#         return jsonify({'status': 'success', 'message': 'Message sent successfully'})
-#     except ValueError as vex:
-#         print('Error in send_message:', vex)
-#         return jsonify({'error': 'Missing sender ID, receiver ID, or message'}), 400
-#     except Exception as ex:
-#         print('Error in send_message:', ex)
-#         return jsonify({'error': 'Failed to send message'}), 500
-
-
->>>>>>> 1374c76f3a6d9ce55474cb6870c10b4ef4abc917
 @app.route('/edit_profile', methods=['POST'])
 def edit_profile():
     """Update the user's profile information."""
