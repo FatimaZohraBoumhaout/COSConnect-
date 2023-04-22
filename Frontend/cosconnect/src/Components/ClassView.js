@@ -6,32 +6,32 @@ import "./ClassView.css"
 import "@fontsource/inter";
 
 function ClassView(props){
-    const [cookies, setCookie] = useCookies(['user_id']);
+    const [cookies, setCookie] = useCookies(['net_id']);
     const [classes, setClasses] = useState([]);
     const [sentRequest, setSentRequest] = useState([]);
     const [receivedRequest, setReceivedRequest] = useState([]);
     const [studentsId, setStudentsId] = useState([]);
     const [input, setInput] = useState('');
-    const user_id = cookies.user_id;
+    const net_id = cookies.net_id;
     const location = useLocation;
     
     const this_class = window.location.search.match(/class=([^&]*)/)[1].replace('%20',' ');
 
-    
+
     useEffect(() => {
-        console.log("get class: ",cookies.user_id);
+        console.log("get class: ",cookies.net_id);
         console.log("this class: ",this_class);
-        if(cookies.user_id !== null){
-        fetch(`/get_class?user_id=${cookies.user_id}`)
+        if(cookies.net_id !== null){
+        fetch(`/get_class?net_id=${cookies.net_id}`)
             .then(response => response.json())
             .then(data => {
                 setClasses(data);})
         //         const this_class = data; 
-        //         fetch(`/getSentRequest?user_id=${cookies.user_id}`)
+        //         fetch(`/getSentRequest?net_id=${cookies.net_id}`)
         //             .then(response=> response.json())
         //             .then(data => {
         //                 setSentRequest(data);
-        //                 fetch(`/getReceivedRequest?user_id=${cookies.user_id}`)
+        //                 fetch(`/getReceivedRequest?net_id=${cookies.net_id}`)
         //                     .then(response=> response.json())
         //                     .then(data => {
         //                         setReceivedRequest(data);
@@ -44,45 +44,46 @@ function ClassView(props){
         //             });
         //     })
         // Promise.all([
-        // fetch(`/get_class?user_id=${cookies.user_id}`),
-        // fetch(`/getSentRequest?user_id=${cookies.user_id}`),
-        // fetch(`/getReceivedRequest?user_id=${cookies.user_id}`),
+        // fetch(`/get_class?net_id=${cookies.net_id}`),
+        // fetch(`/getSentRequest?net_id=${cookies.net_id}`),
+        // fetch(`/getReceivedRequest?net_id=${cookies.net_id}`),
         // fetch(`/get_students?class=${this_class}`)])
         // .then(([setClasses, setSentRequest, setReceivedRequest, setStudents]))
             .catch((error) => {
                 console.log(error);
             });
         }else{
-            console.log("user_id is null");
+            console.log("net_id is null");
         }
-    }, [cookies.user_id]);
+    }, [cookies.net_id]);
 
     useEffect(() => {
-        if (cookies.user_id !== null) {
-            fetch(`/getSentRequest?user_id=${cookies.user_id}`)
+        if (cookies.net_id !== null) {
+            fetch(`/getSentRequest?user_id=${cookies.net_id}&course=${this_class}`)
             .then(response=> response.json())
             .then(data => {
                 setSentRequest(data);
             })
             .catch(error => console.log(error));
           } else {
-            console.log("user_id is null");
+            console.log("net_id is null");
           }
-      }, [cookies.user_id]);
+      }, [cookies.net_id]);
+
       useEffect(() => {
-        if (cookies.user_id !== null) {
-            fetch(`/getReceivedRequest?user_id=${cookies.user_id}`)
+        if (cookies.net_id !== null) {
+            fetch(`/getReceivedRequest?user_id=${cookies.net_id}&course=${this_class}`)
             .then(response=> response.json())
             .then(data => {
                 setReceivedRequest(data);})
             .catch(error => console.log(error));
           } else {
-            console.log("user_id is null");
+            console.log("net_id is null");
           }
-      }, [cookies.user_id]);
+      }, [cookies.net_id]);
     
       useEffect(() => {
-        if (cookies.user_id !== null) {
+        if (cookies.net_id !== null) {
             fetch(`/get_students?class=${this_class}`)
             .then(response=> response.json())
             .then(data => {
@@ -90,9 +91,9 @@ function ClassView(props){
             })
             .catch(error => console.log(error));
           } else {
-            console.log("user_id is null");
+            console.log("net_id is null");
           }
-      }, [cookies.user_id]);
+      }, [cookies.net_id]);
 
       var studentInfo = [];
       Promise.all(
@@ -122,13 +123,19 @@ function ClassView(props){
     //         })
     //     })
     // )
-      console.log(studentInfo);
     function handleChange(event){
         //setData()
     }
     function handleSubmit(event){
         //event.preventDefault();
         //console.log(data);
+    }
+
+    const sendRequest = (st) => {
+        console.log(cookies.net_id)
+        fetch(`add_request?sender_id=${cookies.net_id}&receiver_id=${st}&course=${this_class}`, {
+            method: 'POST',
+        })
     }
     return(
         <div className="body">
@@ -154,7 +161,7 @@ function ClassView(props){
                     <h2>{this_class}</h2>
                 </div>
                     <h3>Invitations Sent</h3>
-                    {sentRequest && sentRequest.map((req, index) => (
+                    {sentRequest && sentRequest.map((req) => (
                         <div className="rectangle-right">
                             <center>{req}</center>
                         </div>
@@ -175,7 +182,10 @@ function ClassView(props){
                 <div className="students">
                     <h3>Students</h3>
                     {studentsId && studentsId.map((st, index) =>(
-                    <Link to={`/partnerview?partnerid=${st}`}><div className="rectangle-right">{st}</div></Link>
+                        <div className="rectangle-right">
+                    <Link to={`/partnerview?partnerid=${st}`}>{st}</Link>
+                    <button onClick={sendRequest(st)}></button>
+                    </div>
                     ))}
                     
                 </div>
