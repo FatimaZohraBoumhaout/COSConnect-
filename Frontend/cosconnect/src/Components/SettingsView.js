@@ -8,7 +8,7 @@ const settingsStyle = {
   display: "flex",
   alignItems: "center",
   justifyContent: "center",
-  backgroundColor: "#BADFE7",
+  backgroundColor: "#edede4",
   borderRadius: "30px",
   marginTop: "20px"
 };

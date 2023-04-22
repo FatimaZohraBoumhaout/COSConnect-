@@ -20,7 +20,7 @@ function Header() {
     justify-content: space-between;
     align-items: center;
     padding: 1rem;
-    background-color: #65B3B8;
+    background-color: #BDD2B6;
     box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2);
   }
   

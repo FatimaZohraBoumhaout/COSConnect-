@@ -28,7 +28,7 @@ function ProfileDetails() {
       display: flex;
       justify-content: center;
       align-items: center;
-      background-color: #BADFE7;  
+      background-color: #BDD2B6;  
       border-radius: 30px;
       margin: 20px;
     }
@@ -61,13 +61,14 @@ function ProfileDetails() {
 
     .edit-button {
       margin-left: auto;
-      background-color: #4CAF50;
+      background-color: #26272D; 
       color: white;
       border: none;
       border-radius: 5px;
       padding: 10px 20px;
       font-size: 16px;
       cursor: pointer;
+      margin-top : 50px;
     }
 
     .edit-button:hover {
@@ -75,16 +76,21 @@ function ProfileDetails() {
     }
 
     .profile-content {
-      margin-top: 20px;
+      margin-top: 16%;
       padding: 20px;
       display: flex;
       flex-direction: column;
       flex-grow: 1;
       justify-content: space-between;
+      background-color: white;
+      opacity : 0.5;
+      margin-bottom : 15%;
+      border-radius: 25px;
     }
-
+    
     .profile-content > div {
-      margin-bottom: 100px;
+      margin-bottom: 60px;
+
     }
 
     .profile-content label {
@@ -94,14 +100,6 @@ function ProfileDetails() {
 
     .profile-content span {
       margin-left: 10px;
-    }
-
-
-    .gray-box {
-      width: 100%;
-      height: 200px;
-      background-color: #d3d3d3;
-      margin-bottom: 20px;
     }
 
     @media (max-width: 768px) {
@@ -125,10 +123,6 @@ function ProfileDetails() {
         padding: 10px;
       }
 
-      .gray-box {
-        height: 100px;
-        margin-bottom: 10px;
-      }
     }
 
   `;
@@ -150,7 +144,6 @@ function ProfileDetails() {
           
         </div>
         <div className="profile-content">
-          {/* <div className="gray-box"></div> */}
           <div>
             <label htmlFor="pronouns">Pronouns: </label>
             <span id="pronouns">{  user[0][0]}</span>

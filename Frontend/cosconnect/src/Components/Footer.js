@@ -3,7 +3,7 @@ import React from 'react';
 const footerStyles = {
   padding: '1rem',
   textAlign: 'left',
-  backgroundColor: '#65B3B8', 
+  backgroundColor: '#BDD2B6', 
   color: '#F6F6F2',
   boxShadow: '0px 2px 4px rgba(0, 0, 0, 0.2)',
   fontSize: '10px',

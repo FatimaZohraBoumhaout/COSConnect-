@@ -6,7 +6,7 @@
   grid-template-rows: auto auto;
   grid-template-areas: 'detail setting'
                        'detail request';
-  background-color: #FFFFFF;
+  background-color: #F6F6F2;
   overflow: auto;
 }
 

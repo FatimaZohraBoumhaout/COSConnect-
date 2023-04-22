@@ -1,6 +1,6 @@
 import React from "react";
 const requestBody = {
-  backgroundColor: "#BADFE7",
+  backgroundColor: "#edede4",
   borderRadius: "30px",
   marginTop: "20px",
   height: "85%",
@@ -25,7 +25,7 @@ const rectangleStyle = {
   marginTop: "10px",
   width: "80%",
   height: "100%",
-  backgroundColor: "#D9D9D9",
+  backgroundColor: "#26272D",
   borderRadius: "15px",
 };
 
@@ -38,7 +38,7 @@ const mediaQueryStyle = {
 };
 
 const pStyle = {
-  color: "#000000",
+  color: "#BDD2B6",
   margin: "10px",
 };
 
