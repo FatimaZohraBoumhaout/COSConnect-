@@ -154,7 +154,6 @@ function Header() {
           <a href="home">Home</a>
           <a href="profileview">Profile</a>
           <a href="chatsview">Chats</a>
-          <a href="classview">Classes</a>
           <a href="/" onClick={handleLogOut}>Log Out</a>
         </div>
 
@@ -164,8 +163,6 @@ function Header() {
         <a className="hidd" href="profileview">Profile</a>
         <div className="header__button-divider hidd"></div>
         <a className="hidd" href="chatsview">Chats</a>
-        <div className="header__button-divider hidd"></div>
-        <a className="hidd" href="classview">Classes</a>
         <div className="header__button-divider hidd"></div>
         <a className="hidd" href="/" onClick={handleLogOut}>Log Out</a>
 
