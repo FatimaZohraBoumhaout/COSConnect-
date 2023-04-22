@@ -157,7 +157,7 @@ function ProfileDetails() {
           </div>
           <div>
             <label htmlFor="classes">Classes: </label>
-            <span id="classes">{  user[0][1]}</span>
+            <span id="classes">{ user[0][1].join(", ")}</span>
           </div>
           <div>
             <label htmlFor="bio">Bio: </label>
