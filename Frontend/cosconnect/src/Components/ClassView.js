@@ -6,7 +6,7 @@ import "./ClassView.css"
 import "@fontsource/inter";
 
 function ClassView(props){
-    const [cookies, setCookie] = useCookies(['net_id']);
+    const [cookies, setCookie] = useCookies(['net_id', 'partner_id']);
     const [classes, setClasses] = useState([]);
     const [sentRequest, setSentRequest] = useState([]);
     const [receivedRequest, setReceivedRequest] = useState([]);
@@ -146,9 +146,11 @@ function ClassView(props){
             <div className="grid-container">
                 <div className="classes">
                     <h3 className="left-header">Classes</h3>
-                    <div className="rectangle-right">
-                        <center>{this_class}</center>
-                    </div>
+                    {classes && classes.map((cl) => (
+                        <div className="rectangle-left">
+                            <center>{cl}</center>
+                        </div>
+                    ))}
                     
                 </div>
                 
@@ -187,7 +189,7 @@ function ClassView(props){
                     <h3>Students</h3>
                     {studentsId && studentsId.map((st, index) =>(
                         <div className="rectangle-right">
-                    <Link to={`/partnerview?partnerid=${st}`}>{st}</Link>
+                    <Link to={`/partnerview`} onClick={setCookie('partner_id', st)}>{st}</Link>
                     <button ref={buttonRef} onClick={sendRequest(st)}>
                         <center>Send</center>
                     </button>
