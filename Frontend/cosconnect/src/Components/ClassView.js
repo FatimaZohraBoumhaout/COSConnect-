@@ -111,7 +111,7 @@ function ClassView(props){
     // )
     function handleChange(event){
         //setData()
-        
+        console.log(event)
     }
     function handleSubmit(event){
         //event.preventDefault();
@@ -122,14 +122,17 @@ function ClassView(props){
         renderClasses = classes[0][0] && classes[0][0].map((cl) => {
             return(
                 <div className="rectangle-left">
-                    <center>{cl}</center>
+                    <center>
+                        <Link to={`/classview?class=${cl}`}>
+                        {cl}
+                        </Link>
+                    </center>
                 </div>
             );
         });
     }
     function sendRequest(st) {
         setCookie('class_id', this_class)
-        setCookie('partner_id', st);
         // fetch(`add_request?sender_id=${cookies.net_id}&receiver_id=${st}&course=${this_class}`, {
         //     method: 'POST',
         // })
@@ -148,7 +151,7 @@ function ClassView(props){
                     <center>NetId: {st[0]} <p>Display Name: {st[1]}, Availability: {st[2]}</p></center>
                 </div>
                 </Link>
-                <Link className="btn" onClick={() => sendRequest(st[0])} to={`/sendrequest`}>
+                <Link className="btn" onClick={sendRequest(st[0])} to={`/sendrequest`}>
                     <center>Send</center>
                 </Link>
             </div>
@@ -167,7 +170,7 @@ function ClassView(props){
                 <div className="search">
                     <center>
                     <form id="form" className="form">
-                        <input placeholder="Search..." value={input}></input>
+                        <input placeholder="Search..." onChange={event => handleChange(event.target.value)}/>
                         <button className="search-button">
                         <svg viewBox="0 0 1024 1024"><path class="path1" d="M848.471 928l-263.059-263.059c-48.941 36.706-110.118 55.059-177.412 55.059-171.294 0-312-140.706-312-312s140.706-312 312-312c171.294 0 312 140.706 312 312 0 67.294-24.471 128.471-55.059 177.412l263.059 263.059-79.529 79.529zM189.623 408.078c0 121.364 97.091 218.455 218.455 218.455s218.455-97.091 218.455-218.455c0-121.364-103.159-218.455-218.455-218.455-121.364 0-218.455 97.091-218.455 218.455z"></path></svg>
                         </button>
