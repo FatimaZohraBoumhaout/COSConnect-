@@ -16,6 +16,7 @@ function ClassView(){
     const this_class = window.location.search.match(/class=([^&]*)/)[1].replace('%20',' ');
     let output = []
     let fixed = []
+    let display = []
 
     useEffect(() => {
         console.log("get class: ",cookies.net_id);
@@ -110,8 +111,11 @@ function ClassView(){
         console.log("StudentsId set to", studentsId)
         fixed = studentsId.map((element, index) => [index, element[1]])
         console.log("fixed set to", fixed)
-        renderStudents = studentsId.map((st) =>(
-            <div className="rectangle-right">
+        output = fixed.map(element => element[0])
+
+        renderStudents = studentsId.map((st, index) =>{
+            if (output.includes(index)){
+            return (<div className="rectangle-right">
                 <Link to={`/partnerview`} onClick={() => handleClick(st[0])}>
                 <div style={{float:'left'}}>
                     <center>NetId: {st[0]} <p>Display Name: {st[1]}, Availability: {st[2]}</p></center>
@@ -120,8 +124,8 @@ function ClassView(){
                 <Link className="btn" onClick={() => sendRequest(st[0])} to={`/sendrequest`}>
                     <center>Send</center>
                 </Link>
-            </div>
-        ))
+            </div>);
+            }});
     }
     return(
         <div className="body">
