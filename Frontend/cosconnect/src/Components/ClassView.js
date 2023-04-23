@@ -12,11 +12,14 @@ function ClassView(){
     const [receivedRequest, setReceivedRequest] = useState([]);
     const [studentsId, setStudentsId] = useState([]);
     const [input, setInput] = useState('');
+    //const [finaloutput, setFinalOutput] = useState([]);
+    const [renderStudents, setRenderStudents] = useState([]);
+    const [fixed, setFixed] = useState([]);
     
     const this_class = window.location.search.match(/class=([^&]*)/)[1].replace('%20',' ');
     let output = []
-    let fixed = []
-    let display = []
+    //let fixed = []
+    //let renderStudents = null;
 
     useEffect(() => {
         console.log("get class: ",cookies.net_id);
@@ -68,6 +71,7 @@ function ClassView(){
             .then(response=> response.json())
             .then(data => {
                 setStudentsId(data);
+                console.log("StudentsId set to", studentsId);
             })
             .catch(error => console.log(error));
           } else {
@@ -88,8 +92,25 @@ function ClassView(){
 
     useEffect(() => {
          output = fixed.filter(element => element[1].includes(input))
+         console.log("fixed from input set to be", fixed)
          output = output.map(element => element[0])
-         console.log("output", output)
+         //setFinalOutput(output)
+         let studentsToRender = studentsId.map((st, index) =>{
+            if (output.includes(index)){
+            return (<div className="rectangle-right">
+                <Link to={`/partnerview`} onClick={() => handleClick(st[0])}>
+                <div style={{float:'left'}}>
+                    <center>NetId: {st[0]} <p>Display Name: {st[1]}, Availability: {st[2]}</p></center>
+                </div>
+                </Link>
+                <Link className="btn" onClick={() => sendRequest(st[0])} to={`/sendrequest`}>
+                    <center>Send</center>
+                </Link>
+            </div>);
+            }});
+        setRenderStudents(studentsToRender);
+
+        console.log("output set to be", output)
     }, [input]);
     
     function sendRequest(st) {
@@ -106,27 +127,30 @@ function ClassView(){
         setInput(event)
     }
 
-    let renderStudents = null;
-    if(studentsId.length > 0){
-        console.log("StudentsId set to", studentsId)
-        fixed = studentsId.map((element, index) => [index, element[1]])
-        console.log("fixed set to", fixed)
-        output = fixed.map(element => element[0])
+    useEffect(() => {
+        if(studentsId.length > 0){
+            console.log("StudentsId set to", studentsId)
+            setFixed(studentsId.map((element, index) => [index, element[1]]))
+            console.log("fixed set to", fixed)
+            output = fixed.map(element => element[0])
 
-        renderStudents = studentsId.map((st, index) =>{
-            if (output.includes(index)){
-            return (<div className="rectangle-right">
-                <Link to={`/partnerview`} onClick={() => handleClick(st[0])}>
-                <div style={{float:'left'}}>
-                    <center>NetId: {st[0]} <p>Display Name: {st[1]}, Availability: {st[2]}</p></center>
-                </div>
-                </Link>
-                <Link className="btn" onClick={() => sendRequest(st[0])} to={`/sendrequest`}>
-                    <center>Send</center>
-                </Link>
-            </div>);
-            }});
-    }
+            let studentsToRender = studentsId.map((st, index) =>{
+                if (output.includes(index)){
+                return (<div className="rectangle-right">
+                    <Link to={`/partnerview`} onClick={() => handleClick(st[0])}>
+                    <div style={{float:'left'}}>
+                        <center>NetId: {st[0]} <p>Display Name: {st[1]}, Availability: {st[2]}</p></center>
+                    </div>
+                    </Link>
+                    <Link className="btn" onClick={() => sendRequest(st[0])} to={`/sendrequest`}>
+                        <center>Send</center>
+                    </Link>
+                </div>);
+                }});
+            setRenderStudents(studentsToRender);
+        }
+      }, [studentsId]);
+
     return(
         <div className="body">
             <div className="grid-container">
