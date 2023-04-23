@@ -173,7 +173,7 @@ function ClassView(props){
                     <h3>Students</h3>
                     {studentsId && studentsId.map((st, index) =>(
                         <div className="rectangle-right">
-                           <center>NetId: {st[0]}, Display Name: {st[1]}, Availability: {st[2]}</center>
+                           <center>NetId: {st[0]}, <p>Display Name: {st[1]}, Availability: {st[2]}</p></center>
                             
                     {/* <Link to={`/partnerview`} onClick={setCookie('partner_id', st)}>{st}</Link> */}
                     {/* <button ref={buttonRef} onClick={sendRequest(st)}> */}
