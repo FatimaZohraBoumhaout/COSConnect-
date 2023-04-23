@@ -67,17 +67,6 @@ function Header() {
     margin: 0 1rem;
   }
   
-  .header__button a:nth-last-child(2)::after { 
-    content: '';
-    position: absolute;
-    top: 50%;
-    right: -10px; 
-    transform: translateY(-50%) rotate(90deg);
-    border-top: 10px solid transparent;
-    border-bottom: 10px solid transparent;
-    border-left: 10px solid #F6F6F2;
-  }
-  
   /* Responsive styles */
   
   @media screen and (max-width: 768px) {
@@ -165,7 +154,6 @@ function Header() {
           <a href="home">Home</a>
           <a href="profileview">Profile</a>
           <a href="chatsview">Chats</a>
-          <a href="classview">Classes</a>
           <a href="/" onClick={handleLogOut}>Log Out</a>
         </div>
 
@@ -175,8 +163,6 @@ function Header() {
         <a className="hidd" href="profileview">Profile</a>
         <div className="header__button-divider hidd"></div>
         <a className="hidd" href="chatsview">Chats</a>
-        <div className="header__button-divider hidd"></div>
-        <a className="hidd" href="classview">Classes</a>
         <div className="header__button-divider hidd"></div>
         <a className="hidd" href="/" onClick={handleLogOut}>Log Out</a>
 

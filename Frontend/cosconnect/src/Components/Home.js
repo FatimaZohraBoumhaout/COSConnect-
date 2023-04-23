@@ -45,7 +45,7 @@ function Home(){
     console.log(element);
     return (
       <div key = {index}>
-        <Link to={`/classview?class=${element}`}>
+        <Link to={`/classview?class=${element}`} style={{ textDecoration: 'none' }}>
           
           <h2 key={index} className="num">{element}</h2>
         
