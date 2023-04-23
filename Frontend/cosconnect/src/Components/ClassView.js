@@ -138,6 +138,21 @@ function ClassView(props){
         setCookie('partner_id', st);
       }
 
+    let renderStudents = null;
+    if(studentsId.length > 0){
+        renderStudents = studentsId.map((st) =>(
+            <div className="rectangle-right">
+                <Link to={`/partnerview`} onClick={() => handleClick(st[0])}>
+                <div style={{float:'left'}}>
+                    <center>NetId: {st[0]} <p>Display Name: {st[1]}, Availability: {st[2]}</p></center>
+                </div>
+                </Link>
+                <Link className="btn" onClick={sendRequest(st[0])} to={`/sendrequest`}>
+                    <center>Send</center>
+                </Link>
+            </div>
+        ))
+    }
     return(
         <div className="body">
             <div className="grid-container">
@@ -191,18 +206,7 @@ function ClassView(props){
                 </div> */}
                 <div className="students">
                     <h3>Students</h3>
-                    {studentsId && studentsId.map((st, index) =>(
-                        <div className="rectangle-right">
-                            <Link to={`/partnerview`} onClick={() => handleClick(st[0])}>
-                            <div style={{float:'left'}}>
-                                <center>NetId: {st[0]} <p>Display Name: {st[1]}, Availability: {st[2]}</p></center>
-                            </div>
-                            </Link>
-                            <Link className="btn" onClick={sendRequest(st[0])} to={`/sendrequest`}>
-                                <center>Send</center>
-                            </Link>
-                        </div>
-                    ))}
+                    {studentsId && renderStudents}
                     
                 </div>
             </div>
