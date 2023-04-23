@@ -129,6 +129,7 @@ function ClassView(props){
     }
     function sendRequest(st) {
         setCookie('class_id', this_class)
+        setCookie('partner_id', st);
         // fetch(`add_request?sender_id=${cookies.net_id}&receiver_id=${st}&course=${this_class}`, {
         //     method: 'POST',
         // })
@@ -147,7 +148,7 @@ function ClassView(props){
                     <center>NetId: {st[0]} <p>Display Name: {st[1]}, Availability: {st[2]}</p></center>
                 </div>
                 </Link>
-                <Link className="btn" onClick={sendRequest(st[0])} to={`/sendrequest`}>
+                <Link className="btn" onClick={() => sendRequest(st[0])} to={`/sendrequest`}>
                     <center>Send</center>
                 </Link>
             </div>
