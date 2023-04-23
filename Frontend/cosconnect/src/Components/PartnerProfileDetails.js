@@ -6,7 +6,7 @@ import { useCookies } from 'react-cookie';
 
 function PartnerProfileDetails(props) {
   const [partner, setPartner] = useState(null);
-  const [cookies, setCookie] = useCookies(['net_id', 'partner_id']);
+  const [cookies, setCookie] = useCookies(['net_id', 'partner_id', 'class_id']);
 
   useEffect(() => {
   if (cookies.partner_id !== null) {
@@ -172,7 +172,7 @@ function PartnerProfileDetails(props) {
           <div className="profile-info">
             <h1 className="profile-name">{ partner[0][4]}</h1>
           </div>
-          <Link to={`/classview`} className="edit-button">Close</Link>
+          <Link to={`/classview?class=${cookies.class_id}`} className="edit-button">Close</Link>
           <Link to={`/sendrequest?receiver=${props.partneridProp}`} className="edit-button" onClick={handleSendEmail}>Send Request</Link>
         </div>
         <div className="profile-content">

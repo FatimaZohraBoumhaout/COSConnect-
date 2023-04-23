@@ -118,6 +118,7 @@ function ClassView(){
         setCookie('partner_id', st);
     }
     function handleClick(st) {
+        setCookie('class_id', this_class)
         setCookie('partner_id', st);
     }
 

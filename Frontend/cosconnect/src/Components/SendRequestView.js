@@ -175,7 +175,7 @@ function SendRequestView() {
           <div className="profile-info">
             <h1 className="profile-name">{  cookies.net_id}</h1>
           </div>
-          <Link to={`/classview`} className="edit-button">Close</Link>
+          <Link to={`/classview?class=${cookies.class_id}`} className="edit-button">Close</Link>
           
         </div>
         <div className="profile-content">
