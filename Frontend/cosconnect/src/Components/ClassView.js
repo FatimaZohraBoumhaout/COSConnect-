@@ -64,7 +64,7 @@ function ClassView(props){
           }
       }, [cookies.net_id]);
     
-      useEffect(() => {
+      /* useEffect(() => {
         if (cookies.net_id !== null) {
             fetch(`/get_students?id=${cookies.net_id}&class=${this_class}`)
             .then(response=> response.json())
@@ -75,7 +75,7 @@ function ClassView(props){
           } else {
             console.log("net_id is null");
           }
-      }, [cookies.net_id]);
+      }, [cookies.net_id]); */
 
       useEffect(() => {
         if (cookies.net_id !== null) {
@@ -173,6 +173,8 @@ function ClassView(props){
                     <h3>Students</h3>
                     {studentsId && studentsId.map((st, index) =>(
                         <div className="rectangle-right">
+                           <center>NetId: {st[0]}, Display Name: {st[1]}, Availability: {st[2]}</center>
+                            
                     {/* <Link to={`/partnerview`} onClick={setCookie('partner_id', st)}>{st}</Link> */}
                     {/* <button ref={buttonRef} onClick={sendRequest(st)}> */}
                         {/* <center>Send</center>
