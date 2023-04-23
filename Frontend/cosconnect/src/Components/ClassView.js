@@ -6,7 +6,7 @@ import "./ClassView.css"
 import "@fontsource/inter";
 
 function ClassView(props){
-    const [cookies, setCookie] = useCookies(['net_id', 'partner_id']);
+    const [cookies, setCookie] = useCookies(['net_id', 'partner_id', 'class_id']);
     const [classes, setClasses] = useState([]);
     const [sentRequest, setSentRequest] = useState([]);
     const [receivedRequest, setReceivedRequest] = useState([]);
@@ -127,13 +127,13 @@ function ClassView(props){
             );
         });
     }
-    // const sendRequest = (st) => {
-    //     console.log(cookies.net_id)
-    //     fetch(`add_request?sender_id=${cookies.net_id}&receiver_id=${st}&course=${this_class}`, {
-    //         method: 'POST',
-    //     })
-    //     if(buttonRef.current) buttonRef.current.disabled = true;
-    // }
+    function sendRequest(st) {
+        setCookie('class_id', this_class)
+        // fetch(`add_request?sender_id=${cookies.net_id}&receiver_id=${st}&course=${this_class}`, {
+        //     method: 'POST',
+        // })
+        //if(buttonRef.current) buttonRef.current.disabled = true;
+    }
     function handleClick(st) {
         setCookie('partner_id', st);
       }
@@ -166,7 +166,9 @@ function ClassView(props){
                         </div>
                     ))}
                     {sentRequest.length === 0 && 
-                        <p>Send some requests to get started.</p>
+                        <center>
+                            <p>Send some requests to get started.</p>
+                        </center>
                     }
                 </div>
                 <div className="received">
@@ -175,7 +177,9 @@ function ClassView(props){
                         <div className="rectangle-left">{req}</div>
                     ))}
                     {receivedRequest.length === 0 && 
-                        <p>You have received no requests!</p>
+                        <center>
+                            <p>You have received no requests!</p>
+                        </center>
                     }
                 </div>
                 <div className="students">
@@ -183,13 +187,14 @@ function ClassView(props){
                     {studentsId && studentsId.map((st, index) =>(
                         <div className="rectangle-right">
                             <Link to={`/partnerview`} onClick={() => handleClick(st[0])}>
-                           <center>NetId: {st[0]}, <p>Display Name: {st[1]}, Availability: {st[2]}</p></center>
-                           </Link>
-                    {/* <Link to={`/partnerview`} onClick={setCookie('partner_id', st)}>{st}</Link> */}
-                    {/* <button ref={buttonRef} onClick={sendRequest(st)}> */}
-                        {/* <center>Send</center>
-                    </button> */}
-                    </div>
+                            <div style={{float:'left'}}>
+                                <center>NetId: {st[0]} <p>Display Name: {st[1]}, Availability: {st[2]}</p></center>
+                            </div>
+                            </Link>
+                            <Link className="btn" onClick={sendRequest(st[0])} to={`/sendrequest`}>
+                                <center>Send</center>
+                            </Link>
+                        </div>
                     ))}
                     
                 </div>

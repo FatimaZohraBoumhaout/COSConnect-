@@ -122,14 +122,16 @@ p{
     font-size: small;
     color: #65B3B8;
     text-align: center;
+    display: inline;
 }
-button{
+.btn{
     float: right ;
-    color: #26272D;
+    background-color: #26272D;
     width: 60px;
     height: 53%;
     border-radius: 5px;
     color:  #F6F6F2;
+    vertical-align: middle;
 }
 
 Link{
