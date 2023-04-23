@@ -28,25 +28,27 @@
 }
 .classes{
     grid-area: classes;   
-    border-right: 5px solid #403F3D;
     min-height: 50vh;
 }
 .received{
     grid-area:received;
-    border-right: 5px solid #403F3D;
     border-top: 5px solid #403F3D;
     height:50vh;
 }
 .students{
     grid-area:students;
+    border-left: 5px solid #403F3D;
 }
 .sent{
     grid-area:sent;
+    border-left: 5px solid #403F3D;
+
 }
 .search{
     grid-area:search;
     align-content:'center';
     max-height: 100px;
+
 }
 h3{
     color:#338888;

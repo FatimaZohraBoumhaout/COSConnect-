@@ -159,10 +159,17 @@ function ClassView(props){
                     </center>
                     <h2>{this_class}</h2>
                 </div>
-                    <h3>Invitations Sent</h3>
+                    <h3>Invitations</h3>
                     {sentRequest && sentRequest.map((req) => (
                         <div className="rectangle-right">
                             <center>{req}</center>
+                            <div style={{float:'right'}}>Sent</div>
+                        </div>
+                    ))}
+                    {receivedRequest && receivedRequest.map((req, index) => (
+                        <div className="rectangle-left">
+                            {req}
+                            <div style={{float:'right'}}>Sent</div>
                         </div>
                     ))}
                     {sentRequest.length === 0 && 
@@ -171,7 +178,7 @@ function ClassView(props){
                         </center>
                     }
                 </div>
-                <div className="received">
+                {/* <div className="received">
                     <h3 className="left-header">Invitations Received</h3>
                     {receivedRequest && receivedRequest.map((req, index) => (
                         <div className="rectangle-left">{req}</div>
@@ -181,7 +188,7 @@ function ClassView(props){
                             <p>You have received no requests!</p>
                         </center>
                     }
-                </div>
+                </div> */}
                 <div className="students">
                     <h3>Students</h3>
                     {studentsId && studentsId.map((st, index) =>(
