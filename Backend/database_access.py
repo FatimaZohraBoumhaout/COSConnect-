@@ -178,8 +178,8 @@ def edit_user(input, database_url):
     try:
         with psycopg2.connect(dbname=database_url, host="dpg-cggj3fceoogqfc2no840-a.ohio-postgres.render.com", user="testuser", password="gVYdK2LMupfkuAxyR6kp3a6XpuIB9VVV") as connection:
             with contextlib.closing(connection.cursor()) as cursor:
-                query = "UPDATE user_profile SET pronouns = %s, classes = "+ "ARRAY [" + classes_string + "], bio = %s, availability = %s WHERE user_id = %s"
-                cursor.execute(query, (pronouns, classes, bio, availability, user_id))
+                query = "UPDATE user_profile SET pronouns = %s, classes = "+ "ARRAY [" + classes_string + "], bio = %s, availability = %s WHERE net_id = %s"
+                cursor.execute(query, (pronouns, bio, availability, user_id))
     except Exception as ex:
         print(ex)
 

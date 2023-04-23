@@ -203,11 +203,12 @@ def edit_profile():
     """Update the user's profile information."""
     try:
         data = flask.request.get_json()
-        user_id = data.get('userId')[0]
+        user_id = data.get('userId')
         pronouns = data.get('pronouns')
         classes = data.get('classes')
         bio = data.get('bio')
         availability = data.get('availability')
+        print(user_id, pronouns, classes, bio, availability)
         database_access.edit_user(
             (user_id, pronouns, classes, bio, availability), 'testdb_ery6')
         return jsonify({'message': 'Profile updated successfully'})

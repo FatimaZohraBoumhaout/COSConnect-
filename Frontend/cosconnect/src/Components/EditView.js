@@ -3,6 +3,7 @@ import Avatar from 'react-avatar';
 import { Link } from 'react-router-dom';
 import { useCookies } from 'react-cookie';
 import { useNavigate } from "react-router-dom";
+import Multiselect from "multiselect-react-dropdown";
 
 function EditView() {
   // const { userId } = props;
@@ -13,6 +14,7 @@ function EditView() {
   const [classes, setClasses] = useState('');
   const [availability, setAvailability] = useState('');
   const [bio, setBio] = useState('');
+  const [course, setCourse] = useState([]);
 
   useEffect(() => {
     if (cookies.user_id !== null) {
@@ -31,12 +33,33 @@ function EditView() {
     } else {
       console.log("user_id is null");
     }
-  }, [cookies.user_id]);
+  }, [cookies.net_id]);
+
+  useEffect(() => {
+    fetch(`/get_courses`)
+      .then((response) => response.json())
+      .then(({ term }) => {
+        console.log("terms:", term);
+        const subjects = term[0].subjects;
+        console.log("subjects:", subjects);
+        const courses = subjects[0].courses;
+        console.log("courses", courses);
+        const coursenums = courses.map((course) => course.catalog_number);
+        console.log("coursenums", coursenums);
+        const coursenumsstring = coursenums.map((num) => String(num));
+        setCourse(coursenumsstring);
+      })
+      .catch((error) => console.log(error));
+  }, [cookies.net_id]);
+
+  function handleTagSelect(selectedList) {
+    setClasses(selectedList);
+  }
 
   const handleSubmit = (event) => {
     let class_ = ""; 
     event.preventDefault();
-    const userId = cookies.user_id;
+    const userId = cookies.net_id;
     console.log(pronouns, classes, availability, bio)
     const data = {userId, pronouns, classes, availability, bio};
     fetch(`/edit_profile`, {
@@ -177,9 +200,9 @@ function EditView() {
 
   `;
 
-  if (!user) {
-    return <>loading...</>
-  }
+  // if (!user) {
+  //   return <>loading...</>
+  // }
 
   return (
     <form method="post" onSubmit={handleSubmit}>   
@@ -187,9 +210,9 @@ function EditView() {
       <style>{styles}</style>
       <div className="grid-item item-1">
         <div className="profile-header">
-          <Avatar  className="profile-avatar" name={user[0][4]} size="50" round={true} />
+          <Avatar  className="profile-avatar" name={cookies.net_id} size="50" round={true} />
           <div className="profile-info">
-            <h1 className="profile-name">{  user[0][4]}</h1>
+            <h1 className="profile-name">{cookies.net_id}</h1>
           </div>
           <Link to={`/profileview`} className="edit-button">Close</Link>
           
@@ -198,19 +221,27 @@ function EditView() {
           {/* <div className="gray-box"></div> */}
           <div>
             <label htmlFor="pronouns">Pronouns: </label>
-            <input id="pronouns" name="pronouns" type="text" placeholder={user[0][0]} onChange={event => setPronouns(event.target.value)}  required/>
+            <input id="pronouns" name="pronouns" type="text" placeholder={pronouns} onChange={event => setPronouns(event.target.value)}  required/>
           </div>
           <div>
-            <label htmlFor="classes">Classes: </label>
-            <input id="classes" name="classes" type="text" placeholder={user[0][1]} onChange={event => setClasses(event.target.value)} required/>
+          <label htmlFor="classes">Classes</label>
+              <div className="multi-select">
+                <Multiselect 
+                isObject={false}
+                options={course}
+                selectedValues={classes}
+                onSelect={handleTagSelect}
+                onRemove={handleTagSelect}
+                />
+              </div>
           </div>
           <div>
             <label htmlFor="bio">Bio: </label>
-            <input id="bio" name="bio" type="text" placeholder={user[0][2]} onChange={event => setAvailability(event.target.value)} required/>
+            <input id="bio" name="bio" type="text" placeholder={bio} onChange={event => setBio(event.target.value)} required/>
           </div>
           <div>
             <label htmlFor="availability">Availability: </label>
-            <input id="availability" name="availability" type="text" placeholder={user[0][5]} onChange={event => setBio(event.target.value)} required/>
+            <input id="availability" name="availability" type="text" placeholder={availability} onChange={event => setAvailability(event.target.value)} required/>
           </div>
 
           <input className = "button-save" type="submit" name="submit" value="Save" />
