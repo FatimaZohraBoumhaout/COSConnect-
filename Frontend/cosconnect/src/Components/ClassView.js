@@ -117,7 +117,16 @@ function ClassView(props){
         //event.preventDefault();
         //console.log(data);
     }
-
+    let renderClasses = null;
+    if(classes.length > 0){
+        renderClasses = classes[0][0] && classes[0][0].map((cl) => {
+            return(
+                <div className="rectangle-left">
+                    <center>{cl}</center>
+                </div>
+            );
+        });
+    }
     // const sendRequest = (st) => {
     //     console.log(cookies.net_id)
     //     fetch(`add_request?sender_id=${cookies.net_id}&receiver_id=${st}&course=${this_class}`, {
@@ -130,11 +139,7 @@ function ClassView(props){
             <div className="grid-container">
                 <div className="classes">
                     <h3 className="left-header">Classes</h3>
-                    {classes && classes.map((cl) => (
-                        <div className="rectangle-left">
-                            <center>{cl}</center>
-                        </div>
-                    ))}
+                    {classes && renderClasses}
                     
                 </div>
                 
@@ -173,8 +178,9 @@ function ClassView(props){
                     <h3>Students</h3>
                     {studentsId && studentsId.map((st, index) =>(
                         <div className="rectangle-right">
+                            <Link to={`/partnerview`}>
                            <center>NetId: {st[0]}, <p>Display Name: {st[1]}, Availability: {st[2]}</p></center>
-                            
+                           </Link>
                     {/* <Link to={`/partnerview`} onClick={setCookie('partner_id', st)}>{st}</Link> */}
                     {/* <button ref={buttonRef} onClick={sendRequest(st)}> */}
                         {/* <center>Send</center>

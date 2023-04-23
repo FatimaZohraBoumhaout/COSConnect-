@@ -131,3 +131,8 @@ button{
     border-radius: 5px;
     color:  #F6F6F2;
 }
+
+Link{
+    color: inherit;
+    text-decoration: none !important;
+}
