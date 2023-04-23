@@ -188,8 +188,13 @@ def get_students(input, database_url):
     try:
         with psycopg2.connect(dbname=database_url, host="dpg-cggj3fceoogqfc2no840-a.ohio-postgres.render.com", user="testuser", password="gVYdK2LMupfkuAxyR6kp3a6XpuIB9VVV") as connection:
             with contextlib.closing(connection.cursor()) as cursor:
-                query = "SELECT net_id FROM classes WHERE class = %s AND net_id != %s"
-                cursor.execute(query, (classes, net_id))
+                query = "SELECT net_id FROM classes WHERE class = %s AND net_id != %s " 
+                query += "AND NOT EXISTS (SELECT * FROM communications WHERE receiver = %s "
+                query += "AND sender = classes.net_id AND class = %s) AND NOT EXISTS ("
+                query += "SELECT * FROM communications WHERE receiver = classes.net_id "
+                query += "AND sender = %s AND class = %s);"
+   
+                cursor.execute(query, (classes, net_id, net_id, classes, net_id, classes))
                 output = cursor.fetchall()
                 return output 
     except Exception as ex:
