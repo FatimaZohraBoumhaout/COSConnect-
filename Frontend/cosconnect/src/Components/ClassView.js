@@ -134,6 +134,10 @@ function ClassView(props){
     //     })
     //     if(buttonRef.current) buttonRef.current.disabled = true;
     // }
+    function handleClick(st) {
+        setCookie('partner_id', st);
+      }
+
     return(
         <div className="body">
             <div className="grid-container">
@@ -178,7 +182,7 @@ function ClassView(props){
                     <h3>Students</h3>
                     {studentsId && studentsId.map((st, index) =>(
                         <div className="rectangle-right">
-                            <Link to={`/partnerview`}>
+                            <Link to={`/partnerview`} onClick={() => handleClick(st[0])}>
                            <center>NetId: {st[0]}, <p>Display Name: {st[1]}, Availability: {st[2]}</p></center>
                            </Link>
                     {/* <Link to={`/partnerview`} onClick={setCookie('partner_id', st)}>{st}</Link> */}
