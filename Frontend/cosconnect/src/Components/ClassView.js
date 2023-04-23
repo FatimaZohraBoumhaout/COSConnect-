@@ -14,6 +14,8 @@ function ClassView(){
     const [input, setInput] = useState('');
     
     const this_class = window.location.search.match(/class=([^&]*)/)[1].replace('%20',' ');
+    let output = []
+    let fixed = []
 
     useEffect(() => {
         console.log("get class: ",cookies.net_id);
@@ -82,6 +84,11 @@ function ClassView(){
             );
         });
     }
+
+    useEffect(() => {
+         output = fixed.filter(element => element.includes(input))
+         console.log(output)
+    }, [input]);
     
     function sendRequest(st) {
         setCookie('class_id', this_class)
@@ -94,10 +101,14 @@ function ClassView(){
     function handleChange(event){
         //setData()
         console.log(event)
+        setInput(event)
     }
 
     let renderStudents = null;
     if(studentsId.length > 0){
+        console.log("StudentsId set to", studentsId)
+        fixed = studentsId.map(element => element[1])
+        console.log("fixed set to", fixed)
         renderStudents = studentsId.map((st) =>(
             <div className="rectangle-right">
                 <Link to={`/partnerview`} onClick={() => handleClick(st[0])}>
