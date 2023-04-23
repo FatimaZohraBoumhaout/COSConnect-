@@ -13,7 +13,7 @@ def authenticate_user(netId, database_url):
             with contextlib.closing(connection.cursor()) as cursor:
                 query = "SELECT display_name FROM user_profile WHERE net_id = %s;"
                 try:
-                    cursor.execute(query, (str(netId)))
+                    cursor.execute(query, (netId,))
                     output = cursor.fetchone()
                     return output
                 except Exception as ex:

@@ -31,7 +31,7 @@ def log_in():
         net_id = email.split("@")[0]
         print(net_id)
         displayname = database_access.authenticate_user(net_id, 'testdb_ery6')
-        print(displayname)
+        print("display",displayname)
         if displayname is None:
             return jsonify({'message': 'User not found', 'net_id': net_id}), 404
         else:
