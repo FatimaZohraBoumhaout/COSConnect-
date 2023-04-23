@@ -86,8 +86,9 @@ function ClassView(){
     }
 
     useEffect(() => {
-         output = fixed.filter(element => element.includes(input))
-         console.log(output)
+         output = fixed.filter(element => element[1].includes(input))
+         output = output.map(element => element[0])
+         console.log("output", output)
     }, [input]);
     
     function sendRequest(st) {
@@ -107,7 +108,7 @@ function ClassView(){
     let renderStudents = null;
     if(studentsId.length > 0){
         console.log("StudentsId set to", studentsId)
-        fixed = studentsId.map(element => element[1])
+        fixed = studentsId.map((element, index) => [index, element[1]])
         console.log("fixed set to", fixed)
         renderStudents = studentsId.map((st) =>(
             <div className="rectangle-right">
