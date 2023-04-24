@@ -2,10 +2,12 @@ import React, { useState, useEffect, useRef } from "react";
 import { useCookies } from "react-cookie";
 import { useLocation } from "react-router-dom";
 import { Link } from 'react-router-dom';
+import { useNavigate } from "react-router-dom";
 import "./ClassView.css"
 import "@fontsource/inter";
 
 function ClassView(){
+    const navigate = useNavigate();
     const [cookies, setCookie] = useCookies(['net_id', 'partner_id', 'class_id']);
     const [classes, setClasses] = useState([]);
     const [sentRequest, setSentRequest] = useState([]);
@@ -20,6 +22,16 @@ function ClassView(){
     let output = []
     //let fixed = []
     //let renderStudents = null;
+
+    useEffect(() => {
+        if (classes.length > 0){
+            console.log("classes", classes[0][0])
+            console.log("this class", this_class)
+            if (!classes[0][0].includes(this_class)){
+                navigate(`/home`);
+            }
+        }
+    }, [classes]);
 
     useEffect(() => {
         console.log("get class: ",cookies.net_id);

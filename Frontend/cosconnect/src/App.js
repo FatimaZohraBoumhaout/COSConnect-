@@ -13,6 +13,7 @@ import EditView from './Components/EditView'
 import SendRequestView from "./Components/SendRequestView";
 import Header from './Components/Header';
 import SignInHeader from './Components/SignInHeader';
+import Error from './Components/Error';
 
 
 function App() {
@@ -32,6 +33,7 @@ function App() {
           <Route path="/classview" element={<ClassView />} />
           <Route path="/partnerview" element={<PartnerProfileView />} />
           <Route path="/sendrequest" element={<SendRequestView />} />
+          <Route path="/error" element={<Error />} />
         </Routes>
       </BrowserRouter>
       <Footer />
