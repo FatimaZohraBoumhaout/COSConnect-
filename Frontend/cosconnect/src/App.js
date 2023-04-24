@@ -1,29 +1,26 @@
 import React from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import './App.css';
-import UserProfileView from './Components/UserProfileView';
+import UserProfileView from './Pages/UserProfileView';
 import Footer from './Components/Footer';
-import UserSurvey from './Components/UserSurvey';
+import UserSurvey from './Pages/UserSurvey';
 import SettingsView from "./Components/SettingsView";
-import Home from "./Components/Home";
-import ClassView from './Components/ClassView';
-import Signin from './Components/SignIn';
-import PartnerProfileView from './Components/PartnerProfileView'
-import EditView from './Components/EditView'
-import SendRequestView from "./Components/SendRequestView";
+import Home from "./Pages/Home";
+import ClassView from './Pages/ClassView';
+import Signin from './Pages/SignIn';
+import PartnerProfileView from './Pages/PartnerProfileView'
+import EditView from './Pages/EditView'
+import SendRequestView from "./Pages/SendRequestView";
 import Header from './Components/Header';
 import SignInHeader from './Components/SignInHeader';
-import Error from './Components/Error';
+import Error from './Pages/Error';
 
 
 function App() {
-  const showHeader = window.location.pathname !== "/" && window.location.pathname !== "/survey";
-  const showSignInHeader = window.location.pathname == "/" 
+
   return (
     <>
       <BrowserRouter>
-        {showHeader && <Header />}
-        {showSignInHeader && <SignInHeader />}
         <Routes>
           <Route path="/" element={<Signin />} />
           <Route path="/home" element={<Home />} />
@@ -36,7 +33,6 @@ function App() {
           <Route path="/error" element={<Error />} />
         </Routes>
       </BrowserRouter>
-      <Footer />
     </>
   );
 }

@@ -140,7 +140,7 @@ function ProfileDetails() {
           <div className="profile-info">
             <h1 className="profile-name">{  user[0][4]}</h1>
           </div>
-          <Link to={`/edit`} className="edit-button">Edit</Link>
+          <Link to={`/edit`} className="edit-button" style={{ textDecoration: 'none' }}>Edit</Link>
           
         </div>
         <div className="profile-content">
@@ -150,7 +150,7 @@ function ProfileDetails() {
           </div>
           <div>
             <label htmlFor="classes">Classes: </label>
-            <span id="classes">{ user[0][1].join(", ")}</span>
+            <span id="classes">{ user[0][1].map(cls => "COS " + cls).join(", ")}</span>
           </div>
           <div>
             <label htmlFor="bio">Bio: </label>

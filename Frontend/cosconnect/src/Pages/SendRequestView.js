@@ -3,6 +3,8 @@ import Avatar from 'react-avatar';
 import { Link } from 'react-router-dom';
 import { useCookies } from 'react-cookie';
 import { useNavigate } from "react-router-dom";
+import Footer from "../Components/Footer";
+import Header from "../Components/Header";
 
 function SendRequestView() {
   // const { userId } = props;
@@ -54,11 +56,11 @@ function SendRequestView() {
       display: flex;
       justify-content: center;
       align-items: center;
-      background-color: #BADFE7;  
+      background-color: #BDD2B6;  
       border-radius: 30px;
       margin: 20px;
       width: 50%;
-      margin-left: 0%;
+      margin-left: 25%;
     }
 
     .grid-item {
@@ -89,7 +91,7 @@ function SendRequestView() {
 
     .edit-button {
       margin-left: auto;
-      background-color: #4CAF50;
+      background-color: #26272D; 
       color: white;
       border: none;
       border-radius: 5px;
@@ -166,6 +168,8 @@ function SendRequestView() {
   // }
 
   return (
+    <>
+    <Header />
     <form method="post" onSubmit={handleSubmit}>   
     <div className="profile-container">
       <style>{styles}</style>
@@ -175,7 +179,7 @@ function SendRequestView() {
           <div className="profile-info">
             <h1 className="profile-name">{  cookies.net_id}</h1>
           </div>
-          <Link to={`/classview?class=${cookies.class_id}`} className="edit-button">Close</Link>
+          <Link to={`/classview?class=${cookies.class_id}`} className="edit-button" style={{ textDecoration: 'none' }}>Close</Link>
           
         </div>
         <div className="profile-content">
@@ -188,7 +192,7 @@ function SendRequestView() {
           </div>
           <div>
             <label>Message: </label>
-            <p>Hi, this is CosConnect!{cookies.net_id} has requested to partner with you!</p>
+            <h2 style={{color:'black'}}>Partner request through email</h2>
           </div>
           {/* <Link to={`/classview?class=${cookies.class_id}`}> */}
           <input type="submit" name="submit" value="Send" />
@@ -197,6 +201,8 @@ function SendRequestView() {
       </div>
     </div>
     </form>
+    <Footer />
+    </>
   );
 }
 

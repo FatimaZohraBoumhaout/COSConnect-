@@ -4,6 +4,9 @@ import { Link } from 'react-router-dom';
 import { useCookies } from 'react-cookie';
 import { useNavigate } from "react-router-dom";
 import Multiselect from "multiselect-react-dropdown";
+import Header from "../Components/Header";
+import Footer from "../Components/Footer";
+
 
 function EditView() {
   // const { userId } = props;
@@ -205,6 +208,8 @@ function EditView() {
   // }
 
   return (
+    <>
+    <Header />
     <form method="post" onSubmit={handleSubmit}>   
     <div className="profile-container">
       <style>{styles}</style>
@@ -214,14 +219,14 @@ function EditView() {
           <div className="profile-info">
             <h1 className="profile-name">{cookies.net_id}</h1>
           </div>
-          <Link to={`/profileview`} className="edit-button">Close</Link>
+          <Link to={`/profileview`} className="edit-button" style={{ textDecoration: 'none' }}>Close</Link>
           
         </div>
         <div className="profile-content">
           {/* <div className="gray-box"></div> */}
           <div>
             <label htmlFor="pronouns">Pronouns: </label>
-            <input id="pronouns" name="pronouns" type="text" placeholder={pronouns} onChange={event => setPronouns(event.target.value)}  required/>
+            <input id="pronouns" name="pronouns" type="text" placeholder={pronouns} onChange={event => setPronouns(event.target.value)}  required style={{ paddingLeft: '8px' }}/>
           </div>
           <div>
           <label htmlFor="classes">Classes</label>
@@ -237,11 +242,11 @@ function EditView() {
           </div>
           <div>
             <label htmlFor="bio">Bio: </label>
-            <input id="bio" name="bio" type="text" placeholder={bio} onChange={event => setBio(event.target.value)} required/>
+            <input id="bio" name="bio" type="text" placeholder={bio} onChange={event => setBio(event.target.value)} required style={{ paddingLeft: '8px' }}/>
           </div>
           <div>
             <label htmlFor="availability">Availability: </label>
-            <input id="availability" name="availability" type="text" placeholder={availability} onChange={event => setAvailability(event.target.value)} required/>
+            <input id="availability" name="availability" type="text" placeholder={availability} onChange={event => setAvailability(event.target.value)} required style={{ paddingLeft: '8px' }}/>
           </div>
 
           <input className = "button-save" type="submit" name="submit" value="Save" />
@@ -249,6 +254,8 @@ function EditView() {
       </div>
     </div>
     </form>
+    <Footer />
+    </>
   );
 }
 

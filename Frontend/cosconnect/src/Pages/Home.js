@@ -3,6 +3,8 @@ import { useCookies } from "react-cookie";
 import Avatar from "react-avatar";
 import { Link } from "react-router-dom";
 import './Home.css';
+import Header from "../Components/Header";
+import Footer from "../Components/Footer";
 
 function Home(){
   const [classes, setClasses] = useState([]);
@@ -42,12 +44,14 @@ function Home(){
   let extractedElements = null;
   if(classes.length > 0){
   extractedElements = classes[0][0].map((element, index) => {
-    console.log(element);
+    // console.log(element);
+    // element = 'COS ' + element;
     return (
       <div key = {index}>
-        <Link to={`/classview?class=${element}`} style={{ textDecoration: 'none' }}>
+        <Link to={`/classview?class=${element}`} style={{ textDecoration: 'none', color: '#403F3D' }}>
           
-          <h2 key={index} className="num">{element}</h2>
+        <h2 key={index} className="num">COS {element}</h2>
+
         
         </Link>
       </div>
@@ -56,6 +60,8 @@ function Home(){
 }
 
   return(
+    <>
+    <Header />
     <div className="home">
       <div className="avatar">
       <Avatar className="p-avatar" name={user ? user[0][4] : ''} size="60" round={true} />
@@ -75,6 +81,8 @@ function Home(){
         {classes && extractedElements}
       </div>
     </div>
+    <Footer />
+    </>
   );
 }
 
