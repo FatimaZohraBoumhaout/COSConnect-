@@ -190,7 +190,9 @@ function SendRequestView() {
             <label>Message: </label>
             <p>Hi, this is CosConnect!{cookies.net_id} has requested to partner with you!</p>
           </div>
+          <Link to={`/classview?class=${cookies.class_id}`}>
           <input type="submit" name="submit" value="Send" />
+          </Link>
         </div>
       </div>
     </div>
