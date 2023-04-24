@@ -54,7 +54,7 @@ function SendRequestView() {
       display: flex;
       justify-content: center;
       align-items: center;
-      background-color: #BADFE7;  
+      background-color: #BDD2B6;  
       border-radius: 30px;
       margin: 20px;
       width: 50%;
@@ -89,7 +89,7 @@ function SendRequestView() {
 
     .edit-button {
       margin-left: auto;
-      background-color: #4CAF50;
+      background-color: #26272D; 
       color: white;
       border: none;
       border-radius: 5px;
@@ -175,7 +175,7 @@ function SendRequestView() {
           <div className="profile-info">
             <h1 className="profile-name">{  cookies.net_id}</h1>
           </div>
-          <Link to={`/classview?class=${cookies.class_id}`} className="edit-button">Close</Link>
+          <Link to={`/classview?class=${cookies.class_id}`} className="edit-button" style={{ textDecoration: 'none' }}>Close</Link>
           
         </div>
         <div className="profile-content">
@@ -188,7 +188,7 @@ function SendRequestView() {
           </div>
           <div>
             <label>Message: </label>
-            <p>Hi, this is CosConnect!{cookies.net_id} has requested to partner with you!</p>
+            <p>Hi, this is CosConnect! {cookies.net_id} has requested to partner with you!</p>
           </div>
           {/* <Link to={`/classview?class=${cookies.class_id}`}> */}
           <input type="submit" name="submit" value="Send" />

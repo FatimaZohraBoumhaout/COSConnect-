@@ -30,7 +30,7 @@ function PartnerProfileDetails(props) {
       width: 100%;
       justify-content: center;
       align-items: center;
-      background-color: #BADFE7;  
+      background-color: #BDD2B6; 
       border-radius: 30px;
       margin: 20px;
       margin-left: 50%;
@@ -64,7 +64,7 @@ function PartnerProfileDetails(props) {
 
     .edit-button {
       margin-left: auto;
-      background-color: #4CAF50;
+      background-color: #26272D;
       color: white;
       border: none;
       border-radius: 5px;
@@ -172,8 +172,8 @@ function PartnerProfileDetails(props) {
           <div className="profile-info">
             <h1 className="profile-name">{ partner[0][4]}</h1>
           </div>
-          <Link to={`/classview?class=${cookies.class_id}`} className="edit-button">Close</Link>
-          <Link to={`/sendrequest?receiver=${props.partneridProp}`} className="edit-button" onClick={handleSendEmail}>Send Request</Link>
+          <Link to={`/classview?class=${cookies.class_id}`} className="edit-button" style={{ textDecoration: 'none'}}>Close</Link>
+          <Link to={`/sendrequest?receiver=${props.partneridProp}`} className="edit-button" onClick={handleSendEmail} style={{ textDecoration: 'none'}}>Send Request</Link>
         </div>
         <div className="profile-content">
           {/* <div className="gray-box"></div> */}
@@ -183,7 +183,7 @@ function PartnerProfileDetails(props) {
           </div>
           <div>
             <label htmlFor="classes">Classes: </label>
-            <span id="classes">{  partner[0][1]}</span>
+            <span id="classes">{ partner[0][1].map((classNum) => "COS " + classNum).join(", ") }</span>
           </div>
           <div>
             <label htmlFor="bio">Bio: </label>

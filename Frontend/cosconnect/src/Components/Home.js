@@ -42,12 +42,14 @@ function Home(){
   let extractedElements = null;
   if(classes.length > 0){
   extractedElements = classes[0][0].map((element, index) => {
-    console.log(element);
+    // console.log(element);
+    // element = 'COS ' + element;
     return (
       <div key = {index}>
-        <Link to={`/classview?class=${element}`} style={{ textDecoration: 'none' }}>
+        <Link to={`/classview?class=${element}`} style={{ textDecoration: 'none', color: '#403F3D' }}>
           
-          <h2 key={index} className="num">{element}</h2>
+        <h2 key={index} className="num">COS {element}</h2>
+
         
         </Link>
       </div>
