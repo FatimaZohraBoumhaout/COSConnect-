@@ -279,4 +279,28 @@ def get_students_info(input, database_url):
     except Exception as ex:
         print(ex)
 
+def get_recent_sent(input, database_url):
+    netid = input
+    try:
+        with psycopg2.connect(dbname=database_url, host="dpg-cggj3fceoogqfc2no840-a.ohio-postgres.render.com", user="testuser", password="gVYdK2LMupfkuAxyR6kp3a6XpuIB9VVV") as connection:
+            with contextlib.closing(connection.cursor()) as cursor:
+                query = "SELECT receiver from communications WHERE sender = %s;"
+                cursor.execute(query, (netid,))
+                output = cursor.fetchall()
+                return output 
+    except Exception as ex:
+        print(ex)
+
+def get_recent_received(input, database_url):
+    netid = input
+    try:
+        with psycopg2.connect(dbname=database_url, host="dpg-cggj3fceoogqfc2no840-a.ohio-postgres.render.com", user="testuser", password="gVYdK2LMupfkuAxyR6kp3a6XpuIB9VVV") as connection:
+            with contextlib.closing(connection.cursor()) as cursor:
+                query = "SELECT sender from communications WHERE receiver = %s;"
+                cursor.execute(query, (netid,))
+                output = cursor.fetchall()
+                return output 
+    except Exception as ex:
+        print(ex)
+
                     

@@ -343,5 +343,33 @@ def get_students_info():
         print('Error in post_status:', ex)
         return jsonify({'error': 'Failed to get talking'}), 500
 
+@app.route('/getRecentSent', methods=['GET'])
+def get_recent_sent():
+    try:
+        net_id = flask.request.args.get('id')
+        output = database_access.get_recent_sent((net_id), 'testdb_ery6')
+        print("got sent", output)
+        if (len(output) > 0):
+            output = output[len(output) - 1][0]
+        print("got sent is now", output)
+        return jsonify(output)
+    except Exception as ex:
+        print('Error in post_status:', ex)
+        return jsonify({'error': 'Failed to get recent sent'}), 500
+
+@app.route('/getRecentReceived', methods=['GET'])
+def get_recent_received():
+    try:
+        net_id = flask.request.args.get('id')
+        output = database_access.get_recent_received((net_id), 'testdb_ery6')
+        print("got received", output)
+        if (len(output) > 0):
+            output = output[len(output) - 1][0]
+        print("got received is now", output)
+        return jsonify(output)
+    except Exception as ex:
+        print('Error in post_status:', ex)
+        return jsonify({'error': 'Failed to recent received'}), 500
+
 if __name__ == '__main__':
     app.run(debug=True)
