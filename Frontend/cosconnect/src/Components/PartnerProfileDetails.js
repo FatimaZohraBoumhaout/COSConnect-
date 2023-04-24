@@ -138,7 +138,7 @@ function PartnerProfileDetails(props) {
   `;
 
     if (partner === null){
-        return (<p>error: nothing returned from database (ignore this message if it pops up for one second)</p>)
+        return (<p>Loading...</p>)
     } 
 
     function handleSendEmail() {
