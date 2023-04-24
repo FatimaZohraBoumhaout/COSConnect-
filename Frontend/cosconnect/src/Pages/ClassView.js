@@ -5,6 +5,8 @@ import { Link } from 'react-router-dom';
 import { useNavigate } from "react-router-dom";
 import "./ClassView.css"
 import "@fontsource/inter";
+import Header from "../Components/Header";
+import Footer from "../Components/Footer";
 
 function ClassView(){
     const navigate = useNavigate();
@@ -165,6 +167,8 @@ function ClassView(){
       }, [studentsId]);
 
     return(
+        <>
+        <Header />
         <div className="body">
             <div className="grid-container">
                 <div className="classes">
@@ -227,6 +231,8 @@ function ClassView(){
                 </div>
             </div>
         </div>
+        <Footer />
+        </>
     )
 }
 export default ClassView;

@@ -4,6 +4,9 @@ import { Link } from 'react-router-dom';
 import { useCookies } from 'react-cookie';
 import { useNavigate } from "react-router-dom";
 import Multiselect from "multiselect-react-dropdown";
+import Header from "../Components/Header";
+import Footer from "../Components/Footer";
+
 
 function EditView() {
   // const { userId } = props;
@@ -205,6 +208,8 @@ function EditView() {
   // }
 
   return (
+    <>
+    <Header />
     <form method="post" onSubmit={handleSubmit}>   
     <div className="profile-container">
       <style>{styles}</style>
@@ -249,6 +254,8 @@ function EditView() {
       </div>
     </div>
     </form>
+    <Footer />
+    </>
   );
 }
 

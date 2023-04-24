@@ -3,6 +3,8 @@ import { useCookies } from "react-cookie";
 import Avatar from "react-avatar";
 import { Link } from "react-router-dom";
 import './Home.css';
+import Header from "../Components/Header";
+import Footer from "../Components/Footer";
 
 function Home(){
   const [classes, setClasses] = useState([]);
@@ -58,6 +60,8 @@ function Home(){
 }
 
   return(
+    <>
+    <Header />
     <div className="home">
       <div className="avatar">
       <Avatar className="p-avatar" name={user ? user[0][4] : ''} size="60" round={true} />
@@ -77,6 +81,8 @@ function Home(){
         {classes && extractedElements}
       </div>
     </div>
+    <Footer />
+    </>
   );
 }
 

@@ -6,7 +6,7 @@
     grid-template-areas: 'avatar class'
                          'but box'   ;
     margin: auto;
-    height: 85vh;
+    height: 100%;
 }
 
 .avatar {

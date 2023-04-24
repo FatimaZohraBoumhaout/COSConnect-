@@ -6,6 +6,8 @@ import './SignIn.css';
 import image from './FronPage.png';
 import { useCookies } from "react-cookie";
 import { useNavigate } from "react-router-dom";
+import SignInHeader from "../Components/SignInHeader";
+import Footer from "../Components/Footer";
 
 function SignIn() {
 
@@ -55,6 +57,8 @@ const handleLogin = (response) => {
 
 
   return (
+    <>
+    <SignInHeader />
     <div className='main-container'>
       <h1 className='welcome'>Welcome to COSConnect where the journey begins!</h1>
       <div className='butt-container'>
@@ -72,6 +76,8 @@ const handleLogin = (response) => {
         <img src={image}/>
      </div>
     </div>
+    <Footer />
+    </>
   );
 };
 

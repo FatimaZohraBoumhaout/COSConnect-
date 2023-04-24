@@ -3,6 +3,8 @@ import Avatar from 'react-avatar';
 import { Link } from 'react-router-dom';
 import { useCookies } from 'react-cookie';
 import { useNavigate } from "react-router-dom";
+import Footer from "../Components/Footer";
+import Header from "../Components/Header";
 
 function SendRequestView() {
   // const { userId } = props;
@@ -166,6 +168,8 @@ function SendRequestView() {
   // }
 
   return (
+    <>
+    <Header />
     <form method="post" onSubmit={handleSubmit}>   
     <div className="profile-container">
       <style>{styles}</style>
@@ -197,6 +201,8 @@ function SendRequestView() {
       </div>
     </div>
     </form>
+    <Footer />
+    </>
   );
 }
 
