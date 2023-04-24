@@ -142,11 +142,20 @@ function PartnerProfileDetails(props) {
     } 
 
     function handleSendEmail() {
-        const sender_email = cookies.net_id + '@princeton.edu';
-        const receiver_email = cookies.partner_id + '@princeton.edu';
-        const subject = 'COS class partnership request';
-        const body = 'Hello,\n\nThis is a pre-drafted email.\n\nBest regards,';
-        
+      const sender_email = cookies.net_id + '@princeton.edu';
+      const receiver_email = cookies.partner_id + '@princeton.edu';
+      const subject = 'COS class partnership request';
+      const sender_id = cookies.net_id;
+      const receiver_id = cookies.partner_id;
+      const cosconnect_link = 'https://cosconnect-app.onrender.com';
+      const body = `Hello ${receiver_id},
+      You received a partnership request on ${cosconnect_link} from ${sender_id}.
+      Please click on the link to visit our website and view your request.
+      Best regards,`;
+      
+
+      
+      
         fetch('/send-email', {
           method: 'POST',
           headers: {
