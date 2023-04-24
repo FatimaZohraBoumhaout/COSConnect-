@@ -129,7 +129,7 @@ function ClassView(){
     }
 
     useEffect(() => {
-        if(studentsId.length > 0){
+        if(studentsId && studentsId.length > 0){
             console.log("StudentsId set to", studentsId)
             setFixed(studentsId.map((element, index) => [index, element[1]]))
             console.log("fixed set to", fixed)
@@ -206,6 +206,11 @@ function ClassView(){
                 <div className="students">
                     <h3>Students</h3>
                     {studentsId && renderStudents}
+                    {!studentsId &&
+                        <center>
+                            <p>Send some requests to get started.</p>
+                        </center>
+                    }
                     
                 </div>
             </div>
