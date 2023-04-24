@@ -248,7 +248,7 @@ def get_courses():
 app.config['MAIL_SERVER']='smtp.gmail.com'
 app.config['MAIL_PORT'] = 465
 app.config['MAIL_USERNAME'] = 'cosconnectprinceton@gmail.com'
-app.config['MAIL_PASSWORD'] = 'COSConnect2025'
+app.config['MAIL_PASSWORD'] = 'fymlapfgknffjdjg'
 app.config['MAIL_USE_TLS'] = False
 app.config['MAIL_USE_SSL'] = True
 
@@ -257,13 +257,15 @@ mail = Mail(app)
 @app.route('/send-email', methods=['POST'])
 def send_email():
     try:
-        data = flask.request.json()
+        print ('Sending email')
+        data = flask.request.get_json()
+        print(data)
         sender_email = data.get('sender_email')
         receiver_email = data.get('receiver_email')
         subject = data.get('subject')
         body = data.get('body')
 
-        msg = Message(subject, sender=sender_email, recipients=[receiver_email])
+        msg = Message(subject, sender='cosconnectprinceton@gmail.com', recipients=[receiver_email], cc=[sender_email])
         msg.body = body
 
         mail.send(msg)
@@ -276,7 +278,8 @@ def send_email():
     except Exception as ex:
         print('Error in send_email:', ex)
         return jsonify({'error': 'Failed to send the email'}), 500
-  
+#-------------------------------------------------------------------------------------------------------
+
 @app.route('/post_status', methods=['POST'])
 def post_status():
     try:

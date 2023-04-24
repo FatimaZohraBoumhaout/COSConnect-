@@ -125,7 +125,7 @@ function ClassView(){
         setRenderStudents(studentsToRender);
 
         console.log("output set to be", output)
-    }, [input]);
+    }, [input, fixed]);
     
     function sendRequest(st) {
         setCookie('class_id', this_class)
@@ -133,7 +133,9 @@ function ClassView(){
     }
     function handleClick(st) {
         setCookie('class_id', this_class)
+        console.log("classid cookie set to"+ cookies.class_id);
         setCookie('partner_id', st);
+        console.log("partenr cookie set to"+ cookies.partner_id);
     }
 
     function handleChange(event){
