@@ -32,7 +32,7 @@ function SendRequestView() {
     const receiver_id = cookies.partner_id;
     const course = cookies.class_id;
     const data = {sender_id, receiver_id, course};
-    fetch(`/send_message`, {
+    fetch(`/add_request`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
@@ -41,7 +41,7 @@ function SendRequestView() {
     })
     .then(response => {
         if (response.ok) {
-          navigate(`/classview`);
+          navigate(`/classview?class=${cookies.class_id}`);
         } else {
           throw new Error('Request failed');
         }
@@ -190,9 +190,9 @@ function SendRequestView() {
             <label>Message: </label>
             <p>Hi, this is CosConnect!{cookies.net_id} has requested to partner with you!</p>
           </div>
-          <Link to={`/classview?class=${cookies.class_id}`}>
+          {/* <Link to={`/classview?class=${cookies.class_id}`}> */}
           <input type="submit" name="submit" value="Send" />
-          </Link>
+          {/* </Link> */}
         </div>
       </div>
     </div>
