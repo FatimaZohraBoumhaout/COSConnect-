@@ -133,9 +133,9 @@ function ClassView(){
     }
     function handleClick(st) {
         setCookie('class_id', this_class)
-        console.log("classid cookie set to"+ cookie.partner_id);
+        console.log("classid cookie set to"+ cookies.class_id);
         setCookie('partner_id', st);
-        console.log("partenr cookie set to"+ cookie.partner_id);
+        console.log("partenr cookie set to"+ cookies.partner_id);
     }
 
     function handleChange(event){
