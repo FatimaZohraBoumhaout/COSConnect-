@@ -197,9 +197,9 @@ function ClassView(){
                         </div>
                     ))}
                     {receivedRequest && receivedRequest.map((req, index) => (
-                        <div className="rectangle-left">
-                            {req}
-                            <div style={{float:'right'}}>Sent</div>
+                        <div className="rectangle-right">
+                            <center>{req}</center>
+                            <div style={{float:'right'}}>Received</div>
                         </div>
                     ))}
                     {sentRequest.length === 0 && receivedRequest.length === 0 &&
