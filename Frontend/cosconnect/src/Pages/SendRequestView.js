@@ -43,6 +43,7 @@ function SendRequestView() {
     })
     .then(response => {
         if (response.ok) {
+          handleSendEmail()
           navigate(`/classview?class=${cookies.class_id}`);
         } else {
           throw new Error('Request failed');
@@ -50,6 +51,35 @@ function SendRequestView() {
       })
       .catch(error => console.error(error));
   }
+
+  function handleSendEmail() {
+    const sender_email = cookies.net_id + '@princeton.edu';
+    const receiver_email = cookies.partner_id + '@princeton.edu';
+    const subject = 'COS class partnership request';
+    const sender_id = cookies.net_id;
+    const receiver_id = cookies.partner_id;
+    const cosconnect_link = 'https://cosconnect-app.onrender.com';
+    const body = `Hello ${receiver_id},
+    You received a partnership request on ${cosconnect_link} from ${sender_id}.
+    Please click on the link to visit our website and view your request.
+    Best regards,`;
+    
+      fetch('/send-email', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          sender_email: sender_email,
+          receiver_email: receiver_email,
+          subject: subject,
+          body: body
+        })
+      })
+      .then(response => console.log(response))
+      .catch(error => console.log(error));
+    }
+
 
   const styles = `
     .profile-container {

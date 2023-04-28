@@ -141,36 +141,6 @@ function PartnerProfileDetails(props) {
         return (<p>Loading...</p>)
     } 
 
-    function handleSendEmail() {
-      const sender_email = cookies.net_id + '@princeton.edu';
-      const receiver_email = cookies.partner_id + '@princeton.edu';
-      const subject = 'COS class partnership request';
-      const sender_id = cookies.net_id;
-      const receiver_id = cookies.partner_id;
-      const cosconnect_link = 'https://cosconnect-app.onrender.com';
-      const body = `Hello ${receiver_id},
-      You received a partnership request on ${cosconnect_link} from ${sender_id}.
-      Please click on the link to visit our website and view your request.
-      Best regards,`;
-      
-
-      
-      
-        fetch('/send-email', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json'
-          },
-          body: JSON.stringify({
-            sender_email: sender_email,
-            receiver_email: receiver_email,
-            subject: subject,
-            body: body
-          })
-        })
-        .then(response => console.log(response))
-        .catch(error => console.log(error));
-      }
 
   return (
     <div className="profile-container">
@@ -182,7 +152,7 @@ function PartnerProfileDetails(props) {
             <h1 className="profile-name">{ partner[0][4]}</h1>
           </div>
           <Link to={`/classview?class=${cookies.class_id}`} className="edit-button" style={{ textDecoration: 'none'}}>Close</Link>
-          <Link to={`/sendrequest?receiver=${props.partneridProp}`} className="edit-button" onClick={handleSendEmail} style={{ textDecoration: 'none'}}>Send Request</Link>
+          <Link to={`/sendrequest?receiver=${props.partneridProp}`} className="edit-button" style={{ textDecoration: 'none'}}>Send Request</Link>
         </div>
         <div className="profile-content">
           {/* <div className="gray-box"></div> */}
