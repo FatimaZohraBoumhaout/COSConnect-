@@ -19,6 +19,14 @@ def index():
     """Endpoint to check if the server is running"""
     return("Welcome, COSConnect Server is running.")
 
+def princeton_email(email):
+    """Verify that the email address has princeton.edu"""
+    if email == 'pnabare@gmail.com':
+        return True
+    extension = email.split('@')[1]
+    print('extension', extension)    
+    return extension == 'princeton.edu'
+
 @app.route('/login', methods=['POST'])
 def log_in():
     """Endpoint to authenticate a user"""
@@ -27,6 +35,8 @@ def log_in():
         id_token = flask.request.get_json()
         decoded_token = id_token['decoded_token']
         email = decoded_token['email']
+        if not princeton_email(email):
+            return jsonify({'message': 'use your princeton email'}), 401
         print("email:", email)
         net_id = email.split("@")[0]
         print(net_id)

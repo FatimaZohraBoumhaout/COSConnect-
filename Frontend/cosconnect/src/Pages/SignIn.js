@@ -46,6 +46,12 @@ const handleLogin = (response) => {
         setCookie("net_id", netId);
         navigate('/survey');
       });
+    } else if (res.status === 401){
+      res.json().then((jsonRes) => {
+        const message = jsonRes.message;
+        console.log("message" + message);
+        alert(message);
+      });
     } else {
       console.error('Login failed.');
     }
