@@ -206,14 +206,18 @@ function ClassView(){
                     <h3>Invitations</h3>
                     {sentRequest && sentRequest.map((req) => (
                         <div className="rectangle-right">
-                            <div><center>{req}</center></div>
-                            <div style={{float:'right'}}>Sent</div>
+                            <div style={{float:'left', backgroundColor:'#338888', height:'100%', width: '100px', color: 'white', borderRadius: '5px'}}>
+                                <center>Sent</center>
+                            </div>
+                            <div style={{float:'left', marginLeft:'40%'}}><center>{req}</center></div>
                         </div>
                     ))}
                     {receivedRequest && receivedRequest.map((req, index) => (
                         <div className="rectangle-right">
-                            <center>{req}</center>
-                            <div style={{float:'right'}}>Received</div>
+                            <div style={{float:'left', backgroundColor: '#CCD5AE', height:'100%', width: '100px', borderRadius: '5px'}}>
+                                <center>Received</center>
+                            </div>
+                            <div style={{float:'left', marginLeft:'40%'}}><center>{req}</center></div>
                         </div>
                     ))}
                     {sentRequest.length === 0 && receivedRequest.length === 0 &&
