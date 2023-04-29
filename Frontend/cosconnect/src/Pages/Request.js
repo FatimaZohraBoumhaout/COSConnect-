@@ -55,8 +55,6 @@ function Request(){
                             <div className="request" key={request.id}>
                                 <div className="request-details">
                                     <p>{request}</p>
-                                </div>
-                                <div className="request-buttons">
                                     <button onClick={() => handleAccept(request.id)}>Accept</button>
                                     <button onClick={() => handleReject(request.id)}>Reject</button>
                                 </div>
