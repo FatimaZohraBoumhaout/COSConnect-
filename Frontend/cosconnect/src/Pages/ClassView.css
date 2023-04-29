@@ -108,7 +108,7 @@ h2{
     border-color: #BDD2B6;
     border-style: solid;
     border-width: 2px;
-
+    overflow: wrap;
 }
 .rectangle-left{
     display: 'flex';
@@ -156,8 +156,19 @@ p{
     border-radius: 5px;
     color:  #F6F6F2;
     vertical-align: middle;
+    text-align:center;
 }
 
+@media screen and (max-width: 700px) and (min-width:320px){
+    .btn{
+        background-color: #26272D;
+        width: 60px;
+        height: 53%;
+        border-radius: 5px;
+        color:  #F6F6F2;
+        vertical-align: middle;
+    }
+}
 Link{
     color: black;
     text-decoration: none !important;
