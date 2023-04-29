@@ -1,7 +1,5 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect } from "react";
 import { useCookies } from "react-cookie";
-import { useLocation } from "react-router-dom";
-import { Link } from 'react-router-dom';
 import { useNavigate } from "react-router-dom";
 import "@fontsource/inter";
 import Header from "../Components/Header";
@@ -9,18 +7,18 @@ import Footer from "../Components/Footer";
 import "./Request.css";
 
 function Request(){
-    const [classes, setClasses] = useState([]);
-    const [cookies, setCookie] = useCookies(['net_id','partner_id', 'class_id']);
+    const [requests, setRequests] = useState([]);
+    const [cookies] = useCookies(['net_id']);
+    const navigate = useNavigate();
 
-  
     useEffect(() => {
         if(cookies.net_id != null){
             console.log("net_id: " + cookies.net_id);
-            fetch(`get_class?net_id=${cookies.net_id}`)
+            fetch(`get_request?id=${cookies.net_id}`)
             .then (response => response.json())
             .then(data => {
-                setClasses(data)
-                console.log("classes: "+data);
+                setRequests(data);
+                console.log("requests: "+data);
             })
             .catch((error) => {
                 console.log(error);
@@ -30,43 +28,51 @@ function Request(){
         }
     }, [cookies.net_id]);
 
-    useEffect(() => {
-        fetch('get')
-    
-    })
+    const handleAccept = (requestId) => {
+        // Handle accept button click for a request with ID `requestId`
+        console.log(`Accepted request with ID ${requestId}`);
+    }
 
+    const handleReject = (requestId) => {
+        // Handle reject button click for a request with ID `requestId`
+        console.log(`Rejected request with ID ${requestId}`);
+    }
 
     return(
         <>
         <Header/>
         <div className ="container">
-
             <div className="class-title">
                 Pascal is a bitch 
-
             </div>
-
             <aside className="container_left">
-            <div className="classes">
-                    <h3 className="left-header">Classes</h3>
-                    {classes && renderClasses}
-                    
-                </div>
             </aside>
             <div className="container_top">
-            <div className="new_requests">
-                <h3 className="top-header">New Requests</h3>
+                <div className="new_requests">
+                    <h3 className="top-header">New Requests</h3>
+                    {requests.length > 0 ? 
+                        requests.map(request => (
+                            <div className="request" key={request.id}>
+                                <div className="request-details">
+                                    <p>{request}</p>
+                                </div>
+                                <div className="request-buttons">
+                                    <button onClick={() => handleAccept(request.id)}>Accept</button>
+                                    <button onClick={() => handleReject(request.id)}>Reject</button>
+                                </div>
+                            </div>
+                        ))
+                    :
+                        <p>No new requests</p>
+                    }
                 </div>
             </div>
-              
-
             <div className="container_bottom">
-            <div className="rejected-requests">
-                <h3 className="top-header">Rejected Requests</h3>
+                <div className="rejected-requests">
+                    <h3 className="top-header">Rejected Requests</h3>
+                    {/* Render rejected requests similarly */}
                 </div>
             </div>
-        
-        
         </div>
         <Footer/>
         </>
