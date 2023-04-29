@@ -7,6 +7,8 @@ import { useNavigate } from "react-router-dom";
 import { useCookies } from "react-cookie";
 import "./UserSurvey.css";
 import Multiselect from "multiselect-react-dropdown";
+import DOMPurify from 'dompurify';
+
 
 function UserSurvey() {
   const navigate = useNavigate();
@@ -22,16 +24,17 @@ function UserSurvey() {
   const handleSubmit = (event) => {
     event.preventDefault();
     const netId = cookies.net_id;
-    console.log(netId);
+    console.log("cookie us" + netId);
     const data = {
       netId,
-      fullName,
-      displayName,
-      pronouns,
+      fullName: DOMPurify.sanitize(fullName),
+      displayName: DOMPurify.sanitize(displayName),
+      pronouns: DOMPurify.sanitize(pronouns),
       classes,
-      availability,
-      bio,
+      availability: DOMPurify.sanitize(availability),
+      bio: DOMPurify.sanitize(bio),
     };
+    console.log(data);
     fetch("/userprofile", {
       method: "POST",
       headers: {
