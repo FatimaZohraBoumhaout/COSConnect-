@@ -12,7 +12,7 @@ import EditView from './Pages/EditView'
 import SendRequestView from "./Pages/SendRequestView";
 import Error from './Pages/Error';
 import PageNotFound from './Pages/PageNotFound';
-
+import Request from "./Pages/Request";
 function App() {
 
   return (
@@ -27,6 +27,7 @@ function App() {
           <Route path="/classview" element={<ClassView />} />
           <Route path="/partnerview" element={<PartnerProfileView />} />
           <Route path="/sendrequest" element={<SendRequestView />} />
+          <Route path="/request" element={<Request />} />
           <Route path="/error" element={<Error />} />
           <Route path="*" element={<PageNotFound />} /> 
         </Routes>

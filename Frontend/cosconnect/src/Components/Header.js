@@ -34,6 +34,13 @@ function Header() {
     margin: 0;
     font-size: 1.5rem;
   }
+
+  .header__logo a {
+    color: #F6F6F2;
+    text-decoration: none;
+    justify-content: space-between;
+
+  }
   
   .header__button {
     display: flex;
@@ -141,7 +148,7 @@ function Header() {
     <nav className="header">
       <style>{styles}</style>
       <div className="header__logo">
-        <h1>COSConnect</h1>
+        <h1><a href="home">COSConnect</a></h1>
       </div>
       <div className="header__button">
         { /* Render the dropdown button on small screens */ }
@@ -158,7 +165,7 @@ function Header() {
         </div>
 
         { /* Render the links as individual items on large screens */ }
-        <a className="hidd" href="home">Home</a>
+        <a className="hidd" href="home">Classes</a>
         <div className="header__button-divider hidd"></div>
         <a className="hidd" href="profileview">Profile</a>
         <div className="header__button-divider hidd"></div>
