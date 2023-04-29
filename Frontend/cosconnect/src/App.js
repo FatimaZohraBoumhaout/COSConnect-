@@ -4,18 +4,15 @@ import './App.css';
 import UserProfileView from './Pages/UserProfileView';
 import Footer from './Components/Footer';
 import UserSurvey from './Pages/UserSurvey';
-import SettingsView from "./Components/SettingsView";
 import Home from "./Pages/Home";
 import ClassView from './Pages/ClassView';
 import Signin from './Pages/SignIn';
 import PartnerProfileView from './Pages/PartnerProfileView'
 import EditView from './Pages/EditView'
 import SendRequestView from "./Pages/SendRequestView";
-import Header from './Components/Header';
-import SignInHeader from './Components/SignInHeader';
 import Error from './Pages/Error';
-
-
+import PageNotFound from './Pages/PageNotFound';
+import Request from "./Pages/Request";
 function App() {
 
   return (
@@ -30,7 +27,9 @@ function App() {
           <Route path="/classview" element={<ClassView />} />
           <Route path="/partnerview" element={<PartnerProfileView />} />
           <Route path="/sendrequest" element={<SendRequestView />} />
+          <Route path="/request" element={<Request />} />
           <Route path="/error" element={<Error />} />
+          <Route path="*" element={<PageNotFound />} /> 
         </Routes>
       </BrowserRouter>
     </>

@@ -1,5 +1,5 @@
 /*------------------------------------------------------------------
-  FOR FIRST TIME USERS (Form) -----> ADD REQUIRED TO INPUT
+  FOR FIRST TIME USERS (Form)
   -------------------------------------------------------------------*/
 
 import React, { useState, useEffect } from "react";
@@ -7,6 +7,8 @@ import { useNavigate } from "react-router-dom";
 import { useCookies } from "react-cookie";
 import "./UserSurvey.css";
 import Multiselect from "multiselect-react-dropdown";
+import DOMPurify from 'dompurify';
+
 
 function UserSurvey() {
   const navigate = useNavigate();
@@ -22,16 +24,17 @@ function UserSurvey() {
   const handleSubmit = (event) => {
     event.preventDefault();
     const netId = cookies.net_id;
-    console.log(netId);
+    console.log("cookie us" + netId);
     const data = {
       netId,
-      fullName,
-      displayName,
-      pronouns,
+      fullName: DOMPurify.sanitize(fullName),
+      displayName: DOMPurify.sanitize(displayName),
+      pronouns: DOMPurify.sanitize(pronouns),
       classes,
-      availability,
-      bio,
+      availability: DOMPurify.sanitize(availability),
+      bio: DOMPurify.sanitize(bio),
     };
+    console.log(data);
     fetch("/userprofile", {
       method: "POST",
       headers: {
@@ -86,98 +89,105 @@ function UserSurvey() {
 
   return (
     <div className="bd">
-      <div className="container1">
-        <h1 className="form-title" style={{ color: "#338888" }}>
-          Welcome to COSConnect!
-        </h1>
-
-        <form method="post" onSubmit={handleSubmit}>
-          <div className="user-info">
-            <div className="input-box">
-              <label htmlFor="fullName">Full Name</label>
-              <input
-                type="text"
-                id="fullName"
-                name="fullName"
-                placeholder="Enter Full Name"
-                value={fullName}
-                onChange={(event) => setFullName(event.target.value)}
-                required
-              />
-            </div>
-
-            <div className="input-box">
-              <label htmlFor="displayName">Display Name</label>
-              <input
-                type="text"
-                id="displayName"
-                name="displayName"
-                placeholder="Enter Display Name"
-                value={displayName}
-                onChange={(event) => setDisplayName(event.target.value)}
-              />
-            </div>
-
-            <div className="input-box">
-              <label htmlFor="pronouns">Pronouns</label>
-              <input
-                type="text"
-                id="pronouns"
-                name="pronouns"
-                placeholder="Enter Pronouns"
-                value={pronouns}
-                onChange={(event) => setPronouns(event.target.value)}
-                required
-              />
-            </div>
-
-            <div className="input-box">
-              <label htmlFor="classes">Classes</label>
-              <div className="multi-select">
-                <Multiselect 
+    <div className="container1">
+      <h1 className="form-title" style={{ color: "#338888" }}>
+        Welcome to COSConnect!
+      </h1>
+  
+      <form method="post" onSubmit={handleSubmit}>
+        <div className="user-info">
+          <div className="input-box">
+            <label htmlFor="fullName">Full Name</label>
+            <input
+              type="text"
+              id="fullName"
+              name="fullName"
+              placeholder="Enter Full Name"
+              value={fullName}
+              onChange={(event) => setFullName(event.target.value)}
+              required
+              maxlength="50"
+            />
+          </div>
+  
+          <div className="input-box">
+            <label htmlFor="displayName">Display Name</label>
+            <input
+              type="text"
+              id="displayName"
+              name="displayName"
+              placeholder="Enter Display Name"
+              value={displayName}
+              onChange={(event) => setDisplayName(event.target.value)}
+              maxlength="50"
+            />
+          </div>
+  
+          <div className="input-box">
+            <label htmlFor="pronouns">Pronouns</label>
+            <input
+              type="text"
+              id="pronouns"
+              name="pronouns"
+              placeholder="Enter Pronouns"
+              value={pronouns}
+              onChange={(event) => setPronouns(event.target.value)}
+              required
+              maxlength="50"
+            />
+          </div>
+  
+          <div className="input-box">
+            <label htmlFor="classes">Classes</label>
+            <div className="multi-select">
+              <Multiselect 
                 isObject={false}
                 options={course}
                 selectedValues={classes}
                 onSelect={handleTagSelect}
                 onRemove={handleTagSelect}
-                />
-              </div>
-            </div>
-
-            <div className="input-box">
-              <label htmlFor="availability">Availability</label>
-              <textarea
-                type="text"
-                id="availability"
-                name="availability"
-                placeholder="i.e. Monday from 3:00 PM to 5:00 PM"
-                value={availability}
-                onChange={(event) => setAvailability(event.target.value)}
-                style={{ height: "97%", width: "95%", padding: "15px" }}
-                required
-              ></textarea>
-            </div>
-
-            <div className="input-box">
-              <label htmlFor="bio">Bio</label>
-              <textarea
-                id="bio"
-                name="Bio"
-                placeholder="Tell us about yourself"
-                value={bio}
-                onChange={(event) => setBio(event.target.value)}
-                style={{ height: "97%", width: "95%", padding: "15px" }}
-                required
-              ></textarea>
+                maxlength="40"
+              />
             </div>
           </div>
-
-          <div className="submit-btn">
-            <input type="submit" value="Submit" />
+  
+          <div className="input-box">
+            <label htmlFor="availability">Availability</label>
+            <textarea
+              type="text"
+              id="availability"
+              name="availability"
+              placeholder="i.e. Monday from 3:00 PM to 5:00 PM. Please write no more than 100 chars!"
+              value={availability}
+              onChange={(event) => setAvailability(event.target.value)}
+              style={{ height: "97%", width: "95%", padding: "15px" }}
+              required
+              maxlength="100"
+            ></textarea>
           </div>
-        </form>
-      </div>
+  
+          <div className="input-box">
+            <label htmlFor="bio">Bio</label>
+            <textarea
+              id="bio"
+              name="Bio"
+              placeholder="Please write no more than 100 chars!"
+              value={bio}
+              onChange={(event) => setBio(event.target.value)}
+              style={{ height: "97%", width: "95%", padding: "15px" }}
+              required
+              maxlength="100"
+            ></textarea>
+          </div>
+        </div>
+  
+        <div className="submit-btn">
+          <input type="submit" value="Submit" />
+        </div>
+      </form>
     </div>
+  </div>
+  
   );
 }
 
