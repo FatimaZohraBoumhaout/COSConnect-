@@ -25,7 +25,8 @@ def princeton_email(email):
         return True
     extension = email.split('@')[1]
     print('extension', extension)    
-    return extension == 'princeton.edu'
+    return True
+    #return extension == 'princeton.edu'
 
 @app.route('/login', methods=['POST'])
 def log_in():
@@ -379,6 +380,17 @@ def get_recent_received():
         if (len(output) > 0):
             output = output[len(output) - 1][0]
         print("got received is now", output)
+        return jsonify(output)
+    except Exception as ex:
+        print('Error in post_status:', ex)
+        return jsonify({'error': 'Failed to recent received'}), 500
+
+@app.route('/get_request', methods=['GET'])
+def get_request_():
+    try:
+        net_id = flask.request.args.get('id')
+        output = database_access.get_recent_received((net_id), 'testdb_ery6')
+        print("got received", output)
         return jsonify(output)
     except Exception as ex:
         print('Error in post_status:', ex)
