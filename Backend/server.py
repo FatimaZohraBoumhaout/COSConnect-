@@ -228,22 +228,22 @@ def edit_profile():
         return jsonify({'error': 'Failed to update profile'}), 500
 
 
-@app.route('/get_students', methods=['GET'])
-def get_students():
-    """Get a list of students who are enrolled in the given class."""
-    try:
-        classes = flask.request.args.get('class')
-        net_id = flask.request.args.get('id')
-        if not classes:
-            raise ValueError('Missing class name')
-        students = database_access.get_students((classes, net_id), 'testdb_ery6')
-        return jsonify(students)
-    except ValueError as vex:
-        print('Error in get_students:', vex)
-        return jsonify({'error': 'Missing class name'}), 400
-    except Exception as ex:
-        print('Error in get_students:', ex)
-        return jsonify({'error': 'Failed to retrieve students'}), 500
+# @app.route('/get_students', methods=['GET'])
+# def get_students():
+#     """Get a list of students who are enrolled in the given class."""
+#     try:
+#         classes = flask.request.args.get('class')
+#         net_id = flask.request.args.get('id')
+#         if not classes:
+#             raise ValueError('Missing class name')
+#         students = database_access.get_students((classes, net_id), 'testdb_ery6')
+#         return jsonify(students)
+#     except ValueError as vex:
+#         print('Error in get_students:', vex)
+#         return jsonify({'error': 'Missing class name'}), 400
+#     except Exception as ex:
+#         print('Error in get_students:', ex)
+#         return jsonify({'error': 'Failed to retrieve students'}), 500
 
 @app.route('/get_courses', methods=['GET'])
 def get_courses():
@@ -291,58 +291,87 @@ def send_email():
         return jsonify({'error': 'Failed to send the email'}), 500
 #-------------------------------------------------------------------------------------------------------
 
-@app.route('/post_status', methods=['POST'])
-def post_status():
-    try:
-        data = flask.request.get_json()
-        net_id = data.get('netId')
-        status = data.get('status')
-        print("trying to change status to", status)
-        database_access.post_status((net_id, status), 'testdb_ery6')
-        return jsonify({'status': 'success', 'message': 'Status updated successfully'})
-    except Exception as ex:
-        print('Error in post_status:', ex)
-        return jsonify({'error': 'Failed to post status'}), 500
+# @app.route('/post_status', methods=['POST'])
+# def post_status():
+#     try:
+#         data = flask.request.get_json()
+#         net_id = data.get('netId')
+#         status = data.get('status')
+#         print("trying to change status to", status)
+#         database_access.post_status((net_id, status), 'testdb_ery6')
+#         return jsonify({'status': 'success', 'message': 'Status updated successfully'})
+#     except Exception as ex:
+#         print('Error in post_status:', ex)
+#         return jsonify({'error': 'Failed to post status'}), 500
 
-@app.route('/post_talking', methods=['POST'])
-def post_talking():
+# @app.route('/post_talking', methods=['POST'])
+# def post_talking():
+#     try:
+#         data = flask.request.get_json()
+#         net_id = data.get('netId')
+#         talking = not data.get('talking')
+#         print("trying to change talking to", talking)
+#         database_access.post_talking((net_id, talking), 'testdb_ery6')
+#         return jsonify({'status': 'success', 'message': 'Talking updated successfully'})
+#     except Exception as ex:
+#         print('Error in post_status:', ex)
+#         return jsonify({'error': 'Failed to post talking'}), 500
+
+@app.route('/post_notifications', methods=['POST'])
+def post_notifications():
     try:
         data = flask.request.get_json()
         net_id = data.get('netId')
-        talking = not data.get('talking')
-        print("trying to change talking to", talking)
-        database_access.post_talking((net_id, talking), 'testdb_ery6')
+        notifications = not data.get('notifications')
+        print("trying to change notifications to", notifications)
+        database_access.post_notifications((net_id, notifications), 'testdb_ery6')
         return jsonify({'status': 'success', 'message': 'Talking updated successfully'})
     except Exception as ex:
         print('Error in post_status:', ex)
-        return jsonify({'error': 'Failed to post talking'}), 500
+        return jsonify({'error': 'Failed to post notifications'}), 500
 
-@app.route('/get_status', methods=['GET'])
+# @app.route('/get_status', methods=['GET'])
+# def get_status():
+#     try:
+#         net_id = flask.request.args.get('id')
+#         status = database_access.get_status((net_id), 'testdb_ery6')
+#         print("GOT STATUS", status[0][0])
+#         if status[0][0] == True:
+#             status = "Available"
+#         else:
+#             status = "Not Available"
+#         print("GOT STATUS", status)
+#         return jsonify(status)
+#     except Exception as ex:
+#         print('Error in post_status:', ex)
+#         return jsonify({'error': 'Failed to get status'}), 500
+
+# @app.route('/get_talking', methods=['GET'])
+# def get_talking():
+#     try:
+#         net_id = flask.request.args.get('id')
+#         talking = database_access.get_talking((net_id), 'testdb_ery6')
+#         print("GOT TALKING", talking[0][0])
+#         return jsonify(talking[0][0])
+#     except Exception as ex:
+#         print('Error in post_status:', ex)
+#         return jsonify({'error': 'Failed to get talking'}), 500
+
+@app.route('/get_notifications', methods=['GET'])
 def get_status():
     try:
         net_id = flask.request.args.get('id')
-        status = database_access.get_status((net_id), 'testdb_ery6')
-        print("GOT STATUS", status[0][0])
-        if status[0][0] == True:
-            status = "Available"
+        notifications = database_access.get_notifications((net_id), 'testdb_ery6')
+        print("GOT Notifications", notifications[0][0])
+        if notifications[0][0] == True:
+            notifications = "Available"
         else:
-            status = "Not Available"
-        print("GOT STATUS", status)
-        return jsonify(status)
+            notifications = "Not Available"
+        print("GOT STATUS", notifications)
+        return jsonify(notifications)
     except Exception as ex:
         print('Error in post_status:', ex)
         return jsonify({'error': 'Failed to get status'}), 500
-
-@app.route('/get_talking', methods=['GET'])
-def get_talking():
-    try:
-        net_id = flask.request.args.get('id')
-        talking = database_access.get_talking((net_id), 'testdb_ery6')
-        print("GOT TALKING", talking[0][0])
-        return jsonify(talking[0][0])
-    except Exception as ex:
-        print('Error in post_status:', ex)
-        return jsonify({'error': 'Failed to get talking'}), 500
 
 @app.route('/get_students_info', methods=['GET'])
 def get_students_info():

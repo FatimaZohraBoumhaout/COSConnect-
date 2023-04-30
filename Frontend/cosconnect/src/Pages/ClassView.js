@@ -117,7 +117,7 @@ function ClassView(){
             return (<div className="rectangle-right">
                 <Link to={`/partnerview`} onClick={() => handleClick(st[0])}>
                 <div style={{float:'left'}}>
-                    <center style={{ paddingLeft: '8px', textAlign: 'center'}}>{st[1]} <p>NetId: {st[0]}, Availability: {st[2]}, Status: {st[3]}</p></center>
+                    <center style={{ paddingLeft: '8px', textAlign: 'center'}}>{st[1]} <p>NetId: {st[0]}, Availability: {st[2]}</p></center>
                 </div>
                 </Link>
                 <Link className="btn" onClick={() => sendRequest(st[0])} to={`/sendrequest`}>
