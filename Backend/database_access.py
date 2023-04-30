@@ -325,6 +325,10 @@ def get_courses():
 
 def post_notifications(input, database_url):
     user_id, notifications = input
+    if notifications == "Available":
+        notifications = "False"
+    else:
+        notifications = "True"
     try:
         with psycopg2.connect(dbname=database_url, host="dpg-cggj3fceoogqfc2no840-a.ohio-postgres.render.com", user="testuser", password="gVYdK2LMupfkuAxyR6kp3a6XpuIB9VVV") as connection:
             with contextlib.closing(connection.cursor()) as cursor:
