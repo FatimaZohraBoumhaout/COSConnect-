@@ -99,7 +99,7 @@ function ClassView(){
         renderClasses = classes[0][0] && classes[0][0].map((cl) => {
             return(
                 <div className="rectangle-left">
-                    <Link to={`/classview?class=${cl}`} onClick={() => window.location.replace(`/classview?class=${cl}`)}><center>{cl}</center></Link>
+                    <Link to={`/classview?class=${cl}`} onClick={() => window.location.replace(`/classview?class=${cl}`)} style={{ textDecoration: 'none' }}><center>{cl}</center></Link>
                 </div>
             );
         });
@@ -117,7 +117,7 @@ function ClassView(){
             return (<div className="rectangle-right">
                 <Link to={`/partnerview`} onClick={() => handleClick(st[0])}>
                 <div style={{float:'left'}}>
-                    <center>NetId: {st[0]} <p>Display Name: {st[1]}, Availability: {st[2]}</p></center>
+                    <center style={{ paddingLeft: '8px', textAlign: 'center'}}>{st[1]} <p>NetId: {st[0]}, Availability: {st[2]}, Status: {st[3]}</p></center>
                 </div>
                 </Link>
                 <Link className="btn" onClick={() => sendRequest(st[0])} to={`/sendrequest`}>
@@ -163,7 +163,7 @@ function ClassView(){
                 return (<div className="rectangle-right">
                     <Link to={`/partnerview`} onClick={() => handleClick(st[0])}>
                     <div style={{float:'left'}}>
-                        <center>NetId: {st[0]} <p>Display Name: {st[1]}, Availability: {st[2]}</p></center>
+                        <center style={{ paddingLeft: '8px' }}>{st[1]} <p>NetId: {st[0]}, Availability: {st[2]}</p></center>
                     </div>
                     </Link>
                     <Link className="btn" onClick={() => sendRequest(st[0])} to={`/sendrequest`}>
