@@ -333,9 +333,9 @@ def post_notifications():
     try:
         data = flask.request.get_json()
         net_id = data.get('netId')
-        notifications = not data.get('notifications')
-        print("trying to change notifications to", notifications)
-        database_access.post_notifications((net_id, notifications), 'testdb_ery6')
+        status = data.get('status')
+        print("trying to change notifications to", status)
+        database_access.post_notifications((net_id, status), 'testdb_ery6')
         return jsonify({'status': 'success', 'message': 'Talking updated successfully'})
     except Exception as ex:
         print('Error in post_status:', ex)
@@ -381,8 +381,8 @@ def get_status():
         print("GOT STATUS", notifications)
         return jsonify(notifications)
     except Exception as ex:
-        print('Error in post_status:', ex)
-        return jsonify({'error': 'Failed to get status'}), 500
+        print('Error in get_notifications:', ex)
+        return jsonify({'error': 'Failed to get Notifications'}), 500
 
 @app.route('/get_students_info', methods=['GET'])
 def get_students_info():

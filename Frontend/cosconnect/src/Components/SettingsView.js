@@ -28,24 +28,25 @@ const toggleContainerStyle = {
 };
 
 function SettingsView() {
-  const [notifications, setNotifications] = useState([]);
+  const [status, setStatus] = useState([]);
   const [cookies] = useCookies(["net_id"]);
 
   useEffect(() => {
     fetch(`/get_notifications?id=${cookies.net_id}`)
     .then(response => response.json())
     .then((data) => {
-      setNotifications(data);
+      setStatus(data);
       console.log("notifications set to:", data);
     })
     .catch(error => console.error(error));
   }, []);
+  
 
-  const handleNotificationsToggle = () => {
+  const handleStatusToggle = () => {
     const netId = cookies.net_id;
-    setNotifications((prevNotifications) => (prevNotifications === true ? false : true));
-    console.log(netId, notifications)
-    const data = {netId, notifications};
+    setStatus((prevStatus) => (prevStatus === "Available" ? "Not Available" : "Available"));
+    console.log(netId, status)
+    const data = {netId, status};
     fetch(`/post_notifications`, {
       method: 'POST',
       headers: {
@@ -55,13 +56,14 @@ function SettingsView() {
     })
     .then(response => {
         if (response.ok) {
-          console.log("notifications changed")
+          console.log("Status changed")
         } else {
-          console.log("notifications change failed")
+          console.log("Status change failed")
         }
       })
       .catch(error => console.error(error));
   };
+
 
   return (
     <div className="grid-item item-2" style={settingsStyle}>
@@ -69,24 +71,23 @@ function SettingsView() {
         <div style={headerContainerStyle}>
           <h2 style={{ margin:0}}>Settings</h2>
           <div style={toggleContainerStyle}>
-            <label htmlFor="status-toggle">Notifications: </label>
+            <label htmlFor="status-toggle">Status: </label>
             <div style={{ marginLeft: "10px" }}>
               <label className="switch">
                 <input
                   type="checkbox"
                   id="status-toggle"
-                  onChange={handleNotificationsToggle}
-                  checked={notifications === "Available"}
+                  onChange={handleStatusToggle}
+                  checked={status === "Available"}
                 />
                 <span className="slider round"></span>
               </label>
             </div>
-            <span style={{ marginLeft: "10px" }}>{notifications}</span>
-          </div>
-            {/* {notifications && <span className="notification-badge">1</span>} */}
+            <span style={{ marginLeft: "10px" }}>{status}</span>
           </div>
         </div>
       </div>
+    </div>
   );
 }
 
