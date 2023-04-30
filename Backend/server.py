@@ -436,5 +436,41 @@ def get_request_():
         print('Error in post_status:', ex)
         return jsonify({'error': 'Failed to recent received'}), 500
 
+@app.route('/accept_request', methods=['POST'])
+def accept_request():
+    try:
+        sender = flask.request.args.get('sender')
+        receiver = flask.request.args.get('receiver')
+        course = flask.request.args.get('course')
+        database_access.accept_request((sender, receiver, course), 'testdb_ery6')
+        return jsonify({'status': 'success', 'message': 'Request accepted successfully'})
+    except Exception as ex:
+        print('Error in accept_request:', ex)
+        return jsonify({'error': 'Failed to accept request'}), 500
+
+@app.route('/reject_request', methods=['POST'])
+def reject_request():
+    try:
+        sender = flask.request.args.get('sender')
+        receiver = flask.request.args.get('receiver')
+        course = flask.request.args.get('course')
+        output = database_access.reject_request((sender, receiver, course), 'testdb_ery6')
+        return jsonify({'status': 'success', 'message': 'Request rejected successfully'})
+    except Exception as ex:
+        print('Error in reject_request:', ex)
+        return jsonify({'error': 'Failed to reject request'}), 500
+
+@app.route('/post_class_status', methods=['POST'])
+def post_class_status():
+    try:
+        course = flask.request.args.get('course')
+        net_id = flask.request.args.get('id')
+        class_status = flask.request.args.get('status')
+        database_access.post_class_status((net_id, course), 'testdb_ery6')
+        return jsonify({'status': 'success', 'message': 'Class status updated successfully'})
+    except Exception as ex:
+        print('Error in reject_request:', ex)
+        return jsonify({'error': 'Failed to update class status'}), 500
+
 if __name__ == '__main__':
     app.run(debug=True)
