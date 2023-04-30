@@ -9,6 +9,7 @@ import smtplib
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
 from flask_mail import Mail, Message
+import numpy as np
 
 
 # -----------------------------------------------------------------------
@@ -220,6 +221,16 @@ def edit_profile():
         bio = data.get('bio')
         availability = data.get('availability')
         print(user_id, pronouns, classes, bio, availability)
+        old_classes = database_access.get_classes(user_id, 'testdb_ery6')[0][0]
+        #print("old classes", old_classes)
+        #print("new classes", classes)
+        deleted_classes =  np.setdiff1d(old_classes, classes)
+        added_classes = np.setdiff1d(classes, old_classes)
+        for course in deleted_classes:
+            database_access.delete_class((user_id, course), 'testdb_ery6')
+            database_access.reject_all_requests((user_id, course), 'testdb_ery6')
+        for course in added_classes:
+            database_access.add_class((user_id, course), 'testdb_ery6')
         database_access.edit_user(
             (user_id, pronouns, classes, bio, availability), 'testdb_ery6')
         return jsonify({'message': 'Profile updated successfully'})

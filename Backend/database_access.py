@@ -94,14 +94,15 @@ def add_class(input_data, database_url):
         print(ex)
 
 def delete_class(input_data, database_url):
-    net_id = input_data
+    net_id, course = input_data
     print("id: ", net_id)
+    print("course: ", course)
     try:
         with psycopg2.connect(dbname=database_url, host="dpg-cggj3fceoogqfc2no840-a.ohio-postgres.render.com", user="testuser", password="gVYdK2LMupfkuAxyR6kp3a6XpuIB9VVV") as connection:
             with contextlib.closing(connection.cursor()) as cursor:
-                query = "DELETE FROM classes WHERE net_id = %s;"
+                query = "DELETE FROM classes WHERE net_id = %s AND class = %s;"
                 try:
-                    cursor.execute(query, (net_id,))
+                    cursor.execute(query, (net_id, course))
                 except Exception as ex:
                     print(ex)
                 return
@@ -111,6 +112,7 @@ def delete_class(input_data, database_url):
 def reject_all_requests(input_data, database_url):
     net_id, course = input_data
     print("id: ", net_id)
+    print("course: ", course)
     try:
         with psycopg2.connect(dbname=database_url, host="dpg-cggj3fceoogqfc2no840-a.ohio-postgres.render.com", user="testuser", password="gVYdK2LMupfkuAxyR6kp3a6XpuIB9VVV") as connection:
             with contextlib.closing(connection.cursor()) as cursor:
