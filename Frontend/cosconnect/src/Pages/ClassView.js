@@ -137,9 +137,8 @@ function ClassView(){
 
     useEffect(() => {
          console.log("fixed from input set to be", fixed)
-
-         output = fixed.filter(element => (element[1].includes(input) || element[3].includes(input) && 
-                                            element[2].includes(availInput)))
+         output = fixed.filter(element => ((element[1].toLowerCase()).includes(input.toLowerCase()) || (element[3].toLowerCase()).includes(input.toLocaleLowerCase()) ||
+                                            (element[2].toLowerCase()).includes(input.toLowerCase())))
          output = output.map(element => element[0])
          //setFinalOutput(output)
          let studentsToRender = studentsId.map((st, index) =>{
@@ -220,15 +219,15 @@ function ClassView(){
                 <div className="search">
                     <center>
                     <form id="form" className="form">
-                        <input placeholder="Search Name or NetId..." onChange={event => handleChange(event.target.value)}/>
+                        <input placeholder="Search..." onChange={event => handleChange(event.target.value)}/>
                         <button className="search-button" disabled={true}>
                         <svg viewBox="0 0 1024 1024"><path class="path1" d="M848.471 928l-263.059-263.059c-48.941 36.706-110.118 55.059-177.412 55.059-171.294 0-312-140.706-312-312s140.706-312 312-312c171.294 0 312 140.706 312 312 0 67.294-24.471 128.471-55.059 177.412l263.059 263.059-79.529 79.529zM189.623 408.078c0 121.364 97.091 218.455 218.455 218.455s218.455-97.091 218.455-218.455c0-121.364-103.159-218.455-218.455-218.455-121.364 0-218.455 97.091-218.455 218.455z"></path></svg>
                         </button>
                         
-                        <input placeholder="Search Availability..." onChange={event => handleAvailChange(event.target.value)}/>
+                       {/* { <input placeholder="Search Availability..." onChange={event => handleAvailChange(event.target.value)}/>
                         <button className="search-button" disabled={true}>
                         <svg viewBox="0 0 1024 1024"><path class="path1" d="M848.471 928l-263.059-263.059c-48.941 36.706-110.118 55.059-177.412 55.059-171.294 0-312-140.706-312-312s140.706-312 312-312c171.294 0 312 140.706 312 312 0 67.294-24.471 128.471-55.059 177.412l263.059 263.059-79.529 79.529zM189.623 408.078c0 121.364 97.091 218.455 218.455 218.455s218.455-97.091 218.455-218.455c0-121.364-103.159-218.455-218.455-218.455-121.364 0-218.455 97.091-218.455 218.455z"></path></svg>
-                        </button>
+                        </button>} */}
                     </form>  
                     </center>
                     <h2>{"COS " + this_class}</h2>
