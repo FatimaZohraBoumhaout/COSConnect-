@@ -106,7 +106,7 @@ function UserSurvey() {
               value={fullName}
               onChange={(event) => setFullName(event.target.value)}
               required
-              maxlength="50"
+              maxlength="70"
             />
           </div>
   
@@ -119,7 +119,8 @@ function UserSurvey() {
               placeholder="Enter Display Name"
               value={displayName}
               onChange={(event) => setDisplayName(event.target.value)}
-              maxlength="50"
+              required
+              maxlength="70"
             />
           </div>
   
@@ -146,6 +147,7 @@ function UserSurvey() {
                 selectedValues={classes}
                 onSelect={handleTagSelect}
                 onRemove={handleTagSelect}
+                required
                 maxlength="40"
               />
             </div>
@@ -176,7 +178,7 @@ function UserSurvey() {
               onChange={(event) => setBio(event.target.value)}
               style={{ height: "97%", width: "95%", padding: "15px" }}
               required
-              maxlength="100"
+              maxlength="150"
             ></textarea>
           </div>
         </div>
