@@ -79,11 +79,11 @@ function RequestView() {
   return (
     <div className="grid-item item-3" style={requestBody}>
       <div className="request-header" style={headerStyle}>
-        <h2>My Requests</h2>
+        <h2>My Recent Activity</h2>
       </div>
       <div className="rectangle-container" style={rectangleContainerStyle}>
         <div className="rectangle" style={rectangleStyle}>
-          <p style={pStyle}>Recently Received</p>
+          <p style={pStyle}>Recently Received Request</p>
           <p style={{color:'white'}}>
           {receivedRequest}
           </p>
@@ -92,7 +92,7 @@ function RequestView() {
           }
         </div>
         <div className="rectangle" style={rectangleStyle}>
-        <p style={pStyle}>Recently Sent</p>
+        <p style={pStyle}>Recently Sent Request</p>
         <p style={{color:'white'}}>
         {sentRequest}
         </p>

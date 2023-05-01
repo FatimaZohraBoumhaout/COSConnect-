@@ -12,7 +12,8 @@ const footerStyles = {
 function Footer() {
   return (
     <footer style={footerStyles}>
-      <h2>Designed and Created by: </h2>
+      <h2>Designed and Created by: Zohra Boumhaout, Ankhitha Manjunatha, Pascal Nabare, Cynthia Or, Devansh Sharma
+</h2>
     </footer>
   );
 }

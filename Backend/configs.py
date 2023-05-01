@@ -2,6 +2,7 @@ import requests
 import json
 import base64
 
+# code from: https://github.com/vr2amesh/COS333-API-Code-Examples
 class Configs:
     def __init__(self):
         self.CONSUMER_KEY = "o8eO5mCZnLfJBaF7U3Twx4mfWY0a"

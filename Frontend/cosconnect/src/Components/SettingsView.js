@@ -29,23 +29,14 @@ const toggleContainerStyle = {
 
 function SettingsView() {
   const [status, setStatus] = useState([]);
-  const [talking, setTalking] = useState([]);
   const [cookies] = useCookies(["net_id"]);
 
   useEffect(() => {
-    fetch(`/get_status?id=${cookies.net_id}`)
+    fetch(`/get_notifications?id=${cookies.net_id}`)
     .then(response => response.json())
     .then((data) => {
       setStatus(data);
-      console.log("status set to:", data);
-    })
-    .catch(error => console.error(error));
-
-    fetch(`/get_talking?id=${cookies.net_id}`)
-    .then(response => response.json())
-    .then((data) => {
-      setTalking(data);
-      console.log("talking set to:", data);
+      console.log("notifications set to:", data);
     })
     .catch(error => console.error(error));
   }, []);
@@ -56,7 +47,7 @@ function SettingsView() {
     setStatus((prevStatus) => (prevStatus === "Available" ? "Not Available" : "Available"));
     console.log(netId, status)
     const data = {netId, status};
-    fetch(`/post_status`, {
+    fetch(`/post_notifications`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
@@ -73,27 +64,6 @@ function SettingsView() {
       .catch(error => console.error(error));
   };
 
-  const handleTalkingToggle = () => {
-    const netId = cookies.net_id;
-    setTalking((prevTalking) => (prevTalking === true ? false : true));
-    console.log(netId, talking)
-    const data = {netId, talking};
-    fetch(`/post_talking`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(data)
-    })
-    .then(response => {
-        if (response.ok) {
-          console.log("talking changed")
-        } else {
-          console.log("talking change failed")
-        }
-      })
-      .catch(error => console.error(error));
-  };
 
   return (
     <div className="grid-item item-2" style={settingsStyle}>
@@ -101,7 +71,7 @@ function SettingsView() {
         <div style={headerContainerStyle}>
           <h2 style={{ margin:0}}>Settings</h2>
           <div style={toggleContainerStyle}>
-            <label htmlFor="status-toggle">Status: </label>
+            <label htmlFor="status-toggle">Notifications: </label>
             <div style={{ marginLeft: "10px" }}>
               <label className="switch">
                 <input
@@ -114,33 +84,6 @@ function SettingsView() {
               </label>
             </div>
             <span style={{ marginLeft: "10px" }}>{status}</span>
-          </div>
-          <div style={toggleContainerStyle}>
-            <label htmlFor="talking-toggle">Talking to Someone: </label>
-            <div style={{ marginLeft: "10px" }}>
-              <label className="switch">
-                <input
-                  type="checkbox"
-                  id="talking-toggle"
-                  onChange={handleTalkingToggle}
-                  checked={talking === true}
-                />
-                <span className="slider round"></span>
-              </label>
-            </div>
-            </div>
-          <div style={toggleContainerStyle}>
-            <label htmlFor="notifications-toggle">Notifications:</label>
-            <div style={{ marginLeft: "10px" }}>
-              <label className="switch">
-                <input
-                  type="checkbox"
-                  id="notifications-toggle"
-                />
-                <span className="slider round"></span>
-              </label>
-            </div>
-            {/* {notifications && <span className="notification-badge">1</span>} */}
           </div>
         </div>
       </div>
