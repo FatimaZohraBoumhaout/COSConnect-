@@ -138,7 +138,7 @@ function ClassView(){
     useEffect(() => {
          console.log("fixed from input set to be", fixed)
          if(fixed.length===0){
-            return(<p>There are no other students in this class.</p>)
+            return() => {<p>There are no other students in this class.</p>};
          }
          output = fixed.filter(element => ((element[1].toLowerCase()).includes(input.toLowerCase()) || (element[3].toLowerCase()).includes(input.toLocaleLowerCase()) ||
                                             (element[2].toLowerCase()).includes(input.toLowerCase())))
@@ -188,7 +188,7 @@ function ClassView(){
             console.log("StudentsId set to", studentsId)
             setFixed(studentsId.map((element, index) => [index, element[1], element[2], element[0]]))
             if(fixed.length===0){
-                return(<p>There are no other students in this class.</p>)
+                return() => {<p>There are no other students in this class.</p>};
             }
             console.log("fixed set to", fixed)
             output = fixed.map(element => element[0])
