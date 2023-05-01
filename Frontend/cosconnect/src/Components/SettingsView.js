@@ -71,7 +71,7 @@ function SettingsView() {
         <div style={headerContainerStyle}>
           <h2 style={{ margin:0}}>Settings</h2>
           <div style={toggleContainerStyle}>
-            <label htmlFor="status-toggle">Status: </label>
+            <label htmlFor="status-toggle">Notifications: </label>
             <div style={{ marginLeft: "10px" }}>
               <label className="switch">
                 <input

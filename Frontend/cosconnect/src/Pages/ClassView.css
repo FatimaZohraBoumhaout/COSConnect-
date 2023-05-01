@@ -104,13 +104,13 @@ h2{
     height: 50px;
     background-color: #F6F6F2;
     justify-content: 'center';
+    vertical-align: middle;
     margin: 16px;
     border-color: #BDD2B6;
     border-style: solid;
     border-width: 2px;
     overflow: wrap;
     border-radius: 10px;
-
 }
 
 .rectangle-left{
@@ -120,10 +120,12 @@ h2{
     background-color: #F6F6F2;
     margin: 16px;
     text-align: 'center';
+    vertical-align: middle;
     border-color: #BDD2B6;
     border-style: solid;
     border-width: 2px;
-    border-radius: 10px
+    border-radius: 10px;
+    font-size: 20px;
 }
 
 .search-button{
@@ -177,3 +179,60 @@ Link{
     color: black;
     text-decoration: none !important;
 }
+
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 60px;
+    height: 34px;
+  }
+  
+  .switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+  }
+  
+  .slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    -webkit-transition: .4s;
+    transition: .4s;
+    border-radius: 34px;
+  }
+  
+  .slider:before {
+    position: absolute;
+    content: "";
+    height: 26px;
+    width: 26px;
+    left: 4px;
+    bottom: 4px;
+    background-color: white;
+    -webkit-transition: .4s;
+    transition: .4s;
+    border-radius: 50%;
+  }
+  
+  input:checked + .slider {
+    background-color: #3e8e41;
+  }
+  
+  input:focus + .slider {
+    box-shadow: 0 0 1px #2196F3;
+  }
+  
+  input:checked + .slider:before {
+    -webkit-transform: translateX(26px);
+    -ms-transform: translateX(26px);
+    transform: translateX(26px);
+  }
+
+  .statusToggle {
+    margin-top: 10px;
+  }

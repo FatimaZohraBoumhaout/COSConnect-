@@ -8,8 +8,16 @@ import "@fontsource/inter";
 import Header from "../Components/Header";
 import Footer from "../Components/Footer";
 
+const toggleContainerStyle = {
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+  };
+
+
 function ClassView(){
     const navigate = useNavigate();
+    const [status, setStatus] = useState([]);
     const [cookies, setCookie] = useCookies(['net_id', 'partner_id', 'class_id']);
     const [classes, setClasses] = useState([]);
     const [sentRequest, setSentRequest] = useState([]);
@@ -99,11 +107,33 @@ function ClassView(){
         renderClasses = classes[0][0] && classes[0][0].map((cl) => {
             return(
                 <div className="rectangle-left">
-                    <Link to={`/classview?class=${cl}`} onClick={() => window.location.replace(`/classview?class=${cl}`)} style={{ textDecoration: 'none' }}><center>{cl}</center></Link>
+                    <Link to={`/classview?class=${cl}`} onClick={() => window.location.replace(`/classview?class=${cl}`)} style={{ textDecoration: 'none' }}><center>{"COS " + cl}</center></Link>
                 </div>
             );
         });
     }
+
+    const handleStatusToggle = () => {
+        const netId = cookies.net_id;
+        setStatus((prevStatus) => (prevStatus === "Available" ? "Not Available" : "Available"));
+        console.log(netId, status)
+        const data = {netId, status};
+        fetch(`/post_notifications`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(data)
+        })
+        .then(response => {
+            if (response.ok) {
+              console.log("Status changed")
+            } else {
+              console.log("Status change failed")
+            }
+          })
+          .catch(error => console.error(error));
+      };
 
     useEffect(() => {
          console.log("fixed from input set to be", fixed)
@@ -117,10 +147,10 @@ function ClassView(){
             return (<div className="rectangle-right">
                 <Link to={`/partnerview`} onClick={() => handleClick(st[0])}>
                 <div style={{float:'left'}}>
-                    <center style={{ paddingLeft: '8px', textAlign: 'center'}}>{st[1]} <p>NetId: {st[0]}, Availability: {st[2]}</p></center>
+                    <center style={{ paddingLeft: '8px', fontSize: '18px'}}>{st[1]} <p style={{fontSize: '14px'}}>NetId: {st[0]}, Availability: {st[2]}</p></center>
                 </div>
                 </Link>
-                <Link className="btn" onClick={() => sendRequest(st[0])} to={`/sendrequest`}>
+                <Link className="btn" onClick={() => sendRequest(st[0])} to={`/sendrequest`} style={{ textDecoration: 'none' }}>
                     <center >Send</center>
                 </Link >
             </div>);
@@ -166,8 +196,8 @@ function ClassView(){
                         <center style={{ paddingLeft: '8px' }}>{st[1]} <p>NetId: {st[0]}, Availability: {st[2]}</p></center>
                     </div>
                     </Link>
-                    <Link className="btn" onClick={() => sendRequest(st[0])} to={`/sendrequest`}>
-                        <center>Send</center>
+                    <Link className="btn" onClick={() => sendRequest(st[0])} to={`/sendrequest`} style={{ textDecoration: 'none' }}>
+                        <center style={{ textDecoration: 'none' }}>Send</center>
                     </Link>
                 </div>);
                 }});
@@ -201,7 +231,24 @@ function ClassView(){
                         </button>
                     </form>  
                     </center>
-                    <h2>{this_class}</h2>
+                    <h2>{"COS " + this_class}</h2>
+                </div>
+                <div className="statusToggle">
+                    <div style={toggleContainerStyle}>
+                        <label htmlFor="status-toggle">Status: </label>
+                        <div style={{ marginLeft: "10px" }}>
+                            <label className="switch">
+                                <input
+                                    type="checkbox"
+                                    id="status-toggle"
+                                    onChange={handleStatusToggle}
+                                    checked={status === "Available"}
+                                />
+                                <span className="slider round"></span>
+                            </label>
+                        </div>
+                        <span style={{ marginLeft: "10px" }}>{status}</span>
+                    </div>
                 </div>
                     <h3>Invitations</h3>
                     {sentRequest && sentRequest.map((req) => (
