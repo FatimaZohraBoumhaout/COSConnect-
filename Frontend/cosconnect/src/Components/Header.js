@@ -169,6 +169,8 @@ function Header() {
         <div className="header__button-divider hidd"></div>
         <a className="hidd" href="profileview">Profile</a>
         <div className="header__button-divider hidd"></div>
+        <a className="hidd" href="request">Requests</a>
+        <div className="header__button-divider hidd"></div>
         {/* <a className="hidd" href="chatsview">Chats</a> */}
         {/* <div className="header__button-divider hidd"></div> */}
         <a className="hidd" href="/" onClick={handleLogOut}>Log Out</a>
