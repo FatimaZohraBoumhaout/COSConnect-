@@ -157,7 +157,7 @@ function UserSurvey() {
               type="text"
               id="availability"
               name="availability"
-              placeholder="i.e. Monday from 3:00 PM to 5:00 PM. Please write no more than 100 chars!"
+              placeholder="i.e. Monday from 3:00 PM to 5:00 PM."
               value={availability}
               onChange={(event) => setAvailability(event.target.value)}
               style={{ height: "97%", width: "95%", padding: "15px" }}
@@ -171,7 +171,7 @@ function UserSurvey() {
             <textarea
               id="bio"
               name="Bio"
-              placeholder="Please write no more than 100 chars!"
+              placeholder="Please write about your skills, past experiences, and anything else you think would help others connect with you as a partner."
               value={bio}
               onChange={(event) => setBio(event.target.value)}
               style={{ height: "97%", width: "95%", padding: "15px" }}
