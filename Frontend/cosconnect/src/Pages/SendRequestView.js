@@ -134,6 +134,16 @@ function SendRequestView() {
       background-color: #3e8e41;
     }
 
+    .send-button {
+      background-color: #26272D; 
+      color: white;
+      font-size: 15px;
+    }
+
+    .send-button:hover {
+      background-color: #3e8e41;
+    }
+
     .profile-content {
       margin-top: 20px;
       padding: 20px;
@@ -155,7 +165,6 @@ function SendRequestView() {
     .profile-content span {
       margin-left: 10px;
     }
-
 
     .gray-box {
       width: 100%;
@@ -222,10 +231,10 @@ function SendRequestView() {
           </div>
           <div>
             <label>Message: </label>
-            <h2 style={{color:'black'}}>Partner request through email</h2>
+            <h2 style={{color:'black', fontSize: '22px'}}>Partner request through email</h2>
           </div>
           {/* <Link to={`/classview?class=${cookies.class_id}`}> */}
-          <input type="submit" name="submit" value="Send" />
+          <input className="send-button" type="submit" name="submit" value="Send" />
           {/* </Link> */}
         </div>
       </div>

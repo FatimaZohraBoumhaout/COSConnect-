@@ -67,7 +67,7 @@ function Request(){
             </div>
             <div className="container_bottom">
                 <div className="rejected-requests">
-                    <h3 className="top-header">Rejected Requests</h3>
+                    <h3 className="top-header">Accepted Requests</h3>
                     {/* Render rejected requests similarly */}
                 </div>
             </div>

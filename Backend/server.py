@@ -26,8 +26,7 @@ def princeton_email(email):
         return True
     extension = email.split('@')[1]
     print('extension', extension)    
-    return True
-    #return extension == 'princeton.edu'
+    return extension == 'princeton.edu'
 
 @app.route('/login', methods=['POST'])
 def log_in():

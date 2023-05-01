@@ -85,12 +85,15 @@ h2{
 }
 .left-header{
     text-align:center;
+    font-size: 25px;
+    color: #26272D;
 }
 
 .form{
     background-color: #fff;
     width: 80%;
     height: 44px;
+    line-height: 44px;
     border-radius: 5px;
     display: flex;
     flex-direction: row;
@@ -102,11 +105,12 @@ h2{
     display: 'flex';
     width: 95%;
     height: 50px;
-    background-color: #F6F6F2;
+    line-height: 45px;
+    background-color: #BDD2B6;
     justify-content: 'center';
     vertical-align: middle;
     margin: 16px;
-    border-color: #BDD2B6;
+    border-color: #F6F6F2;
     border-style: solid;
     border-width: 2px;
     overflow: wrap;
@@ -117,11 +121,10 @@ h2{
     display: 'flex';
     width: 90%;
     height: 50px;
-    background-color: #F6F6F2;
+    line-height: 45px;
+    background-color: #BDD2B6;
     margin: 16px;
-    text-align: 'center';
-    vertical-align: middle;
-    border-color: #BDD2B6;
+    border-color: #F6F6F2;
     border-style: solid;
     border-width: 2px;
     border-radius: 10px;
@@ -158,11 +161,16 @@ p{
     float: right ;
     background-color: #26272D;
     width: 60px;
-    height: 53%;
+    height: 47px;
+    line-height: 47px;
     border-radius: 5px;
     color:  #F6F6F2;
     vertical-align: middle;
     text-align:center;
+}
+
+.btn:hover {
+    background-color: #3e8e41;
 }
 
 @media screen and (max-width: 700px) and (min-width:320px){

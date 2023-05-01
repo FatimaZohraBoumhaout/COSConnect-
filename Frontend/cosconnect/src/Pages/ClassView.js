@@ -107,7 +107,7 @@ function ClassView(){
         renderClasses = classes[0][0] && classes[0][0].map((cl) => {
             return(
                 <div className="rectangle-left">
-                    <Link to={`/classview?class=${cl}`} onClick={() => window.location.replace(`/classview?class=${cl}`)} style={{ textDecoration: 'none' }}><center>{"COS " + cl}</center></Link>
+                    <Link to={`/classview?class=${cl}`} onClick={() => window.location.replace(`/classview?class=${cl}`)} style={{ textDecoration: 'none', color: '#26272D'}}><center>{"COS " + cl}</center></Link>
                 </div>
             );
         });
@@ -149,7 +149,7 @@ function ClassView(){
             return (<div className="rectangle-right">
                 <Link to={`/partnerview`} onClick={() => handleClick(st[0])}>
                 <div style={{float:'left'}}>
-                    <center style={{ paddingLeft: '8px', fontSize: '18px'}}>{st[1]} <p style={{fontSize: '14px'}}>NetId: {st[0]}, Availability: {st[2]}</p></center>
+                    <center style={{ paddingLeft: '8px', fontSize: '18px', color: '#26272D'}}>{st[1]} <p style={{fontSize: '16px', color: '#F6F6F2'}}>NetID: {st[0]}, Availability: {st[2]}</p></center>
                 </div>
                 </Link>
                 <Link className="btn" onClick={() => sendRequest(st[0])} to={`/sendrequest`} style={{ textDecoration: 'none' }}>
@@ -198,7 +198,7 @@ function ClassView(){
                 return (<div className="rectangle-right">
                     <Link to={`/partnerview`} onClick={() => handleClick(st[0])}>
                     <div style={{float:'left'}}>
-                        <center style={{ paddingLeft: '8px' }}>{st[1]} <p>NetId: {st[0]}, Availability: {st[2]}</p></center>
+                        <center style={{ paddingLeft: '8px', fontSize: '18px', color: '#26272D'}}>{st[1]} <p style={{fontSize: '16px', color: '#F6F6F2'}}>NetID: {st[0]}, Availability: {st[2]}</p></center>
                     </div>
                     </Link>
                     <Link className="btn" onClick={() => sendRequest(st[0])} to={`/sendrequest`} style={{ textDecoration: 'none' }}>
@@ -236,7 +236,7 @@ function ClassView(){
                         </button>} */}
                     </form>  
                     </center>
-                    <h2>{"COS " + this_class}</h2>
+                    <h2 style={{fontSize: '26px'}}>{"COS " + this_class}</h2>
                 </div>
                 <div className="statusToggle">
                     <div style={toggleContainerStyle}>
@@ -255,7 +255,7 @@ function ClassView(){
                         <span style={{ marginLeft: "10px" }}>{status}</span>
                     </div>
                 </div>
-                    <h3>Invitations</h3>
+                    <h3 style={{fontSize: '22px', color: '#26272D'}}>Invitations</h3>
                     {sentRequest && sentRequest.map((req) => (
                         <div className="rectangle-right">
                             <div style={{float:'left', backgroundColor:'#338888', height:'100%', width: '100px', color: 'white', borderRadius: '5px'}}>
@@ -290,11 +290,11 @@ function ClassView(){
                     }
                 </div> */}
                 <div className="students">
-                    <h3>Students</h3>
+                    <h3 style={{fontSize: '22px', color: '#26272D'}}>Students</h3>
                     {studentsId && renderStudents}
                     {!studentsId &&
-                        <center>
-                            <p>Send some requests to get started.</p>
+                        <center style={{marginBottom: '20px'}}>
+                            <p>There are currently no students looking for a partner for this class. Try looking again later!</p>
                         </center>
                     }
                     
