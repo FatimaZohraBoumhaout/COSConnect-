@@ -106,7 +106,7 @@ function UserSurvey() {
               value={fullName}
               onChange={(event) => setFullName(event.target.value)}
               required
-              maxlength="70"
+              maxLength="70"
             />
           </div>
   
@@ -120,7 +120,7 @@ function UserSurvey() {
               value={displayName}
               onChange={(event) => setDisplayName(event.target.value)}
               required
-              maxlength="70"
+              maxLength="70"
             />
           </div>
   
@@ -134,7 +134,7 @@ function UserSurvey() {
               value={pronouns}
               onChange={(event) => setPronouns(event.target.value)}
               required
-              maxlength="50"
+              maxLength="50"
             />
           </div>
   
@@ -164,7 +164,7 @@ function UserSurvey() {
               onChange={(event) => setAvailability(event.target.value)}
               style={{ height: "97%", width: "95%", padding: "15px" }}
               required
-              maxlength="100"
+              maxLength="100"
             ></textarea>
           </div>
   
@@ -178,7 +178,7 @@ function UserSurvey() {
               onChange={(event) => setBio(event.target.value)}
               style={{ height: "97%", width: "95%", padding: "15px" }}
               required
-              maxlength="150"
+              maxLength="150"
             ></textarea>
           </div>
         </div>

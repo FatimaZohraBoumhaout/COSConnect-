@@ -203,9 +203,9 @@ function EditView() {
 
   `;
 
-  // if (!user) {
-  //   return <>loading...</>
-  // }
+  if (!user) {
+    return <>loading...</>
+  }
 
   return (
     <>
@@ -226,7 +226,7 @@ function EditView() {
           {/* <div className="gray-box"></div> */}
           <div>
             <label htmlFor="pronouns">Pronouns: </label>
-            <input id="pronouns" name="pronouns" maxlength="50" type="text" value={pronouns} onChange={event => setPronouns(event.target.value)}  required style={{ paddingLeft: '8px' }}/>
+            <input id="pronouns" name="pronouns" maxLength="50" type="text" value={pronouns} onChange={event => setPronouns(event.target.value)}  required style={{ paddingLeft: '8px' }}/>
           </div>
           <div>
           <label htmlFor="classes">Classes</label>
@@ -243,11 +243,11 @@ function EditView() {
           </div>
           <div>
             <label htmlFor="availability">Availability: </label>
-            <input id="availability" maxlength="100" name="availability" type="text" value={availability} onChange={event => setAvailability(event.target.value)} required style={{ paddingLeft: '8px' }}/>
+            <input id="availability" maxLength="100" name="availability" type="text" value={availability} onChange={event => setAvailability(event.target.value)} required style={{ paddingLeft: '8px' }}/>
           </div>
           <div>
             <label htmlFor="bio">Bio: </label>
-            <input id="bio" maxlength="150" name="bio" type="text" value={bio} onChange={event => setBio(event.target.value)} required style={{ paddingLeft: '8px' }}/>
+            <input id="bio" maxLength="150" name="bio" type="text" value={bio} onChange={event => setBio(event.target.value)} required style={{ paddingLeft: '8px' }}/>
           </div>
 
           <input className = "button-save" type="submit" name="submit" value="Save" />
