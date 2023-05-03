@@ -501,5 +501,38 @@ def get_class_status():
         print('Error in get_class_status:', ex)
         return jsonify({'error': 'Failed to get status'}), 500
 
+@app.route('/get_accepted', methods=['GET'])
+def get_accepted():
+    try:
+        net_id = flask.request.args.get('id')
+        accepted = database_access.get_accepted((net_id), 'testdb_ery6')
+        print("got accepted", accepted)
+        return jsonify(accepted)
+    except Exception as ex:
+        print('Error in get_accepted:', ex)
+        return jsonify({'error': 'Failed to get accepted'}), 500
+
+@app.route('/get_rejected', methods=['GET'])
+def get_rejected():
+    try:
+        net_id = flask.request.args.get('id')
+        rejected = database_access.get_accepted((net_id), 'testdb_ery6')
+        print("got rejected", rejected)
+        return jsonify(rejected)
+    except Exception as ex:
+        print('Error in get_rejected:', ex)
+        return jsonify({'error': 'Failed to get rejected'}), 500
+
+@app.route('/get_pending', methods=['GET'])
+def get_pending():
+    try:
+        net_id = flask.request.args.get('id')
+        pending = database_access.get_pending((net_id), 'testdb_ery6')
+        print("got pending", pending)
+        return jsonify(pending)
+    except Exception as ex:
+        print('Error in get_pending:', ex)
+        return jsonify({'error': 'Failed to get pending'}), 500
+
 if __name__ == '__main__':
     app.run(debug=True)

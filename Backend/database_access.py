@@ -436,4 +436,41 @@ def get_class_status(input, database_url):
                 return output 
     except Exception as ex:
         print(ex)
+
+def get_accepted(input, database_url):
+    net_id = input
+    try:
+        with psycopg2.connect(dbname=database_url, host="dpg-cggj3fceoogqfc2no840-a.ohio-postgres.render.com", user="testuser", password="gVYdK2LMupfkuAxyR6kp3a6XpuIB9VVV") as connection:
+            with contextlib.closing(connection.cursor()) as cursor:
+                query = "SELECT sender, receiver, class from classes WHERE request_status='accepted' AND (sender = %s OR receiver = %s);"
+                cursor.execute(query, (net_id, net_id))
+                output = cursor.fetchall()
+                return output 
+    except Exception as ex:
+        print(ex)
+
+def get_rejected(input, database_url):
+    net_id = input
+    try:
+        with psycopg2.connect(dbname=database_url, host="dpg-cggj3fceoogqfc2no840-a.ohio-postgres.render.com", user="testuser", password="gVYdK2LMupfkuAxyR6kp3a6XpuIB9VVV") as connection:
+            with contextlib.closing(connection.cursor()) as cursor:
+                query = "SELECT sender, receiver, class from classes WHERE request_status='rejected' AND (sender = %s OR receiver = %s);"
+                cursor.execute(query, (net_id, net_id))
+                output = cursor.fetchall()
+                return output 
+    except Exception as ex:
+        print(ex)
+
+def get_pending(input, database_url):
+    net_id = input
+    try:
+        with psycopg2.connect(dbname=database_url, host="dpg-cggj3fceoogqfc2no840-a.ohio-postgres.render.com", user="testuser", password="gVYdK2LMupfkuAxyR6kp3a6XpuIB9VVV") as connection:
+            with contextlib.closing(connection.cursor()) as cursor:
+                query = "SELECT sender, receiver, class from classes WHERE and request_status='pending' AND (sender = %s OR receiver = %s);"
+                cursor.execute(query, (net_id, net_id))
+                output = cursor.fetchall()
+                return output 
+    except Exception as ex:
+        print(ex)
+                  
                     
