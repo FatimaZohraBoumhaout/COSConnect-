@@ -147,8 +147,8 @@ function UserSurvey() {
                 selectedValues={classes}
                 onSelect={handleTagSelect}
                 onRemove={handleTagSelect}
+                selectionLimit = {6}
                 required
-                maxlength="40"
               />
             </div>
           </div>

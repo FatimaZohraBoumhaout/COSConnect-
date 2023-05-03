@@ -72,6 +72,8 @@ function SendRequestView() {
         body: JSON.stringify({
           sender_email: sender_email,
           receiver_email: receiver_email,
+          sender_id: sender_id,
+          receiver_id: receiver_id,
           subject: subject,
           body: body
         })

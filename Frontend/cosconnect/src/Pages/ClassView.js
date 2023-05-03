@@ -113,12 +113,22 @@ function ClassView(){
         });
     }
 
+    useEffect(() => {
+        fetch(`/get_class_status?id=${cookies.net_id}&class=${this_class}`)
+        .then(response => response.json())
+        .then((data) => {
+          setStatus(data);
+          console.log("notifications set to:", data);
+        })
+        .catch(error => console.error(error));
+      }, []);
+
     const handleStatusToggle = () => {
         const netId = cookies.net_id;
         setStatus((prevStatus) => (prevStatus === "Available" ? "Not Available" : "Available"));
-        console.log(netId, status)
-        const data = {netId, status};
-        fetch(`/post_notifications`, {
+        console.log(netId, this_class, status)
+        const data = {netId, this_class, status};
+        fetch(`/post_class_status`, {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json'

@@ -215,9 +215,9 @@ function EditView() {
       <style>{styles}</style>
       <div className="grid-item item-1">
         <div className="profile-header">
-          <Avatar  className="profile-avatar" name={cookies.net_id} size="50" round={true} />
+        <Avatar  className="profile-avatar" name={user[0][4]} size="50" round={true} />
           <div className="profile-info">
-            <h1 className="profile-name">{cookies.net_id}</h1>
+            <h1 className="profile-name">{  user[0][4]}</h1>
           </div>
           <Link to={`/profileview`} className="edit-button" style={{ textDecoration: 'none' }}>Close</Link>
           
@@ -226,7 +226,7 @@ function EditView() {
           {/* <div className="gray-box"></div> */}
           <div>
             <label htmlFor="pronouns">Pronouns: </label>
-            <input id="pronouns" name="pronouns" type="text" placeholder={pronouns} onChange={event => setPronouns(event.target.value)}  required style={{ paddingLeft: '8px' }}/>
+            <input id="pronouns" name="pronouns" maxlength="50" type="text" value={pronouns} onChange={event => setPronouns(event.target.value)}  required style={{ paddingLeft: '8px' }}/>
           </div>
           <div>
           <label htmlFor="classes">Classes</label>
@@ -237,16 +237,17 @@ function EditView() {
                 selectedValues={classes}
                 onSelect={handleTagSelect}
                 onRemove={handleTagSelect}
+                selectionLimit = {6}
                 />
               </div>
           </div>
           <div>
-            <label htmlFor="bio">Bio: </label>
-            <input id="bio" name="bio" type="text" placeholder={bio} onChange={event => setBio(event.target.value)} required style={{ paddingLeft: '8px' }}/>
+            <label htmlFor="availability">Availability: </label>
+            <input id="availability" maxlength="100" name="availability" type="text" value={availability} onChange={event => setAvailability(event.target.value)} required style={{ paddingLeft: '8px' }}/>
           </div>
           <div>
-            <label htmlFor="availability">Availability: </label>
-            <input id="availability" name="availability" type="text" placeholder={availability} onChange={event => setAvailability(event.target.value)} required style={{ paddingLeft: '8px' }}/>
+            <label htmlFor="bio">Bio: </label>
+            <input id="bio" maxlength="150" name="bio" type="text" value={bio} onChange={event => setBio(event.target.value)} required style={{ paddingLeft: '8px' }}/>
           </div>
 
           <input className = "button-save" type="submit" name="submit" value="Save" />

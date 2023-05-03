@@ -43,7 +43,6 @@ function Request(){
         <Header/>
         <div className ="container">
             <div className="class-title">
-                Pascal is a bitch 
             </div>
             <aside className="container_left">
             </aside>
