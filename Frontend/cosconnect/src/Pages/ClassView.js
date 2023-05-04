@@ -156,7 +156,7 @@ function ClassView(){
          //setFinalOutput(output)
          let studentsToRender = studentsId.map((st, index) =>{
             if (output.includes(index)){
-            return (<div className="rectangle-right">
+            return (<div className="rectangle-right" id ="availableStudents">
                 <Link to={`/partnerview`} onClick={() => handleClick(st[0])}>
                 <div style={{float:'left'}}>
                     <center style={{ paddingLeft: '8px', fontSize: '18px', color: '#26272D'}}>{st[1]} <p style={{fontSize: '16px', backgroundColor: '#186100', padding: '5px', borderRadius: '20px', color: 'white', marginLeft:'5px'}}>NetID: {st[0]}</p><p style={{fontSize: '16px', backgroundColor: '#186100', padding: '5px', borderRadius: '20px', color: 'white', marginLeft:'5px'}}> Availability: {st[2]}</p></center>
@@ -205,7 +205,7 @@ function ClassView(){
 
             let studentsToRender = studentsId.map((st, index) =>{
                 if (output.includes(index)){
-                return (<div className="rectangle-right">
+                return (<div className="rectangle-right" id="availableStudents">
                     <Link to={`/partnerview`} onClick={() => handleClick(st[0])}>
                     <div style={{float:'left'}}>
                         <center style={{ paddingLeft: '8px', fontSize: '18px', color: '#26272D'}}> {st[1]} <p style={{fontSize: '16px', color: '#F6F6F2'}}>NetID: {st[0]}, Availability: {st[2]}</p> </center>
@@ -246,11 +246,11 @@ function ClassView(){
                         </button>} */}
                     </form>  
                     </center>
-                    <h2 style={{fontSize: '26px'}}>{"COS " + this_class}</h2>
+                    <h2 style={{fontSize: '30px'}}>{"COS " + this_class}</h2>
                 </div>
                 <div className="statusToggle">
                     <div style={toggleContainerStyle}>
-                        <label htmlFor="status-toggle">Don't see a perfect match? Allow yourself to be available to other students: </label>
+                        <label>Don't see a perfect match? Allow yourself to be available to other students: </label>
                         <div style={{ marginLeft: "10px" }}>
                             <label className="switch">
                                 <input
@@ -265,9 +265,11 @@ function ClassView(){
                         <span style={{ marginLeft: "10px" }}>{status}</span>
                     </div>
                 </div>
-                    <h3 style={{fontSize: '22px', color: '#26272D'}}>Invitations</h3>
+                    <br/>
+                    <h3 style={{fontSize: '25px', color: '#26272D'}}>Requests</h3>
+                    <h3 style={{fontSize: '16px', color: 'black'}}>Looking to Accept or Reject requests? Head over to the <a id="requestLink" href={`/request`}>Requests Page</a></h3>
                     {sentRequest && sentRequest.map((req) => (
-                        <div className="rectangle-right">
+                        <div className="rectangle-right" id="requestStudents">
                             <div style={{float:'left', backgroundColor:'#338888', height:'100%', width: '100px', color: 'white', borderRadius: '5px'}}>
                                 <center>Sent</center>
                             </div>
@@ -275,7 +277,7 @@ function ClassView(){
                         </div>
                     ))}
                     {receivedRequest && receivedRequest.map((req, index) => (
-                        <div className="rectangle-right">
+                        <div className="rectangle-right" id="requestStudents">
                             <div style={{float:'left', backgroundColor: '#CCD5AE', height:'100%', width: '100px', borderRadius: '5px'}}>
                                 <center>Received</center>
                             </div>
@@ -300,7 +302,7 @@ function ClassView(){
                     }
                 </div> */}
                 <div className="students">
-                    <h3 style={{fontSize: '22px', color: '#26272D'}}>Students</h3>
+                    <h3 style={{fontSize: '25px', color: '#26272D'}}>Available Students</h3>
                     {studentsId && renderStudents}
                     {!studentsId &&
                         <center style={{marginBottom: '20px'}}>

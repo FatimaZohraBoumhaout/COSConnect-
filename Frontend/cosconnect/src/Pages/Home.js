@@ -80,6 +80,8 @@ function Home(){
       <div className="boxes">
         {classes && extractedElements}
       </div>
+      <br/>
+    <br/>
     </div>
     <Footer />
     </>

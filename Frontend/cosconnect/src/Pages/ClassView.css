@@ -123,10 +123,14 @@ h2{
     transition: width 0.4s, box-shadow 0.3s;
 }
 
-.rectangle-right:hover{
+#availableStudents:hover{
     background-color: #BADFE7;
     width: 96%;
     box-shadow:0 0 4px 4px #dedede;
+}
+
+#requestStudents:hover{
+    background-color: #BADFE7;
 }
 
 .rectangle-left{
@@ -260,3 +264,17 @@ Link{
   .statusToggle {
     margin-top: 10px;
   }
+
+  #requestLink{
+    background-color: #338888;
+    border-radius:5px;
+    padding: 5px;
+    color: white;
+    transition: color 1s, background-color 1s;
+    text-decoration: none;
+  }
+
+  #requestLink:hover{
+    color: black;
+    background-color: #BDD2B6;
+}

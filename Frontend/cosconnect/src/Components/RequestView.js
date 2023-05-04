@@ -41,7 +41,7 @@ const mediaQueryStyle = {
 };
 
 const pStyle = {
-  color: "#BDD2B6",
+  color: "white",
   margin: "10px",
 };
 
@@ -86,7 +86,10 @@ function RequestView() {
       <div className="rectangle-container" style={rectangleContainerStyle}>
         <div className="rectangle" style={rectangleStyle}>
           <p style={pStyle}>Recently Received Request</p>
-          <p style={{color:'white'}}>
+          
+        </div>
+        <div style={{backgroundColor: 'green', paddingLeft: '9px',paddingRight: '9px', borderRadius: '20px', textAlign:'left'}}>
+        <p style={{color:'white', textAlign:'left'}}>
           {receivedRequest}
           </p>
           {receivedRequest.length === 0 &&
@@ -95,14 +98,15 @@ function RequestView() {
         </div>
         <div className="rectangle" style={rectangleStyle}>
         <p style={pStyle}>Recently Sent Request</p>
+        </div>
+        <div style={{backgroundColor: 'green', paddingLeft: '9px',paddingRight: '9px', borderRadius: '20px', textAlign:'left'}}>
         <p style={{color:'white'}}>
         {sentRequest}
         </p>
           {sentRequest.length === 0 &&
                   <p style={{color:'white'}}>No Sent Requests.</p>
           }
-          
-        </div>
+          </div>
       </div>
       <style>
         {`@media (min-width: 768px) {
