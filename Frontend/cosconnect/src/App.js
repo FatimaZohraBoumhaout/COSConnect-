@@ -13,8 +13,8 @@ import SendRequestView from "./Pages/SendRequestView";
 import Error from './Pages/Error';
 import PageNotFound from './Pages/PageNotFound';
 import Request from "./Pages/Request";
-function App() {
 
+function App() {
   return (
     <>
       <BrowserRouter>
@@ -28,7 +28,7 @@ function App() {
           <Route path="/partnerview" element={<PartnerProfileView />} />
           <Route path="/sendrequest" element={<SendRequestView />} />
           <Route path="/request" element={<Request />} />
-          <Route path="/error" element={<Error />} />
+          <Route path="/error" element={<PageNotFound />} />
           <Route path="*" element={<PageNotFound />} /> 
         </Routes>
       </BrowserRouter>

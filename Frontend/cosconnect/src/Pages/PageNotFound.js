@@ -30,6 +30,7 @@ const PageNotFound = () => {
         <style>{styles}</style>
       <h1 className="not-found-header">Oops! 404 Page Not Found</h1>
       <p className="not-found-message">We're sorry, but the page you're looking for cannot be found.</p>
+      <p><a href="/home">Go Back Home</a></p>
     </div>
     </>
   );

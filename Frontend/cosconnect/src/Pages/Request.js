@@ -9,6 +9,8 @@ import "./Request.css";
 function Request(){
     const [requests, setRequests] = useState([]);
     const [cookies] = useCookies(['net_id']);
+    const [rejected, setRejected] = useState([]);
+    const [accepted, setAccepted] = useState([]);
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -31,6 +33,7 @@ function Request(){
     const handleAccept = (requestId) => {
         // Handle accept button click for a request with ID `requestId`
         console.log(`Accepted request with ID ${requestId}`);
+        navigate(`/request`);
     }
 
     const handleReject = (requestId) => {
@@ -43,13 +46,14 @@ function Request(){
         <Header/>
         <div className ="container">
             <div className="class-title">
-                Pascal is a bitch 
+                Zohra is a bitch 
             </div>
             <aside className="container_left">
+                   Accepted Requests
             </aside>
             <div className="container_top">
                 <div className="new_requests">
-                    <h3 className="top-header">New Requests</h3>
+                    <h3 className="top-header">Requests</h3>
                     {requests.length > 0 ? 
                         requests.map(request => (
                             <div className="request" key={request.id}>
@@ -67,7 +71,7 @@ function Request(){
             </div>
             <div className="container_bottom">
                 <div className="rejected-requests">
-                    <h3 className="top-header">Accepted Requests</h3>
+                    <h3 className="top-header">Rejected Requests</h3>
                     {/* Render rejected requests similarly */}
                 </div>
             </div>

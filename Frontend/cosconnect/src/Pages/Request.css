@@ -17,6 +17,8 @@
 .container_left{
     background-color: #F6F6F2;
     grid-area: side;
+    text-align: center;
+    padding-top: 20%;
 }
 .container_top{
     background-color: #F6F6F2;

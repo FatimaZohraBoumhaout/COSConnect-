@@ -39,7 +39,7 @@ function ClassView(){
             console.log("classes", classes[0][0])
             console.log("this class", this_class)
             if (!classes[0][0].includes(this_class)){
-                navigate(`/home`);
+                navigate(`/error`);
             }
         }
     }, [classes]);
