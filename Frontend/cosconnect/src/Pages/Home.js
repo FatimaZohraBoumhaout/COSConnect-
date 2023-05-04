@@ -70,12 +70,12 @@ function Home(){
         <> Classes </>
       </div>
       <div className="buttons">
-        <button onClick={handleAddClass}>
+        {/* <button onClick={handleAddClass}>
           Add
         </button>
         <button onClick={handleDropClass}>
           Drop
-        </button>
+        </button> */}
       </div>
       <div className="boxes">
         {classes && extractedElements}
