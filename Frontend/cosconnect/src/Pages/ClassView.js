@@ -113,12 +113,22 @@ function ClassView(){
         });
     }
 
+    useEffect(() => {
+        fetch(`/get_class_status?id=${cookies.net_id}&class=${this_class}`)
+        .then(response => response.json())
+        .then((data) => {
+          setStatus(data);
+          console.log("notifications set to:", data);
+        })
+        .catch(error => console.error(error));
+      }, []);
+
     const handleStatusToggle = () => {
         const netId = cookies.net_id;
         setStatus((prevStatus) => (prevStatus === "Available" ? "Not Available" : "Available"));
-        console.log(netId, status)
-        const data = {netId, status};
-        fetch(`/post_notifications`, {
+        console.log(netId, this_class, status)
+        const data = {netId, this_class, status};
+        fetch(`/post_class_status`, {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json'
@@ -137,16 +147,19 @@ function ClassView(){
 
     useEffect(() => {
          console.log("fixed from input set to be", fixed)
+         if(fixed.length===0){
+            return() => {<p>There are no other students in this class.</p>};
+         }
          output = fixed.filter(element => ((element[1].toLowerCase()).includes(input.toLowerCase()) || (element[3].toLowerCase()).includes(input.toLocaleLowerCase()) ||
                                             (element[2].toLowerCase()).includes(input.toLowerCase())))
          output = output.map(element => element[0])
          //setFinalOutput(output)
          let studentsToRender = studentsId.map((st, index) =>{
             if (output.includes(index)){
-            return (<div className="rectangle-right">
+            return (<div className="rectangle-right" id ="availableStudents">
                 <Link to={`/partnerview`} onClick={() => handleClick(st[0])}>
                 <div style={{float:'left'}}>
-                    <center style={{ paddingLeft: '8px', fontSize: '18px', color: '#26272D'}}>{st[1]} <p style={{fontSize: '16px', color: '#F6F6F2'}}>NetID: {st[0]}, Availability: {st[2]}</p></center>
+                    <center style={{ paddingLeft: '8px', fontSize: '18px', color: '#26272D'}}>{st[1]} <p style={{fontSize: '16px', backgroundColor: '#186100', padding: '5px', borderRadius: '20px', color: 'white', marginLeft:'5px'}}>NetID: {st[0]}</p><p style={{fontSize: '16px', backgroundColor: '#186100', padding: '5px', borderRadius: '20px', color: 'white', marginLeft:'5px'}}> Availability: {st[2]}</p></center>
                 </div>
                 </Link>
                 <Link className="btn" onClick={() => sendRequest(st[0])} to={`/sendrequest`} style={{ textDecoration: 'none' }}>
@@ -184,15 +197,18 @@ function ClassView(){
         if(studentsId && studentsId.length > 0){
             console.log("StudentsId set to", studentsId)
             setFixed(studentsId.map((element, index) => [index, element[1], element[2], element[0]]))
+            if(fixed.length===0){
+                return() => {<p>There are no other students in this class.</p>};
+            }
             console.log("fixed set to", fixed)
             output = fixed.map(element => element[0])
 
             let studentsToRender = studentsId.map((st, index) =>{
                 if (output.includes(index)){
-                return (<div className="rectangle-right">
+                return (<div className="rectangle-right" id="availableStudents">
                     <Link to={`/partnerview`} onClick={() => handleClick(st[0])}>
                     <div style={{float:'left'}}>
-                        <center style={{ paddingLeft: '8px', fontSize: '18px', color: '#26272D'}}>{st[1]} <p style={{fontSize: '16px', color: '#F6F6F2'}}>NetID: {st[0]}, Availability: {st[2]}</p></center>
+                        <center style={{ paddingLeft: '8px', fontSize: '18px', color: '#26272D'}}> {st[1]} <p style={{fontSize: '16px', color: '#F6F6F2'}}>NetID: {st[0]}, Availability: {st[2]}</p> </center>
                     </div>
                     </Link>
                     <Link className="btn" onClick={() => sendRequest(st[0])} to={`/sendrequest`} style={{ textDecoration: 'none' }}>
@@ -219,7 +235,7 @@ function ClassView(){
                 <div className="search">
                     <center>
                     <form id="form" className="form">
-                        <input placeholder="Search..." onChange={event => handleChange(event.target.value)}/>
+                        <input placeholder="Search by Name, NetID, or Availability" onChange={event => handleChange(event.target.value)}/>
                         <button className="search-button" disabled={true}>
                         <svg viewBox="0 0 1024 1024"><path class="path1" d="M848.471 928l-263.059-263.059c-48.941 36.706-110.118 55.059-177.412 55.059-171.294 0-312-140.706-312-312s140.706-312 312-312c171.294 0 312 140.706 312 312 0 67.294-24.471 128.471-55.059 177.412l263.059 263.059-79.529 79.529zM189.623 408.078c0 121.364 97.091 218.455 218.455 218.455s218.455-97.091 218.455-218.455c0-121.364-103.159-218.455-218.455-218.455-121.364 0-218.455 97.091-218.455 218.455z"></path></svg>
                         </button>
@@ -230,11 +246,11 @@ function ClassView(){
                         </button>} */}
                     </form>  
                     </center>
-                    <h2 style={{fontSize: '26px'}}>{"COS " + this_class}</h2>
+                    <h2 style={{fontSize: '30px'}}>{"COS " + this_class}</h2>
                 </div>
                 <div className="statusToggle">
                     <div style={toggleContainerStyle}>
-                        <label htmlFor="status-toggle">Status: </label>
+                        <label>Don't see a perfect match? Allow yourself to be available to other students: </label>
                         <div style={{ marginLeft: "10px" }}>
                             <label className="switch">
                                 <input
@@ -249,9 +265,11 @@ function ClassView(){
                         <span style={{ marginLeft: "10px" }}>{status}</span>
                     </div>
                 </div>
-                    <h3 style={{fontSize: '22px', color: '#26272D'}}>Invitations</h3>
+                    <br/>
+                    <h3 style={{fontSize: '25px', color: '#26272D'}}>Requests</h3>
+                    <h3 style={{fontSize: '16px', color: 'black'}}>Looking to Accept or Reject requests? Head over to the <a id="requestLink" href={`/request`}>Requests Page</a></h3>
                     {sentRequest && sentRequest.map((req) => (
-                        <div className="rectangle-right">
+                        <div className="rectangle-right" id="requestStudents">
                             <div style={{float:'left', backgroundColor:'#338888', height:'100%', width: '100px', color: 'white', borderRadius: '5px'}}>
                                 <center>Sent</center>
                             </div>
@@ -259,7 +277,7 @@ function ClassView(){
                         </div>
                     ))}
                     {receivedRequest && receivedRequest.map((req, index) => (
-                        <div className="rectangle-right">
+                        <div className="rectangle-right" id="requestStudents">
                             <div style={{float:'left', backgroundColor: '#CCD5AE', height:'100%', width: '100px', borderRadius: '5px'}}>
                                 <center>Received</center>
                             </div>
@@ -284,7 +302,7 @@ function ClassView(){
                     }
                 </div> */}
                 <div className="students">
-                    <h3 style={{fontSize: '22px', color: '#26272D'}}>Students</h3>
+                    <h3 style={{fontSize: '25px', color: '#26272D'}}>Available Students</h3>
                     {studentsId && renderStudents}
                     {!studentsId &&
                         <center style={{marginBottom: '20px'}}>

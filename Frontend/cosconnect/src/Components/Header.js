@@ -15,6 +15,10 @@ function Header() {
   }
 
   const styles = `
+  #title:hover {
+    color: #BADFE7;
+  }
+
   .header {
     display: flex;
     justify-content: space-between;
@@ -148,7 +152,7 @@ function Header() {
     <nav className="header">
       <style>{styles}</style>
       <div className="header__logo">
-        <h1><a href="home">COSConnect</a></h1>
+        <h1><a href="home" id = "title">COSConnect</a></h1>
       </div>
       <div className="header__button">
         { /* Render the dropdown button on small screens */ }

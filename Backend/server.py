@@ -278,13 +278,25 @@ mail = Mail(app)
 @app.route('/send-email', methods=['POST'])
 def send_email():
     try:
-        print ('Sending email')
         data = flask.request.get_json()
         print(data)
+
+        print ('Sending email')
         sender_email = data.get('sender_email')
         receiver_email = data.get('receiver_email')
+        sender_id = data.get('sender_id')
+        receiver_id = data.get('receiver_id')
         subject = data.get('subject')
         body = data.get('body')
+
+        print ('Check if notifications on')
+        notifications = database_access.get_notifications((sender_id), 'testdb_ery6')
+        if notifications[0][0] == False:
+            sender_email = 'cosconnectprinceton@gmail.com'
+
+        notifications = database_access.get_notifications((receiver_id), 'testdb_ery6')
+        if notifications[0][0] == False:
+            receiver_email = 'cosconnectprinceton@gmail.com'
 
         msg = Message(subject, sender='cosconnectprinceton@gmail.com', recipients=[receiver_email], cc=[sender_email])
         msg.body = body
@@ -442,6 +454,7 @@ def accept_request():
         receiver = flask.request.args.get('receiver')
         course = flask.request.args.get('course')
         database_access.accept_request((sender, receiver, course), 'testdb_ery6')
+        database_access.reject_unaccepted_requests((sender, receiver, course), 'testdb_ery6')
         return jsonify({'status': 'success', 'message': 'Request accepted successfully'})
     except Exception as ex:
         print('Error in accept_request:', ex)
@@ -462,14 +475,65 @@ def reject_request():
 @app.route('/post_class_status', methods=['POST'])
 def post_class_status():
     try:
-        course = flask.request.args.get('course')
-        net_id = flask.request.args.get('id')
-        class_status = flask.request.args.get('status')
-        database_access.post_class_status((net_id, course), 'testdb_ery6')
+        data = flask.request.get_json()
+        net_id = data.get('netId')
+        course = data.get('this_class')
+        class_status = data.get('status')
+        database_access.post_class_status((net_id, course, class_status), 'testdb_ery6')
         return jsonify({'status': 'success', 'message': 'Class status updated successfully'})
     except Exception as ex:
-        print('Error in reject_request:', ex)
+        print('Error in post_class_status:', ex)
         return jsonify({'error': 'Failed to update class status'}), 500
+
+@app.route('/get_class_status', methods=['GET'])
+def get_class_status():
+    try:
+        net_id = flask.request.args.get('id')
+        course = flask.request.args.get('class')
+        status = database_access.get_class_status((net_id, course), 'testdb_ery6')
+        print("GOT class status", status[0][0])
+        if status[0][0] == True:
+            status = "Available"
+        else:
+            status = "Not Available"
+        print("GOT STATUS", status)
+        return jsonify(status)
+    except Exception as ex:
+        print('Error in get_class_status:', ex)
+        return jsonify({'error': 'Failed to get status'}), 500
+
+@app.route('/get_accepted', methods=['GET'])
+def get_accepted():
+    try:
+        net_id = flask.request.args.get('id')
+        accepted = database_access.get_accepted((net_id), 'testdb_ery6')
+        print("got accepted", accepted)
+        return jsonify(accepted)
+    except Exception as ex:
+        print('Error in get_accepted:', ex)
+        return jsonify({'error': 'Failed to get accepted'}), 500
+
+@app.route('/get_rejected', methods=['GET'])
+def get_rejected():
+    try:
+        net_id = flask.request.args.get('id')
+        rejected = database_access.get_accepted((net_id), 'testdb_ery6')
+        print("got rejected", rejected)
+        return jsonify(rejected)
+    except Exception as ex:
+        print('Error in get_rejected:', ex)
+        return jsonify({'error': 'Failed to get rejected'}), 500
+
+@app.route('/get_pending', methods=['GET'])
+def get_pending():
+    try:
+        net_id = flask.request.args.get('id')
+        pending = database_access.get_pending((net_id), 'testdb_ery6')
+        print("got pending", pending)
+        return jsonify(pending)
+    except Exception as ex:
+        print('Error in get_pending:', ex)
+        return jsonify({'error': 'Failed to get pending'}), 500
 
 if __name__ == '__main__':
     app.run(debug=True)

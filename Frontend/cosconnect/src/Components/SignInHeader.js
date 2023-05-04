@@ -15,6 +15,10 @@ function Header() {
   }
 
   const styles = `
+  #title:hover {
+    color: #BADFE7;
+  }
+
   .header {
     display: flex;
     justify-content: space-between;
@@ -152,7 +156,7 @@ function Header() {
     <nav className="header">
       <style>{styles}</style>
       <div className="header__logo">
-        <h1>COSConnect</h1>
+        <h1 id="title">COSConnect</h1>
       </div>
       <div className="header__button">
       </div>

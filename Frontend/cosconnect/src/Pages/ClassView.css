@@ -99,6 +99,11 @@ h2{
     flex-direction: row;
     align-items: 'stretch';
     margin: 10px;
+    padding-left: 20px;
+    transition: box-shadow 0.3s;
+}
+.form:hover{
+    box-shadow:0 0 4px 4px #dedede;
 }
 
 .rectangle-right{
@@ -112,9 +117,20 @@ h2{
     margin: 16px;
     border-color: #F6F6F2;
     border-style: solid;
-    border-width: 2px;
+    border-width: 0px;
     overflow: wrap;
     border-radius: 10px;
+    transition: width 0.4s, box-shadow 0.3s;
+}
+
+#availableStudents:hover{
+    background-color: #BADFE7;
+    width: 96%;
+    box-shadow:0 0 4px 4px #dedede;
+}
+
+#requestStudents:hover{
+    background-color: #BADFE7;
 }
 
 .rectangle-left{
@@ -124,11 +140,15 @@ h2{
     line-height: 45px;
     background-color: #BDD2B6;
     margin: 16px;
-    border-color: #F6F6F2;
-    border-style: solid;
-    border-width: 2px;
     border-radius: 10px;
     font-size: 20px;
+    transition: width 0.4s, height 0.4s, box-shadow 0.3s;
+}
+.rectangle-left:hover{
+    background-color: #BADFE7;
+    height: 52px;
+    width: 91%;
+    box-shadow:0 0 4px 4px #dedede;
 }
 
 .search-button{
@@ -161,7 +181,7 @@ p{
     float: right ;
     background-color: #26272D;
     width: 60px;
-    height: 47px;
+    height: 49px;
     line-height: 47px;
     border-radius: 5px;
     color:  #F6F6F2;
@@ -244,3 +264,17 @@ Link{
   .statusToggle {
     margin-top: 10px;
   }
+
+  #requestLink{
+    background-color: #338888;
+    border-radius:5px;
+    padding: 5px;
+    color: white;
+    transition: color 1s, background-color 1s;
+    text-decoration: none;
+  }
+
+  #requestLink:hover{
+    color: black;
+    background-color: #BDD2B6;
+}

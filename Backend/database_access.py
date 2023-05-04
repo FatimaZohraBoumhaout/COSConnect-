@@ -269,7 +269,7 @@ def get_students(input, database_url):
     try:
         with psycopg2.connect(dbname=database_url, host="dpg-cggj3fceoogqfc2no840-a.ohio-postgres.render.com", user="testuser", password="gVYdK2LMupfkuAxyR6kp3a6XpuIB9VVV") as connection:
             with contextlib.closing(connection.cursor()) as cursor:
-                query = "SELECT net_id FROM classes WHERE class = %s AND net_id != %s " 
+                query = "SELECT net_id FROM classes WHERE class = %s AND net_id != %s AND class_status = True " 
                 query += "AND NOT EXISTS (SELECT * FROM communications WHERE receiver = %s "
                 query += "AND sender = classes.net_id AND class = %s) AND NOT EXISTS ("
                 query += "SELECT * FROM communications WHERE receiver = classes.net_id "
@@ -413,6 +413,10 @@ def get_recent_received(input, database_url):
 
 def post_class_status(input, database_url):
     net_id, course, class_status = input
+    if class_status == "Available":
+        class_status = "False"
+    else:
+        class_status = "True"
     try:
         with psycopg2.connect(dbname=database_url, host="dpg-cggj3fceoogqfc2no840-a.ohio-postgres.render.com", user="testuser", password="gVYdK2LMupfkuAxyR6kp3a6XpuIB9VVV") as connection:
             with contextlib.closing(connection.cursor()) as cursor:
@@ -420,4 +424,65 @@ def post_class_status(input, database_url):
                 cursor.execute(query, (net_id, course))
     except Exception as ex:
         print(ex)
+
+def get_class_status(input, database_url):
+    net_id, course = input
+    try:
+        with psycopg2.connect(dbname=database_url, host="dpg-cggj3fceoogqfc2no840-a.ohio-postgres.render.com", user="testuser", password="gVYdK2LMupfkuAxyR6kp3a6XpuIB9VVV") as connection:
+            with contextlib.closing(connection.cursor()) as cursor:
+                query = "SELECT class_status from classes WHERE net_id = %s AND class = %s;"
+                cursor.execute(query, (net_id, course))
+                output = cursor.fetchall()
+                return output 
+    except Exception as ex:
+        print(ex)
+
+def get_accepted(input, database_url):
+    net_id = input
+    try:
+        with psycopg2.connect(dbname=database_url, host="dpg-cggj3fceoogqfc2no840-a.ohio-postgres.render.com", user="testuser", password="gVYdK2LMupfkuAxyR6kp3a6XpuIB9VVV") as connection:
+            with contextlib.closing(connection.cursor()) as cursor:
+                query = "SELECT sender, receiver, class from classes WHERE request_status='accepted' AND (sender = %s OR receiver = %s);"
+                cursor.execute(query, (net_id, net_id))
+                output = cursor.fetchall()
+                return output 
+    except Exception as ex:
+        print(ex)
+
+def get_rejected(input, database_url):
+    net_id = input
+    try:
+        with psycopg2.connect(dbname=database_url, host="dpg-cggj3fceoogqfc2no840-a.ohio-postgres.render.com", user="testuser", password="gVYdK2LMupfkuAxyR6kp3a6XpuIB9VVV") as connection:
+            with contextlib.closing(connection.cursor()) as cursor:
+                query = "SELECT sender, receiver, class from classes WHERE request_status='rejected' AND (sender = %s OR receiver = %s);"
+                cursor.execute(query, (net_id, net_id))
+                output = cursor.fetchall()
+                return output 
+    except Exception as ex:
+        print(ex)
+
+def get_pending(input, database_url):
+    net_id = input
+    try:
+        with psycopg2.connect(dbname=database_url, host="dpg-cggj3fceoogqfc2no840-a.ohio-postgres.render.com", user="testuser", password="gVYdK2LMupfkuAxyR6kp3a6XpuIB9VVV") as connection:
+            with contextlib.closing(connection.cursor()) as cursor:
+                query = "SELECT sender, receiver, class from classes WHERE request_status='pending' AND (sender = %s OR receiver = %s);"
+                cursor.execute(query, (net_id, net_id))
+                output = cursor.fetchall()
+                return output 
+    except Exception as ex:
+        print(ex)
+
+def reject_unaccepted_requests(input, database_url):
+    sender, receiver, course = input
+    try:
+        with psycopg2.connect(dbname=database_url, host="dpg-cggj3fceoogqfc2no840-a.ohio-postgres.render.com", user="testuser", password="gVYdK2LMupfkuAxyR6kp3a6XpuIB9VVV") as connection:
+            with contextlib.closing(connection.cursor()) as cursor:
+                query = "UPDATE request_status in communications WHERE class = %s and request_status='pending' AND (sender = %s OR receiver = %s OR sender = %s OR receiver = %s);"
+                cursor.execute(query, (course, sender, sender, receiver, receiver))
+                output = cursor.fetchall()
+                return output 
+    except Exception as ex:
+        print(ex)
+                  
                     

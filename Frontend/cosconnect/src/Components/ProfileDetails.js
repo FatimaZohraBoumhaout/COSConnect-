@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import Avatar from 'react-avatar';
 import { Link } from 'react-router-dom';
 import { useCookies } from 'react-cookie';
+import "./ProfileDetails.css";
 
 function ProfileDetails() {
   // const { userId } = props;
@@ -128,7 +129,7 @@ function ProfileDetails() {
   `;
 
   if (!user) {
-    return <>loading...</>
+    return <div style={{ backgroundColor: '#d9d9d9', height: '100%', paddingTop: '30%', borderRadius: '40px'}}><center><h2>Loading...</h2></center></div>
   }
 
   return (

@@ -46,7 +46,10 @@ function Request(){
         <Header/>
         <div className ="container">
             <div className="class-title">
+<<<<<<< HEAD
                 Zohra is a bitch 
+=======
+>>>>>>> 348b58be18161eca73e41e2e6e9253dd276c03ea
             </div>
             <aside className="container_left">
                    Accepted Requests
