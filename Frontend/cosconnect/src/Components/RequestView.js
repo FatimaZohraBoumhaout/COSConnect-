@@ -1,5 +1,7 @@
 import React, {useState, useEffect} from "react";
 import { useCookies } from 'react-cookie';
+import "./RequestView.css";
+
 const requestBody = {
   backgroundColor: "#edede4",
   borderRadius: "30px",

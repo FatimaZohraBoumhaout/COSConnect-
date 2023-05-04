@@ -50,4 +50,17 @@
     -ms-transform: translateX(26px);
     transform: translateX(26px);
   }
+
+  .instructions {
+    margin-left: 10%;
+    margin-right: 10%;
+    font-size: 1em;
+    text-align: center;
+  }
+
+  .item-2:hover {
+    width: 83%;
+    height: 103%;
+    transition: width 1s, height 1s;
+  }
   

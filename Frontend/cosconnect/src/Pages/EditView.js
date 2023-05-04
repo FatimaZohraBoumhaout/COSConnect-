@@ -247,7 +247,7 @@ function EditView() {
           </div>
           <div>
             <label htmlFor="bio">Bio: </label>
-            <input id="bio" maxLength="150" name="bio" type="text" value={bio} onChange={event => setBio(event.target.value)} required style={{ paddingLeft: '8px' }}/>
+            <input id="bio" maxLength="200" name="bio" type="text" value={bio} onChange={event => setBio(event.target.value)} required style={{ paddingLeft: '8px' }}/>
           </div>
 
           <input className = "button-save" type="submit" name="submit" value="Save" />

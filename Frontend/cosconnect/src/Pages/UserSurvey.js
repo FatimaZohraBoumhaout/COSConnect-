@@ -178,7 +178,7 @@ function UserSurvey() {
               onChange={(event) => setBio(event.target.value)}
               style={{ height: "97%", width: "95%", padding: "15px" }}
               required
-              maxLength="150"
+              maxLength="200"
             ></textarea>
           </div>
         </div>

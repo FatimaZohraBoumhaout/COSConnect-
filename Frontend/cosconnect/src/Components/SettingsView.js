@@ -30,6 +30,7 @@ const toggleContainerStyle = {
 function SettingsView() {
   const [status, setStatus] = useState([]);
   const [cookies] = useCookies(["net_id"]);
+  const [dispStatus, setDispStatus] = useState([]);
 
   useEffect(() => {
     fetch(`/get_notifications?id=${cookies.net_id}`)
@@ -40,6 +41,15 @@ function SettingsView() {
     })
     .catch(error => console.error(error));
   }, []);
+
+  useEffect(() => {
+    if (status === "Available"){
+      setDispStatus("On");
+    }
+    else{
+      setDispStatus("Off");
+    }
+  }, [status]);
   
 
   const handleStatusToggle = () => {
@@ -70,6 +80,8 @@ function SettingsView() {
       <div className="settings-header">
         <div style={headerContainerStyle}>
           <h2 style={{ margin:0}}>Settings</h2>
+          <h4 class = "instructions">If opting into notifications, COSConnect will send you emails to the email listed below when you send or receive requests. Please whitelist <a style={{ color: '#186100' }}> cosconnectprinceton@gmail.com </a> to avoid our emails going to spam.</h4>
+          <label>Email: <a style={{ color: '#186100' }}>{cookies.net_id}@princeton.edu</a></label>
           <div style={toggleContainerStyle}>
             <label htmlFor="status-toggle">Notifications: </label>
             <div style={{ marginLeft: "10px" }}>
@@ -83,7 +95,7 @@ function SettingsView() {
                 <span className="slider round"></span>
               </label>
             </div>
-            <span style={{ marginLeft: "10px" }}>{status}</span>
+            <span style={{ marginLeft: "10px" }}>{dispStatus}</span>
           </div>
         </div>
       </div>

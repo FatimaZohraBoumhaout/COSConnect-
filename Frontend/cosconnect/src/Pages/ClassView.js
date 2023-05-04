@@ -250,7 +250,7 @@ function ClassView(){
                 </div>
                 <div className="statusToggle">
                     <div style={toggleContainerStyle}>
-                        <label htmlFor="status-toggle">Status: </label>
+                        <label htmlFor="status-toggle">Don't see a perfect match? Allow yourself to be available to other students: </label>
                         <div style={{ marginLeft: "10px" }}>
                             <label className="switch">
                                 <input

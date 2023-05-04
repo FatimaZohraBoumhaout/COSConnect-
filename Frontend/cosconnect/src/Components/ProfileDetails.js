@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import Avatar from 'react-avatar';
 import { Link } from 'react-router-dom';
 import { useCookies } from 'react-cookie';
+import "./ProfileDetails.css";
 
 function ProfileDetails() {
   // const { userId } = props;
