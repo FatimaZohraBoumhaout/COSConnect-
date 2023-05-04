@@ -466,8 +466,20 @@ def get_pending(input, database_url):
     try:
         with psycopg2.connect(dbname=database_url, host="dpg-cggj3fceoogqfc2no840-a.ohio-postgres.render.com", user="testuser", password="gVYdK2LMupfkuAxyR6kp3a6XpuIB9VVV") as connection:
             with contextlib.closing(connection.cursor()) as cursor:
-                query = "SELECT sender, receiver, class from classes WHERE and request_status='pending' AND (sender = %s OR receiver = %s);"
+                query = "SELECT sender, receiver, class from classes WHERE request_status='pending' AND (sender = %s OR receiver = %s);"
                 cursor.execute(query, (net_id, net_id))
+                output = cursor.fetchall()
+                return output 
+    except Exception as ex:
+        print(ex)
+
+def reject_unaccepted_requests(input, database_url):
+    sender, receiver, course = input
+    try:
+        with psycopg2.connect(dbname=database_url, host="dpg-cggj3fceoogqfc2no840-a.ohio-postgres.render.com", user="testuser", password="gVYdK2LMupfkuAxyR6kp3a6XpuIB9VVV") as connection:
+            with contextlib.closing(connection.cursor()) as cursor:
+                query = "UPDATE request_status in communications WHERE class = %s and request_status='pending' AND (sender = %s OR receiver = %s OR sender = %s OR receiver = %s);"
+                cursor.execute(query, (course, sender, sender, receiver, receiver))
                 output = cursor.fetchall()
                 return output 
     except Exception as ex:

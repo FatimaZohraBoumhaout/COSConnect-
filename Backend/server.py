@@ -454,6 +454,7 @@ def accept_request():
         receiver = flask.request.args.get('receiver')
         course = flask.request.args.get('course')
         database_access.accept_request((sender, receiver, course), 'testdb_ery6')
+        database_access.reject_unaccepted_requests((sender, receiver, course), 'testdb_ery6')
         return jsonify({'status': 'success', 'message': 'Request accepted successfully'})
     except Exception as ex:
         print('Error in accept_request:', ex)
