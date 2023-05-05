@@ -165,6 +165,7 @@ function Header() {
           <a href="home">Home</a>
           <a href="profileview">Profile</a>
           {/* <a href="chatsview">Chats</a> */}
+          <a href="request">Requests</a>
           <a href="about-this">Help</a>
           <a href="/" onClick={handleLogOut}>Log Out</a>
         </div>

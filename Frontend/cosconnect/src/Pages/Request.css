@@ -1,40 +1,122 @@
-.container{
-    height: 100vh;
+/* Set default font and font size for the body */
+body {
+    font-family: Arial, sans-serif;
+    font-size: 16px;
+    }
+    
+    /* Set background color for the body */
+    body {
+    background-color: #f2f2f2;
+    }
+    
+    /* Set up grid layout for the container */
+    .container {
     display: grid;
-    grid-template-columns: 1fr 2fr;
-    grid-template-rows: 1fr 3fr 3fr;
-    grid-template-areas: 'side title'
-                         'side to'
-                         'side bo';
-
-}
-.class-title{
-    background-color: #F6F6F2;
-    text-align: center;
-    padding-top: 6%;
-    grid-area: title ;
-}
-.container_left{
-    background-color: #F6F6F2;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 3fr;
+    grid-template-areas:
+    "side to"
+    "side bo";
+    }
+    
+    /* Style the left container area */
+    .container_left {
     grid-area: side;
     text-align: center;
     padding-top: 20%;
-}
-.container_top{
-    background-color: #F6F6F2;
-    grid-area: to;
-}
-.container_bottom{
-    background-color: #F6F6F2;
-    grid-area: bo;
-}
-
-
-@media only screen and (max-width: 769px) {
-    .container{
-        grid-template-columns: 1fr;
-        grid-template-rows: 1/4fr 1fr 1fr 1fr;
-        grid-template-areas: 'title''side' 'to' 'bo';
+    padding-left: 20%;
     }
- 
-}
+    
+    /* Style the top container area */
+    .container_top {
+    grid-area: to;
+    padding-left: 20%;
+    padding-top: 8.5%;
+    height: auto;
+    }
+    
+    /* Style the bottom container area */
+    .container_bottom {
+    grid-area: bo;
+    padding-left: 20%;
+    padding-top: 20%;
+    height: auto;
+    }
+    
+    /* Style the requests box */
+    .requests {
+    background-color: #bdd2b6;
+    border-radius: 10px;
+    padding: 10px;
+    height: auto;
+    width: auto;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    }
+    
+    /* Style the button */
+    .butn {
+    background-color: #4caf50;
+    border: none;
+    color: white;
+    padding: 10px 20px;
+    width: auto;
+    height: auto;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 14px;
+    font-weight: bold;
+    margin: 4px 2px;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+    }
+    
+    /* Style the button on hover */
+    .butn:hover {
+    background-color: #388e3c;
+    opacity: 0.8;
+    }
+    
+    /* Style the request details */
+    .request-details p {
+    font-size: 14px;
+    font-weight: bold;
+    padding: 15px;
+    margin: 0;
+    }
+    
+    /* Style the request details button */
+    .request-details button {
+    margin-right: 8px;
+    }
+    
+    /* Style the top header */
+    .top-header {
+    color: black;
+    font-size: 24px;
+    font-weight: bold;
+    text-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+    }
+    
+    .accepted_requests {
+        background-color: #bdd2b6;
+        border-radius: 10px;
+        padding: 10px;
+        height: auto;
+        width: auto;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+        margin-right: 20%;    
+    }
+    
+    .rejected-requests {
+        background-color: #bdd2b6;
+        border-radius: 10px;
+        padding: 10px;
+        height: auto;
+        width: auto;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+        margin-right: 20%;
+    }
+    
+    

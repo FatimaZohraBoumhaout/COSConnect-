@@ -119,28 +119,27 @@ function Request(){
         <>
         <Header/>
         <div className ="container">
-            <div className="class-title">
-            </div>
             <aside className="container_left">
              <div className="requests">  
-             <h3 className="top-header"> Requests</h3>
+                <h3 className="top-header"> Received Requests</h3>
             
             {receivedPending.length > 0 || sentPending.length > 0 ? (
                         <>
                             {receivedPending.length > 0 && receivedPending.map(request => (
                                 <div className="request" key={request.id}>
                                     <div className="request-details">
-                                        <p>{request[0]} {request[1]} </p>
-                                        <button onClick={() => handleAccept(request[0], request[1])}>Accept</button>
-                                        <button onClick={() => handleReject(request[0], request[1])}>Reject</button>
+                                        <p>{request[0]} COS {request[1]} </p>
+                                        <button className="butn" onClick={() => handleAccept(request[0], request[1])}>Accept</button>
+                                        <button className="butn" onClick={() => handleReject(request[0], request[1])}>Reject</button>
                                     </div>
                                 </div>
                             ))}
-                            <h3>Sent Requests</h3>
+                            
+                            <h3 className="top-header">Sent Requests</h3>
                             {sentPending.length > 0 && sentPending.map(request => (
                                 <div className="request" key={request.id}>
                                     <div className="request-details">
-                                        <p>{request[0]} {request[1]}</p>
+                                        <p>{request[0]} COS {request[1]}</p>
                                         <p className="request-status">  Request Pending</p>
                                     </div>
                                 </div>
@@ -158,7 +157,7 @@ function Request(){
                         accepted.map(accepted => (
                             <div className="accepted" key={accepted.id}>
                                 <div className="request-details">
-                                    <p>{accepted[0]} {accepted[2]}</p>
+                                    <p>{accepted[0]} COS {accepted[2]}</p>
                                 </div>
                             </div>
                         ))
@@ -175,7 +174,7 @@ function Request(){
                         rejected.map(rejected => (
                             <div className="accepted">
                                 <div className="request-details">
-                                    <p>{rejected[0]} {rejected[1]} {rejected[2]}</p>
+                                    <p>{rejected[0]} {rejected[1]} COS {rejected[2]}</p>
                                 </div>
                             </div>
                         ))
