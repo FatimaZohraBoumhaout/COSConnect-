@@ -159,7 +159,12 @@ function Header() {
         <h1 id="title">COSConnect</h1>
       </div>
       <div className="header__button">
+        <div className={`header__links ${isDropdownOpen ? 'open' : ''}`}>
+            <a href="about-this">Help</a>
+        </div>
+        <a className="hidd" href="about-this">Help</a>
       </div>
+        
     </nav>
   );
 }

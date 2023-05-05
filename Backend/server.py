@@ -450,12 +450,14 @@ def get_request_():
 @app.route('/accept_request', methods=['POST'])
 def accept_request():
     try:
-        sender = flask.request.args.get('sender')
-        receiver = flask.request.args.get('receiver')
-        course = flask.request.args.get('course')
+        data = flask.request.get_json()
+        sender = data.get('sender')
+        receiver = data.get('receiver')
+        course = data.get('course')
+        print(sender, receiver, course)
         database_access.accept_request((sender, receiver, course), 'testdb_ery6')
         database_access.reject_unaccepted_requests((sender, receiver, course), 'testdb_ery6')
-        return jsonify({'status': 'success', 'message': 'Request accepted successfully'})
+        return jsonify({'status': 'success', 'message': 'Request accepted successfully'}), 200
     except Exception as ex:
         print('Error in accept_request:', ex)
         return jsonify({'error': 'Failed to accept request'}), 500
@@ -463,10 +465,12 @@ def accept_request():
 @app.route('/reject_request', methods=['POST'])
 def reject_request():
     try:
-        sender = flask.request.args.get('sender')
-        receiver = flask.request.args.get('receiver')
-        course = flask.request.args.get('course')
-        output = database_access.reject_request((sender, receiver, course), 'testdb_ery6')
+        data = flask.request.get_json()
+        sender = data.get('sender')
+        receiver = data.get('receiver')
+        course = data.get('course')
+        print(sender, receiver, course)
+        database_access.reject_request((sender, receiver, course), 'testdb_ery6')
         return jsonify({'status': 'success', 'message': 'Request rejected successfully'})
     except Exception as ex:
         print('Error in reject_request:', ex)
@@ -517,7 +521,7 @@ def get_accepted():
 def get_rejected():
     try:
         net_id = flask.request.args.get('id')
-        rejected = database_access.get_accepted((net_id), 'testdb_ery6')
+        rejected = database_access.get_rejected((net_id), 'testdb_ery6')
         print("got rejected", rejected)
         return jsonify(rejected)
     except Exception as ex:
@@ -529,8 +533,19 @@ def get_pending():
     try:
         net_id = flask.request.args.get('id')
         pending = database_access.get_pending((net_id), 'testdb_ery6')
-        print("got pending", pending)
-        return jsonify(pending)
+        sent = []
+        received = []
+        output = []
+        for row in pending:
+            if row[0] == net_id:
+                sent.append((row[1], row[2]))
+            else:
+                received.append((row[0], row[2]))
+        print("sent", sent)
+        print("received", received)
+        output.append(sent)
+        output.append(received)
+        return output
     except Exception as ex:
         print('Error in get_pending:', ex)
         return jsonify({'error': 'Failed to get pending'}), 500

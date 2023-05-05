@@ -7,7 +7,8 @@ import Footer from "../Components/Footer";
 import "./Request.css";
 
 function Request(){
-    const [requests, setRequests] = useState([]);
+    const [sentPending, setSentPending] = useState([]);
+    const [receivedPending, setReceivedPending] = useState([]);
     const [cookies] = useCookies(['net_id']);
     const [rejected, setRejected] = useState([]);
     const [accepted, setAccepted] = useState([]);
@@ -16,11 +17,13 @@ function Request(){
     useEffect(() => {
         if(cookies.net_id != null){
             console.log("net_id: " + cookies.net_id);
-            fetch(`get_request?id=${cookies.net_id}`)
+            fetch(`get_pending?id=${cookies.net_id}`)
             .then (response => response.json())
             .then(data => {
-                setRequests(data);
-                console.log("requests: "+data);
+                setSentPending(data[0]);
+                setReceivedPending(data[1]);
+                console.log("receivedrequests: "+ data[1]);
+                console.log("sentrequests: "+ data[0]);
             })
             .catch((error) => {
                 console.log(error);
@@ -30,41 +33,136 @@ function Request(){
         }
     }, [cookies.net_id]);
 
-    const handleAccept = (requestId) => {
-        // Handle accept button click for a request with ID `requestId`
-        console.log(`Accepted request with ID ${requestId}`);
-        navigate(`/request`);
-    }
+    useEffect(() => {
+        if(cookies.net_id != null){
+            console.log("net_id: " + cookies.net_id);
+            fetch(`get_accepted?id=${cookies.net_id}`)
+            .then (response => response.json())
+            .then(data => {
+                setAccepted(data);
+                console.log("accepted requests: "+ data);
+            })
+            .catch((error) => {
+                console.log(error);
+            });
+        }else{
+            console.log("net_id is null");
+        }
+    }, [cookies.net_id]);
 
-    const handleReject = (requestId) => {
-        // Handle reject button click for a request with ID `requestId`
-        console.log(`Rejected request with ID ${requestId}`);
-    }
+    useEffect(() => {
+        if(cookies.net_id != null){
+            console.log("net_id: " + cookies.net_id);
+            fetch(`get_rejected?id=${cookies.net_id}`)
+            .then (response => response.json())
+            .then(data => {
+                setRejected(data);
+                console.log("rejected requests: "+ data);
+            })
+            .catch((error) => {
+                console.log(error);
+            });
+        }else{
+            console.log("net_id is null");
+        }
+    }, [cookies.net_id]);
+
+    const handleAccept = (sender, course) => {
+        const receiver = cookies.net_id;
+        console.log(`Accepted request with ID ${sender} ${course}` + receiver);
+        const data = {
+            sender,
+            receiver,
+            course,
+        };
+        fetch(`accept_request`, {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(data)
+          })
+          .then((response) => response.json())
+          .then((data) => {
+            console.log(data);
+            
+          })
+            .catch(error => console.error(error));
+            window.location.reload();
+        }
+
+
+    const handleReject = (sender, course) => {
+        const receiver = cookies.net_id;
+        console.log(`Accepted request with ID ${sender} ${course}` + receiver);
+        const data = {
+            sender,
+            receiver,
+            course,
+        };
+        fetch(`reject_request`, {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(data)
+          })
+          .then((response) => response.json())
+          .then((data) => {
+            console.log(data);
+          })
+            .catch(error => console.error(error));
+            window.location.reload();
+        }
 
     return(
         <>
         <Header/>
         <div className ="container">
-            <div className="class-title">
-            </div>
             <aside className="container_left">
-                   Accepted Requests
+             <div className="requests">  
+                <h3 className="top-header"> Received Requests</h3>
+            
+            {receivedPending.length > 0 || sentPending.length > 0 ? (
+                        <>
+                            {receivedPending.length > 0 && receivedPending.map(request => (
+                                <div className="request" key={request.id}>
+                                    <div className="request-details">
+                                        <p>{request[0]} COS {request[1]} </p>
+                                        <button className="butn" onClick={() => handleAccept(request[0], request[1])}>Accept</button>
+                                        <button className="butn" onClick={() => handleReject(request[0], request[1])}>Reject</button>
+                                    </div>
+                                </div>
+                            ))}
+                            
+                            <h3 className="top-header">Sent Requests</h3>
+                            {sentPending.length > 0 && sentPending.map(request => (
+                                <div className="request" key={request.id}>
+                                    <div className="request-details">
+                                        <p>{request[0]} COS {request[1]}</p>
+                                        <p className="request-status">  Request Pending</p>
+                                    </div>
+                                </div>
+                            ))}
+                        </>
+                    ) : (
+                        <p>No new requests</p>
+                    )}
+                </div> 
             </aside>
             <div className="container_top">
-                <div className="new_requests">
-                    <h3 className="top-header">Requests</h3>
-                    {requests.length > 0 ? 
-                        requests.map(request => (
-                            <div className="request" key={request.id}>
+                <div className="accepted_requests">
+                    <h3 className="top-header">Accepted Requests</h3>
+                        {accepted.length > 0 ? 
+                        accepted.map(accepted => (
+                            <div className="accepted" key={accepted.id}>
                                 <div className="request-details">
-                                    <p>{request}</p>
-                                    <button onClick={() => handleAccept(request.id)}>Accept</button>
-                                    <button onClick={() => handleReject(request.id)}>Reject</button>
+                                    <p>{accepted[0]} COS {accepted[2]}</p>
                                 </div>
                             </div>
                         ))
                     :
-                        <p>No new requests</p>
+                        <p>No accepted requests</p>
                     }
                 </div>
             </div>
@@ -72,6 +170,17 @@ function Request(){
                 <div className="rejected-requests">
                     <h3 className="top-header">Rejected Requests</h3>
                     {/* Render rejected requests similarly */}
+                    {rejected.length > 0 ? 
+                        rejected.map(rejected => (
+                            <div className="accepted">
+                                <div className="request-details">
+                                    <p>{rejected[0]} {rejected[1]} COS {rejected[2]}</p>
+                                </div>
+                            </div>
+                        ))
+                    :
+                        <p>No rejected requests</p>
+                    }
                 </div>
             </div>
         </div>
