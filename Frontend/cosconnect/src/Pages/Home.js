@@ -64,7 +64,9 @@ function Home(){
     <Header />
     <div className="home">
       <div className="avatar">
+      <a href={`/profileview`}>
       <Avatar className="p-avatar" name={user ? user[0][4] : ''} size="60" round={true} />
+      </a>
       </div>
       <div className="title">
         <> Classes </>
