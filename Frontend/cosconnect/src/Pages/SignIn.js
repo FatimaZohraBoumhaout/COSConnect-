@@ -69,6 +69,7 @@ const handleLogin = (response) => {
     <div className='main-container'>
       <h1 className='welcome'>Welcome to COSConnect!</h1>
       <h2>Sign In Below to start finding partners!</h2>
+      <br/>
       <div className='butt-container'>
         <GoogleOAuthProvider clientId='478842507060-e6h97rhvrg7set6n13teb5quprmgjvc7.apps.googleusercontent.com' className='butt'>
         <GoogleLogin
