@@ -120,7 +120,7 @@ function Request(){
         <Header/>
         <div className ="container">
             <aside className="container_left">
-             <div className="requests">  
+             <div className="requests" id="requestTransition">  
                 <h3 className="top-header"> Received Requests</h3>
             
             {receivedPending.length > 0 || sentPending.length > 0 ? (
@@ -157,7 +157,7 @@ function Request(){
                         accepted.map(accepted => (
                             <div className="accepted" key={accepted.id}>
                                 <div className="request-details">
-                                    <p>{accepted[0]} COS {accepted[2]}</p>
+                                <p><p class = "request-label">Sender:</p>{accepted[0]} <p class = "request-label">Receiver:</p>{accepted[1]}<p class = "request-label">Class:</p>COS {accepted[2]}</p>
                                 </div>
                             </div>
                         ))
@@ -174,7 +174,7 @@ function Request(){
                         rejected.map(rejected => (
                             <div className="accepted">
                                 <div className="request-details">
-                                    <p>{rejected[0]} {rejected[1]} COS {rejected[2]}</p>
+                                    <p><p class = "request-label">Sender:</p>{rejected[0]} <p class = "request-label">Receiver:</p> {rejected[1]} <p class = "request-label">Class:</p> COS {rejected[2]}</p>
                                 </div>
                             </div>
                         ))
@@ -184,6 +184,8 @@ function Request(){
                 </div>
             </div>
         </div>
+        <br/>
+        <br/>
         <Footer/>
         </>
     );

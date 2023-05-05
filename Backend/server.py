@@ -400,13 +400,17 @@ def get_students_info():
     try:
         classes = flask.request.args.get('class')
         net_id = flask.request.args.get('id')
+        accepted = database_access.get_accepted((net_id), 'testdb_ery6')
+        for row in accepted:
+            if row[2] == classes:
+                return []
         students = database_access.get_students((classes, net_id), 'testdb_ery6')
         students_info = database_access.get_students_info(students, 'testdb_ery6')
         print("GOT TALKING", students_info)
         return jsonify(students_info)
     except Exception as ex:
-        print('Error in post_status:', ex)
-        return jsonify({'error': 'Failed to get talking'}), 500
+        print('Error in get_students_info:', ex)
+        return jsonify({'error': 'Failed to get_students_info'}), 500
 
 @app.route('/getRecentSent', methods=['GET'])
 def get_recent_sent():

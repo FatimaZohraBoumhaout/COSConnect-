@@ -6,7 +6,7 @@ body {
     
     /* Set background color for the body */
     body {
-    background-color: #f2f2f2;
+    background-color: #F6F6F2;
     }
     
     /* Set up grid layout for the container */
@@ -45,12 +45,10 @@ body {
     
     /* Style the requests box */
     .requests {
-    background-color: #bdd2b6;
     border-radius: 10px;
     padding: 10px;
     height: auto;
     width: auto;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
     }
     
     /* Style the button */
@@ -82,8 +80,9 @@ body {
     .request-details p {
     font-size: 14px;
     font-weight: bold;
-    padding: 15px;
-    margin: 0;
+    padding: 10px;
+    background-color: #f3f6f2;
+    border-radius: 20px;
     }
     
     /* Style the request details button */
@@ -96,7 +95,6 @@ body {
     color: black;
     font-size: 24px;
     font-weight: bold;
-    text-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
     }
     
     .accepted_requests {
@@ -105,8 +103,13 @@ body {
         padding: 10px;
         height: auto;
         width: auto;
-        box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
         margin-right: 20%;    
+        transition: 0.5s background-color, 0.5s box-shadow;
+    }
+
+    .accepted_requests:hover {
+        background-color: #BADFE7;
+        box-shadow:0 0 10px 10px #dedede;
     }
     
     .rejected-requests {
@@ -115,8 +118,28 @@ body {
         padding: 10px;
         height: auto;
         width: auto;
-        box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
         margin-right: 20%;
+        transition: 0.5s background-color, 0.5s box-shadow;
+    }
+
+    .rejected-requests:hover {
+        background-color: #BADFE7;
+        box-shadow:0 0 10px 10px #dedede;
+    }
+
+    #requestTransition{
+        background-color: #bdd2b6;
+        transition: 0.5s background-color, 0.5s box-shadow;
+    }
+    #requestTransition:hover {
+        background-color: #BADFE7;
+        box-shadow:0 0 10px 10px #dedede;
+    }
+    .accepted, .request-details {
+        margin-bottom: 50px;
+    }
+    .request-label{
+        color: black;
     }
     
     

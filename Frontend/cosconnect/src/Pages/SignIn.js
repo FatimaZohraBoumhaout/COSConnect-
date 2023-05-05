@@ -3,7 +3,7 @@ import { GoogleOAuthProvider } from '@react-oauth/google';
 import { GoogleLogin } from '@react-oauth/google';
 import jwt_decode from 'jwt-decode';
 import './SignIn.css';
-import image from './FronPage.png';
+import image from './landing_page_img.png';
 import { useCookies } from "react-cookie";
 import { useNavigate } from "react-router-dom";
 import SignInHeader from "../Components/SignInHeader";
@@ -67,7 +67,8 @@ const handleLogin = (response) => {
     <>
     <SignInHeader />
     <div className='main-container'>
-      <h1 className='welcome'>Welcome to COSConnect where the journey begins!</h1>
+      <h1 className='welcome'>Welcome to COSConnect!</h1>
+      <h2 style={{marginBottom: '12px'}}>Sign in below to start finding partners!</h2>
       <div className='butt-container'>
         <GoogleOAuthProvider clientId='478842507060-e6h97rhvrg7set6n13teb5quprmgjvc7.apps.googleusercontent.com' className='butt'>
         <GoogleLogin
