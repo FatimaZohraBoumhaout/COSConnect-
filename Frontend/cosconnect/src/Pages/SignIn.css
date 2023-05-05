@@ -5,10 +5,9 @@
 
 .welcome {
   text-align: center;
-  color: black;
+  color: #338888;
   margin-top: 50px;
-  font-family: "Times New Roman", Times, serif;
-  margin-bottom: 4%;
+  font-family: Inter;
 }
 
 img {
