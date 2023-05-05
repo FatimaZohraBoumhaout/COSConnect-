@@ -461,6 +461,8 @@ def accept_request():
         print(sender, receiver, course)
         database_access.accept_request((sender, receiver, course), 'testdb_ery6')
         database_access.reject_unaccepted_requests((sender, receiver, course), 'testdb_ery6')
+        database_access.status_off((sender, course), 'testdb_ery6')
+        database_access.status_off((receiver, course), 'testdb_ery6')
         return jsonify({'status': 'success', 'message': 'Request accepted successfully'}), 200
     except Exception as ex:
         print('Error in accept_request:', ex)
