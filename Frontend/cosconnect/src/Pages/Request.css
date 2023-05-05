@@ -45,12 +45,11 @@ body {
     
     /* Style the requests box */
     .requests {
-    background-color: #bdd2b6;
+    background-color: none;
     border-radius: 10px;
     padding: 10px;
     height: auto;
     width: auto;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
     }
     
     /* Style the button */
