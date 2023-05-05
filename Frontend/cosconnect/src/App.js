@@ -14,7 +14,6 @@ import Error from './Pages/Error';
 import PageNotFound from './Pages/PageNotFound';
 import Request from "./Pages/Request";
 import About from "./Pages/About";
-function App() {
 
 function App() {
   return (
@@ -37,6 +36,5 @@ function App() {
       </BrowserRouter>
     </>
   );
-}
 }
 export default App;

@@ -3,7 +3,7 @@ import { useCookies } from "react-cookie";
 import { useLocation } from "react-router-dom";
 import { Link } from 'react-router-dom';
 import { useNavigate } from "react-router-dom";
-import "./ClassView.css"
+import "./About.css"
 import "@fontsource/inter";
 import Header from "../Components/Header";
 import Footer from "../Components/Footer";
