@@ -28,6 +28,8 @@
     background-color: #F6F6F2;
     grid-area: bo;
 }
+
+
 @media only screen and (max-width: 769px) {
     .container{
         grid-template-columns: 1fr;
