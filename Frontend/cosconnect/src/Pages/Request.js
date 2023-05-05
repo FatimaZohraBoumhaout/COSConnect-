@@ -157,7 +157,7 @@ function Request(){
                         accepted.map(accepted => (
                             <div className="accepted" key={accepted.id}>
                                 <div className="request-details">
-                                    <p><p class = "request-label">Partner:</p>{accepted[0]} <p class = "request-label">Class:</p>COS {accepted[2]}</p>
+                                <p><p class = "request-label">Sender:</p>{accepted[0]} <p class = "request-label">Receiver:</p>{accepted[1]}<p class = "request-label">Class:</p>COS {accepted[2]}</p>
                                 </div>
                             </div>
                         ))
