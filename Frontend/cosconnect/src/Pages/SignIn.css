@@ -1,5 +1,5 @@
 .main-container {
-  background-color: white;
+  background-color: #F6F6F2;
   font-family: Arial, sans-serif;
 }
 
@@ -16,6 +16,7 @@ img {
   width: 80%;
   max-width: 40%;
   margin-bottom: 5%;
+  border: 2px solid #338888;
 }
 
 .butt-container {
