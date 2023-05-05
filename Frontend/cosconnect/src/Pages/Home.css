@@ -3,25 +3,26 @@
     display: grid;
     grid-template-columns: 1fr 2fr;
     grid-template-rows: 1fr 4fr;
-    grid-template-areas: 'avatar class'
-                         'but box'   ;
+    grid-template-areas:
+      'avatar class'
+      'but box';
     margin: auto;
     height: 100%;
-}
-
-.avatar {
+  }
+  
+  .avatar {
     grid-area: avatar;
     margin: 10%;
-}
-
-.title {
+  }
+  
+  .title {
     font-size: 30px;
     margin-top: 7%;
     margin-left: 20%;
     color: #338888;
-}
-
-button {
+  }
+  
+  button {
     height: 40px;
     width: 40px;
     background-color: black;
@@ -29,24 +30,24 @@ button {
     margin: 2%;
     padding-left: 12px;
     padding-right: 37px;
-}
-
-.buttons {
+  }
+  
+  .buttons {
     display: flex;
     flex-direction: column;
     margin-left: 10%;
-}
-
-.boxes {
+  }
+  
+  .boxes {
     display: grid;
-    grid-template-columns: 1fr 1fr;
-    grid-template-rows: auto auto;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: auto auto auto;
     margin-right: 51%;
     margin-left: auto;
     margin-bottom: auto;
-}
-
-.boxes > div {
+  }
+  
+  .boxes > div {
     height: 180px;
     width: 180px;
     background-color: #BDD2B6;
@@ -55,13 +56,85 @@ button {
     margin-bottom: 20px;
     border-radius: 10px;
     transition: background-color 0.4s, box-shadow 0.3s;
-}
-.boxes > div:hover {
+  }
+  
+  .boxes > div:hover {
     background-color: #BADFE7;
-    box-shadow:0 0 10px 10px #dedede;
-}
-
-.num {
+    box-shadow: 0 0 10px 10px #dedede;
+  }
+  
+  .num {
     text-align: center;
     margin-top: 40%;
   }
+  
+  /* Media queries */
+  
+  @media screen and (max-width: 830px) {
+    .home {
+      grid-template-rows: auto auto auto auto;
+      grid-template-areas:
+        'avatar'
+        'class'
+        'but'
+        'box';
+    }
+  
+    .avatar {
+      margin: 5%;
+    }
+  
+    .title {
+      margin-left: 5%;
+      margin-top: 10%;
+    }
+  
+    .buttons {
+      margin-left: 5%;
+    }
+  
+    .boxes {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        grid-template-rows: auto;
+        margin: 10%;
+      }
+
+
+  }
+  
+  @media screen and (max-width: 480px) {
+    .home {
+      grid-template-rows: auto auto auto auto auto;
+      grid-template-areas:
+        'avatar'
+        'class'
+        'title'
+        'but'
+        'box';
+    }
+  
+    .title {
+      margin-left: 5%;
+      margin-top: 10%;
+      font-size: 20px;
+    }
+  
+    .buttons {
+      margin-left: 5%;
+    }
+  
+    .boxes {
+        display: grid;
+        grid-template-columns: 1fr;
+        grid-template-rows: auto;
+        margin: auto;
+    }
+
+  
+    .boxes > div {
+      height: 150px;
+      width: 150px;
+    }
+  }
+  
