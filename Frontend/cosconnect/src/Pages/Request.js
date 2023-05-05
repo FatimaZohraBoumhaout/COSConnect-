@@ -120,7 +120,7 @@ function Request(){
         <Header/>
         <div className ="container">
             <aside className="container_left">
-             <div className="requests">  
+             <div className="requests" id="requestTransition">  
                 <h3 className="top-header"> Received Requests</h3>
             
             {receivedPending.length > 0 || sentPending.length > 0 ? (

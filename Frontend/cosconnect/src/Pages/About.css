@@ -8,5 +8,15 @@ body{
 }
 
 img{
-    width:65%;
+    width:100%;
+}
+
+.about-content {
+    color: black;
+    font-size: 20px;
+}
+
+.about-group {
+    padding-left: 20%;
+    padding-right: 20%;
 }
