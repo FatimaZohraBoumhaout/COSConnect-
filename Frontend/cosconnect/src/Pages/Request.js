@@ -140,13 +140,13 @@ function Request(){
                                 <div className="request" key={request.id}>
                                     <div className="request-details">
                                         <p>{request[0]} COS {request[1]}</p>
-                                        <p className="request-status">  Request Pending</p>
+                                        <p style={{backgroundColor:"#338888", color:"white", marginLeft:'10px'}}>  Request Pending</p>
                                     </div>
                                 </div>
                             ))}
                         </>
                     ) : (
-                        <p>No new requests</p>
+                        <p style={{color:"#338888", marginLeft:'20px'}}>No new requests</p>
                     )}
                 </div> 
             </aside>
@@ -162,7 +162,7 @@ function Request(){
                             </div>
                         ))
                     :
-                        <p>No accepted requests</p>
+                        <p style={{color:"#338888", marginLeft:'20px'}}>No accepted requests</p>
                     }
                 </div>
             </div>
@@ -179,7 +179,7 @@ function Request(){
                             </div>
                         ))
                     :
-                        <p>No rejected requests</p>
+                        <p style={{color:"#338888", marginLeft:'20px'}}>No rejected requests</p>
                     }
                 </div>
             </div>
