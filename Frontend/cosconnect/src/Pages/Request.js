@@ -129,7 +129,7 @@ function Request(){
                             {receivedPending.length > 0 && receivedPending.map(request => (
                                 <div className="request" key={request.id}>
                                     <div className="request-details">
-                                        <p>{request[0]} COS {request[1]} </p>
+                                        <p><b style={{color:"#338888"}}>{request[0]}:</b> COS {request[1]} </p>
                                         <button className="butn" onClick={() => handleAccept(request[0], request[1])}>Accept</button>
                                         <button className="butn" onClick={() => handleReject(request[0], request[1])}>Reject</button>
                                     </div>
@@ -140,7 +140,7 @@ function Request(){
                             {sentPending.length > 0 && sentPending.map(request => (
                                 <div className="request" key={request.id}>
                                     <div className="request-details">
-                                        <p>{request[0]} COS {request[1]}</p>
+                                        <p><b style={{color:"#338888"}}>{request[0]}:</b> COS {request[1]}</p>
                                         <p style={{backgroundColor:"#338888", color:"white", marginLeft:'10px'}}>  Request Pending</p>
                                     </div>
                                 </div>

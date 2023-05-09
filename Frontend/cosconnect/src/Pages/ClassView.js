@@ -38,7 +38,7 @@ function ClassView(){
             console.log("classes", classes[0][0])
             console.log("this class", this_class)
             if (!classes[0][0].includes(this_class)){
-                navigate(`/error`);
+                navigate(`/notfound`);
             }
         }
     }, [classes]);
@@ -139,6 +139,8 @@ function ClassView(){
               console.log("Status changed")
             } else {
               console.log("Status change failed")
+              alert("Cannot turn status on after accepting a partner")
+              setStatus("Not Available")
             }
           })
           .catch(error => console.error(error));

@@ -76,6 +76,7 @@ function About(){
             <p class="about-content"> You can also send an invite by through the other student's public profile by the 
                 "send request" button, or you can go back to the previous page to view the class you were on.
             </p></div>
+            <br/>
             <img src={partner}/>
             <br></br>
             <h2>Navigating Profile</h2>
