@@ -243,6 +243,8 @@ def get_courses():
         return jsonify({'error': 'Failed to retrieve students'}), 500
     
 #-------------------------------------------------------------------------------------------------------
+''' Some of the code for the send_email function is adapted from: https://mailtrap.io/blog/flask-email-sending/'''
+
 app.config['MAIL_SERVER']='smtp.gmail.com'
 app.config['MAIL_PORT'] = 465
 app.config['MAIL_USERNAME'] = 'cosconnectprinceton@gmail.com'

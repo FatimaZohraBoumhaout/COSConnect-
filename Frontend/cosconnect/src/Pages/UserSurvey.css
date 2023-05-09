@@ -1,6 +1,7 @@
+/*
+Some of the code below is adapted from https://github.com/GvidasGVD/ResponsiveRegistrationForm
+*/
 *{
-    padding: 0;
-    margin: 0;
     box-sizing: border-box;
     font-family: "Times New Roman", Times, serif;
 }
@@ -50,7 +51,7 @@ html, .bd  {
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
-    padding: 20px 0;
+    padding: 25px 5px;
 }
 
 .input-box:nth-child(2n){
