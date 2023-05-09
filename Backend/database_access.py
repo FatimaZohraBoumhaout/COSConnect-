@@ -485,4 +485,13 @@ def reject_unaccepted_requests(input, database_url):
     except Exception as ex:
         print(ex)
                   
+def status_off(input, database_url):
+    net_id, course = input
+    try:
+        with psycopg2.connect(dbname=database_url, host="dpg-cggj3fceoogqfc2no840-a.ohio-postgres.render.com", user="testuser", password="gVYdK2LMupfkuAxyR6kp3a6XpuIB9VVV") as connection:
+            with contextlib.closing(connection.cursor()) as cursor:
+                query = "UPDATE classes SET class_status = 'false' WHERE net_id = %s AND class = %s;"
+                cursor.execute(query, (net_id, course)) 
+    except Exception as ex:
+        print(ex)
                     

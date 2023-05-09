@@ -120,7 +120,7 @@ function Request(){
         <Header/>
         <div className ="container">
             <aside className="container_left">
-             <div className="requests">  
+             <div className="requests" id="requestTransition">  
                 <h3 className="top-header"> Received Requests</h3>
             
             {receivedPending.length > 0 || sentPending.length > 0 ? (
@@ -140,13 +140,13 @@ function Request(){
                                 <div className="request" key={request.id}>
                                     <div className="request-details">
                                         <p>{request[0]} COS {request[1]}</p>
-                                        <p className="request-status">  Request Pending</p>
+                                        <p style={{backgroundColor:"#338888", color:"white", marginLeft:'10px'}}>  Request Pending</p>
                                     </div>
                                 </div>
                             ))}
                         </>
                     ) : (
-                        <p>No new requests</p>
+                        <p style={{color:"#338888", marginLeft:'20px'}}>No new requests</p>
                     )}
                 </div> 
             </aside>
@@ -157,12 +157,12 @@ function Request(){
                         accepted.map(accepted => (
                             <div className="accepted" key={accepted.id}>
                                 <div className="request-details">
-                                    <p>{accepted[0]} COS {accepted[2]}</p>
+                                <p><p class = "request-label">Sender:</p>{accepted[0]} <p class = "request-label">Receiver:</p>{accepted[1]}<p class = "request-label">Class:</p>COS {accepted[2]}</p>
                                 </div>
                             </div>
                         ))
                     :
-                        <p>No accepted requests</p>
+                        <p style={{color:"#338888", marginLeft:'20px'}}>No accepted requests</p>
                     }
                 </div>
             </div>
@@ -174,16 +174,18 @@ function Request(){
                         rejected.map(rejected => (
                             <div className="accepted">
                                 <div className="request-details">
-                                    <p>{rejected[0]} {rejected[1]} COS {rejected[2]}</p>
+                                    <p><p class = "request-label">Sender:</p>{rejected[0]} <p class = "request-label">Receiver:</p> {rejected[1]} <p class = "request-label">Class:</p> COS {rejected[2]}</p>
                                 </div>
                             </div>
                         ))
                     :
-                        <p>No rejected requests</p>
+                        <p style={{color:"#338888", marginLeft:'20px'}}>No rejected requests</p>
                     }
                 </div>
             </div>
         </div>
+        <br/>
+        <br/>
         <Footer/>
         </>
     );

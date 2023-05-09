@@ -7,7 +7,7 @@ function FrontPage() {
         <div>
             <h1>Welcome to COSConnect where the journey begins!</h1>
             <button>Log in to COSConnect</button>
-            <img src="FronPage.jpeg" alt="home page"/>
+            <img src="landing_page_img.png" alt="home page"/>
         </div>
     );
 }
