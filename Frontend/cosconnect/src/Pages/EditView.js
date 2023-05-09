@@ -28,8 +28,8 @@ function EditView() {
           setUser(data);
           setPronouns(data[0][0]);
           setClasses(data[0][1]);
-          setAvailability(data[0][2]);
-          setBio(data[0][5]);
+          setAvailability(data[0][5]);
+          setBio(data[0][2]);
           console.log("user state set to:", data);
         })
         .catch(error => console.log(error));

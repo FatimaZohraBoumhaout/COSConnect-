@@ -208,6 +208,22 @@ def add_request(request, database_url):
     except Exception as ex:
         print(ex)
 
+def get_request(request, database_url):
+    sender_id, receiver_id, course = request 
+    print(sender_id, receiver_id, course)
+    try:
+        with psycopg2.connect(dbname=database_url, host="dpg-cggj3fceoogqfc2no840-a.ohio-postgres.render.com", user="testuser", password="gVYdK2LMupfkuAxyR6kp3a6XpuIB9VVV") as connection:
+            with contextlib.closing(connection.cursor()) as cursor:
+                query = "SELECT sender FROM communications WHERE sender=%s AND receiver=%s AND class=%s;"
+                try:
+                    cursor.execute(query, (sender_id, receiver_id, course))
+                except Exception as ex:
+                    print(ex)
+                output = cursor.fetchall()
+                return output
+    except Exception as ex:
+        print(ex)
+
 # get usernames of people who user sent messages to
 def get_sent(input, database_url):
     sender, course = input

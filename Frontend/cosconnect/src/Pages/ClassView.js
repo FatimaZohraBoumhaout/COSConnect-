@@ -28,6 +28,7 @@ function ClassView(){
     //const [finaloutput, setFinalOutput] = useState([]);
     const [renderStudents, setRenderStudents] = useState([]);
     const [fixed, setFixed] = useState([]);
+    const [dispStatus, setDispStatus] = useState([]);
     
     const this_class = window.location.search.match(/class=([^&]*)/)[1].replace('%20',' ');
     let output = []
@@ -145,6 +146,15 @@ function ClassView(){
           .catch(error => console.error(error));
       };
 
+      useEffect(() => {
+        if (status === "Available"){
+          setDispStatus("Visible");
+        }
+        else{
+          setDispStatus("Not Visible");
+        }
+      }, [status]);
+
     useEffect(() => {
          console.log("fixed from input set to be", fixed)
          if(fixed.length===0){
@@ -235,22 +245,18 @@ function ClassView(){
                 <div className="search">
                     <center>
                     <form id="form" className="form">
+                        {/* Starting Code for Below: https://codepen.io/pagedart/pen/VwvzEbx */}
                         <input placeholder="Search by Name, NetID, or Availability" onChange={event => handleChange(event.target.value)}/>
                         <button className="search-button" disabled={true}>
                         <svg viewBox="0 0 1024 1024"><path class="path1" d="M848.471 928l-263.059-263.059c-48.941 36.706-110.118 55.059-177.412 55.059-171.294 0-312-140.706-312-312s140.706-312 312-312c171.294 0 312 140.706 312 312 0 67.294-24.471 128.471-55.059 177.412l263.059 263.059-79.529 79.529zM189.623 408.078c0 121.364 97.091 218.455 218.455 218.455s218.455-97.091 218.455-218.455c0-121.364-103.159-218.455-218.455-218.455-121.364 0-218.455 97.091-218.455 218.455z"></path></svg>
                         </button>
-                        
-                       {/* { <input placeholder="Search Availability..." onChange={event => handleAvailChange(event.target.value)}/>
-                        <button className="search-button" disabled={true}>
-                        <svg viewBox="0 0 1024 1024"><path class="path1" d="M848.471 928l-263.059-263.059c-48.941 36.706-110.118 55.059-177.412 55.059-171.294 0-312-140.706-312-312s140.706-312 312-312c171.294 0 312 140.706 312 312 0 67.294-24.471 128.471-55.059 177.412l263.059 263.059-79.529 79.529zM189.623 408.078c0 121.364 97.091 218.455 218.455 218.455s218.455-97.091 218.455-218.455c0-121.364-103.159-218.455-218.455-218.455-121.364 0-218.455 97.091-218.455 218.455z"></path></svg>
-                        </button>} */}
                     </form>  
                     </center>
                     <h2 style={{fontSize: '30px'}}>{"COS " + this_class}</h2>
                 </div>
                 <div className="statusToggle">
                     <div style={toggleContainerStyle}>
-                        <label>Don't see a perfect match? Allow yourself to be available to other students: </label>
+                        <label>Want other students to send you partner requests? Allow yourself to be visible: </label>
                         <div style={{ marginLeft: "10px" }}>
                             <label className="switch">
                                 <input
@@ -262,7 +268,7 @@ function ClassView(){
                                 <span className="slider round"></span>
                             </label>
                         </div>
-                        <span style={{ marginLeft: "10px" }}>{status}</span>
+                        <span style={{ marginLeft: "10px" }}>{dispStatus}</span>
                     </div>
                 </div>
                     <br/>

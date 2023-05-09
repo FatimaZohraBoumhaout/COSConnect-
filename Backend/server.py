@@ -72,6 +72,10 @@ def user_profile():
         availability = data.get('availability')
         full_name = data.get('fullName')
         display_name = data.get('displayName')
+        checkUser = database_access.get_user(net_id, 'testdb_ery6')
+        if len(checkUser) != 0:
+            print('Duplicate Request for adding user')
+            return jsonify({'net_id': net_id})
         database_access.add_user(
             (net_id, pronouns, classes, bio, availability, full_name, display_name), 'testdb_ery6')
         #print(statement)
@@ -108,6 +112,10 @@ def add_request():
         course = data.get('course')
         if not sender_id or not receiver_id or not course:
             raise ValueError('Missing required fields')
+        checkRequest = database_access.get_request((sender_id, receiver_id, course), 'testdb_ery6')
+        if len(checkRequest) != 0:
+            print('Duplicate Request for adding request')
+            return jsonify({'status': 'success'})
         database_access.add_request((sender_id, receiver_id, course), 'testdb_ery6')
         return jsonify({'status': 'success'})
     except ValueError as vex:
@@ -180,7 +188,9 @@ def add_class():
         if not net_id or not classes:
             raise ValueError('Missing user ID or classes')
         for class_name in classes:
-            database_access.add_class((net_id, class_name), 'testdb_ery6')
+            class_exists = database_access.get_class_status((net_id, class_name), 'testdb_ery6')
+            if len(class_exists) != 0:
+                database_access.add_class((net_id, class_name), 'testdb_ery6')
             print("added class: ", class_name)
         return jsonify({'status': 'success', 'message': 'Classes added successfully'})
     except ValueError as vex:
@@ -555,6 +565,20 @@ def get_pending():
     except Exception as ex:
         print('Error in get_pending:', ex)
         return jsonify({'error': 'Failed to get pending'}), 500
+
+@app.route('/cancel_accept', methods=['POST'])
+def cancel_accept():
+    try:
+        data = flask.request.get_json()
+        sender = data.get('sender')
+        receiver = data.get('receiver')
+        course = data.get('course')
+        print(sender, receiver, course)
+        database_access.reject_request((sender, receiver, course), 'testdb_ery6')
+        return jsonify({'status': 'success', 'message': 'Request canceled successfully'}), 200
+    except Exception as ex:
+        print('Error in accept_request:', ex)
+        return jsonify({'error': 'Failed to accept request'}), 500
 
 if __name__ == '__main__':
     app.run(debug=True)
