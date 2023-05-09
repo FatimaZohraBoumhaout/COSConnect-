@@ -40,7 +40,7 @@ function About(){
             <p class="about-content"> The following will walk you through the page.</p>
             <p class="about-content"> First, login using your Princeton email. </p>
             <br></br>
-            <p class="about-content"> You will be directed to a survey page, where you will be asked to fill in your information. Please fill in all the blanks, and press submit when done. </p>
+            <p class="about-content"> You will be directed to a survey page, where you will be asked to fill in your information. Please fill in all the blanks, and press submit when done. In the availability section, please make sure to put in the days of the week and times of the day that you are available.</p>
             </div>
             <br></br><br></br>
             <img src={image_survey} style={{width: '100%'}}/> <img src={survey_classes}/>
