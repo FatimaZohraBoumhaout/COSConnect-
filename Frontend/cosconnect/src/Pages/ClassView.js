@@ -157,6 +157,12 @@ function ClassView(){
          //setFinalOutput(output)
          let studentsToRender = studentsId.map((st, index) =>{
             if (output.includes(index)){
+            if(st[1].length > 30) {
+                st[1] = st[1].slice(0, 20) + "..."
+            }
+            if(st[1].length + st[2].length > 50) {
+                st[2] = st[2].slice(0, 50) + "..."
+            }
             return (<div className="rectangle-right" id ="availableStudents">
                 <Link to={`/partnerview`} onClick={() => handleClick(st[0])}>
                 <div style={{float:'left'}}>

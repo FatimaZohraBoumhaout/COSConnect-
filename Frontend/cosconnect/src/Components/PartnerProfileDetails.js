@@ -140,6 +140,10 @@ function PartnerProfileDetails(props) {
         return (<p>Loading...</p>)
     } 
 
+    if (partner[0][4].length > 20){
+      partner[0][4] = partner[0][4].slice(0, 20) + "..."
+    }
+
 
   return (
     <div className="profile-container">
@@ -151,7 +155,7 @@ function PartnerProfileDetails(props) {
             <h1 className="profile-name">{ partner[0][4]}</h1>
           </div>
           <Link to={`/classview?class=${cookies.class_id}`} className="edit-button" style={{ textDecoration: 'none'}}>Close</Link>
-          <Link to={`/sendrequest?receiver=${props.partneridProp}`} className="edit-button" style={{ textDecoration: 'none'}}>Send Request</Link>
+          <Link to={`/sendrequest?receiver=${props.partneridProp}`} className="edit-button" style={{ textDecoration: 'none', marginLeft:'5px'}}>Send Request</Link>
         </div>
         <div className="profile-content">
           {/* <div className="gray-box"></div> */}
