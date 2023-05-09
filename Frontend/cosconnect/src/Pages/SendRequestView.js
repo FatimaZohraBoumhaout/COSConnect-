@@ -49,6 +49,7 @@ function SendRequestView() {
         }
       })
       .catch(error => console.error(error));
+      alert("Request successfully sent!");
   }
 
   if (cookies.net_id == null) {
@@ -240,7 +241,7 @@ function SendRequestView() {
             <h2 style={{color:'black', fontSize: '22px'}}>Partner request through email</h2>
           </div>
           {/* <Link to={`/classview?class=${cookies.class_id}`}> */}
-          <input className="send-button" type="submit" name="submit" value="Send" />
+          <input className="send-button" type="submit" name="submit" value="Send" style={{ cursor: "pointer"}}/>
           {/* </Link> */}
         </div>
       </div>

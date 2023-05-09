@@ -165,12 +165,12 @@ function PartnerProfileDetails(props) {
             <span id="classes">{ partner[0][1].map((classNum) => "COS " + classNum).join(", ") }</span>
           </div>
           <div>
-            <label htmlFor="bio">Bio: </label>
-            <span id="bio">{ partner[0][2]}</span>
-          </div>
-          <div>
             <label htmlFor="availability">Availability: </label>
             <span id="availability">{partner[0][5]}</span>
+          </div>
+          <div>
+            <label htmlFor="bio">Bio: </label>
+            <span id="bio">{ partner[0][2]}</span>
           </div>
         </div>
       </div>

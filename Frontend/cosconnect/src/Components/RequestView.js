@@ -88,10 +88,11 @@ function RequestView() {
           <p style={pStyle}>Recently Received Request</p>
           
         </div>
-        <div style={{backgroundColor: 'green', paddingLeft: '9px',paddingRight: '9px', borderRadius: '20px', textAlign:'left'}}>
+        <div class="toRequest" style={{paddingLeft: '14px',paddingRight: '14px', paddingTop: '3px',paddingBottom: '3px', borderRadius: '20px', textAlign:'left'}}>
+        <a href="request" style={{textDecoration:'none'}}>
         <p style={{color:'white', textAlign:'left'}}>
           {receivedRequest}
-          </p>
+          </p></a>
           {receivedRequest.length === 0 &&
                   <p style={{color:'white'}}>No Received Requests.</p>
           }
@@ -99,10 +100,11 @@ function RequestView() {
         <div className="rectangle" style={rectangleStyle}>
         <p style={pStyle}>Recently Sent Request</p>
         </div>
-        <div style={{backgroundColor: 'green', paddingLeft: '9px',paddingRight: '9px', borderRadius: '20px', textAlign:'left'}}>
+        <div class="toRequest" style={{paddingLeft: '14px',paddingRight: '14px', paddingTop: '3px',paddingBottom: '3px', borderRadius: '20px', textAlign:'left'}}>
+        <a href="request" style={{textDecoration:'none'}}>
         <p style={{color:'white'}}>
         {sentRequest}
-        </p>
+        </p></a>
           {sentRequest.length === 0 &&
                   <p style={{color:'white'}}>No Sent Requests.</p>
           }

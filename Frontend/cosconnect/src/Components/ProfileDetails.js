@@ -154,12 +154,12 @@ function ProfileDetails() {
             <span id="classes">{ user[0][1].map(cls => "COS " + cls).join(", ")}</span>
           </div>
           <div>
-            <label htmlFor="bio">Bio: </label>
-            <span id="bio">{ user[0][2]}</span>
-          </div>
-          <div>
             <label htmlFor="availability">Availability: </label>
             <span id="availability">{user[0][5]}</span>
+          </div>
+          <div>
+            <label htmlFor="bio">Bio: </label>
+            <span id="bio">{ user[0][2]}</span>
           </div>
         </div>
       </div>

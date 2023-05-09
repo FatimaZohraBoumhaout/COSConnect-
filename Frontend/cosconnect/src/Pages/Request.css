@@ -64,11 +64,11 @@ body {
     display: inline-block;
     font-size: 14px;
     font-weight: bold;
-    margin: 4px 2px;
     cursor: pointer;
     border-radius: 5px;
     transition: background-color 0.3s ease;
     }
+
     
     /* Style the button on hover */
     .butn:hover {

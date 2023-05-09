@@ -93,16 +93,16 @@ function Request(){
           .then((response) => response.json())
           .then((data) => {
             console.log(data);
-            
           })
             .catch(error => console.error(error));
             window.location.reload();
+            alert("Request successfully accepted!");
         }
 
 
     const handleReject = (sender, course) => {
         const receiver = cookies.net_id;
-        console.log(`Accepted request with ID ${sender} ${course}` + receiver);
+        console.log(`Rejected request with ID ${sender} ${course}` + receiver);
         const data = {
             sender,
             receiver,
@@ -121,6 +121,7 @@ function Request(){
           })
             .catch(error => console.error(error));
             window.location.reload();
+            alert("Request successfully rejected!");
         }
 
     return(
@@ -136,7 +137,7 @@ function Request(){
                             {receivedPending.length > 0 && receivedPending.map(request => (
                                 <div className="request" key={request.id}>
                                     <div className="request-details">
-                                        <p>{request[0]} COS {request[1]} </p>
+                                        <p><b style={{color:"#338888"}}>{request[0]}:</b> COS {request[1]} </p>
                                         <button className="butn" onClick={() => handleAccept(request[0], request[1])}>Accept</button>
                                         <button className="butn" onClick={() => handleReject(request[0], request[1])}>Reject</button>
                                     </div>
@@ -147,14 +148,14 @@ function Request(){
                             {sentPending.length > 0 && sentPending.map(request => (
                                 <div className="request" key={request.id}>
                                     <div className="request-details">
-                                        <p>{request[0]} COS {request[1]}</p>
-                                        <p className="request-status">  Request Pending</p>
+                                        <p><b style={{color:"#338888"}}>{request[0]}:</b> COS {request[1]}</p>
+                                        <p style={{backgroundColor:"#338888", color:"white", marginLeft:'10px'}}>  Request Pending</p>
                                     </div>
                                 </div>
                             ))}
                         </>
                     ) : (
-                        <p>No new requests</p>
+                        <p style={{color:"#338888", marginLeft:'20px'}}>No new requests</p>
                     )}
                 </div> 
             </aside>
@@ -170,7 +171,7 @@ function Request(){
                             </div>
                         ))
                     :
-                        <p>No accepted requests</p>
+                        <p style={{color:"#338888", marginLeft:'20px'}}>No accepted requests</p>
                     }
                 </div>
             </div>
@@ -187,7 +188,7 @@ function Request(){
                             </div>
                         ))
                     :
-                        <p>No rejected requests</p>
+                        <p style={{color:"#338888", marginLeft:'20px'}}>No rejected requests</p>
                     }
                 </div>
             </div>

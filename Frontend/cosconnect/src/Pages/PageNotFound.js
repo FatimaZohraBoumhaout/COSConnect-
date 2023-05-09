@@ -26,6 +26,9 @@ const PageNotFound = () => {
   return (
     <>
     <Header/>
+    <br/>
+    <br/>
+    <br/>
     <div className="not-found-container">
         <style>{styles}</style>
       <h1 className="not-found-header">Oops! 404 Page Not Found</h1>
