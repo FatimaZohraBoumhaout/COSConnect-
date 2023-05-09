@@ -16,7 +16,6 @@ function ProfileDetails() {
         .then((response) => response.json())
         .then((data) => {
           setUser(data);
-          console.log("user state set to:", data);
         })
         .catch(error => console.log(error));
     } else {

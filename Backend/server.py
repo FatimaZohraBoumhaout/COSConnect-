@@ -20,9 +20,14 @@ def index():
     """Endpoint to check if the server is running"""
     return("Welcome, COSConnect Server is running.")
 
+def is_whitelisted(email):
+    """return True if the email address is whitelisted"""
+    whitelist = ('pnabare@gmail.com', 'cosconnect1@gmail.com', 'cosconnect3@gmail.com', 'cosconnect4@gmail.com')
+    return email in whitelist
+
 def princeton_email(email):
     """Verify that the email address has princeton.edu"""
-    if email == 'pnabare@gmail.com':
+    if (is_whitelisted(email)):
         return True
     extension = email.split('@')[1]
     print('extension', extension)    

@@ -37,19 +37,9 @@ function Home() {
     return <WrongPage />;
   }
 
-  const handleAddClass = () => {
-    console.log("Add button clicked");
-  };
-
-  const handleDropClass = () => {
-    console.log("Drop button clicked");
-  };
-
   let extractedElements = null;
   if (classes.length > 0) {
     extractedElements = classes[0][0].map((element, index) => {
-      // console.log(element);
-      // element = 'COS ' + element;
       return (
         <div key={index}>
           <Link
@@ -80,15 +70,9 @@ function Home() {
           </a>
         </div>
         <div className="title">
-          <> Classes </>
+          Classes
         </div>
         <div className="buttons">
-          {/* <button onClick={handleAddClass}>
-          Add
-        </button>
-        <button onClick={handleDropClass}>
-          Drop
-        </button> */}
         </div>
         <div className="boxes">{classes && extractedElements}</div>
         <br />

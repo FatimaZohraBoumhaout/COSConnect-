@@ -25,7 +25,6 @@ function UserSurvey() {
   const handleSubmit = (event) => {
     event.preventDefault();
     const netId = cookies.net_id;
-    console.log("cookie us" + netId);
     const data = {
       netId,
       fullName: DOMPurify.sanitize(fullName),
@@ -45,7 +44,6 @@ function UserSurvey() {
     })
       .then((response) => response.json())
       .then((data) => {
-        console.log(netId);
         // Make a new API request to add the classes
         fetch("/add_class", {
           method: "POST",
@@ -59,7 +57,7 @@ function UserSurvey() {
         })
           .then((response) => response.json())
           .then((data) => {
-            console.log(data);
+            console.log("pass");
           })
           .catch((error) => console.error(error));
         navigate(`/home`);
@@ -71,25 +69,21 @@ function UserSurvey() {
     fetch(`/get_courses`)
       .then((response) => response.json())
       .then(({ term }) => {
-        console.log("terms:", term);
         const subjects = term[0].subjects;
-        console.log("subjects:", subjects);
         const courses = subjects[0].courses;
-        console.log("courses", courses);
         const coursenums = courses.map((course) => course.catalog_number);
-        console.log("coursenums", coursenums);
         const coursenumsstring = coursenums.map((num) => String(num));
         setCourse(coursenumsstring);
       })
       .catch((error) => console.log(error));
   }, []);
 
-  if (cookies.net_id == null) {
-    return <WrongPage />;
-  }
-
    function handleTagSelect(selectedList) {
     setClasses(selectedList);
+    }
+
+    if (cookies.first_time == null) {
+      return <WrongPage />;
     }
 
   return (

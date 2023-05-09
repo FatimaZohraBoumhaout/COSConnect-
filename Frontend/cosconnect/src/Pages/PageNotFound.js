@@ -1,7 +1,7 @@
 import React from 'react';
 import Header from '../Components/SignInHeader';
 
-const PageNotFound = () => {
+function PageNotFound() {
   const styles = `
   .not-found-container {
     display: flex;
@@ -38,6 +38,5 @@ const PageNotFound = () => {
     </>
   );
 };
-
 
 export default PageNotFound;

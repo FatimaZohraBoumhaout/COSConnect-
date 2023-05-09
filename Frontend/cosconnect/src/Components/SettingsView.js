@@ -37,7 +37,6 @@ function SettingsView() {
     .then(response => response.json())
     .then((data) => {
       setStatus(data);
-      console.log("notifications set to:", data);
     })
     .catch(error => console.error(error));
   }, []);

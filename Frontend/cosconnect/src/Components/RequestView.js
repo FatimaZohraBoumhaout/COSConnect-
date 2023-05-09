@@ -56,7 +56,6 @@ function RequestView() {
         .then(response=> response.json())
         .then(data => {
             setSentRequest(data);
-            console.log("sent requests set to ", data);
         })
         .catch(error => console.log(error));
       } else {
@@ -70,7 +69,6 @@ function RequestView() {
         .then(response=> response.json())
         .then(data => {
             setReceivedRequest(data);
-            console.log("received requests set to ", data);
           })
         .catch(error => console.log(error));
       } else {

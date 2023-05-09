@@ -1,7 +1,8 @@
 import React from 'react';
 import Header from '../Components/SignInHeader';
 
-const PageNotFound = () => {
+function PageNotFound() {
+    
   const styles = `
   .not-found-container {
     display: flex;
@@ -30,11 +31,10 @@ const PageNotFound = () => {
         <style>{styles}</style>
       <h1 className="not-found-header">Oops! 403 forbidden</h1>
       <p className="not-found-message">Access denied. You must be logged in to view this page</p>
-      <p>Please <a href="/">Log in</a>to continue.</p> 
+      <p>Please <a href="/">Log in</a> to continue.</p> 
     </div>
     </>
   );
 };
-
 
 export default PageNotFound;

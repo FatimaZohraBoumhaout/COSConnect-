@@ -35,8 +35,6 @@ function ClassView(){
 
     useEffect(() => {
         if (classes.length > 0){
-            console.log("classes", classes[0][0])
-            console.log("this class", this_class)
             if (!classes[0][0].includes(this_class)){
                 navigate(`/notfound`);
             }
@@ -44,14 +42,11 @@ function ClassView(){
     }, [classes]);
 
     useEffect(() => {
-        console.log("get class: ",cookies.net_id);
-        console.log("this class: ",this_class);
         if(cookies.net_id !== null){
         fetch(`/get_class?net_id=${cookies.net_id}`)
             .then(response => response.json())
             .then(data => {
                 setClasses(data);
-                console.log("classes set to ", data);
             })
             .catch((error) => {
                 console.log(error);
@@ -67,7 +62,6 @@ function ClassView(){
             .then(response=> response.json())
             .then(data => {
                 setSentRequest(data);
-                console.log("sent requests set to ", data);
             })
             .catch(error => console.log(error));
           } else {
@@ -93,7 +87,6 @@ function ClassView(){
             .then(response=> response.json())
             .then(data => {
                 setStudentsId(data);
-                console.log("StudentsId set to", studentsId);
             })
             .catch(error => console.log(error));
           } else {
@@ -117,7 +110,6 @@ function ClassView(){
         .then(response => response.json())
         .then((data) => {
           setStatus(data);
-          console.log("notifications set to:", data);
         })
         .catch(error => console.error(error));
       }, []);
@@ -125,7 +117,6 @@ function ClassView(){
     const handleStatusToggle = () => {
         const netId = cookies.net_id;
         setStatus((prevStatus) => (prevStatus === "Available" ? "Not Available" : "Available"));
-        console.log(netId, this_class, status)
         const data = {netId, this_class, status};
         fetch(`/post_class_status`, {
           method: 'POST',
@@ -179,7 +170,6 @@ function ClassView(){
             }});
         setRenderStudents(studentsToRender);
 
-        console.log("output set to be", output)
     }, [input, availInput, fixed]);
     
     function sendRequest(st) {
@@ -188,9 +178,7 @@ function ClassView(){
     }
     function handleClick(st) {
         setCookie('class_id', this_class)
-        console.log("classid cookie set to"+ cookies.class_id);
         setCookie('partner_id', st);
-        console.log("partenr cookie set to"+ cookies.partner_id);
     }
 
     function handleChange(event){
@@ -205,12 +193,10 @@ function ClassView(){
 
     useEffect(() => {
         if(studentsId && studentsId.length > 0){
-            console.log("StudentsId set to", studentsId)
             setFixed(studentsId.map((element, index) => [index, element[1], element[2], element[0]]))
             if(fixed.length===0){
                 return() => {<p>There are no other students in this class.</p>};
             }
-            console.log("fixed set to", fixed)
             output = fixed.map(element => element[0])
 
             let studentsToRender = studentsId.map((st, index) =>{

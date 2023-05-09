@@ -16,7 +16,6 @@ function PartnerProfileDetails(props) {
       .then((response) => response.json())
       .then((data) => {
         setPartner(data);
-        console.log("partner state set to:", data);
       })
       .catch(error => console.log(error));
   } else {
