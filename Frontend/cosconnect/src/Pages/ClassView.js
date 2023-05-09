@@ -25,15 +25,13 @@ function ClassView(){
     const [studentsId, setStudentsId] = useState([]);
     const [input, setInput] = useState('');
     const [availInput, setAvailInput] = useState('');
-    //const [finaloutput, setFinalOutput] = useState([]);
     const [renderStudents, setRenderStudents] = useState([]);
     const [fixed, setFixed] = useState([]);
     const [dispStatus, setDispStatus] = useState([]);
     
-    const this_class = window.location.search.match(/class=([^&]*)/)[1].replace('%20',' ');
+    const urlParams = new URLSearchParams(window.location.search);
+    const this_class = urlParams.get('class')
     let output = []
-    //let fixed = []
-    //let renderStudents = null;
 
     useEffect(() => {
         if (classes.length > 0){

@@ -148,6 +148,7 @@ function UserSurvey() {
                 onSelect={handleTagSelect}
                 onRemove={handleTagSelect}
                 selectionLimit = {6}
+                emptyRecordMsg = {"Loading..."}
                 required
               />
             </div>
@@ -184,7 +185,7 @@ function UserSurvey() {
         </div>
   
         <div className="submit-btn">
-          <input type="submit" value="Submit" />
+          <input type="submit" value="Submit" style={{ cursor: "pointer"}}/>
         </div>
       </form>
     </div>

@@ -37,7 +37,7 @@ def log_in():
         decoded_token = id_token['decoded_token']
         email = decoded_token['email']
         if not princeton_email(email):
-            return jsonify({'message': 'use your princeton email'}), 401
+            return jsonify({'message': 'Please use a Princeton email address instead!'}), 401
         print("email:", email)
         net_id = email.split("@")[0]
         print(net_id)

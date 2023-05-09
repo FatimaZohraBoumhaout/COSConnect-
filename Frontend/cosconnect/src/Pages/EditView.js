@@ -238,6 +238,7 @@ function EditView() {
                 onSelect={handleTagSelect}
                 onRemove={handleTagSelect}
                 selectionLimit = {6}
+                emptyRecordMsg = {"Loading..."}
                 />
               </div>
           </div>
@@ -246,11 +247,11 @@ function EditView() {
             <input id="availability" maxLength="100" name="availability" type="text" value={availability} onChange={event => setAvailability(event.target.value)} required style={{ paddingLeft: '8px' }}/>
           </div>
           <div>
-            <label htmlFor="bio">Bio: </label>
-            <input id="bio" maxLength="200" name="bio" type="text" value={bio} onChange={event => setBio(event.target.value)} required style={{ paddingLeft: '8px' }}/>
+            <label htmlFor="bio">Bio: </label> <br/>
+            <textarea id="bio" maxLength="200" name="bio" type="text" value={bio} onChange={event => setBio(event.target.value)} required style={{ paddingLeft: '8px', width: '100%', height:'70px', fontSize:'14px', padding:'5px'}}/>
           </div>
 
-          <input className = "button-save" type="submit" name="submit" value="Save" />
+          <input className = "button-save" type="submit" name="submit" value="Save" style={{ cursor: "pointer"}}/>
         </div>
       </div>
     </div>

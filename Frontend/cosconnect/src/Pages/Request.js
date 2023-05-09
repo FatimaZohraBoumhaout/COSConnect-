@@ -85,16 +85,16 @@ function Request(){
           .then((response) => response.json())
           .then((data) => {
             console.log(data);
-            
           })
             .catch(error => console.error(error));
             window.location.reload();
+            alert("Request successfully accepted!");
         }
 
 
     const handleReject = (sender, course) => {
         const receiver = cookies.net_id;
-        console.log(`Accepted request with ID ${sender} ${course}` + receiver);
+        console.log(`Rejected request with ID ${sender} ${course}` + receiver);
         const data = {
             sender,
             receiver,
@@ -113,6 +113,7 @@ function Request(){
           })
             .catch(error => console.error(error));
             window.location.reload();
+            alert("Request successfully rejected!");
         }
 
     return(
