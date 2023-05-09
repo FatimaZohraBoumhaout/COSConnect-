@@ -35,7 +35,7 @@ function About(){
             <p> The following will walk you through the page.</p>
             <p> First, login using your Princeton email. </p>
             <br></br>
-            <p> You will be directed to a survey page, where you will be asked to fill in your information. Please fill in all the blanks, and press submit when done. </p>
+            <p> You will be directed to a survey page, where you will be asked to fill in your information. Please fill in all the blanks, and press submit when done. In the availability section, please make sure to put in the days of the week and times of the day that you are available.</p>
             <br></br><br></br>
             <img src={image_survey}/> <img src={survey_classes}/>
             <h2>Navigating Classes</h2>
