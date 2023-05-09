@@ -5,6 +5,9 @@ import Header from "../Components/Header";
 import Footer from "../Components/Footer";
 
 function PartnerProfileView() {
+  // const [cookies] = useCookies(['net_id']);
+  // const navigate = useNavigate();
+
   return (
     <>
     <Header />

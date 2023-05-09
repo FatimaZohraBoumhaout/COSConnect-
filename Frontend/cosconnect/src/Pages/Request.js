@@ -4,15 +4,18 @@ import { useNavigate } from "react-router-dom";
 import "@fontsource/inter";
 import Header from "../Components/Header";
 import Footer from "../Components/Footer";
+import WrongPage from "./WrongPage";
 import "./Request.css";
 
 function Request(){
+
     const [sentPending, setSentPending] = useState([]);
     const [receivedPending, setReceivedPending] = useState([]);
     const [cookies] = useCookies(['net_id']);
     const [rejected, setRejected] = useState([]);
     const [accepted, setAccepted] = useState([]);
     const navigate = useNavigate();
+
 
     useEffect(() => {
         if(cookies.net_id != null){
@@ -66,6 +69,11 @@ function Request(){
             console.log("net_id is null");
         }
     }, [cookies.net_id]);
+    
+
+    if (cookies.net_id == null) {
+        return <WrongPage/>
+    }
 
     const handleAccept = (sender, course) => {
         const receiver = cookies.net_id;

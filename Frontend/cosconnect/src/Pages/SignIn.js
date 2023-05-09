@@ -12,7 +12,7 @@ import Footer from "../Components/Footer";
 function SignIn() {
 
   const navigate = useNavigate();
-  const [cookies, setCookie] = useCookies(["net_id"]);
+  const [cookies, setCookie, removeCookie] = useCookies(["net_id"]);
 
   /*@Zohra @Pascal */
 const handleLogin = (response) => {
@@ -44,7 +44,6 @@ const handleLogin = (response) => {
         const netId = jsonRes.net_id;
         console.log("should go to survey");
         setCookie("net_id", netId);
-        console.log("cookie"+cookies.net_id);
         navigate('/survey');
       });
     } else if (res.status === 401){

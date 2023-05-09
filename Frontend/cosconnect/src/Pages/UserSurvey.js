@@ -8,6 +8,7 @@ import { useCookies } from "react-cookie";
 import "./UserSurvey.css";
 import Multiselect from "multiselect-react-dropdown";
 import DOMPurify from 'dompurify';
+import WrongPage from "./WrongPage";
 
 
 function UserSurvey() {
@@ -82,6 +83,10 @@ function UserSurvey() {
       })
       .catch((error) => console.log(error));
   }, []);
+
+  if (cookies.net_id == null) {
+    return <WrongPage />;
+  }
 
    function handleTagSelect(selectedList) {
     setClasses(selectedList);

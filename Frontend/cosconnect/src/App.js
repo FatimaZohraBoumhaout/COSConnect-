@@ -1,21 +1,22 @@
 import React from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import './App.css';
-import UserProfileView from './Pages/UserProfileView';
-import Footer from './Components/Footer';
-import UserSurvey from './Pages/UserSurvey';
+import "./App.css";
+import UserProfileView from "./Pages/UserProfileView";
+import UserSurvey from "./Pages/UserSurvey";
 import Home from "./Pages/Home";
-import ClassView from './Pages/ClassView';
-import Signin from './Pages/SignIn';
-import PartnerProfileView from './Pages/PartnerProfileView'
-import EditView from './Pages/EditView'
+import ClassView from "./Pages/ClassView";
+import Signin from "./Pages/SignIn";
+import PartnerProfileView from "./Pages/PartnerProfileView";
+import EditView from "./Pages/EditView";
 import SendRequestView from "./Pages/SendRequestView";
-import Error from './Pages/Error';
-import PageNotFound from './Pages/PageNotFound';
+import Error from "./Pages/Error";
+import PageNotFound from "./Pages/PageNotFound";
 import Request from "./Pages/Request";
 import About from "./Pages/About";
 
 function App() {
+  // Check if the net_id cookie has expired and remove it if it has
+
   return (
     <>
       <BrowserRouter>

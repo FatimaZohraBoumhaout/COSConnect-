@@ -3,14 +3,14 @@ import Avatar from 'react-avatar';
 import { Link } from 'react-router-dom';
 import { useCookies } from 'react-cookie';
 import { useNavigate } from "react-router-dom";
+import WrongPage from "./WrongPage";
 import Footer from "../Components/Footer";
 import Header from "../Components/Header";
 
 function SendRequestView() {
   // const { userId } = props;
   const navigate = useNavigate();
-  const [user, setUser] = useState(null);
-  const [cookies, setCookie] = useCookies(['net_id', 'partner_id', 'class_id']);
+  const [cookies] = useCookies(['net_id', 'partner_id', 'class_id']);
 
   // useEffect(() => {
   //   if (cookies.partner_id !== null) {
@@ -28,7 +28,6 @@ function SendRequestView() {
   // }, [cookies.partner_id]);
 
   const handleSubmit = (event) => {
-    let class_ = ""; 
     event.preventDefault();
     const sender_id = cookies.net_id;
     const receiver_id = cookies.partner_id;
@@ -51,6 +50,11 @@ function SendRequestView() {
       })
       .catch(error => console.error(error));
   }
+
+  if (cookies.net_id == null) {
+    return <WrongPage/>
+}
+
 
   function handleSendEmail() {
     const sender_email = cookies.net_id + '@princeton.edu';
