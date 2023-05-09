@@ -179,7 +179,7 @@ def add_class():
             raise ValueError('Missing user ID or classes')
         for class_name in classes:
             class_exists = database_access.get_class_status((net_id, class_name), 'testdb_ery6')
-            if len(class_exists) != 0:
+            if len(class_exists) == 0:
                 database_access.add_class((net_id, class_name), 'testdb_ery6')
             print("added class: ", class_name)
         return jsonify({'status': 'success', 'message': 'Classes added successfully'})
