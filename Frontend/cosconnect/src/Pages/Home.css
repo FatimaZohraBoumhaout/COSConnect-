@@ -69,8 +69,8 @@
     }
   
     .title {
-      margin-left: 5%;
-      margin-top: 10%;
+      margin-left: 35%;
+      font-size: 30px;
     }
   
     .buttons {
@@ -99,9 +99,10 @@
     }
   
     .title {
-      margin-left: 5%;
-      margin-top: 10%;
-      font-size: 20px;
+      margin-left: auto;
+      margin-right: auto;
+      padding-right: 6%;
+      font-size: 30px;
     }
   
     .buttons {
