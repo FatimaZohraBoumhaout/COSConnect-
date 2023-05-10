@@ -166,10 +166,14 @@ function ClassView(){
             return (<div className="rectangle-right" id ="availableStudents">
                 <Link to={`/partnerview`} onClick={() => handleClick(st[0])}>
                 <div style={{float:'left'}}>
-                    <center style={{ paddingLeft: '8px', fontSize: '18px', color: '#26272D'}}>{st[1]} <p style={{fontSize: '16px', backgroundColor: '#186100', padding: '5px', borderRadius: '20px', color: 'white', marginLeft:'5px'}}>NetID: {st[0]}</p><p style={{fontSize: '16px', backgroundColor: '#186100', padding: '5px', borderRadius: '20px', color: 'white', marginLeft:'5px'}}> Availability: {st[2]}</p></center>
+                    <center style={{ paddingLeft: '8px', fontSize: '16px', color: '#26272D'}}>
+                        {st[1]} <p style={{fontSize: '12px', backgroundColor: '#186100', padding: '5px', borderRadius: '20px', color: 'white', marginLeft:'5px'}}>
+                            NetID: {st[0]}</p>
+                            <p className="avail" style={{fontSize: '16px', backgroundColor: '#186100', padding: '5px', borderRadius: '20px', color: 'white', marginLeft:'5px'}}> Availability: {st[2]}</p>
+                            </center>
                 </div>
                 </Link>
-                <Link className="btn" onClick={() => sendRequest(st[0])} to={`/sendrequest`} style={{ textDecoration: 'none' }}>
+                <Link className="btn send" onClick={() => sendRequest(st[0])} to={`/sendrequest`} style={{ textDecoration: 'none' }}>
                     <center >Send</center>
                 </Link >
             </div>);
@@ -264,8 +268,8 @@ function ClassView(){
                     </div>
                 </div>
                     <br/>
-                    <h3 style={{fontSize: '25px', color: '#26272D'}}>Requests</h3>
-                    <h3 style={{fontSize: '16px', color: 'black'}}>Looking to Accept or Reject requests? Head over to the <a id="requestLink" href={`/request`}>Requests Page</a></h3>
+                    <h3 className="req" style={{fontSize: '25px', color: '#26272D'}}>Requests</h3>
+                    <h3 className="looking" style={{fontSize: '16px', color: 'black'}}>Looking to Accept or Reject requests? Head over to the <a id="requestLink" href={`/request`}>Requests Page</a></h3>
                     {sentRequest && sentRequest.map((req) => (
                         <div className="rectangle-right" id="requestStudents">
                             <div style={{float:'left', backgroundColor:'#338888', height:'100%', width: '100px', color: 'white', borderRadius: '5px'}}>

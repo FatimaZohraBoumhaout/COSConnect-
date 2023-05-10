@@ -1,15 +1,10 @@
-/* Set default font and font size for the body */
-body {
-    font-family: Arial, sans-serif;
-    font-size: 16px;
-    }
-    
-    /* Set background color for the body */
     body {
-    background-color: #F6F6F2;
+        font-family: Arial, sans-serif;
+        font-size: 16px;
+        background-color: #F6F6F2;
+
     }
     
-    /* Set up grid layout for the container */
     .container {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -19,7 +14,6 @@ body {
     "side bo";
     }
     
-    /* Style the left container area */
     .container_left {
     grid-area: side;
     text-align: center;
@@ -27,23 +21,22 @@ body {
     padding-left: 20%;
     }
     
-    /* Style the top container area */
     .container_top {
     grid-area: to;
+    text-align: center;
     padding-left: 20%;
     padding-top: 8.5%;
     height: auto;
     }
     
-    /* Style the bottom container area */
     .container_bottom {
     grid-area: bo;
+    text-align: center;
     padding-left: 20%;
     padding-top: 20%;
     height: auto;
     }
     
-    /* Style the requests box */
     .requests {
     border-radius: 10px;
     padding: 10px;
@@ -51,7 +44,6 @@ body {
     width: auto;
     }
     
-    /* Style the button */
     .butn {
     background-color: #4caf50;
     border: none;
@@ -70,13 +62,11 @@ body {
     }
 
     
-    /* Style the button on hover */
     .butn:hover {
     background-color: #388e3c;
     opacity: 0.8;
     }
     
-    /* Style the request details */
     .request-details p {
     font-size: 14px;
     font-weight: bold;
@@ -85,12 +75,10 @@ body {
     border-radius: 20px;
     }
     
-    /* Style the request details button */
     .request-details button {
     margin-right: 8px;
     }
     
-    /* Style the top header */
     .top-header {
     color: black;
     font-size: 24px;
@@ -141,5 +129,58 @@ body {
     .request-label{
         color: black;
     }
+
+    @media screen and (max-width: 830px) {
+        .container {
+            display: grid;
+            grid-template-columns: 1fr;
+            grid-template-rows: auto;
+            grid-template-areas:
+            "side"
+            "to"
+            "bo";
+        }
+        .container_left {
+            grid-area: side;
+            text-align: center;
+            padding-top: 20%;
+            padding-left: 20%;
+        }
+
+        .requests {
+            border-radius: 10px;
+            margin-right: 20%;
+            height: auto;
+            width: auto;
+        }
+            
+        .container_top {
+            grid-area: to;
+            padding-left: 20%;
+            padding-top: 8.5%;
+            height: auto;
+        }
+            
+            .container_bottom {
+            grid-area: bo;
+            margin-top: -10%;
+            padding-left: 20%;
+            padding-top: 20%;
+            height: auto;
+        }
+
+    .rejected-requests {
+        background-color: #bdd2b6;
+        border-radius: 10px;
+        padding: 10px;
+        height: auto;
+        width: auto;
+        margin-right: 20%;
+        transition: 0.5s background-color, 0.5s box-shadow;
+    }
+    
+}
+
+
     
     

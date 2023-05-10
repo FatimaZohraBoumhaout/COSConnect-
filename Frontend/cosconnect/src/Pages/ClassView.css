@@ -278,3 +278,15 @@ Link{
     color: black;
     background-color: #BDD2B6;
 }
+
+@media screen and (max-width: 830px) {
+   .avail {
+    display: none;
+   }
+}
+
+@media screen and (max-width: 480px) {
+    .send {
+        height: auto;
+    }
+}

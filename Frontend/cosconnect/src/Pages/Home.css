@@ -51,9 +51,7 @@
     text-align: center;
     margin-top: 40%;
   }
-  
-  /* Media queries */
-  
+    
   @media screen and (max-width: 830px) {
     .home {
       grid-template-rows: auto auto auto auto;
