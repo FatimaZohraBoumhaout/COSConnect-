@@ -18,7 +18,7 @@ function UserSurvey() {
   const [pronouns, setPronouns] = useState("");
   const [availability, setAvailability] = useState("");
   const [bio, setBio] = useState("");
-  const [cookies] = useCookies(["net_id"]);
+  const [cookies] = useCookies(["net_id", "first_time"]);
   const [course, setCourse] = useState([]);
   const [classes, setClasses] = useState([]);
 
@@ -80,11 +80,11 @@ function UserSurvey() {
 
    function handleTagSelect(selectedList) {
     setClasses(selectedList);
-    }
+  }
 
-    if (cookies.first_time == null) {
+  if (cookies.first_time !== "firstTime") {
       return <WrongPage />;
-    }
+  }
 
   return (
     <div className="bd">

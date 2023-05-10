@@ -44,7 +44,8 @@ const handleLogin = (response) => {
         const netId = jsonRes.net_id;
         console.log("should go to survey");
         setCookie("net_id", netId);
-        setCookie("first_time", "yes");
+        const status = "firstTime"
+        setCookie("first_time", status);
         navigate('/survey');
       });
     } else if (res.status === 401){
