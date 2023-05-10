@@ -9,7 +9,7 @@ import Footer from "../Components/Footer";
 
 function Home() {
   const [classes, setClasses] = useState([]);
-  const [cookies] = useCookies(["net_id"]);
+  const [cookies, removeCookie] = useCookies(["net_id"]);
   const [user, setUser] = useState(null);
 
   useEffect(() => {
@@ -25,7 +25,6 @@ function Home() {
         .then((response) => response.json())
         .then((data) => {
           setUser(data);
-          console.log("user state set to:", data);
         })
         .catch((error) => console.log(error));
     } else {

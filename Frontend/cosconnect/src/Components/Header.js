@@ -4,7 +4,7 @@ import { useCookies } from 'react-cookie';
 function Header() {
 
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
-  const [cookies, setCookie, removeCookie] = useCookies(['net_id']);
+  const [cookies, setCookie, removeCookie] = useCookies(['net_id', 'first_time']);
 
   function handleDropdownClick() {
     setIsDropdownOpen(!isDropdownOpen);
@@ -12,6 +12,7 @@ function Header() {
 
   function handleLogOut() {
     removeCookie('net_id');
+    removeCookie('first_time');
   }
 
   const styles = `

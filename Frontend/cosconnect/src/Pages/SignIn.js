@@ -72,7 +72,7 @@ const handleLogin = (response) => {
       <h2 style={{marginBottom: '12px'}}>Sign in below to start finding partners!</h2>
       {/* reference: https://www.npmjs.com/package/@react-oauth/google */}
       <div className='butt-container'>
-        <GoogleOAuthProvider clientId='478842507060-e6h97rhvrg7set6n13teb5quprmgjvc7.apps.googleusercontent.com' className='butt'>
+        <GoogleOAuthProvider clientId={process.env.REACT_APP_GOOGLE_ID} className='butt'>
         <GoogleLogin
           onSuccess={handleLogin}
           theme='filled_blue'
