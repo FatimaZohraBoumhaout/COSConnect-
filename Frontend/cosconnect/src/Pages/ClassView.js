@@ -7,6 +7,7 @@ import "./ClassView.css"
 import "@fontsource/inter";
 import Header from "../Components/Header";
 import Footer from "../Components/Footer";
+import WrongPage from "./WrongPage";
 
 const toggleContainerStyle = {
     display: "flex",
@@ -225,6 +226,10 @@ function ClassView(){
             setRenderStudents(studentsToRender);
         }
       }, [studentsId]);
+
+      if (cookies.net_id == null) {
+        return <WrongPage/>
+    }
 
     return(
         <>
