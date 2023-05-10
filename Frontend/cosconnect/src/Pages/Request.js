@@ -148,7 +148,7 @@ function Request(){
                             {sentPending.length > 0 && sentPending.map(request => (
                                 <div className="request" key={request.id}>
                                     <div className="request-details">
-                                        <p><b style={{color:"#338888"}}>{request[0]}:</b> COS {request[1]}</p>
+                                        <p><b style={{color:"#338888"}}><a href="#">{request[0]}</a>:</b> COS {request[1]}</p>
                                         <p style={{backgroundColor:"#338888", color:"white", marginLeft:'10px'}}>  Request Pending</p>
                                     </div>
                                 </div>
